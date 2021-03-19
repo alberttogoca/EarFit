@@ -1,9 +1,8 @@
-import Navbar from '../../components/Navbar/navbar'
+import Navbar from '../../components/Navbar/Navbar'
 
 export default function About() {
     return (
       <>
-      <Navbar></Navbar>
       {/*Fila*/}
       <div className="row ">
           {/*Columna 1*/}

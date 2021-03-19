@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import Navbar from "../components/Navbar/Navbar";
@@ -12,8 +11,7 @@ export default function Home() {
         <title>EarFit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </Head>
-      {/*Navbar*/}
-      <Navbar></Navbar>
+    
       {/*Container*/}
       <div className="container-fluid bg-light ">
         {/*Fila*/}

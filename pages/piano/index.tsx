@@ -7,7 +7,6 @@ import 'bootswatch/dist/pulse/bootstrap.min.css'
 export default function Piano() {
   return (
     <>
-        <Navbar></Navbar>
         {/*Container*/}
         <div className="container-fluid">
             {/*Fila*/}

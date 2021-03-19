@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import 'react-piano/dist/styles.css';
-import Soundfont, { Player } from 'soundfont-player';
-import utilStyles from 'piano.module.css'
+import {getInstrument, NotePlayer} from "music-instrument-js";
 
 export default function PianoBasic(props) {
 
@@ -17,11 +16,11 @@ export default function PianoBasic(props) {
     keyboardConfig: KeyboardShortcuts.HOME_ROW,
   });
   
-  const [instrument, setInstrument] = useState<Player>(undefined);
+  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
   
     useEffect(() => {
-      const loadInstrument = async () => {
-        const piano = await Soundfont.instrument(new AudioContext(), 'acoustic_grand_piano');
+        const loadInstrument = async () => {
+        const piano = await getInstrument('acoustic_grand_piano');
         setInstrument(piano);
       }
       loadInstrument();
@@ -33,7 +32,7 @@ export default function PianoBasic(props) {
         <Piano 
           noteRange={noteRange}
           width={500}
-          playNote={(note)=>{instrument.play(note)}}
+          playNote={(note)=>{instrument.play(note, {})}}
           stopNote={(note)=>{instrument.stop(note)}}
           keyboardShortcuts={keyboardShortcuts}
           disabled={!instrument}
