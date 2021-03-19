@@ -1,0 +1,43 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.PianoDarkTheme .ReactPiano__Key--accidental {
+  background: #a3a3a3;
+  border: 1px solid #888;
+}
+.PianoDarkTheme .ReactPiano__Key--natural {
+  background: #2c2c2c;
+  border: 1px solid #888;
+  margin-right: 0;
+}
+.PianoDarkTheme .ReactPiano__Key--active.ReactPiano__Key--accidental {
+  background: #0396ca;
+}
+.PianoDarkTheme .ReactPiano__Key--active.ReactPiano__Key--natural {
+  background: #0396ca;
+}

@@ -1,0 +1,13 @@
+@api = http://localhost:3000/
+
+GET {{api}}api/hello
+
+###
+
+POST {{api}}api/hello
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
