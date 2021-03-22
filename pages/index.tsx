@@ -1,9 +1,6 @@
 import Head from "next/head";
 import Menu from "../components/Menu/Menu"
 import utilStyles from "../styles/utils.module.css";
-import Link from "next/link";
-import Navbar from "../components/Navbar/Navbar";
-import {Options} from "../components/Options/Options";
 
 import "bootswatch/dist/pulse/bootstrap.min.css";
 

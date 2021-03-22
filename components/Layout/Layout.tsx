@@ -4,8 +4,6 @@ export default function Layout({children}) {
     return (
         <>
             <Header></Header>
-            <script src="tonal.min.js"></script>
-
             {children}
         </>
     )
