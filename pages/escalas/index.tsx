@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PianoBasic from "../../components/PianoBasic";
 import Navbar from '../../components/Navbar/Navbar'
 import { getInstrument, startNote, stopNote, NotePlayer } from "music-instrument-js";
+import { Options } from '../../components/Options/Options';
+import Menu from "../../components/Menu/Menu";
 
 export default function Escalas() {
 
@@ -29,6 +31,7 @@ export default function Escalas() {
             <div className="row p-3">
                 {/*Columna 1*/}
                 <div className="col-sm border d-none d-md-block  ">
+                  <Menu></Menu>
                 </div>
                 {/*Columna 2*/}
                 <div className="col-lg-6 border p-3  "> 
@@ -46,7 +49,8 @@ export default function Escalas() {
                 </div>
 
                 {/*Columna 3*/}
-                <div className="col-sm border d-none d-md-block">
+                <div className="col-sm border">
+                <Options page="Escalas"></Options>
                 </div>
             </div>
         </div>
