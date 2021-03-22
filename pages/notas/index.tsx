@@ -4,6 +4,7 @@ import { getInstrument, NotePlayer } from "music-instrument-js";
 import { Options } from "../../components/Options/Options";
 import Menu from "../../components/Menu/Menu";
 import { Scale } from "@tonaljs/tonal";
+import { getRandomItem } from "../../utils/arrayUtils";
 
 export default function Notas() {
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -21,12 +22,8 @@ export default function Notas() {
   }, []);
 
   async function handleClick() {
-    const note = random_item(notes);
+    const note = getRandomItem(notes);
     instrument.play(`${note}3` , {});
-  }
-
-  function random_item(items) {
-    return items[Math.floor(Math.random() * items.length)];
   }
 
   return (
