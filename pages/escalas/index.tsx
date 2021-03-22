@@ -34,7 +34,7 @@ export default function Escalas() {
                   <Menu></Menu>
                 </div>
                 {/*Columna 2*/}
-                <div className="col-lg-6 border p-3  "> 
+                <div className="col-lg-6 border p-3 shadow-lg "> 
                 <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Escalas</h1></div>               
                 {/*PLAY SOUND*/}
                 <div className="d-flex justify-content-center p-3 "><button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true"onClick={handleClick}>Escala?</button></div>

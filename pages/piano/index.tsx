@@ -15,7 +15,7 @@ export default function Piano() {
                 <Menu></Menu>
                 </div>
                 {/*Columna 2*/}
-                <div className="col-lg-6 border p-3  "> 
+                <div className="col-lg-6 border p-3 shadow-lg "> 
                 <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Piano</h1></div>               
                 <div className="d-flex justify-content-center p-3 "><PianoBasic></PianoBasic></div>
                 </div>

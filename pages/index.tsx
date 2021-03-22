@@ -24,7 +24,7 @@ export default function Home() {
         </div>
 
           {/*Columna 2*/}
-          <div className="col-lg-6 border p-3  ">
+          <div className="col-lg-6 border p-3 shadow-lg ">
            <Menu home={true}></Menu>
           </div>
 
