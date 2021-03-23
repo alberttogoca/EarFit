@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Menu from "../components/Menu/Menu"
+import Menu from "components/Menu"
 
 export default function Home() {
   return (

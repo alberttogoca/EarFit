@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
-import 'react-piano/dist/styles.css';
 import {getInstrument, NotePlayer} from "music-instrument-js";
+import 'react-piano/dist/styles.css';
 
 export default function PianoBasic(props) {
 

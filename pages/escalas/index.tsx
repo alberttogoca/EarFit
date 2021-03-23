@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PianoBasic from "../../components/PianoBasic";
-import Navbar from '../../components/Navbar/Navbar'
 import { getInstrument, startNote, stopNote, NotePlayer } from "music-instrument-js";
-import { Options } from '../../components/Options/Options';
-import Menu from "../../components/Menu/Menu";
+import PianoBasic from "components/PianoBasic";
+import { Options } from 'components/Options';
+import Menu from "components/Menu";
 
 export default function Escalas() {
 

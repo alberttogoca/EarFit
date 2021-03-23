@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from "react";
-import PianoBasic from "../../components/PianoBasic";
-import { getInstrument, NotePlayer } from "music-instrument-js";
-import { Options } from "../../components/Options/Options";
-import Menu from "../../components/Menu/Menu";
+import { getRandomItem } from "utils/arrayUtils";
+import { Options } from "components/Options";
 import { Scale } from "@tonaljs/tonal";
-import { getRandomItem } from "../../utils/arrayUtils";
-import useInstrument from "../../hooks/useInstrument";
+import Menu from "components/Menu";
+import PianoBasic from "components/PianoBasic";
+import useInstrument from "hooks/useInstrument";
 
 export default function Notas() {
-  // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
   const instrument = useInstrument();
   const [notes, setNotes] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<string>();
 
   useEffect(() => {
     const notes = Scale.get("C major").notes;
+    const note = getRandomItem(notes);
     setNotes(notes);
+    setAnswer(note);
+    console.log(note);
+
   }, []);
 
-  async function handleClick() {
-    const note = getRandomItem(notes);
-    instrument.play(`${note}3` , {});
+  function handlePlay() {
+    instrument.play(`${answer}3` , {});
+    console.log(`Now playing: ${answer}`);
+
   }
 
+  function handleOption(option: string) {
+    console.log(option === answer);
+    if (option === answer){
+      const note = getRandomItem(notes);
+      setAnswer(note);
+      instrument.play(`${note}3` , {});
+    }
+  }
+
+  
   return (
     <>
       {/*Container*/}
@@ -41,32 +55,16 @@ export default function Notas() {
             {/*EJERCICIO NOTAS*/}
             {/*PLAY SOUND*/}
             <div className="d-flex justify-content-center p-3 ">
-              <button
-                type="button"
-                className="btn btn-primary btn-lg  p-3"
-                aria-pressed="true"
-                onClick={handleClick}
-              >
+              <button type="button" className="btn btn-primary btn-lg  p-3"  aria-pressed="true" onClick={handlePlay}>
                 Nota?
               </button>
             </div>
             {/*OPCIONES*/}
-            <div
-              className="btn-group btn-group-toggle d-flex justify-content-center"
-              data-toggle="buttons"
-            >
-              <button type="button" className="btn btn-secondary" id="option1">
-                {" "}
-                DO{" "}
-              </button>
-              <button type="button" className="btn btn-secondary" id="option2">
-                {" "}
-                RE{" "}
-              </button>
-              <button type="button" className="btn btn-secondary" id="option3">
-                {" "}
-                MI{" "}
-              </button>
+            <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+              {notes.map(note => 
+                <button key={note} type="button" className="btn btn-secondary" onClick={() => handleOption(note)}>
+                  {note}
+                </button> )}
             </div>
             {/*FIN EJERCICIO NOTAS*/}
 
@@ -85,3 +83,25 @@ export default function Notas() {
     </>
   );
 }
+
+/*<button type="button" className="btn btn-secondary" id="option1">
+                C
+              </button>
+              <button type="button" className="btn btn-secondary" id="option2">
+                D
+              </button>
+              <button type="button" className="btn btn-secondary" id="option3">
+                E
+              </button>
+              <button type="button" className="btn btn-secondary" id="option4">
+                F
+              </button>
+              <button type="button" className="btn btn-secondary" id="option5">
+                G
+              </button>
+              <button type="button" className="btn btn-secondary" id="option6">
+                A
+              </button>
+              <button type="button" className="btn btn-secondary" id="option7">
+                B
+              </button> */

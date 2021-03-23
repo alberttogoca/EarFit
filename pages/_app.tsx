@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import 'bootswatch/dist/pulse/bootstrap.min.css'
-import Layout from '../components/Layout/Layout'
+import Layout from 'components/Layout'
 
 export default function App({ Component, pageProps }: AppProps) {
     return (

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PianoBasic from "../../components/PianoBasic";
-import { Options } from '../../components/Options/Options';
-import Menu from "../../components/Menu/Menu";
-import useInstrument from '../../hooks/useInstrument';
+import PianoBasic from "components/PianoBasic";
+import { Options } from 'components/Options';
+import Menu from "components/Menu";
+import useInstrument from 'hooks/useInstrument';
 
 export default function Intervalos() {
 

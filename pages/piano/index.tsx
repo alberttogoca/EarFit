@@ -1,7 +1,6 @@
-import PianoBasic from "../../components/PianoBasic";
-import 'bootswatch/dist/pulse/bootstrap.min.css'
-import { Options } from "../../components/Options/Options";
-import Menu from "../../components/Menu/Menu";
+import { Options } from "components/Options";
+import Menu from "components/Menu";
+import PianoBasic from "components/PianoBasic";
 
 export default function Piano() {
   return (

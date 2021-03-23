@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "components/Sidebar";
 
 export default function Header() {
     return (
