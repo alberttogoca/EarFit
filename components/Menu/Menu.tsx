@@ -1,8 +1,6 @@
 import Link from "next/link";
 
-export default function Menu({ home }: {
-  home?: boolean
-}){
+export default function Menu({ home }: {home?: boolean}){
      return (
      <>
       {home ? (<>
