@@ -4,7 +4,7 @@ import { Options } from 'components/Options';
 import Menu from "components/Menu";
 import useInstrument from 'hooks/useInstrument';
 
-export default function Intervalos() {
+export default function Intervals() {
 
   const instrument = useInstrument();
  // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -25,14 +25,14 @@ export default function Intervalos() {
                 </div>
                 {/*Columna 2*/}
                 <div className="col-lg-6 border p-3 shadow-lg "> 
-                <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Intervalos</h1></div>               
+                <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Intervals</h1></div>               
                 {/*PLAY SOUND*/}
                 <div className="d-flex justify-content-center p-3 "><button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true"onClick={handleClick}>Intervalo?</button></div>
                 {/*OPCIONES*/}
                 <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-                    <button type="button" className="btn btn-secondary" id="option1" > DO </button>
-                    <button type="button" className="btn btn-secondary" id="option2"> RE </button>
-                    <button type="button" className="btn btn-secondary" id="option3" > MI </button>
+                    <button type="button" className="btn btn-secondary" id="option1" > M3 </button>
+                    <button type="button" className="btn btn-secondary" id="option2"> P4 </button>
+                    <button type="button" className="btn btn-secondary" id="option3" > P5 </button>
                 </div>
                 {/*PIANO*/}
                 <div className="d-flex justify-content-center p-3 "><PianoBasic></PianoBasic></div>
@@ -40,7 +40,7 @@ export default function Intervalos() {
 
                 {/*Columna 3*/}
                 <div className="col-sm border">
-                <Options page="Intervalos"></Options>
+                <Options page="Intervals"></Options>
                 </div>
             </div>
         </div>

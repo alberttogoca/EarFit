@@ -5,11 +5,11 @@ export default function Menu({ home }: {home?: boolean}){
      <>
       {home ? (<>
               <div className="d-flex justify-content-center p-3 btn">
-                <Link href="/notas"><h1 className="display-4">Notas</h1></Link></div>
+                <Link href="/notes"><h1 className="display-4">Notes</h1></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
-                <Link href="/intervalos"><h1 className="display-4">Intervalos</h1></Link></div>
+                <Link href="/intervals"><h1 className="display-4">Intervals</h1></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
-                <Link href="/escalas"><h1 className="display-4">Escalas</h1></Link></div>
+                <Link href="/scales"><h1 className="display-4">Scales</h1></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
                 <Link href="/piano"><h1 className="display-4">Piano</h1></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
@@ -17,11 +17,11 @@ export default function Menu({ home }: {home?: boolean}){
       </>) : (<>
       
               <div className="d-flex justify-content-center p-3 btn">
-                <Link href="/notas"><h2>Notas</h2></Link></div>
+                <Link href="/notes"><h2>Notes</h2></Link></div>
               <div className="d-flex justify-content-center p-3 btn" >
-                <Link href="/intervalos"><h2>Intervalos</h2></Link></div>
+                <Link href="/intervals"><h2>Intervals</h2></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
-                <Link href="/escalas"><h2>Escalas</h2></Link></div>
+                <Link href="/scales"><h2>Scales</h2></Link></div>
               <div className="d-flex justify-content-center p-3 btn">
                 <Link href="/piano"><h2>Piano</h2></Link></div>
               <div className="d-flex justify-content-center p-3 btn">

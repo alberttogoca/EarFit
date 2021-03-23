@@ -6,7 +6,7 @@ import Menu from "components/Menu";
 import PianoBasic from "components/PianoBasic";
 import useInstrument from "hooks/useInstrument";
 
-export default function Notas() {
+export default function Notes() {
   const instrument = useInstrument();
   const [notes, setNotes] = useState<string[]>([]);
   const [answer, setAnswer] = useState<string>();
@@ -49,14 +49,14 @@ export default function Notas() {
           {/*Columna 2*/}
           <div className="col-lg-6 border p-3  shadow-lg">
             <div className="d-flex justify-content-center p-3 ">
-              <h1 className="display-4 ">Notas</h1>
+              <h1 className="display-4 ">Notes</h1>
             </div>
 
             {/*EJERCICIO NOTAS*/}
             {/*PLAY SOUND*/}
             <div className="d-flex justify-content-center p-3 ">
               <button type="button" className="btn btn-primary btn-lg  p-3"  aria-pressed="true" onClick={handlePlay}>
-                Nota?
+                Note?
               </button>
             </div>
             {/*OPCIONES*/}
@@ -76,7 +76,7 @@ export default function Notas() {
 
           {/*Columna 3*/}
           <div className="col-sm border">
-            <Options page="Notas"></Options>
+            <Options page="Notes"></Options>
           </div>
         </div>
       </div>

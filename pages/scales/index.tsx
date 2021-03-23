@@ -4,7 +4,7 @@ import PianoBasic from "components/PianoBasic";
 import { Options } from 'components/Options';
 import Menu from "components/Menu";
 
-export default function Escalas() {
+export default function Scales() {
 
  // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -34,14 +34,14 @@ export default function Escalas() {
                 </div>
                 {/*Columna 2*/}
                 <div className="col-lg-6 border p-3 shadow-lg "> 
-                <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Escalas</h1></div>               
+                <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Scales</h1></div>               
                 {/*PLAY SOUND*/}
                 <div className="d-flex justify-content-center p-3 "><button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true"onClick={handleClick}>Escala?</button></div>
                 {/*OPCIONES*/}
                 <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-                    <button type="button" className="btn btn-secondary" id="option1" > DO </button>
-                    <button type="button" className="btn btn-secondary" id="option2"> RE </button>
-                    <button type="button" className="btn btn-secondary" id="option3" > MI </button>
+                    <button type="button" className="btn btn-secondary" id="option1" > MAJOR </button>
+                    <button type="button" className="btn btn-secondary" id="option2"> MENOR </button>
+                    <button type="button" className="btn btn-secondary" id="option3" > HARMONIC MINOR </button>
                 </div>
                 {/*PIANO*/}
                 <div className="d-flex justify-content-center p-3 "><PianoBasic></PianoBasic></div>
@@ -49,7 +49,7 @@ export default function Escalas() {
 
                 {/*Columna 3*/}
                 <div className="col-sm border">
-                <Options page="Escalas"></Options>
+                <Options page="Scales"></Options>
                 </div>
             </div>
         </div>

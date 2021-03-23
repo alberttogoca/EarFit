@@ -11,7 +11,7 @@ export default function About() {
         {/*Columna 2*/}
         <div className="col-sm border">
           <div className="d-flex justify-content-center p-3 "><h1 className="display-4">Alberto Gómez Cano</h1></div>
-          <div className="p-3"><p className="lead ">Prototipo de TFG</p></div>
+          <div className="p-3"><p className="lead ">TFG Prototype</p></div>
         </div>
      </div>
       </>
