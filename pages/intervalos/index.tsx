@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PianoBasic from "../../components/PianoBasic";
-import Navbar from '../../components/Navbar/Navbar'
-import { getInstrument, startNote, stopNote, NotePlayer } from "music-instrument-js";
 import { Options } from '../../components/Options/Options';
 import Menu from "../../components/Menu/Menu";
+import useInstrument from '../../hooks/useInstrument';
 
 export default function Intervalos() {
 
+  const instrument = useInstrument();
  // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
-
-   useEffect(() => {
-        const loadInstrument = async () => {
-        const piano = await getInstrument('acoustic_grand_piano');
-        setInstrument(piano);
-      }
-      loadInstrument();
-    }, []);
 
   async function handleClick() {
     instrument.play('A3', {})

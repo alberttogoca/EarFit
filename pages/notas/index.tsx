@@ -5,20 +5,16 @@ import { Options } from "../../components/Options/Options";
 import Menu from "../../components/Menu/Menu";
 import { Scale } from "@tonaljs/tonal";
 import { getRandomItem } from "../../utils/arrayUtils";
+import useInstrument from "../../hooks/useInstrument";
 
 export default function Notas() {
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
+  const instrument = useInstrument();
   const [notes, setNotes] = useState<string[]>([]);
 
   useEffect(() => {
-    const loadInstrument = async () => {
-      setInstrument(await getInstrument("acoustic_grand_piano"));
-    };
     const notes = Scale.get("C major").notes;
     setNotes(notes);
-    loadInstrument();
   }, []);
 
   async function handleClick() {

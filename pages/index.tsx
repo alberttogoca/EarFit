@@ -1,8 +1,5 @@
 import Head from "next/head";
 import Menu from "../components/Menu/Menu"
-import utilStyles from "../styles/utils.module.css";
-
-import "bootswatch/dist/pulse/bootstrap.min.css";
 
 export default function Home() {
   return (
