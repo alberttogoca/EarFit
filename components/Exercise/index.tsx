@@ -1,8 +1,3 @@
-
-export const ExerciseNote = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+export const ExerciseNote = (): JSX.Element => {
+  return <div></div>;
+};

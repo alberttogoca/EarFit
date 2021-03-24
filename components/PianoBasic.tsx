@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
-import {getInstrument, NotePlayer} from "music-instrument-js";
 import 'react-piano/dist/styles.css';
 
-export default function PianoBasic(props) {
+import { getInstrument, NotePlayer } from 'music-instrument-js';
+import React, { useEffect, useState } from 'react';
+import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
 
+export default function PianoBasic(props: string): JSX.Element {
   const noteRange = {
-    first: MidiNumbers.fromNote("c3"),
-    last: MidiNumbers.fromNote("f5"),
+    first: MidiNumbers.fromNote('c3'),
+    last: MidiNumbers.fromNote('f5'),
   };
 
   const keyboardShortcuts = KeyboardShortcuts.create({
@@ -15,30 +15,34 @@ export default function PianoBasic(props) {
     lastNote: noteRange.last,
     keyboardConfig: KeyboardShortcuts.HOME_ROW,
   });
-  
+
   const [instrument, setInstrument] = useState<NotePlayer>(undefined);
-  
-    useEffect(() => {
-        const loadInstrument = async () => {
-        const piano = await getInstrument('acoustic_grand_piano');
-        setInstrument(piano);
-      }
-      loadInstrument();
-    }, []);
+
+  useEffect(() => {
+    const loadInstrument = async (): Promise<void> => {
+      const piano = await getInstrument('acoustic_grand_piano');
+      setInstrument(piano);
+    };
+    loadInstrument();
+  }, []);
 
   return (
     <>
-    <div className="container-fluid">
-        <Piano 
+      <div className="container-fluid">
+        <Piano
           noteRange={noteRange}
           width={500}
-          playNote={(note)=>{instrument.play(note, {})}}
-          stopNote={(note)=>{instrument.stop(note)}}
+          playNote={(note) => {
+            instrument.play(note, {});
+          }}
+          stopNote={(note) => {
+            instrument.stop(note);
+          }}
           keyboardShortcuts={keyboardShortcuts}
           disabled={!instrument}
           {...props}
-        ></Piano>  
-        </div>
+        ></Piano>
+      </div>
     </>
   );
 }
