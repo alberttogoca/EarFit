@@ -6,8 +6,10 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "eslint ./**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix ./**/*.{ts,tsx}",
+    "prettier": "prettier --check ./**/*.{ts,tsx,css}",
+    "prettier:format": "prettier --write ./**/*.{ts,tsx,css}"
   },
   "dependencies": {
     "@tonaljs/tonal": "^4.6.0",
@@ -30,6 +32,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.2.1"
   }
 }

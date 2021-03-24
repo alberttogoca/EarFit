@@ -25,9 +25,9 @@ module.exports = {
           'plugin:react/recommended', // React rules
           'plugin:react-hooks/recommended', // React hooks rules
           'plugin:jsx-a11y/recommended', // Accessibility rules
-          'prettier/@typescript-eslint',
           'plugin:prettier/recommended', // Prettier plugin
         ],
+        plugins: ['simple-import-sort'],
         rules: {
           // We will use TypeScript's types for component props instead
           'react/prop-types': 'off',
@@ -50,6 +50,8 @@ module.exports = {
             },
           ],
           'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
+          'simple-import-sort/imports': 'error',
+          'simple-import-sort/exports': 'error'
         },
       },
     ],
