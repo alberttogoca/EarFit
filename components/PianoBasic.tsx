@@ -1,5 +1,6 @@
 import 'react-piano/dist/styles.css';
 
+import DimensionsProvider from 'components/DimensionsProvider';
 import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
@@ -28,21 +29,23 @@ export default function PianoBasic(props: unknown): JSX.Element {
 
   return (
     <>
-      <div className="container-fluid">
-        <Piano
-          noteRange={noteRange}
-          width={500}
-          playNote={(note) => {
-            instrument.play(note, {});
-          }}
-          stopNote={(note) => {
-            instrument.stop(note);
-          }}
-          keyboardShortcuts={keyboardShortcuts}
-          disabled={!instrument}
-          {...props}
-        ></Piano>
-      </div>
+      <DimensionsProvider>
+        {({ containerWidth }) => (
+          <Piano
+            noteRange={noteRange}
+            width={containerWidth}
+            playNote={(note) => {
+              instrument.play(note, {});
+            }}
+            stopNote={(note) => {
+              instrument.stop(note);
+            }}
+            keyboardShortcuts={keyboardShortcuts}
+            disabled={!instrument}
+            {...props}
+          ></Piano>
+        )}
+      </DimensionsProvider>
     </>
   );
 }
