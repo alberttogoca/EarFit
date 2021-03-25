@@ -4,7 +4,7 @@ import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
 
-export default function PianoBasic(props: string): JSX.Element {
+export default function PianoBasic(props: unknown): JSX.Element {
   const noteRange = {
     first: MidiNumbers.fromNote('c3'),
     last: MidiNumbers.fromNote('f5'),
