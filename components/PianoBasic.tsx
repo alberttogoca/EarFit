@@ -4,11 +4,24 @@ import DimensionsProvider from 'components/DimensionsProvider';
 import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
+interface IProps {
+  firstNote?: string;
+  lastNote?: string;
+  props?: unknown;
+}
+export default function PianoBasic({ firstNote, lastNote, props }: IProps): JSX.Element {
+  //default
+  let start = 'c3';
+  let end = 'c4';
 
-export default function PianoBasic(props: unknown): JSX.Element {
+  if (firstNote && lastNote) {
+    start = firstNote;
+    end = lastNote;
+  }
+
   const noteRange = {
-    first: MidiNumbers.fromNote('c3'),
-    last: MidiNumbers.fromNote('f5'),
+    first: MidiNumbers.fromNote(start),
+    last: MidiNumbers.fromNote(end),
   };
 
   const keyboardShortcuts = KeyboardShortcuts.create({

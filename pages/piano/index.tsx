@@ -19,7 +19,7 @@ export default function Piano(): JSX.Element {
               <h1 className="display-4">Piano</h1>
             </div>
             <div className="d-flex justify-content-center p-3 ">
-              <PianoBasic></PianoBasic>
+              <PianoBasic firstNote="c3" lastNote="b4"></PianoBasic>
             </div>
           </div>
           {/*Columna 3*/}
