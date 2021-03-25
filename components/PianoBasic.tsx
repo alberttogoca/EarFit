@@ -1,17 +1,19 @@
 import 'react-piano/dist/styles.css';
 
 import DimensionsProvider from 'components/DimensionsProvider';
-import { getInstrument, NotePlayer } from 'music-instrument-js';
-import React, { useEffect, useState } from 'react';
+import useInstrument from 'hooks/useInstrument';
 import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
+
 interface IProps {
   firstNote?: string;
   lastNote?: string;
 }
+
 export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element {
   //default
   let start = 'c3';
   let end = 'c4';
+  const instrument = useInstrument();
 
   if (firstNote && lastNote) {
     start = firstNote;
@@ -28,16 +30,6 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
     lastNote: noteRange.last,
     keyboardConfig: KeyboardShortcuts.HOME_ROW,
   });
-
-  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
-
-  useEffect(() => {
-    const loadInstrument = async (): Promise<void> => {
-      const piano = await getInstrument('acoustic_grand_piano');
-      setInstrument(piano);
-    };
-    loadInstrument();
-  }, []);
 
   return (
     <>
