@@ -7,9 +7,8 @@ import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
 interface IProps {
   firstNote?: string;
   lastNote?: string;
-  props?: unknown;
 }
-export default function PianoBasic({ firstNote, lastNote, props }: IProps): JSX.Element {
+export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element {
   //default
   let start = 'c3';
   let end = 'c4';
@@ -55,7 +54,6 @@ export default function PianoBasic({ firstNote, lastNote, props }: IProps): JSX.
             }}
             keyboardShortcuts={keyboardShortcuts}
             disabled={!instrument}
-            {...props}
           ></Piano>
         )}
       </DimensionsProvider>
