@@ -34,10 +34,10 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
   return (
     <>
       <DimensionsProvider>
-        {({ containerWidth }) => (
+        {({ newWidth }) => (
           <Piano
             noteRange={noteRange}
-            width={containerWidth}
+            width={newWidth}
             playNote={(note) => {
               instrument.play(note, {});
             }}
