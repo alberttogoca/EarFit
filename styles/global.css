@@ -26,6 +26,16 @@ img {
   display: block;
 }
 
+.avatar{
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 9999px;
+  object-fit: cover;
+  
+
+}
+
 .PianoDarkTheme .ReactPiano__Key--accidental {
   background: #a3a3a3;
   border: 1px solid #888;

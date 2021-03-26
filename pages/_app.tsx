@@ -1,4 +1,5 @@
 import 'bootswatch/dist/pulse/bootstrap.min.css';
+import 'styles/global.css';
 
 import Layout from 'components/Layout';
 import { AppProps } from 'next/app';
