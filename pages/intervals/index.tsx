@@ -1,6 +1,6 @@
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
-import { Options } from 'components/Options';
+import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
 import useInstrument from 'hooks/useInstrument';
 

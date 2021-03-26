@@ -2,7 +2,7 @@ interface IProps {
   page: string;
 }
 
-export const Options = ({ page }: IProps): JSX.Element => {
+export default function Options({ page }: IProps): JSX.Element {
   return (
     <>
       <div className="d-flex justify-content-center p-3">
@@ -13,4 +13,4 @@ export const Options = ({ page }: IProps): JSX.Element => {
       </div>
     </>
   );
-};
+}
