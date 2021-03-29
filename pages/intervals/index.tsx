@@ -8,7 +8,7 @@ export default function Intervals(): JSX.Element {
   const instrument = useInstrument();
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-  function handleClick(): void {
+  function handlePlay(): void {
     instrument.play('A3', {});
   }
 
@@ -22,9 +22,12 @@ export default function Intervals(): JSX.Element {
 
         {/*PLAY SOUND*/}
         <div className="d-flex justify-content-center p-3 ">
-          <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handleClick}>
-            Intervalo?
-          </button>
+          {instrument && (
+            <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
+              Note?
+            </button>
+          )}
+          {!instrument && <div>Cargando instrumento...</div>}
         </div>
 
         {/*OPCIONES*/}

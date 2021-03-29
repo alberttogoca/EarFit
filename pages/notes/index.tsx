@@ -44,9 +44,12 @@ export default function Notes(): JSX.Element {
 
         {/*PLAY SOUND*/}
         <div className="d-flex justify-content-center p-3 ">
-          <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
-            Note?
-          </button>
+          {instrument && (
+            <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
+              Note?
+            </button>
+          )}
+          {!instrument && <div>Cargando instrumento...</div>}
         </div>
 
         {/*OPCIONES*/}

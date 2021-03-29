@@ -18,7 +18,7 @@ export default function Scales(): JSX.Element {
     loadInstrument();
   }, []);
 
-  function handleClick(): void {
+  function handlePlay(): void {
     instrument.play('A3', {});
   }
 
@@ -32,9 +32,12 @@ export default function Scales(): JSX.Element {
 
         {/*PLAY SOUND*/}
         <div className="d-flex justify-content-center p-3 ">
-          <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handleClick}>
-            Escala?
-          </button>
+          {instrument && (
+            <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
+              Scale?
+            </button>
+          )}
+          {!instrument && <div>Cargando instrumento...</div>}
         </div>
 
         {/*OPCIONES*/}
