@@ -37,7 +37,7 @@ export default function Scales(): JSX.Element {
               Scale?
             </button>
           )}
-          {!instrument && <div>Cargando instrumento...</div>}
+          {!instrument && <div>Loading instrument...</div>}
         </div>
 
         {/*OPCIONES*/}

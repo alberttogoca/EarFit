@@ -49,7 +49,7 @@ export default function Notes(): JSX.Element {
               Note?
             </button>
           )}
-          {!instrument && <div>Cargando instrumento...</div>}
+          {!instrument && <div>Loading instrument...</div>}
         </div>
 
         {/*OPCIONES*/}
