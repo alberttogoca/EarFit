@@ -3,12 +3,12 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import useInstrument from 'hooks/useInstrument';
+import { useInstrument } from 'context/InstrumentContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Notes(): JSX.Element {
-  const instrument = useInstrument();
+  const { instrument } = useInstrument();
   const [notes, setNotes] = useState<string[]>([]);
   const [answer, setAnswer] = useState<string>();
 
@@ -17,11 +17,10 @@ export default function Notes(): JSX.Element {
     const note = getRandomItem(notes);
     setNotes(notes);
     setAnswer(note);
-    console.log(note);
   }, []);
 
   function handlePlay(): void {
-    instrument.play(`${answer}3`, {});
+    instrument?.play(`${answer}3`, 0, { gain: 10 });
     console.log(`Now playing: ${answer}`);
   }
 
@@ -30,7 +29,8 @@ export default function Notes(): JSX.Element {
     if (option === answer) {
       const note = getRandomItem(notes);
       setAnswer(note);
-      instrument.play(`${note}3`, {});
+      instrument?.play(`${note}3`, 0, { gain: 10 });
+      console.log(`Now playing: ${note}`);
     }
   }
 

@@ -1,6 +1,6 @@
 import { getInstrument, NotePlayer } from 'music-instrument-js';
 import { useEffect, useState } from 'react';
-
+//DEPRECATED -> USE InstrumentContext INSTEAD
 const useInstrument = (): NotePlayer => {
   const [instrument, setInstrument] = useState<NotePlayer>(undefined);
   useEffect(() => {

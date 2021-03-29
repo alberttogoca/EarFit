@@ -2,14 +2,14 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import useInstrument from 'hooks/useInstrument';
+import { useInstrument } from 'context/InstrumentContext';
 
 export default function Intervals(): JSX.Element {
-  const instrument = useInstrument();
+  const { instrument } = useInstrument();
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   function handlePlay(): void {
-    instrument.play('A3', {});
+    instrument?.play('A3', 0, { gain: 10 });
   }
 
   return (

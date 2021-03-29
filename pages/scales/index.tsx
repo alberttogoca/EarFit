@@ -1,25 +1,39 @@
+import { Scale } from '@tonaljs/tonal';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import { getInstrument, NotePlayer } from 'music-instrument-js';
+import { useInstrument } from 'context/InstrumentContext';
 import React, { useEffect, useState } from 'react';
+import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Scales(): JSX.Element {
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
+  const { instrument } = useInstrument();
+  const [notes, setNotes] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<string>();
 
   useEffect(() => {
-    const loadInstrument = async (): Promise<void> => {
-      const piano = await getInstrument('acoustic_grand_piano');
-      setInstrument(piano);
-    };
-    loadInstrument();
+    const notes = Scale.get('C major').notes;
+    const note = getRandomItem(notes);
+    setNotes(notes);
+    setAnswer(note);
   }, []);
 
   function handlePlay(): void {
-    instrument.play('A3', {});
+    instrument?.play(`${answer}3`, 0, { gain: 10 });
+    console.log(`Now playing: ${answer}`);
+  }
+
+  function handleOption(option: string): void {
+    console.log(option === answer);
+    if (option === answer) {
+      const note = getRandomItem(notes);
+      setAnswer(note);
+      instrument?.play(`${note}3`, 0, { gain: 10 });
+      console.log(`Now playing: ${note}`);
+    }
   }
 
   return (
@@ -42,17 +56,14 @@ export default function Scales(): JSX.Element {
 
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          <button type="button" className="btn btn-secondary" id="option1">
-            {' '}
-            MAJOR{' '}
+          <button type="button" className="btn btn-secondary" onClick={() => handleOption('MAJOR')}>
+            MAJOR
           </button>
-          <button type="button" className="btn btn-secondary" id="option2">
-            {' '}
-            MENOR{' '}
+          <button type="button" className="btn btn-secondary" onClick={() => handleOption('MENOR')}>
+            MENOR
           </button>
-          <button type="button" className="btn btn-secondary" id="option3">
-            {' '}
-            HARMONIC MINOR{' '}
+          <button type="button" className="btn btn-secondary" onClick={() => handleOption('HARMONIC MINOR')}>
+            HARMONIC MINOR
           </button>
         </div>
 
