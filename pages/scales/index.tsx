@@ -1,4 +1,5 @@
-import { Scale } from '@tonaljs/tonal';
+import { Scale } from '@tonaljs/scale';
+import { Scale as ScaleDict } from '@tonaljs/tonal';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
@@ -13,17 +14,17 @@ export default function Scales(): JSX.Element {
   const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
   const [playing, setPlaying] = useState<boolean>(false);
-  const delay = (ms): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     const root = 'C';
-    const ionian = Scale.get(root + ' ionian'); //major
-    const dorian = Scale.get(root + ' dorian');
-    const phrygian = Scale.get(root + ' phrygian');
-    const lydian = Scale.get(root + ' lydian');
-    const mixolydian = Scale.get(root + ' mixolydian');
-    const aolian = Scale.get(root + ' aeolian'); //minor
-    const locrian = Scale.get(root + ' locrian');
+    const ionian = ScaleDict.get([root, 'ionian']); //major
+    const dorian = ScaleDict.get([root, 'dorian']);
+    const phrygian = ScaleDict.get([root, 'phrygian']);
+    const lydian = ScaleDict.get([root, 'lydian']);
+    const mixolydian = ScaleDict.get([root, 'mixolydian']);
+    const aolian = ScaleDict.get([root, 'aeolian']); //minor
+    const locrian = ScaleDict.get([root, 'locrian']);
 
     const scalesArray = [ionian, dorian, phrygian, lydian, mixolydian, aolian, locrian];
     setScales(scalesArray);
