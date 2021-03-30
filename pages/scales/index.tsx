@@ -4,35 +4,67 @@ import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
 import { useInstrument } from 'context/InstrumentContext';
+import { startNote, stopNote } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Scales(): JSX.Element {
-  // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
   const { instrument } = useInstrument();
-  const [notes, setNotes] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<string>();
+  const [scales, setScales] = useState<Scale[]>([]);
+  const [answer, setAnswer] = useState<Scale>(undefined);
+  const [playing, setPlaying] = useState<boolean>(false);
+  const delay = (ms): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    const notes = Scale.get('C major').notes;
-    const note = getRandomItem(notes);
-    setNotes(notes);
-    setAnswer(note);
+    const root = 'C';
+    const ionian = Scale.get(root + ' ionian'); //major
+    const dorian = Scale.get(root + ' dorian');
+    const phrygian = Scale.get(root + ' phrygian');
+    const lydian = Scale.get(root + ' lydian');
+    const mixolydian = Scale.get(root + ' mixolydian');
+    const aolian = Scale.get(root + ' aeolian'); //minor
+    const locrian = Scale.get(root + ' locrian');
+
+    const scalesArray = [ionian, dorian, phrygian, lydian, mixolydian, aolian, locrian];
+    setScales(scalesArray);
+    setAnswer(getRandomItem(scalesArray));
   }, []);
 
-  function handlePlay(): void {
-    instrument?.play(`${answer}3`, { gain: 10 });
-    console.log(`Now playing: ${answer}`);
+  async function playScale(): Promise<void> {
+    setPlaying(true);
+
+    const options = { duration: 500, gain: 10 };
+
+    console.log(`Answer: ${answer.name}`);
+    console.log(`Now playing: ${answer.notes}`);
+
+    for (let i = 0; i < answer.notes.length; i++) {
+      instrument?.play(answer.notes[i] + '3', options);
+      await delay(300);
+    }
+
+    setPlaying(false);
   }
 
-  function handleOption(option: string): void {
-    console.log(option === answer);
-    if (option === answer) {
-      const note = getRandomItem(notes);
-      setAnswer(note);
-      instrument?.play(`${note}3`, { gain: 10 });
-      console.log(`Now playing: ${note}`);
+  function handlePlay(): void {
+    if (!playing) {
+      playScale();
+    }
+  }
+
+  async function handleOption(option: string): Promise<void> {
+    console.log(option === answer.name);
+    if (option === answer.name) {
+      setAnswer(getRandomItem(scales));
+      //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
+      //Cambiar sonido de acierto por reproducir siguiente escala y boton verde
+      await startNote('vibraphone', 'A5', { duration: 500, gain: 10 });
+      await delay(900);
+      await stopNote('vibraphone', 'A5');
+    } else {
+      await startNote('trombone', 'C2', { duration: 500, gain: 10 });
+      await delay(300);
+      await stopNote('trombone', 'C2');
     }
   }
 
@@ -56,15 +88,16 @@ export default function Scales(): JSX.Element {
 
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          <button type="button" className="btn btn-secondary" onClick={() => handleOption('MAJOR')}>
-            MAJOR
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={() => handleOption('MENOR')}>
-            MENOR
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={() => handleOption('HARMONIC MINOR')}>
-            HARMONIC MINOR
-          </button>
+          {scales.map((scale) => (
+            <button
+              key={scale.name}
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => handleOption(scale.name)}
+            >
+              {scale.name.slice(2).toUpperCase()}
+            </button>
+          ))}
         </div>
 
         {/*PIANO*/}
