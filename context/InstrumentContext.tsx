@@ -1,8 +1,8 @@
+import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
-import SoundFontPlayer, { Player } from 'soundfont-player';
 
 interface ProvidedValue {
-  instrument?: Player;
+  instrument?: NotePlayer;
 }
 
 interface Props {
@@ -10,13 +10,12 @@ interface Props {
 }
 
 export const InstrumentProvider = ({ children }: Props): JSX.Element => {
-  const [instrument, setInstrument] = useState<Player | undefined>(undefined);
+  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
-      const piano = await SoundFontPlayer.instrument(new AudioContext(), 'acoustic_grand_piano');
-      setInstrument(piano);
-      console.log('Se crea el instrumento en el context');
+      console.log('Se crea el instrument context');
+      setInstrument(await getInstrument('acoustic_grand_piano'));
     };
     setInitialInstrument();
   }, []);
