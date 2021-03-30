@@ -14,6 +14,7 @@ export default function Scales(): JSX.Element {
   const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
   const [playing, setPlaying] = useState<boolean>(false);
+
   const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
@@ -89,16 +90,18 @@ export default function Scales(): JSX.Element {
 
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          {scales.map((scale) => (
-            <button
-              key={scale.name}
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => handleOption(scale.name)}
-            >
-              {scale.name.slice(2).toUpperCase()}
-            </button>
-          ))}
+          <div>
+            {scales.map((scale) => (
+              <button
+                key={scale.name}
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => handleOption(scale.name)}
+              >
+                {scale.name.slice(2).toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/*PIANO*/}
