@@ -9,7 +9,7 @@ export default function Intervals(): JSX.Element {
   // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   function handlePlay(): void {
-    instrument?.play('A3', 0, { gain: 10 });
+    instrument?.play('A3', { gain: 10 });
   }
 
   return (

@@ -22,7 +22,7 @@ export default function Scales(): JSX.Element {
   }, []);
 
   function handlePlay(): void {
-    instrument?.play(`${answer}3`, 0, { gain: 10 });
+    instrument?.play(`${answer}3`, { gain: 10 });
     console.log(`Now playing: ${answer}`);
   }
 
@@ -31,7 +31,7 @@ export default function Scales(): JSX.Element {
     if (option === answer) {
       const note = getRandomItem(notes);
       setAnswer(note);
-      instrument?.play(`${note}3`, 0, { gain: 10 });
+      instrument?.play(`${note}3`, { gain: 10 });
       console.log(`Now playing: ${note}`);
     }
   }

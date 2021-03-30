@@ -39,10 +39,10 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
             noteRange={noteRange}
             width={newWidth}
             playNote={(note) => {
-              instrument.play(note, 0, { gain: 10 });
+              instrument?.play(note, { gain: 10 });
             }}
             stopNote={(note) => {
-              instrument.stop(note);
+              instrument?.stop(note);
             }}
             keyboardShortcuts={keyboardShortcuts}
             disabled={!instrument}
