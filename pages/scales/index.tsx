@@ -44,7 +44,7 @@ export default function Scales(): JSX.Element {
     ]; */
 
     const scaleToPlay = answer.notes.map((note, i) => {
-      return { note: note, time: i * 0.3 };
+      return { note: note, time: i * 0.3, duration: 0.5 };
     });
 
     instrument?.schedule(0, scaleToPlay);

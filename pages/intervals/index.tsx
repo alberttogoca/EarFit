@@ -1,4 +1,4 @@
-import { Interval, NoInterval } from '@tonaljs/core';
+//import { Interval, NoInterval } from '@tonaljs/core';
 import { Interval as IntervalDict } from '@tonaljs/tonal';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
@@ -6,7 +6,7 @@ import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
-import { getRandomItem } from 'utils/arrayUtils';
+//import { getRandomItem } from 'utils/arrayUtils';
 
 interface IInterval {
   note1: string;
@@ -29,8 +29,8 @@ export default function Intervals(): JSX.Element {
     instrument?.stop();
     //TO DO: sacar de answer.notes este array
     const intervalToPlay = [
-      { note: 'C4', time: 0 },
-      { note: 'G4', time: 0.5 },
+      { note: 'C4', time: 0, duration: 2 },
+      { note: 'G4', time: 0.5, duration: 2 },
     ];
 
     instrument?.schedule(0, intervalToPlay);
