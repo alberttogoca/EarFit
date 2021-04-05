@@ -4,21 +4,20 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import { useInstrument } from 'context/InstrumentContext';
-import { startNote, stopNote } from 'music-instrument-js';
+import { useInstrumentContext } from 'context/SoundfontContext';
+//import { startNote, stopNote } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Scales(): JSX.Element {
-  const { instrument } = useInstrument();
+  const { instrument } = useInstrumentContext();
   const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
-  const [playing, setPlaying] = useState<boolean>(false);
 
-  const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+  //const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    const root = 'C';
+    const root = 'C3';
     const ionian = ScaleDict.get([root, 'ionian']); //major
     const dorian = ScaleDict.get([root, 'dorian']);
     const phrygian = ScaleDict.get([root, 'phrygian']);
@@ -33,40 +32,43 @@ export default function Scales(): JSX.Element {
   }, []);
 
   async function playScale(): Promise<void> {
-    setPlaying(true);
+    instrument?.stop();
+    //TO DO: sacar de answer.notes este array
+    const scaleToPlay = [
+      { note: 'C3', time: 0 },
+      { note: 'D3', time: 0.5 },
+      { note: 'Eb3', time: 1 },
+      { note: 'F3', time: 1.5 },
+      { note: 'G3', time: 2 },
+      { note: 'Ab3', time: 2.5 },
+      { note: 'Bb3', time: 3 },
+    ];
 
-    const options = { duration: 500, gain: 10 };
+    instrument?.schedule(0, scaleToPlay);
 
     console.log(`Answer: ${answer.name}`);
     console.log(`Now playing: ${answer.notes}`);
-
-    for (let i = 0; i < answer.notes.length; i++) {
-      instrument?.play(answer.notes[i] + '3', options);
-      await delay(300);
-    }
-
-    setPlaying(false);
   }
 
   function handlePlay(): void {
-    if (!playing) {
-      playScale();
-    }
+    playScale();
   }
 
   async function handleOption(option: string): Promise<void> {
     console.log(option === answer.name);
     if (option === answer.name) {
-      setAnswer(getRandomItem(scales));
+      const newScale = getRandomItem(scales);
+      setAnswer(newScale);
+      console.log(`New Scale: ${newScale.name}`);
       //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
-      //Cambiar sonido de acierto por reproducir siguiente escala y boton verde
-      await startNote('vibraphone', 'A5', { duration: 500, gain: 10 });
+      playScale();
+      /* await startNote('vibraphone', 'A5', { duration: 500, gain: 10 });
       await delay(900);
-      await stopNote('vibraphone', 'A5');
+      await stopNote('vibraphone', 'A5'); */
     } else {
-      await startNote('trombone', 'C2', { duration: 500, gain: 10 });
+      /* await startNote('trombone', 'C2', { duration: 500, gain: 10 });
       await delay(300);
-      await stopNote('trombone', 'C2');
+      await stopNote('trombone', 'C2'); */
     }
   }
 
