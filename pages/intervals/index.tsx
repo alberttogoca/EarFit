@@ -1,4 +1,4 @@
-import { Interval } from '@tonaljs/scale';
+import { Interval, NoInterval } from '@tonaljs/core';
 import { Interval as IntervalDict } from '@tonaljs/tonal';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
@@ -9,8 +9,8 @@ import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [intervals, setIntervals] = useState<Interval[]>([]);
-  const [answer, setAnswer] = useState<Interval>(undefined);
+  const [intervals, setIntervals] = useState<(Interval | NoInterval)[]>([]);
+  const [answer, setAnswer] = useState<Interval | NoInterval>(undefined);
 
   useEffect(() => {
     console.log(IntervalDict.names());
