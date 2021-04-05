@@ -21,16 +21,17 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
       console.log('Se crea el instrument context');
       const ac = getAudioContext();
 
-      const vca = ac.createGain();
+      /* const vca = ac.createGain();
       vca.gain.value = 10;
-      vca.connect(ac.destination);
+      vca.connect(ac.destination); */
 
       setInstrument(
         await SoundFontPlayer.instrument(
           ac,
           'acoustic_grand_piano',
-          { destination: vca } /* , {
-          nameToUrl: localUrl,
+          { gain: 10 } /* , {
+            destination: vca 
+            nameToUrl: localUrl,
         } */
         )
       );
