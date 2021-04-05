@@ -62,7 +62,7 @@ export default function Notes(): JSX.Element {
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           {notes.map((note) => (
             <button key={note} type="button" className="btn btn-secondary" onClick={() => handleOption(note)}>
-              {note}
+              {note[0]}
             </button>
           ))}
         </div>

@@ -63,7 +63,7 @@ export default function Intervals(): JSX.Element {
         <div className="d-flex justify-content-center p-3 ">
           {instrument && (
             <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
-              Note?
+              Interval?
             </button>
           )}
           {!instrument && <div>Loading instrument...</div>}
