@@ -22,7 +22,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
       const ac = getAudioContext();
 
       const vca = ac.createGain();
-      vca.gain.value = 8;
+      vca.gain.value = 10;
       vca.connect(ac.destination);
 
       setInstrument(

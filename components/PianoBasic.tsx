@@ -42,7 +42,7 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
             width={newWidth}
             playNote={(note) => {
               /* instrument?.play(note, { gain: 10 } */
-              instrument?.play(note, 0, { gain: 10, duration: 200 });
+              instrument?.play(note, 0, { duration: 200 });
             }}
             stopNote={
               (/* note */) => {
