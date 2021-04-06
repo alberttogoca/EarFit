@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect, useState } from 'react';
 import SoundFontPlayer, { Player } from 'soundfont-player';
 
@@ -21,16 +22,17 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
       console.log('Se crea el instrument context');
       const ac = getAudioContext();
 
-      const vca = ac.createGain();
-      vca.gain.value = 8;
-      vca.connect(ac.destination);
+      /* const vca = ac.createGain();
+      vca.gain.value = 10;
+      vca.connect(ac.destination); */
 
       setInstrument(
         await SoundFontPlayer.instrument(
           ac,
           'acoustic_grand_piano',
-          { destination: vca } /* , {
-          nameToUrl: localUrl,
+          { gain: 10 } /* , {
+            destination: vca 
+            nameToUrl: localUrl,
         } */
         )
       );
@@ -45,13 +47,20 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-const getAudioContext = function (): AudioContext | any {
-  const AudioContext = window.AudioContext /*|| window.webkitAudioContext */ || false;
+export const getAudioContext = (): AudioContext => {
+  const AudioContext =
+    // @ts-ignore
+    window.AudioContext || // Default
+    // @ts-ignore
+    window.webkitAudioContext || // Safari and old versions of Chrome
+    false;
   if (!AudioContext) {
     console.warn(
       'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
     );
+    // @ts-ignore
     return {};
+    // throw new Error('PLATFORM_NOT_SUPPORTED');
   }
   return new AudioContext();
 };

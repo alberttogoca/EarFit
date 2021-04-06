@@ -1,4 +1,4 @@
-import { Interval, NoInterval } from '@tonaljs/core';
+//import { Interval, NoInterval } from '@tonaljs/core';
 import { Interval as IntervalDict } from '@tonaljs/tonal';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
@@ -6,34 +6,36 @@ import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
-import { getRandomItem } from 'utils/arrayUtils';
+//import { getRandomItem } from 'utils/arrayUtils';
+
+interface IInterval {
+  note1: string;
+  note2: string;
+}
+
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [intervals, setIntervals] = useState<(Interval | NoInterval)[]>([]);
-  const [answer, setAnswer] = useState<Interval | NoInterval>(undefined);
+  const [intervals, setIntervals] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<IInterval>(undefined);
 
   useEffect(() => {
     console.log(IntervalDict.names());
-    const p1 = IntervalDict.get('1P');
-    const m2 = IntervalDict.get('2M');
-    const m3 = IntervalDict.get('3M');
-
-    const intervalArray = [p1, m2, m3];
-    setIntervals(intervalArray);
-    setAnswer(getRandomItem(intervalArray));
+    const answer = { note1: 'C4', note2: 'G4' };
+    setIntervals(IntervalDict.names());
+    setAnswer(answer);
   }, []);
 
   async function playInterval(): Promise<void> {
-    instrument?.stop();
+    //instrument?.stop(); //Replace thiss
     //TO DO: sacar de answer.notes este array
     const intervalToPlay = [
-      { note: 'C3', time: 0 },
-      { note: 'Bb3', time: 0.5 },
+      { note: 'C4', time: 0, duration: 2 },
+      { note: 'G4', time: 0.5, duration: 2 },
     ];
 
     instrument?.schedule(0, intervalToPlay);
 
-    console.log(`Answer: ${answer.name}`);
+    console.log(`Answer: ${IntervalDict.distance(answer.note1, answer.note2)}`);
   }
 
   function handlePlay(): void {
@@ -41,11 +43,12 @@ export default function Intervals(): JSX.Element {
   }
 
   async function handleOption(option: string): Promise<void> {
-    console.log(option === answer.name);
-    if (option === answer.name) {
-      const newinterval = getRandomItem(intervals);
-      setAnswer(newinterval);
-      console.log(`New Interval: ${newinterval.name}`);
+    const result = IntervalDict.distance(answer.note1, answer.note2);
+    console.log(option === result);
+    if (option === result) {
+      //const newinterval = getRandomItem(intervals);
+      //setAnswer(newinterval);
+      //console.log(`New Interval: ${newinterval.name}`);
       //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
       playInterval();
     }
@@ -63,7 +66,7 @@ export default function Intervals(): JSX.Element {
         <div className="d-flex justify-content-center p-3 ">
           {instrument && (
             <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
-              Note?
+              Interval?
             </button>
           )}
           {!instrument && <div>Loading instrument...</div>}
@@ -73,13 +76,8 @@ export default function Intervals(): JSX.Element {
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
             {intervals.map((interval) => (
-              <button
-                key={interval.name}
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => handleOption(interval.name)}
-              >
-                {interval.name.toUpperCase()}
+              <button key={interval} type="button" className="btn btn-secondary" onClick={() => handleOption(interval)}>
+                {interval.toUpperCase()}
               </button>
             ))}
           </div>

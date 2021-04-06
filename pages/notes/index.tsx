@@ -22,8 +22,8 @@ export default function Notes(): JSX.Element {
   }, []);
 
   function handlePlay(): void {
-    instrument?.stop();
-    instrument?.play(answer, 0, { duration: 10 }); //duration no funciona
+    //instrument?.stop(); //Replace this
+    instrument?.play(answer, 0, { duration: 2 });
     console.log(`Now playing: ${answer}`);
     //instrument?.play(`${answer}3`, { gain: 10 });
   }
@@ -33,8 +33,8 @@ export default function Notes(): JSX.Element {
     if (option === answer) {
       const note = getRandomItem(notes);
       setAnswer(note);
-      instrument?.stop();
-      instrument?.play(note, 0, { duration: 10 });
+      //instrument?.stop(); //Replace this
+      instrument?.play(note, 0, { duration: 2 });
       console.log(`Now playing: ${note}`);
       //instrument?.play(`${note}3`, { gain: 10 });
     }
@@ -62,7 +62,7 @@ export default function Notes(): JSX.Element {
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           {notes.map((note) => (
             <button key={note} type="button" className="btn btn-secondary" onClick={() => handleOption(note)}>
-              {note}
+              {note[0]}
             </button>
           ))}
         </div>
