@@ -4,6 +4,7 @@ import SoundFontPlayer, { Player } from 'soundfont-player';
 
 interface ProvidedValue {
   instrument?: Player;
+  audioContext?: AudioContext;
 }
 
 interface Props {
@@ -16,35 +17,26 @@ interface Props {
 
 export const SoundfontContext = ({ children }: Props): JSX.Element => {
   const [instrument, setInstrument] = useState<Player>(undefined);
+  const [audioContext, setAudioContext] = useState<AudioContext>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
       console.log('Se crea el instrument context');
       const ac = getAudioContext();
-
-      /* const vca = ac.createGain();
-      vca.gain.value = 10;
-      vca.connect(ac.destination); */
-
+      setAudioContext(ac);
       setInstrument(
-        await SoundFontPlayer.instrument(
-          ac,
-          'acoustic_grand_piano',
-          { gain: 10 } /* , {
-            destination: vca 
-            nameToUrl: localUrl,
-        } */
-        )
+        await SoundFontPlayer.instrument(ac, 'acoustic_grand_piano', { gain: 10 /*,nameToUrl: localUrl,*/ })
       );
     };
     setInitialInstrument();
   }, []);
 
-  return <Context.Provider value={{ instrument }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ instrument, audioContext }}>{children}</Context.Provider>;
 };
 
 const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
+  audioContext: undefined,
 });
 
 export const getAudioContext = (): AudioContext => {

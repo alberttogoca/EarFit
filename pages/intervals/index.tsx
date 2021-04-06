@@ -26,7 +26,7 @@ export default function Intervals(): JSX.Element {
   }, []);
 
   async function playInterval(): Promise<void> {
-    //instrument?.stop(); //Replace thiss
+    //instrument?.stop(); //Replace this
     //TO DO: sacar de answer.notes este array
     const intervalToPlay = [
       { note: 'C4', time: 0, duration: 2 },

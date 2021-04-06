@@ -10,7 +10,7 @@ import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Notes(): JSX.Element {
   //const { instrument } = useInstrument();
-  const { instrument } = useInstrumentContext();
+  const { instrument, audioContext } = useInstrumentContext();
   const [notes, setNotes] = useState<string[]>([]);
   const [answer, setAnswer] = useState<string>();
 
@@ -22,7 +22,8 @@ export default function Notes(): JSX.Element {
   }, []);
 
   function handlePlay(): void {
-    //instrument?.stop(); //Replace this
+    audioContext.resume();
+    instrument?.stop(); //Replace this
     instrument?.play(answer, 0, { duration: 2 });
     console.log(`Now playing: ${answer}`);
     //instrument?.play(`${answer}3`, { gain: 10 });
