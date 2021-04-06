@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect, useState } from 'react';
 import SoundFontPlayer, { Player } from 'soundfont-player';
 
@@ -46,13 +47,19 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-const getAudioContext = function (): AudioContext {
-  const AudioContext = window.AudioContext /*|| window.webkitAudioContext */ || false;
+export const getAudioContext = (): AudioContext => {
+  const AudioContext =
+    // @ts-ignore
+    window.AudioContext || // Default
+    // @ts-ignore
+    window.webkitAudioContext || // Safari and old versions of Chrome
+    false;
   if (!AudioContext) {
     console.warn(
       'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
     );
     return undefined;
+    // throw new Error('PLATFORM_NOT_SUPPORTED');
   }
   return new AudioContext();
 };
