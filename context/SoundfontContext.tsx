@@ -46,13 +46,13 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-const getAudioContext = function (): AudioContext | any {
+const getAudioContext = function (): AudioContext {
   const AudioContext = window.AudioContext /*|| window.webkitAudioContext */ || false;
   if (!AudioContext) {
     console.warn(
       'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
     );
-    return {};
+    return undefined;
   }
   return new AudioContext();
 };
