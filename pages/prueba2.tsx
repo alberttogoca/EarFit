@@ -18,7 +18,7 @@ export default function Prueba(): JSX.Element {
 
   function handlePlay(): void {
     instrument?.stop();
-    instrument?.play('C3', { duration: 200 });
+    instrument?.play('C3', { duration: 200, gain: 10 });
     console.log(`Now playing: C3`);
     //instrument?.play(`${answer}3`, { gain: 10 });
   }
