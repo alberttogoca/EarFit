@@ -30,7 +30,7 @@ export default function Scales(): JSX.Element {
   }, []);
 
   async function playScale(): Promise<void> {
-    instrument?.stop();
+    //instrument?.stop(); //Replace thiss
 
     //scaleToPlay has this form:
     /*  const scaleToPlay = [

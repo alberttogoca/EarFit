@@ -45,7 +45,7 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
               instrument?.play(note, 0, { duration: 0.3 });
             }}
             stopNote={(note) => {
-              instrument?.stop(note);
+              instrument?.stop(note); //Replace this
             }}
             keyboardShortcuts={keyboardShortcuts}
             disabled={!instrument}
