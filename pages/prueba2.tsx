@@ -5,20 +5,20 @@ import Options from 'components/Options';
 import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
 
+//Esto antes iba
 export default function Prueba(): JSX.Element {
   const [instrument, setInstrument] = useState<NotePlayer>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
-      console.log('Se crea el instrument context');
+      console.log('Se crea el instrument ');
       setInstrument(await getInstrument('acoustic_grand_piano'));
     };
     setInitialInstrument();
   }, []);
 
   function handlePlay(): void {
-    instrument?.stop();
-    instrument?.play('C3', { duration: 200, gain: 10 });
+    instrument?.play('C3', { gain: 10 });
     console.log(`Now playing: C3`);
     //instrument?.play(`${answer}3`, { gain: 10 });
   }
