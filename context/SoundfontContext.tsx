@@ -19,7 +19,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
       console.log('Se crea el instrument context');
-      const ac = getAudioContext();
+      //const ac = getAudioContext();
 
       /* const vca = ac.createGain();
       vca.gain.value = 10;
@@ -27,7 +27,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
 
       setInstrument(
         await SoundFontPlayer.instrument(
-          ac,
+          new AudioContext(),
           'acoustic_grand_piano',
           { gain: 10 } /* , {
             destination: vca 
@@ -46,8 +46,8 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-const getAudioContext = function (): AudioContext {
-  const AudioContext = window.AudioContext /*|| window.webkitAudioContext */ || false;
+/* const getAudioContext = function (): AudioContext {
+  const AudioContext = window.AudioContext || window.webkitAudioContext || false;
   if (!AudioContext) {
     console.warn(
       'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
@@ -55,6 +55,6 @@ const getAudioContext = function (): AudioContext {
     return undefined;
   }
   return new AudioContext();
-};
+}; */
 
 export const useInstrumentContext = (): ProvidedValue => React.useContext(Context);
