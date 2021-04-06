@@ -22,7 +22,7 @@ export default function Notes(): JSX.Element {
   }, []);
 
   function handlePlay(): void {
-    instrument?.stop();
+    //instrument?.stop(); //Replace this
     instrument?.play(answer, 0, { duration: 2 }); //duration no funciona
     console.log(`Now playing: ${answer}`);
     //instrument?.play(`${answer}3`, { gain: 10 });
@@ -33,7 +33,7 @@ export default function Notes(): JSX.Element {
     if (option === answer) {
       const note = getRandomItem(notes);
       setAnswer(note);
-      instrument?.stop();
+      //instrument?.stop(); //Replace this
       instrument?.play(note, 0, { duration: 2 });
       console.log(`Now playing: ${note}`);
       //instrument?.play(`${note}3`, { gain: 10 });
