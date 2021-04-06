@@ -1,58 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
+import { getInstrument, NotePlayer } from 'music-instrument-js';
 import React, { useEffect, useState } from 'react';
-import SoundFontPlayer, { Player } from 'soundfont-player';
 
 export default function Prueba(): JSX.Element {
-  const [instrument, setInstrument] = useState<Player>(undefined);
+  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
-      console.log('Se crea el instrument alone');
-      const ac = getAudioContext();
-
-      /* const vca = ac.createGain();
-      vca.gain.value = 10;
-      vca.connect(ac.destination); */
-
-      setInstrument(
-        await SoundFontPlayer.instrument(
-          ac,
-          'acoustic_grand_piano',
-          { gain: 10 } /* , {
-            destination: vca 
-            nameToUrl: localUrl,
-        } */
-        )
-      );
+      console.log('Se crea el instrument context');
+      setInstrument(await getInstrument('acoustic_grand_piano'));
     };
     setInitialInstrument();
   }, []);
 
-  const getAudioContext = (): AudioContext => {
-    const AudioContext =
-      // @ts-ignore
-      window.AudioContext || // Default
-      // @ts-ignore
-      window.webkitAudioContext || // Safari and old versions of Chrome
-      false;
-    if (!AudioContext) {
-      console.warn(
-        'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
-      );
-      // @ts-ignore
-      return {};
-      // throw new Error('PLATFORM_NOT_SUPPORTED');
-    }
-    return new AudioContext();
-  };
-
   function handlePlay(): void {
     instrument?.stop();
-    instrument?.play('C3', 0, { duration: 2 });
+    instrument?.play('C3', { duration: 200 });
     console.log(`Now playing: C3`);
     //instrument?.play(`${answer}3`, { gain: 10 });
   }
