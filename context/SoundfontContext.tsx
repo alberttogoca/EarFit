@@ -10,10 +10,6 @@ interface Props {
   children?: React.ReactNode;
 }
 
-/* function localUrl(name: string): string {
-  return 'context/assets/' + name + '-ogg.js';
-} */
-
 export const SoundfontContext = ({ children }: Props): JSX.Element => {
   const [instrument, setInstrument] = useState<Player>(undefined);
 
@@ -21,21 +17,11 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
     const setInitialInstrument = async (): Promise<void> => {
       console.log('Se crea el instrument context');
       const ac = getAudioContext();
-
-      /* const vca = ac.createGain();
-      vca.gain.value = 10;
-      vca.connect(ac.destination); */
-
-      setInstrument(
-        await SoundFontPlayer.instrument(
-          ac,
-          'acoustic_grand_piano',
-          { gain: 10 } /* , {
-            destination: vca 
-            nameToUrl: localUrl,
-        } */
-        )
-      );
+      const newInstrument = await SoundFontPlayer.instrument(ac, 'acoustic_grand_piano', {
+        gain: 10,
+        //nameToUrl: (name: string) => '/instruments/' + name + '-ogg.js',
+      });
+      setInstrument(newInstrument);
     };
     setInitialInstrument();
   }, []);
@@ -48,19 +34,11 @@ const Context = React.createContext<ProvidedValue>({
 });
 
 export const getAudioContext = (): AudioContext => {
-  const AudioContext =
-    // @ts-ignore
-    window.AudioContext || // Default
-    // @ts-ignore
-    window.webkitAudioContext || // Safari and old versions of Chrome
-    false;
+  const AudioContext = window.AudioContext || window['webkitAudioContext'];
+
   if (!AudioContext) {
-    console.warn(
-      'Sorry but the WebAudio API is not supported on this browser. Please consider using Chrome or Safari for the best experience '
-    );
-    // @ts-ignore
-    return {};
-    // throw new Error('PLATFORM_NOT_SUPPORTED');
+    console.warn('Sorry but the WebAudio API is not supported on this browser.');
+    throw new Error('PLATFORM_NOT_SUPPORTED');
   }
   return new AudioContext();
 };
