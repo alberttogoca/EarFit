@@ -20,6 +20,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
       const newInstrument = await SoundFontPlayer.instrument(ac, 'acoustic_grand_piano', {
         gain: 10,
         //nameToUrl: (name: string) => '/instruments/' + name + '-ogg.js',
+        nameToUrl: (name: string) => '/instruments/' + name + '-mp3.js',
       });
       setInstrument(newInstrument);
     };
