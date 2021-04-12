@@ -9,12 +9,11 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const InstrumentProvider = ({ children }: Props): JSX.Element => {
+export const InstrumentToPianoContext = ({ children }: Props): JSX.Element => {
   const [instrument, setInstrument] = useState<NotePlayer>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
-      console.log('Se crea el instrument context');
       setInstrument(await getInstrument('acoustic_grand_piano'));
     };
     setInitialInstrument();
@@ -27,4 +26,4 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-export const useInstrument = (): ProvidedValue => React.useContext(Context);
+export const useInstrumentToPiano = (): ProvidedValue => React.useContext(Context);

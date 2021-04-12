@@ -4,13 +4,13 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import { useInstrumentContext } from 'context/SoundfontContext';
+import { useInstrument } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 //import { startNote, stopNote } from 'music-instrument-js';
 
 export default function Scales(): JSX.Element {
-  const { instrument } = useInstrumentContext();
+  const { instrument } = useInstrument();
   const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
 
