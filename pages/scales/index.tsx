@@ -1,5 +1,5 @@
-import { Scale } from '@tonaljs/scale';
-import { Scale as ScaleDict } from '@tonaljs/tonal';
+import { Scale as ScaleType } from '@tonaljs/scale';
+import { Scale } from '@tonaljs/tonal';
 import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
@@ -7,58 +7,58 @@ import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
+interface Answer {
+  name: string;
+  value: ScaleType;
+}
+
 export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [options, setScales] = useState<Scale[]>([]);
-  const [answer, setAnswer] = useState<Scale>(undefined);
+  const [scales, setScales] = useState<ScaleType[]>([]);
+  const [options, setOptions] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<Answer>();
+  //red buttons:
+  const [enable, setEnable] = useState<boolean>(true);
+  const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
-    const root = 'C3';
-    const ionian = ScaleDict.get([root, 'ionian']); //major
-    const dorian = ScaleDict.get([root, 'dorian']);
-    const phrygian = ScaleDict.get([root, 'phrygian']);
-    const lydian = ScaleDict.get([root, 'lydian']);
-    const mixolydian = ScaleDict.get([root, 'mixolydian']);
-    const aolian = ScaleDict.get([root, 'aeolian']); //minor
-    const locrian = ScaleDict.get([root, 'locrian']);
-
-    const scalesArray = [ionian, dorian, phrygian, lydian, mixolydian, aolian, locrian];
-    setScales(scalesArray);
-    setAnswer(getRandomItem(scalesArray));
+    const root = 'C';
+    const octave = '3';
+    const modes = Scale.modeNames(root + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
+    const scaleNames = modes.map((m) => m[1].toUpperCase());
+    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
+    setScales(scaleList);
+    setOptions(scaleNames);
+    const value = getRandomItem(scaleList);
+    const name = value.name.slice(3).toUpperCase();
+    const newAnswer = { name, value };
+    setAnswer(newAnswer);
   }, []);
 
-  async function playScale(): Promise<void> {
+  function playAnswer(answer: Answer): void {
     //instrument?.stop(); //Replace this
-
-    const scaleToPlay = answer.notes.map((note, i) => {
+    const scaleToPlay = answer.value.notes.map((note, i) => {
       return { note: note, time: i * 0.3, duration: 0.5 };
     });
-
     instrument?.schedule(0, scaleToPlay);
-
-    console.log(`Answer: ${answer.name}`);
-    console.log(`Now playing: ${answer.notes}`);
+    console.log(`Now playing: ${answer.name}`);
   }
 
   function handlePlay(): void {
-    playScale();
+    playAnswer(answer);
   }
 
   async function handleOption(option: string): Promise<void> {
     console.log(option === answer.name);
-    if (option === answer.name) {
-      const newScale = getRandomItem(options);
-      setAnswer(newScale);
-      console.log(`New Scale: ${newScale.name}`);
-      //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
-      playScale();
-      /* await startNote('vibraphone', 'A5', { duration: 500, gain: 10 });
-      await delay(900);
-      await stopNote('vibraphone', 'A5'); */
+    if (option.toUpperCase() === answer.name.toUpperCase()) {
+      setEnable(true); //red buttons
+      const value = getRandomItem(scales);
+      const name = value.name.slice(3).toUpperCase();
+      const newAnswer = { name, value };
+      setAnswer(newAnswer);
+      playAnswer(newAnswer);
     } else {
-      /* await startNote('trombone', 'C2', { duration: 500, gain: 10 });
-      await delay(300);
-      await stopNote('trombone', 'C2'); */
+      setEnable(!enable); //red buttons
     }
   }
 
@@ -70,14 +70,9 @@ export default function Scales(): JSX.Element {
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {options.map((optionItem) => (
-              <button
-                key={optionItem.name}
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => handleOption(optionItem.name)}
-              >
-                {optionItem.name.slice(2).toUpperCase()}
+            {options.map((option) => (
+              <button key={option} type="button" className={optionClassName} onClick={() => handleOption(option)}>
+                {option}
               </button>
             ))}
           </div>

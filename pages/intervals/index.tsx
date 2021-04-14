@@ -1,5 +1,4 @@
-//import { Interval, NoInterval } from '@tonaljs/core';
-import { Interval as IntervalDict } from '@tonaljs/tonal';
+import { Interval } from '@tonaljs/tonal';
 import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 //import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
@@ -16,11 +15,14 @@ export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
   const [options, setIntervals] = useState<string[]>([]);
   const [answer, setAnswer] = useState<IInterval>(undefined);
+  //red buttons:
+  const [enable, setEnable] = useState<boolean>(true);
+  const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
-    console.log(IntervalDict.names());
+    console.log(Interval.names());
     const answer = { note1: 'C4', note2: 'G4' };
-    setIntervals(IntervalDict.names());
+    setIntervals(Interval.names());
     setAnswer(answer);
   }, []);
 
@@ -34,7 +36,7 @@ export default function Intervals(): JSX.Element {
 
     instrument?.schedule(0, intervalToPlay);
 
-    console.log(`Answer: ${IntervalDict.distance(answer.note1, answer.note2)}`);
+    console.log(`Answer: ${Interval.distance(answer.note1, answer.note2)}`);
   }
 
   function handlePlay(): void {
@@ -42,14 +44,17 @@ export default function Intervals(): JSX.Element {
   }
 
   async function handleOption(option: string): Promise<void> {
-    const result = IntervalDict.distance(answer.note1, answer.note2);
-    console.log(option === result);
+    const result = Interval.distance(answer.note1, answer.note2);
     if (option === result) {
+      setEnable(true); //red buttons
+
       //const newinterval = getRandomItem(intervals);
       //setAnswer(newinterval);
       //console.log(`New Interval: ${newinterval.name}`);
       //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
       playInterval();
+    } else {
+      setEnable(!enable); //red buttons
     }
   }
 
@@ -61,14 +66,9 @@ export default function Intervals(): JSX.Element {
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {options.map((optionItem) => (
-              <button
-                key={optionItem}
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => handleOption(optionItem)}
-              >
-                {optionItem.toUpperCase()}
+            {options.map((option) => (
+              <button key={option} type="button" className={optionClassName} onClick={() => handleOption(option)}>
+                {option}
               </button>
             ))}
           </div>
