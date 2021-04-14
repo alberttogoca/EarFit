@@ -1,7 +1,7 @@
 import 'react-piano/dist/styles.css';
 
 import DimensionsProvider from 'components/DimensionsProvider';
-import { useInstrumentToPiano } from 'context/InstrumentToPianoContext';
+import { useInstrumentContext } from 'context/SoundfontContext';
 import { KeyboardShortcuts, MidiNumbers, Piano } from 'react-piano';
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element {
-  const { instrument } = useInstrumentToPiano();
+  const { instrument } = useInstrumentContext();
   const hasNotes = firstNote && lastNote;
   const startNote = hasNotes ? firstNote : 'c3';
   const endNode = hasNotes ? lastNote : 'c4';
@@ -33,7 +33,7 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
           <Piano
             noteRange={noteRange}
             width={newWidth}
-            playNote={(note: string) => instrument?.play(note, { gain: 10 })}
+            playNote={(note: string) => instrument?.play(note)}
             stopNote={(note: string) => instrument?.stop(note)}
             keyboardShortcuts={keyboardShortcuts}
             disabled={!instrument}

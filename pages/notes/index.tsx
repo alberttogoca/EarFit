@@ -3,12 +3,12 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import { useInstrument } from 'context/SoundfontContext';
+import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Notes(): JSX.Element {
-  const { instrument } = useInstrument();
+  const { instrument } = useInstrumentContext();
   const [notes, setNotes] = useState<string[]>([]);
   const [answer, setAnswer] = useState<string>();
 
@@ -23,7 +23,6 @@ export default function Notes(): JSX.Element {
     //instrument?.stop(); //Replace this
     instrument?.play(answer, 0, { duration: 2 });
     console.log(`Now playing: ${answer}`);
-    //instrument?.play(`${answer}3`, { gain: 10 });
   }
 
   function handleOption(option: string): void {
@@ -34,7 +33,6 @@ export default function Notes(): JSX.Element {
       //instrument?.stop(); //Replace this
       instrument?.play(note, 0, { duration: 2 });
       console.log(`Now playing: ${note}`);
-      //instrument?.play(`${note}3`, { gain: 10 });
     }
   }
 

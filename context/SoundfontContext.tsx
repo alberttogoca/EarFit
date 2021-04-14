@@ -1,31 +1,20 @@
+import { getInstrument, NotePlayer } from 'context/soundfont-wrapper';
 import React, { useEffect, useState } from 'react';
-import SoundFontPlayer, { Player } from 'soundfont-player';
 
 interface ProvidedValue {
-  instrument?: Player;
+  instrument?: NotePlayer;
 }
 
 interface Props {
   children?: React.ReactNode;
 }
 
-const getAudioContext = (): AudioContext => {
-  const AudioContext = window.AudioContext || window['webkitAudioContext'];
-
-  if (!AudioContext) {
-    console.warn('Sorry but the WebAudio API is not supported on this browser.');
-    throw new Error('PLATFORM_NOT_SUPPORTED');
-  }
-  return new AudioContext();
-};
-
 export const SoundfontContext = ({ children }: Props): JSX.Element => {
-  const [instrument, setInstrument] = useState<Player>(undefined);
+  const [instrument, setInstrument] = useState<NotePlayer>(undefined);
 
   useEffect(() => {
     const setInitialInstrument = async (): Promise<void> => {
-      const ac = getAudioContext();
-      const newInstrument = await SoundFontPlayer.instrument(ac, 'acoustic_grand_piano', {
+      const newInstrument = await getInstrument('acoustic_grand_piano', {
         gain: 10,
         nameToUrl: (name: string) => '/instruments/' + name + '-mp3.js',
       });
@@ -41,4 +30,4 @@ const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });
 
-export const useInstrument = (): ProvidedValue => React.useContext(Context);
+export const useInstrumentContext = (): ProvidedValue => React.useContext(Context);

@@ -4,13 +4,12 @@ import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
-import { useInstrument } from 'context/SoundfontContext';
+import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
-//import { startNote, stopNote } from 'music-instrument-js';
 
 export default function Scales(): JSX.Element {
-  const { instrument } = useInstrument();
+  const { instrument } = useInstrumentContext();
   const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
 
@@ -30,18 +29,7 @@ export default function Scales(): JSX.Element {
   }, []);
 
   async function playScale(): Promise<void> {
-    //instrument?.stop(); //Replace thiss
-
-    //scaleToPlay has this form:
-    /*  const scaleToPlay = [
-      { note: 'C3', time: 0 },
-      { note: 'D3', time: 0.5 },
-      { note: 'Eb3', time: 1 },
-      { note: 'F3', time: 1.5 },
-      { note: 'G3', time: 2 },
-      { note: 'Ab3', time: 2.5 },
-      { note: 'Bb3', time: 3 },
-    ]; */
+    //instrument?.stop(); //Replace this
 
     const scaleToPlay = answer.notes.map((note, i) => {
       return { note: note, time: i * 0.3, duration: 0.5 };
