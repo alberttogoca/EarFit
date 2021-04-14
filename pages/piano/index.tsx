@@ -1,13 +1,14 @@
+import Configuration from 'components/Exercise/Configuration';
 import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
-import Options from 'components/Options';
 import PianoBasic from 'components/PianoBasic';
+import React from 'react';
 
 export default function Piano(): JSX.Element {
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Options page="Piano"></Options>}>
+      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Piano"></Configuration>}>
         <Title>Piano</Title>
 
         {/*PIANO*/}

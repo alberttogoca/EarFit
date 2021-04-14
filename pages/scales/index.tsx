@@ -1,11 +1,11 @@
 import { Scale } from '@tonaljs/scale';
 import { Scale as ScaleDict } from '@tonaljs/tonal';
+import Configuration from 'components/Exercise/Configuration';
 import { Piano } from 'components/Exercise/Piano';
 import { PlayButton } from 'components/Exercise/PlayButton';
 import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
-import Options from 'components/Options';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
@@ -67,7 +67,7 @@ export default function Scales(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Options page="Scales"></Options>}>
+      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Scales"></Configuration>}>
         <Title>Scales</Title>
 
         <PlayButton instrument={instrument} handlePlay={handlePlay}>

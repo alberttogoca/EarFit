@@ -2,7 +2,7 @@ interface IProps {
   page: string;
 }
 
-export default function Options({ page }: IProps): JSX.Element {
+export default function Configuration({ page }: IProps): JSX.Element {
   return (
     <>
       <div className="d-flex justify-content-center p-3">
