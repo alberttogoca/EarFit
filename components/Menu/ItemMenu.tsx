@@ -6,7 +6,7 @@ interface IProps {
   children: string;
 }
 
-export default function ItemMenu({ home, href, children }: IProps): JSX.Element {
+export const ItemMenu = ({ home, href, children }: IProps): JSX.Element => {
   return (
     <>
       {home ? (
@@ -32,4 +32,4 @@ export default function ItemMenu({ home, href, children }: IProps): JSX.Element 
       )}
     </>
   );
-}
+};

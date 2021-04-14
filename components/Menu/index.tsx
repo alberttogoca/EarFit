@@ -1,10 +1,10 @@
-import ItemMenu from './ItemMenu';
+import { ItemMenu } from './ItemMenu';
 
 interface IProps {
   home?: boolean;
 }
 
-export default function Menu({ home }: IProps): JSX.Element {
+export const Menu = ({ home }: IProps): JSX.Element => {
   return (
     <>
       <ItemMenu home={home} href="/notes">
@@ -24,4 +24,4 @@ export default function Menu({ home }: IProps): JSX.Element {
       </ItemMenu>
     </>
   );
-}
+};

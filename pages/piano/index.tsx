@@ -1,7 +1,7 @@
 import { Configuration, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
-import Menu from 'components/Menu';
-import PianoBasic from 'components/PianoBasic';
+import { Menu } from 'components/Menu';
+import { PianoBasic } from 'components/PianoBasic';
 import React from 'react';
 
 export default function Piano(): JSX.Element {
