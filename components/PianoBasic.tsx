@@ -9,7 +9,7 @@ interface IProps {
   lastNote?: string;
 }
 
-export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element {
+export const PianoBasic = ({ firstNote, lastNote }: IProps): JSX.Element => {
   const { instrument } = useInstrumentContext();
   const hasNotes = firstNote && lastNote;
   const startNote = hasNotes ? firstNote : 'c3';
@@ -42,4 +42,4 @@ export default function PianoBasic({ firstNote, lastNote }: IProps): JSX.Element
       </DimensionsProvider>
     </>
   );
-}
+};

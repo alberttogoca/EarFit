@@ -1,11 +1,9 @@
 import { instrument, InstrumentName, Player } from 'soundfont-player';
 
-export type { instrument, InstrumentName, Player };
+export type { InstrumentName, NotePlayer };
+export { getInstrument, startNote, stopNote };
 
-const instruments = new Map<InstrumentName, NotePlayer>();
-const playingNotes = new Map<string, Player>();
-
-export type NotePlayer = {
+type NotePlayer = {
   play: (
     noteName: string,
     when?: number,
@@ -25,7 +23,20 @@ export type NotePlayer = {
   schedule: (when?: number, events?: any[]) => Player;
 };
 
-export const getInstrument = async (instrumentName: InstrumentName, options = {}): Promise<NotePlayer> => {
+const instruments = new Map<InstrumentName, NotePlayer>();
+const playingNotes = new Map<string, Player>();
+
+const getAudioContext = (): AudioContext => {
+  const AudioContext = window.AudioContext || window['webkitAudioContext'];
+
+  if (!AudioContext) {
+    console.warn('Sorry but the WebAudio API is not supported on this browser.');
+    throw new Error('PLATFORM_NOT_SUPPORTED');
+  }
+  return new AudioContext();
+};
+
+const getInstrument = async (instrumentName: InstrumentName, options = {}): Promise<NotePlayer> => {
   if (instruments.has(instrumentName)) {
     return instruments.get(instrumentName) as NotePlayer;
   }
@@ -58,22 +69,12 @@ export const getInstrument = async (instrumentName: InstrumentName, options = {}
   return { play, stop, schedule } as NotePlayer;
 };
 
-export async function startNote(instrumentName: InstrumentName, noteName: string, noteOptions = {}): Promise<void> {
+async function startNote(instrumentName: InstrumentName, noteName: string, noteOptions = {}): Promise<void> {
   const instrument = await getInstrument(instrumentName);
   await instrument.play(noteName, 0, noteOptions);
 }
 
-export async function stopNote(instrumentName: InstrumentName, noteName: string): Promise<void> {
+async function stopNote(instrumentName: InstrumentName, noteName: string): Promise<void> {
   const instrument = await getInstrument(instrumentName);
   instrument.stop(noteName);
 }
-
-export const getAudioContext = (): AudioContext => {
-  const AudioContext = window.AudioContext || window['webkitAudioContext'];
-
-  if (!AudioContext) {
-    console.warn('Sorry but the WebAudio API is not supported on this browser.');
-    throw new Error('PLATFORM_NOT_SUPPORTED');
-  }
-  return new AudioContext();
-};

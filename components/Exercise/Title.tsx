@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 interface Props {
   children: ReactNode;
 }
+
 export const Title = ({ children }: Props): JSX.Element => {
   return (
     <>

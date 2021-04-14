@@ -1,9 +1,6 @@
 import { Scale } from '@tonaljs/scale';
 import { Scale as ScaleDict } from '@tonaljs/tonal';
-import Configuration from 'components/Exercise/Configuration';
-import { Piano } from 'components/Exercise/Piano';
-import { PlayButton } from 'components/Exercise/PlayButton';
-import { Title } from 'components/Exercise/Title';
+import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import { useInstrumentContext } from 'context/SoundfontContext';

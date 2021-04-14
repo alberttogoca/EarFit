@@ -2,15 +2,15 @@ interface IProps {
   page: string;
 }
 
-export default function Configuration({ page }: IProps): JSX.Element {
+export const Configuration = ({ page }: IProps): JSX.Element => {
   return (
     <>
       <div className="d-flex justify-content-center p-3">
-        <h1>Config {page}</h1>
+        <h1>Options</h1>
       </div>
       <div className="p-3">
-        <p className="lead">This must have de config of the exercise</p>
+        <p className="lead">This must have de config of the exercise {page}</p>
       </div>
     </>
   );
-}
+};

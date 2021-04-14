@@ -26,6 +26,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
   return <Context.Provider value={{ instrument }}>{children}</Context.Provider>;
 };
 
+//Hook
 const Context = React.createContext<ProvidedValue>({
   instrument: undefined,
 });

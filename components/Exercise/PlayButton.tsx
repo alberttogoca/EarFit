@@ -6,6 +6,7 @@ interface Props {
   handlePlay: MouseEventHandler;
   children: ReactNode;
 }
+
 export const PlayButton = ({ instrument, handlePlay, children }: Props): JSX.Element => {
   return (
     <>

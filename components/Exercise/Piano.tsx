@@ -1,4 +1,4 @@
-import PianoBasic from 'components/PianoBasic';
+import { PianoBasic } from 'components/PianoBasic';
 
 export const Piano = (): JSX.Element => {
   return (
