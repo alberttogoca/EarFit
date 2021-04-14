@@ -1,4 +1,5 @@
 import { Scale } from '@tonaljs/tonal';
+import { Title } from 'components/Exercise/title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
@@ -45,10 +46,7 @@ export default function Notes(): JSX.Element {
   return (
     <>
       <ExerciseLayout col1={<Menu></Menu>} col3={<Options page="Notes"></Options>}>
-        {/*TITLE*/}
-        <div className="d-flex justify-content-center p-3 ">
-          <h1 className="display-4 ">Notes</h1>
-        </div>
+        <Title>Notes</Title>
 
         {/*PLAY SOUND*/}
         <div className="d-flex justify-content-center p-3 ">
