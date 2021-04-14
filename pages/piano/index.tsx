@@ -1,5 +1,4 @@
-import Configuration from 'components/Exercise/Configuration';
-import { Title } from 'components/Exercise/Title';
+import { Configuration, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import PianoBasic from 'components/PianoBasic';

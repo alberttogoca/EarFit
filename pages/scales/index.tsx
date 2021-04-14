@@ -12,7 +12,7 @@ import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [scales, setScales] = useState<Scale[]>([]);
+  const [options, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Scale>(undefined);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Scales(): JSX.Element {
   async function handleOption(option: string): Promise<void> {
     console.log(option === answer.name);
     if (option === answer.name) {
-      const newScale = getRandomItem(scales);
+      const newScale = getRandomItem(options);
       setAnswer(newScale);
       console.log(`New Scale: ${newScale.name}`);
       //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
@@ -77,7 +77,7 @@ export default function Scales(): JSX.Element {
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {scales.map((scale) => (
+            {options.map((scale) => (
               <button
                 key={scale.name}
                 type="button"

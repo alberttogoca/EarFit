@@ -1,10 +1,7 @@
 //import { Interval, NoInterval } from '@tonaljs/core';
 import { Interval as IntervalDict } from '@tonaljs/tonal';
-import Configuration from 'components/Exercise/Configuration';
+import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 //import { getRandomItem } from 'utils/arrayUtils';
-import { Piano } from 'components/Exercise/Piano';
-import { PlayButton } from 'components/Exercise/PlayButton';
-import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import { useInstrumentContext } from 'context/SoundfontContext';
@@ -17,7 +14,7 @@ interface IInterval {
 
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [intervals, setIntervals] = useState<string[]>([]);
+  const [options, setIntervals] = useState<string[]>([]);
   const [answer, setAnswer] = useState<IInterval>(undefined);
 
   useEffect(() => {
@@ -68,7 +65,7 @@ export default function Intervals(): JSX.Element {
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {intervals.map((interval) => (
+            {options.map((interval) => (
               <button key={interval} type="button" className="btn btn-secondary" onClick={() => handleOption(interval)}>
                 {interval.toUpperCase()}
               </button>

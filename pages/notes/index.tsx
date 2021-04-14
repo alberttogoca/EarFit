@@ -1,8 +1,5 @@
 import { Scale } from '@tonaljs/tonal';
-import Configuration from 'components/Exercise/Configuration';
-import { Piano } from 'components/Exercise/Piano';
-import { PlayButton } from 'components/Exercise/PlayButton';
-import { Title } from 'components/Exercise/Title';
+import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import { useInstrumentContext } from 'context/SoundfontContext';
@@ -11,7 +8,7 @@ import { getRandomItem } from 'utils/arrayUtils';
 
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [notes, setNotes] = useState<string[]>([]);
+  const [options, setNotes] = useState<string[]>([]);
   const [answer, setAnswer] = useState<string>();
   //red buttons:
   const [enable, setEnable] = useState<boolean>(true);
@@ -35,7 +32,7 @@ export default function Notes(): JSX.Element {
     if (option === answer) {
       //instrument?.stop(); //Replace this
       setEnable(true); //red buttons
-      const note = getRandomItem(notes);
+      const note = getRandomItem(options);
       setAnswer(note);
       instrument?.play(note, 0, { duration: 2 });
       console.log(`Now playing: ${note}`);
@@ -53,7 +50,7 @@ export default function Notes(): JSX.Element {
         </PlayButton>
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          {notes.map((note) => (
+          {options.map((note) => (
             <button key={note} type="button" className={optionClassName} onClick={() => handleOption(note)}>
               {note[0]}
             </button>
