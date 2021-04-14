@@ -1,10 +1,10 @@
 import { Scale } from '@tonaljs/scale';
 import { Scale as ScaleDict } from '@tonaljs/tonal';
-import { Title } from 'components/Exercise/title';
+import { Piano } from 'components/Exercise/Piano';
+import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
-import PianoBasic from 'components/PianoBasic';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
@@ -95,10 +95,7 @@ export default function Scales(): JSX.Element {
           </div>
         </div>
 
-        {/*PIANO*/}
-        <div className="d-flex justify-content-center p-3 ">
-          <PianoBasic></PianoBasic>
-        </div>
+        <Piano></Piano>
       </ExerciseLayout>
     </>
   );

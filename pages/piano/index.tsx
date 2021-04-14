@@ -1,4 +1,4 @@
-import { Title } from 'components/Exercise/title';
+import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';

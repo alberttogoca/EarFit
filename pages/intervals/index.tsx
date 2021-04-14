@@ -1,13 +1,13 @@
 //import { Interval, NoInterval } from '@tonaljs/core';
 import { Interval as IntervalDict } from '@tonaljs/tonal';
-import { Title } from 'components/Exercise/title';
+//import { getRandomItem } from 'utils/arrayUtils';
+import { Piano } from 'components/Exercise/Piano';
+import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
 import Options from 'components/Options';
-import PianoBasic from 'components/PianoBasic';
 import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
-//import { getRandomItem } from 'utils/arrayUtils';
+import { useEffect, useState } from 'react';
 
 interface IInterval {
   note1: string;
@@ -81,10 +81,7 @@ export default function Intervals(): JSX.Element {
           </div>
         </div>
 
-        {/*PIANO*/}
-        <div className="d-flex justify-content-center p-3 ">
-          <PianoBasic></PianoBasic>
-        </div>
+        <Piano></Piano>
       </ExerciseLayout>
     </>
   );
