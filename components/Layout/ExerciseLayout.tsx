@@ -14,7 +14,7 @@ export default function ExerciseLayout({ col1, children, col3 }: IProps): JSX.El
         {/*Fila*/}
         <div className="row p-3">
           {/*Columna 1*/}
-          <div className="col-sm border d-none d-md-block">{col1}</div>
+          <div className="col-sm border d-none d-lg-block">{col1}</div>
           {/*Columna 2*/}
           <div className="col-lg-6 border p-3 shadow-lg">{children}</div>
           {/*Columna 3*/}
