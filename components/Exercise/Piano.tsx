@@ -1,5 +1,4 @@
 import PianoBasic from 'components/PianoBasic';
-import React from 'react';
 
 export const Piano = (): JSX.Element => {
   return (

@@ -1,6 +1,7 @@
 import { Scale } from '@tonaljs/scale';
 import { Scale as ScaleDict } from '@tonaljs/tonal';
 import { Piano } from 'components/Exercise/Piano';
+import { PlayButton } from 'components/Exercise/PlayButton';
 import { Title } from 'components/Exercise/Title';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import Menu from 'components/Menu';
@@ -69,15 +70,9 @@ export default function Scales(): JSX.Element {
       <ExerciseLayout col1={<Menu></Menu>} col3={<Options page="Scales"></Options>}>
         <Title>Scales</Title>
 
-        {/*PLAY SOUND*/}
-        <div className="d-flex justify-content-center p-3 ">
-          {instrument && (
-            <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
-              Scale?
-            </button>
-          )}
-          {!instrument && <div>Loading instrument...</div>}
-        </div>
+        <PlayButton instrument={instrument} handlePlay={handlePlay}>
+          Scale?
+        </PlayButton>
 
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
