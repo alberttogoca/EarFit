@@ -66,27 +66,22 @@ export default function Scales(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Scales"></Configuration>}>
         <Title>Scales</Title>
-
-        <PlayButton instrument={instrument} handlePlay={handlePlay}>
-          Scale?
-        </PlayButton>
-
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'}></PlayButton>
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {options.map((scale) => (
+            {options.map((optionItem) => (
               <button
-                key={scale.name}
+                key={optionItem.name}
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => handleOption(scale.name)}
+                onClick={() => handleOption(optionItem.name)}
               >
-                {scale.name.slice(2).toUpperCase()}
+                {optionItem.name.slice(2).toUpperCase()}
               </button>
             ))}
           </div>
         </div>
-
         <Piano></Piano>
       </ExerciseLayout>
     </>

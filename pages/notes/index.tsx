@@ -45,18 +45,15 @@ export default function Notes(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Notes"></Configuration>}>
         <Title>Notes</Title>
-        <PlayButton instrument={instrument} handlePlay={handlePlay}>
-          Note?
-        </PlayButton>
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Note?'}></PlayButton>
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          {options.map((note) => (
-            <button key={note} type="button" className={optionClassName} onClick={() => handleOption(note)}>
-              {note[0]}
+          {options.map((optionItem) => (
+            <button key={optionItem} type="button" className={optionClassName} onClick={() => handleOption(optionItem)}>
+              {optionItem[0]}
             </button>
           ))}
         </div>
-
         <Piano></Piano>
       </ExerciseLayout>
     </>

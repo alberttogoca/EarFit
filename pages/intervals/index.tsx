@@ -57,22 +57,22 @@ export default function Intervals(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Intervals"></Configuration>}>
         <Title>Intervals</Title>
-
-        <PlayButton instrument={instrument} handlePlay={handlePlay}>
-          Interval?
-        </PlayButton>
-
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Interval?'}></PlayButton>
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
-            {options.map((interval) => (
-              <button key={interval} type="button" className="btn btn-secondary" onClick={() => handleOption(interval)}>
-                {interval.toUpperCase()}
+            {options.map((optionItem) => (
+              <button
+                key={optionItem}
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => handleOption(optionItem)}
+              >
+                {optionItem.toUpperCase()}
               </button>
             ))}
           </div>
         </div>
-
         <Piano></Piano>
       </ExerciseLayout>
     </>
