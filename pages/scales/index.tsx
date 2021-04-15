@@ -24,13 +24,14 @@ export default function Scales(): JSX.Element {
   useEffect(() => {
     const tonic = 'C';
     const octave = '3';
-    const modes = Scale.modeNames(tonic + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
-    const scaleNames = modes.map((m) => m[1].toUpperCase());
-    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
+    const pattern = 'major';
+    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
+    const scaleList = modes.map(([root, mode]) => Scale.get([root, mode])); //Obtaining notes for each mode
+    const scaleNames = scaleList.map((m) => m.type.toUpperCase());
     setScales(scaleList);
     setOptions(scaleNames);
     const value = getRandomItem(scaleList);
-    const name = value.name.slice(3).toUpperCase();
+    const name = value.type;
     const newAnswer = { name, value };
     setAnswer(newAnswer);
   }, []);
@@ -49,11 +50,10 @@ export default function Scales(): JSX.Element {
   }
 
   async function handleOption(option: string): Promise<void> {
-    console.log(option === answer.name);
     if (option.toUpperCase() === answer.name.toUpperCase()) {
       setEnable(true); //red buttons
       const value = getRandomItem(scales);
-      const name = value.name.slice(3).toUpperCase();
+      const name = value.type;
       const newAnswer = { name, value };
       setAnswer(newAnswer);
       playAnswer(newAnswer);

@@ -1,5 +1,5 @@
-import { Mode, Scale } from '@tonaljs/tonal';
-import { Configuration, Options, Piano, PlayButton, Title } from 'components/Exercise';
+import { Note, Scale } from '@tonaljs/tonal';
+import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { useInstrumentContext } from 'context/SoundfontContext';
@@ -23,20 +23,15 @@ export default function Notes(): JSX.Element {
   useEffect(() => {
     const tonic = 'C';
     const octave = '3';
-    const modes = Scale.modeNames(tonic + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
-
-    console.log(Mode.names()); //CHECK THIS
-    console.log(Mode.notes('ionian', 'C')); //CHECK THIS
-    //Tambien puedes hacer Note.("C4").letter //=> "C" , note("C4").octave; // => 4
-
+    const pattern = 'major';
+    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
     const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
-    const scaleMajor = scaleList[0].notes;
-    const noteList = scaleMajor; //major
-    const noteNames = scaleMajor.map((n) => n.slice(0, -1));
+    const noteList = scaleList[0].notes; //major
+    const noteNames = noteList.map((n) => Note.get(n).letter);
     setNotes(noteList);
     setOptions(noteNames);
     const value = getRandomItem(noteList);
-    const name = value.slice(0, -1);
+    const name = Note.get(value).letter;
     const newAnswer = { name, value };
     setAnswer(newAnswer);
   }, []);
@@ -56,7 +51,7 @@ export default function Notes(): JSX.Element {
       //instrument?.stop(); //Replace this
       setEnable(true); //red buttons
       const value = getRandomItem(notes);
-      const name = value.slice(0, -1);
+      const name = Note.get(value).letter;
       const newAnswer = { name, value };
       setAnswer(newAnswer);
       playAnswer(newAnswer);

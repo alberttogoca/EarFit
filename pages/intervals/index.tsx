@@ -1,58 +1,77 @@
-import { Interval } from '@tonaljs/tonal';
+import { Interval, Scale } from '@tonaljs/tonal';
 import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 //import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
+import { getRandomItem } from 'utils/arrayUtils';
 
-interface IInterval {
+interface IntervalNotes {
   note1: string;
   note2: string;
 }
 
+interface Answer {
+  name: string;
+  value: IntervalNotes;
+}
+
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [options, setIntervals] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<IInterval>(undefined);
+  const [notes, setNotes] = useState<string[]>([]);
+  const [options, setOptions] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<Answer>(undefined);
   //red buttons:
   const [enable, setEnable] = useState<boolean>(true);
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
-    console.log(Interval.names());
-    const answer = { note1: 'C4', note2: 'G4' };
-    setIntervals(Interval.names());
+    const tonic = 'C';
+    const octave = '3';
+    const pattern = 'major';
+    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
+    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
+    const noteList = scaleList[0].notes; //major
+    setNotes(noteList);
+    setOptions(Interval.names());
+    const n1 = getRandomItem(noteList);
+    const n2 = getRandomItem(noteList); // TO DO: que esta nota sea siempre mayor
+    const value = { note1: n1, note2: n2 };
+    const name = Interval.distance(value.note1, value.note2);
+    const answer = { name, value };
     setAnswer(answer);
   }, []);
 
-  async function playInterval(): Promise<void> {
+  async function playAnswer(answer: Answer): Promise<void> {
     //instrument?.stop(); //Replace thiss
     //TO DO: sacar de answer.notes este array
     const intervalToPlay = [
-      { note: 'C4', time: 0, duration: 2 },
-      { note: 'G4', time: 0.5, duration: 2 },
+      { note: answer.value.note1, time: 0, duration: 2 },
+      { note: answer.value.note2, time: 0.5, duration: 2 },
     ];
 
     instrument?.schedule(0, intervalToPlay);
 
-    console.log(`Answer: ${Interval.distance(answer.note1, answer.note2)}`);
+    console.log(`Answer: ${answer.name}`);
   }
 
   function handlePlay(): void {
-    playInterval();
+    playAnswer(answer);
   }
 
   async function handleOption(option: string): Promise<void> {
-    const result = Interval.distance(answer.note1, answer.note2);
-    if (option === result) {
+    console.log('Option: ' + option);
+    console.log(answer.name);
+    if (option.toUpperCase() === answer.name.toUpperCase()) {
       setEnable(true); //red buttons
-
-      //const newinterval = getRandomItem(intervals);
-      //setAnswer(newinterval);
-      //console.log(`New Interval: ${newinterval.name}`);
-      //TO DO: Asegurarse de que el answer se ha actualizado antes de playScale
-      playInterval();
+      const n1 = getRandomItem(notes);
+      const n2 = getRandomItem(notes);
+      const value = { note1: n1, note2: n2 };
+      const name = Interval.distance(value.note1, value.note2);
+      const newAnswer = { name, value };
+      setAnswer(newAnswer);
+      playAnswer(newAnswer);
     } else {
       setEnable(!enable); //red buttons
     }
