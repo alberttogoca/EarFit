@@ -1,4 +1,4 @@
-import { Scale } from '@tonaljs/tonal';
+import { Mode, Scale } from '@tonaljs/tonal';
 import { Configuration, Options, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
@@ -21,9 +21,14 @@ export default function Notes(): JSX.Element {
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
-    const root = 'C';
+    const tonic = 'C';
     const octave = '3';
-    const modes = Scale.modeNames(root + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
+    const modes = Scale.modeNames(tonic + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
+
+    console.log(Mode.names()); //CHECK THIS
+    console.log(Mode.notes('ionian', 'C')); //CHECK THIS
+    //Tambien puedes hacer Note.("C4").letter //=> "C" , note("C4").octave; // => 4
+
     const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
     const scaleMajor = scaleList[0].notes;
     const noteList = scaleMajor; //major

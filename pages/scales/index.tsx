@@ -22,9 +22,9 @@ export default function Scales(): JSX.Element {
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
-    const root = 'C';
+    const tonic = 'C';
     const octave = '3';
-    const modes = Scale.modeNames(root + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
+    const modes = Scale.modeNames(tonic + octave + ' major'); //si pongo la octava en el play luego no tengo que hacer slice
     const scaleNames = modes.map((m) => m[1].toUpperCase());
     const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
     setScales(scaleList);
