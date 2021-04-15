@@ -40,7 +40,7 @@ export default function About(): JSX.Element {
             <p className="lead">
               <h4>Where to find me</h4>
               {/* GitHub */}
-              <a href="https://github.com/alberttogoca">
+              <a href="https://github.com/alberttogoca" target="popup">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   href="http://www.w3.org/1999/xlink"
@@ -75,7 +75,7 @@ export default function About(): JSX.Element {
                 </svg>
               </a>
               {/* Twitter */}
-              <a href="https://twitter.com/alberttogoca">
+              <a href="https://twitter.com/alberttogoca" target="popup">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   href="http://www.w3.org/1999/xlink"
@@ -110,7 +110,7 @@ export default function About(): JSX.Element {
                 </svg>
               </a>
               {/* linkedin */}
-              <a href="https://linedin.com/alberttogoca">
+              <a href="https://linkedin.com/alberttogoca" target="popup">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   href="http://www.w3.org/1999/xlink"
