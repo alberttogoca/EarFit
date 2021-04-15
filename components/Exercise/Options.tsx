@@ -13,11 +13,11 @@ export const Options = ({ options, optionClassName, onClick }: Props): JSX.Eleme
       {/*OPCIONES*/}
       <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
         <div>
-          {options.map((option) => (
+          {/* {options.map((option) => (
             <button key={option} type="button" className={optionClassName} onClick={onClick(option)}>
               {option}
             </button>
-          ))}
+          ))} */}
         </div>
       </div>
     </>
