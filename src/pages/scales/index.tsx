@@ -1,10 +1,11 @@
 import { Scale as ScaleType } from '@tonaljs/scale';
 import { Scale } from '@tonaljs/tonal';
-import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
-import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
+import { Configuration, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
+import { Piano } from 'components/Piano';
+import { useInstrumentContext } from 'context/SoundfontContext';
+import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 interface Answer {
@@ -77,7 +78,9 @@ export default function Scales(): JSX.Element {
             ))}
           </div>
         </div>
-        <Piano></Piano>
+        <div className="d-flex justify-content-center p-3 ">
+          <Piano />
+        </div>
       </ExerciseLayout>
     </>
   );

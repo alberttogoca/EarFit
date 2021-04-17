@@ -1,9 +1,10 @@
 import { Note, Scale } from '@tonaljs/tonal';
-import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
-import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
+import { Configuration, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
+import { Piano } from 'components/Piano';
+import { useInstrumentContext } from 'context/SoundfontContext';
+import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 interface Answer {
@@ -76,7 +77,9 @@ export default function Notes(): JSX.Element {
           </div>
         </div>
         {/* <Options options={options} optionClassName={optionClassName} onClick={() => handleOption(option)}></Options> */}
-        <Piano></Piano>
+        <div className="d-flex justify-content-center p-3 ">
+          <Piano />
+        </div>
       </ExerciseLayout>
     </>
   );

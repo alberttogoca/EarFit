@@ -1,8 +1,8 @@
-import React from 'react';
 import { Configuration, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
-import { PianoBasic } from 'components/PianoBasic';
+import { Piano as PianoComponent } from 'components/Piano';
+import React from 'react';
 
 export default function Piano(): JSX.Element {
   return (
@@ -12,7 +12,7 @@ export default function Piano(): JSX.Element {
 
         {/*PIANO*/}
         <div className="d-flex justify-content-center p-3 ">
-          <PianoBasic firstNote="c3" lastNote="b4"></PianoBasic>
+          <PianoComponent firstNote="c3" lastNote="b4" />
         </div>
       </ExerciseLayout>
     </>
