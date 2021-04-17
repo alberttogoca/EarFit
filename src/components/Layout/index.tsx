@@ -1,6 +1,8 @@
-import { Header } from 'components/Header';
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+
+import { Footer } from './Footer';
+import { Header } from './Header';
 
 interface IProps {
   children: ReactNode;
@@ -17,8 +19,9 @@ export default function Layout({ children }: IProps): JSX.Element {
           content="EARFIT: Aplicación para entrenamiento auditivo musical basada en Next.js y Typescript"
         ></meta>
       </Head>
-      <Header></Header>
+      <Header />
       {children}
+      <Footer />
     </>
   );
 }

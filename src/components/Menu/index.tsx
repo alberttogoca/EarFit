@@ -1,27 +1,13 @@
 import { ItemMenu } from './ItemMenu';
 
-interface IProps {
-  home?: boolean;
-}
-
-export const Menu = ({ home }: IProps): JSX.Element => {
+export const Menu = (): JSX.Element => {
   return (
     <>
-      <ItemMenu home={home} href="/notes">
-        Notes
-      </ItemMenu>
-      <ItemMenu home={home} href="/intervals">
-        Intervals
-      </ItemMenu>
-      <ItemMenu home={home} href="/scales">
-        Scales
-      </ItemMenu>
-      <ItemMenu home={home} href="/piano">
-        Piano
-      </ItemMenu>
-      <ItemMenu home={home} href="/about">
-        About
-      </ItemMenu>
+      <ItemMenu href="/notes" name="Notes" />
+      <ItemMenu href="/intervals" name="Intervals" />
+      <ItemMenu href="/scales" name="Scales" />
+      <ItemMenu href="/piano" name="Piano" />
+      <ItemMenu href="/about" name="About" />
     </>
   );
 };

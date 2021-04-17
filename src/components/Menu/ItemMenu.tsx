@@ -1,35 +1,22 @@
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 
 interface IProps {
-  home?: boolean;
   href: string;
-  children: string;
+  name: string;
 }
 
-export const ItemMenu = ({ home, href, children }: IProps): JSX.Element => {
+export const ItemMenu = ({ href, name }: IProps): JSX.Element => {
+  const { pathname } = useRouter();
+  const isHome = pathname === '/';
   return (
-    <>
-      {home ? (
-        <>
-          <div className="d-flex justify-content-center p-3 ">
-            <Link href={href} passHref>
-              <a className="text-decoration-none text-reset">
-                <h1 className="display-4">{children}</h1>
-              </a>
-            </Link>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="d-flex justify-content-center p-3 ">
-            <Link href={href} passHref>
-              <a className="text-decoration-none text-reset">
-                <h2>{children}</h2>
-              </a>
-            </Link>
-          </div>
-        </>
-      )}
-    </>
+    <div className="d-flex justify-content-center p-3 ">
+      <Link href={href} passHref>
+        <a className="text-decoration-none text-reset">
+          {isHome && <h1 className="display-4">{name}</h1>}
+          {!isHome && <h2>{name}</h2>}
+        </a>
+      </Link>
+    </div>
   );
 };
