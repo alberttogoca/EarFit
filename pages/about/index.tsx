@@ -110,7 +110,7 @@ export default function About(): JSX.Element {
                 </svg>
               </a>
               {/* linkedin */}
-              <a href="https://linkedin.com/alberttogoca" target="popup">
+              <a href="https://linkedin.com/in/alberttogoca" target="popup">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   href="http://www.w3.org/1999/xlink"

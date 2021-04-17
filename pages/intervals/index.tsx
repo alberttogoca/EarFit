@@ -27,14 +27,17 @@ export default function Intervals(): JSX.Element {
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
 
   useEffect(() => {
+    console.log(Interval.simplify(Interval.distance('B#3', 'Eb')));
     const tonic = 'C';
     const octave = '3';
     const pattern = 'major';
     const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
     const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
     const noteList = scaleList[0].notes; //major
+    //noteList.forEach((n) => console.log(Interval.distance('B3', n)));
     setNotes(noteList);
-    setOptions(Interval.names());
+    //INFO: +/-: direccion, 2: distancia notas, P/M/m/A/dd/d?: justa/mayor/menor/aumentado/disminuido/? (semitonos)
+    setOptions(Interval.names()); // TO DO: sacar todos los intervalos de las notas que se van a tocar
     const n1 = getRandomItem(noteList);
     const n2 = getRandomItem(noteList); // TO DO: que esta nota sea siempre mayor
     const value = { note1: n1, note2: n2 };
@@ -61,9 +64,9 @@ export default function Intervals(): JSX.Element {
   }
 
   async function handleOption(option: string): Promise<void> {
-    console.log('Option: ' + option);
-    console.log(answer.name);
-    if (option.toUpperCase() === answer.name.toUpperCase()) {
+    //console.log('Selected option: ' + option);
+    console.log(option === answer.name);
+    if (option === answer.name) {
       setEnable(true); //red buttons
       const n1 = getRandomItem(notes);
       const n2 = getRandomItem(notes);
