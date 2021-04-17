@@ -78,9 +78,7 @@ export default function Scales(): JSX.Element {
             ))}
           </div>
         </div>
-        <div className="d-flex justify-content-center p-3 ">
-          <Piano />
-        </div>
+        <Piano />
       </ExerciseLayout>
     </>
   );

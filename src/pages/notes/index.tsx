@@ -77,9 +77,7 @@ export default function Notes(): JSX.Element {
           </div>
         </div>
         {/* <Options options={options} optionClassName={optionClassName} onClick={() => handleOption(option)}></Options> */}
-        <div className="d-flex justify-content-center p-3 ">
-          <Piano />
-        </div>
+        <Piano />
       </ExerciseLayout>
     </>
   );

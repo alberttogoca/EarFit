@@ -9,11 +9,7 @@ export default function Piano(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Piano"></Configuration>}>
         <Title>Piano</Title>
-
-        {/*PIANO*/}
-        <div className="d-flex justify-content-center p-3 ">
-          <PianoComponent firstNote="c3" lastNote="b4" />
-        </div>
+        <PianoComponent firstNote="c3" lastNote="b4" />
       </ExerciseLayout>
     </>
   );
