@@ -16,7 +16,7 @@ export const SoundfontContext = ({ children }: Props): JSX.Element => {
     const setInitialInstrument = async (): Promise<void> => {
       const newInstrument = await getInstrument('acoustic_grand_piano', {
         gain: 10,
-        nameToUrl: (name: string) => '/instruments/' + name + '-mp3.js',
+        nameToUrl: (name: string) => 'instruments/' + name + '-mp3.js',
       });
       setInstrument(newInstrument);
     };

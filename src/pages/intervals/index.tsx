@@ -1,10 +1,10 @@
 import { Interval, Scale } from '@tonaljs/tonal';
+import { useInstrumentContext } from 'context/SoundfontContext';
+import React, { useEffect, useState } from 'react';
 import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 //import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
-import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 interface IntervalNotes {

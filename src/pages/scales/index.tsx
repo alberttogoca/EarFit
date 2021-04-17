@@ -1,19 +1,20 @@
-import { Note, Scale } from '@tonaljs/tonal';
+import { Scale as ScaleType } from '@tonaljs/scale';
+import { Scale } from '@tonaljs/tonal';
+import { useInstrumentContext } from 'context/SoundfontContext';
+import React, { useEffect, useState } from 'react';
 import { Configuration, Piano, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
-import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
 interface Answer {
   name: string;
-  value: string;
+  value: ScaleType;
 }
 
-export default function Notes(): JSX.Element {
+export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [notes, setNotes] = useState<string[]>([]);
+  const [scales, setScales] = useState<ScaleType[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const [answer, setAnswer] = useState<Answer>();
   //red buttons:
@@ -25,20 +26,22 @@ export default function Notes(): JSX.Element {
     const octave = '3';
     const pattern = 'major';
     const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
-    const noteList = scaleList[0].notes; //major
-    const noteNames = noteList.map((n) => Note.get(n).letter);
-    setNotes(noteList);
-    setOptions(noteNames);
-    const value = getRandomItem(noteList);
-    const name = Note.get(value).letter;
+    const scaleList = modes.map(([root, mode]) => Scale.get([root, mode])); //Obtaining notes for each mode
+    const scaleNames = scaleList.map((m) => m.type.toUpperCase());
+    setScales(scaleList);
+    setOptions(scaleNames);
+    const value = getRandomItem(scaleList);
+    const name = value.type;
     const newAnswer = { name, value };
     setAnswer(newAnswer);
   }, []);
 
   function playAnswer(answer: Answer): void {
     //instrument?.stop(); //Replace this
-    instrument?.play(answer.value, 0, { duration: 2 });
+    const scaleToPlay = answer.value.notes.map((note, i) => {
+      return { note: note, time: i * 0.3, duration: 0.5 };
+    });
+    instrument?.schedule(0, scaleToPlay);
     console.log(`Now playing: ${answer.name}`);
   }
 
@@ -46,12 +49,11 @@ export default function Notes(): JSX.Element {
     playAnswer(answer);
   }
 
-  function handleOption(selectedOption: string): void {
-    if (selectedOption.toUpperCase() === answer.name.toUpperCase()) {
-      //instrument?.stop(); //Replace this
+  async function handleOption(option: string): Promise<void> {
+    if (option.toUpperCase() === answer.name.toUpperCase()) {
       setEnable(true); //red buttons
-      const value = getRandomItem(notes);
-      const name = Note.get(value).letter;
+      const value = getRandomItem(scales);
+      const name = value.type;
       const newAnswer = { name, value };
       setAnswer(newAnswer);
       playAnswer(newAnswer);
@@ -62,9 +64,9 @@ export default function Notes(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Notes"></Configuration>}>
-        <Title>Notes</Title>
-        <PlayButton instrument={instrument} onClick={handlePlay} title={'Note?'}></PlayButton>
+      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Scales"></Configuration>}>
+        <Title>Scales</Title>
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'}></PlayButton>
         {/*OPCIONES*/}
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
@@ -75,7 +77,6 @@ export default function Notes(): JSX.Element {
             ))}
           </div>
         </div>
-        {/* <Options options={options} optionClassName={optionClassName} onClick={() => handleOption(option)}></Options> */}
         <Piano></Piano>
       </ExerciseLayout>
     </>
