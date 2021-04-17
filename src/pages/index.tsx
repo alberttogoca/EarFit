@@ -5,7 +5,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <HomeLayout>
-        <Menu home></Menu>
+        <Menu></Menu>
       </HomeLayout>
     </>
   );
