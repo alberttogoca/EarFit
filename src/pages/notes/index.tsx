@@ -7,7 +7,7 @@ import { useInstrumentContext } from 'context/SoundfontContext';
 import React, { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
-interface Answer {
+export interface Answer {
   name: string;
   value: string;
 }
@@ -65,7 +65,7 @@ export default function Notes(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
         <Title>Notes</Title>
-        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'} />
+        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
         <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
         <Piano />
       </ExerciseLayout>

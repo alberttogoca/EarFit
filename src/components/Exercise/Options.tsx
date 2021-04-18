@@ -1,7 +1,9 @@
+import { OptionItem } from './OptionItem';
+
 interface Props {
   options: string[];
   optionClassName: string;
-  handleOptionClick: (option: string) => void;
+  handleOptionClick: (string) => void;
 }
 
 export const Options = ({ options, optionClassName, handleOptionClick }: Props): JSX.Element => {
@@ -9,9 +11,12 @@ export const Options = ({ options, optionClassName, handleOptionClick }: Props):
     <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
         {options.map((option) => (
-          <button key={option} type="button" className={optionClassName} onClick={() => handleOptionClick(option)}>
-            {option}
-          </button>
+          <OptionItem
+            key={option}
+            option={option}
+            optionClassName={optionClassName}
+            handleOptionClick={handleOptionClick}
+          />
         ))}
       </div>
     </div>
