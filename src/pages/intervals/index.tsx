@@ -1,6 +1,5 @@
 import { Interval, Scale } from '@tonaljs/tonal';
-import { Configuration, PlayButton, Title } from 'components/Exercise';
-import { Options } from 'components/Exercise/Options';
+import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
 //import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
@@ -84,10 +83,10 @@ export default function Intervals(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Intervals"></Configuration>}>
+      <ExerciseLayout col1={<Menu />} col3={<Configuration page="Intervals" />}>
         <Title>Intervals</Title>
-        <PlayButton instrument={instrument} onClick={handlePlay} title={'Interval?'}></PlayButton>
-        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption}></Options>
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'} />
+        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
         <Piano />
       </ExerciseLayout>
     </>

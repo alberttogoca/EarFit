@@ -1,6 +1,5 @@
 import { Note, Scale } from '@tonaljs/tonal';
-import { Configuration, PlayButton, Title } from 'components/Exercise';
-import { Options } from 'components/Exercise/Options';
+import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
@@ -64,10 +63,10 @@ export default function Notes(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Notes"></Configuration>}>
+      <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
         <Title>Notes</Title>
-        <PlayButton instrument={instrument} onClick={handlePlay} title={'Note?'}></PlayButton>
-        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption}></Options>
+        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'} />
+        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
         <Piano />
       </ExerciseLayout>
     </>
