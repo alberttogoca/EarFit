@@ -50,7 +50,7 @@ export default function Scales(): JSX.Element {
     playAnswer(answer);
   }
 
-  async function handleOption(option: string): Promise<void> {
+  function handleOption(option: string): void {
     if (option.toUpperCase() === answer.name.toUpperCase()) {
       setEnable(true); //red buttons
       const value = getRandomItem(scales);

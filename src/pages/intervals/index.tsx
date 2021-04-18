@@ -1,6 +1,5 @@
 import { Interval, Scale } from '@tonaljs/tonal';
 import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
-//import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
@@ -54,7 +53,7 @@ export default function Intervals(): JSX.Element {
     setAnswer(answer);
   }, []);
 
-  async function playAnswer(answer: Answer): Promise<void> {
+  function playAnswer(answer: Answer): void {
     //instrument?.stop(); //Replace this
     const intervalToPlay = [
       { note: answer.value.note1, time: 0, duration: 2 },
@@ -70,7 +69,7 @@ export default function Intervals(): JSX.Element {
     playAnswer(answer);
   }
 
-  async function handleOption(option: string): Promise<void> {
+  function handleOption(option: string): void {
     //console.log('Selected option: ' + option);
     console.log(option === answer.name);
     if (option === answer.name) {
