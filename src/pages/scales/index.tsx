@@ -67,7 +67,7 @@ export default function Scales(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Scales" />}>
         <Title>Scales</Title>
-        <PlayButton instrument={instrument} onClick={handlePlay} title={'Scale?'} />
+        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
         <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
         <Piano />
       </ExerciseLayout>
