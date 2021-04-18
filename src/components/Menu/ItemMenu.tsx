@@ -1,20 +1,20 @@
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
+import { MenuItem } from 'utils/MenuItems';
 
-interface IProps {
-  href: string;
-  name: string;
+interface Props {
+  item: MenuItem;
 }
 
-export const ItemMenu = ({ href, name }: IProps): JSX.Element => {
+export const ItemMenu = ({ item }: Props): JSX.Element => {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
   return (
     <div className="d-flex justify-content-center p-3 ">
-      <Link href={href} passHref>
+      <Link href={item.path} passHref>
         <a className="text-decoration-none text-reset">
-          {isHome && <h1 className="display-4">{name}</h1>}
-          {!isHome && <h2>{name}</h2>}
+          {isHome && <h1 className="display-4">{item.label}</h1>}
+          {!isHome && <h2>{item.label}</h2>}
         </a>
       </Link>
     </div>
