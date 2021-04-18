@@ -1,5 +1,6 @@
 import { Interval, Scale } from '@tonaljs/tonal';
 import { Configuration, PlayButton, Title } from 'components/Exercise';
+import { Options } from 'components/Exercise/Options';
 //import { getRandomItem } from 'utils/arrayUtils';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
@@ -86,16 +87,7 @@ export default function Intervals(): JSX.Element {
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Intervals"></Configuration>}>
         <Title>Intervals</Title>
         <PlayButton instrument={instrument} onClick={handlePlay} title={'Interval?'}></PlayButton>
-        {/*OPCIONES*/}
-        <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          <div>
-            {options.map((option) => (
-              <button key={option} type="button" className={optionClassName} onClick={() => handleOption(option)}>
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
+        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption}></Options>
         <Piano />
       </ExerciseLayout>
     </>

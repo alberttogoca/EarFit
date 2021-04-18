@@ -1,5 +1,6 @@
 import { Note, Scale } from '@tonaljs/tonal';
 import { Configuration, PlayButton, Title } from 'components/Exercise';
+import { Options } from 'components/Exercise/Options';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
@@ -66,17 +67,7 @@ export default function Notes(): JSX.Element {
       <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Notes"></Configuration>}>
         <Title>Notes</Title>
         <PlayButton instrument={instrument} onClick={handlePlay} title={'Note?'}></PlayButton>
-        {/*OPCIONES*/}
-        <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          <div>
-            {options.map((option) => (
-              <button key={option} type="button" className={optionClassName} onClick={() => handleOption(option)}>
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* <Options options={options} optionClassName={optionClassName} onClick={() => handleOption(option)}></Options> */}
+        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption}></Options>
         <Piano />
       </ExerciseLayout>
     </>
