@@ -65,7 +65,7 @@ export default function Notes(): JSX.Element {
     <>
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
         <Title>Notes</Title>
-        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
+        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Note?'} />
         <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
         <Piano />
       </ExerciseLayout>
