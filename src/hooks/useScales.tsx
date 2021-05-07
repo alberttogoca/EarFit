@@ -3,7 +3,7 @@ import { Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
 
-interface Answer {
+export interface Answer {
   name: string;
   value: ScaleType;
 }

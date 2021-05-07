@@ -5,17 +5,8 @@ import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import useIntervals from 'hooks/useIntervals';
+import { Answer } from 'hooks/useIntervals';
 import React, { useState } from 'react';
-
-interface IntervalNotes {
-  note1: string;
-  note2: string;
-}
-
-interface Answer {
-  name: string;
-  value: IntervalNotes;
-}
 
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();

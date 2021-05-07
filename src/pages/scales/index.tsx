@@ -1,4 +1,4 @@
-import { Scale as ScaleType } from '@tonaljs/scale';
+//import { Scale as ScaleType } from '@tonaljs/scale';
 //import { Scale } from '@tonaljs/tonal';
 import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
@@ -6,12 +6,8 @@ import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import useScales from 'hooks/useScales';
+import { Answer } from 'hooks/useScales';
 import React, { useState } from 'react';
-
-interface Answer {
-  name: string;
-  value: ScaleType;
-}
 
 export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();

@@ -7,7 +7,7 @@ interface IntervalNotes {
   note2: string;
 }
 
-interface Answer {
+export interface Answer {
   name: string;
   value: IntervalNotes;
 }

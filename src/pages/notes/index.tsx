@@ -5,12 +5,8 @@ import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import useNotes from 'hooks/useNotes';
+import { Answer } from 'hooks/useNotes';
 import React, { useState } from 'react';
-
-export interface Answer {
-  name: string;
-  value: string;
-}
 
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
