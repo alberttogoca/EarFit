@@ -7,7 +7,7 @@ import React from 'react';
 export default function Piano(): JSX.Element {
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>} col3={<Configuration page="Piano"></Configuration>}>
+      <ExerciseLayout col1={<Menu />} col3={<Configuration page="Piano"></Configuration>}>
         <Title>Piano</Title>
         <PianoComponent firstNote="c3" lastNote="b4" />
       </ExerciseLayout>
