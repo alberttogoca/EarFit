@@ -1,11 +1,11 @@
-import { Note, Scale } from '@tonaljs/tonal';
+//import { Note, Scale } from '@tonaljs/tonal';
 import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
-import React, { useEffect, useState } from 'react';
-import { getRandomItem } from 'utils/arrayUtils';
+import useNotes from 'hooks/useNotes';
+import React, { useState } from 'react';
 
 export interface Answer {
   name: string;
@@ -14,28 +14,11 @@ export interface Answer {
 
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const [notes, setNotes] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<Answer>();
+  const { options, answer, setNewAnswer } = useNotes();
+
   //red buttons:
   const [enable, setEnable] = useState<boolean>(true);
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
-
-  useEffect(() => {
-    const tonic = 'C';
-    const octave = '3';
-    const pattern = 'major';
-    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
-    const noteList = scaleList[0].notes; //major
-    const noteNames = noteList.map((n) => Note.get(n).letter);
-    setNotes(noteList);
-    setOptions(noteNames);
-    const value = getRandomItem(noteList);
-    const name = Note.get(value).letter;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
-  }, []);
 
   function playAnswer(answer: Answer): void {
     //instrument?.stop(); //Replace this
@@ -51,10 +34,7 @@ export default function Notes(): JSX.Element {
     if (selectedOption.toUpperCase() === answer.name.toUpperCase()) {
       //instrument?.stop(); //Replace this
       setEnable(true); //red buttons
-      const value = getRandomItem(notes);
-      const name = Note.get(value).letter;
-      const newAnswer = { name, value };
-      setAnswer(newAnswer);
+      const newAnswer = setNewAnswer();
       playAnswer(newAnswer);
     } else {
       setEnable(!enable); //red buttons
