@@ -10,7 +10,7 @@ export default function ExerciseLayout({ col1, children, col3 }: IProps): JSX.El
   return (
     <>
       {/*Container*/}
-      <div className="container-fluid bg-light">
+      <div className="container-fluid bg-light shadow-lg">
         {/*Fila*/}
         <div className="row p-3">
           {/*Columna 1*/}

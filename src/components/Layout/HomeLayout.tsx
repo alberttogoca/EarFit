@@ -8,9 +8,9 @@ export default function HomeLayout({ children }: IProps): JSX.Element {
   return (
     <>
       {/*Container*/}
-      <div className="container-fluid bg-light">
+      <div className="container-fluid bg-light shadow-lg">
         {/*Fila*/}
-        <div className="row">
+        <div className="row p-3">
           {/*Columna 1*/}
           <div className="col-sm border d-none d-md-block"></div>
           {/*Columna 2*/}
