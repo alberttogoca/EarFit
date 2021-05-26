@@ -1,6 +1,6 @@
 //import { Scale as ScaleType } from '@tonaljs/scale';
 //import { Scale } from '@tonaljs/tonal';
-import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
+import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
@@ -12,10 +12,7 @@ import React, { useState } from 'react';
 export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();
   const { options, answer, setNewAnswer } = useScales();
-
-  //red buttons:
-  const [enable, setEnable] = useState<boolean>(true);
-  const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
+  const [streak, setStreak] = useState(0);
 
   function playAnswer(answer: Answer): void {
     //instrument?.stop(); //Replace this
@@ -30,13 +27,15 @@ export default function Scales(): JSX.Element {
     playAnswer(answer);
   }
 
-  function handleOption(option: string): void {
+  function handleOption(option: string): boolean {
     if (option.toUpperCase() === answer.name.toUpperCase()) {
-      setEnable(true); //red buttons
       const newAnswer = setNewAnswer();
       playAnswer(newAnswer);
+      setStreak((s) => s + 1);
+      return true;
     } else {
-      setEnable(!enable); //red buttons
+      setStreak(0);
+      return false;
     }
   }
 
@@ -45,7 +44,8 @@ export default function Scales(): JSX.Element {
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Scales" />}>
         <Title>Scales</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
-        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
+        <Options options={options} handleOptionClick={handleOption} streak={streak} />
+        <Streak streak={streak} />
         <Piano />
       </ExerciseLayout>
     </>

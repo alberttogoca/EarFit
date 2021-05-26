@@ -1,5 +1,5 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { Configuration, Options, PlayButton, Title } from 'components/Exercise';
+import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
@@ -11,13 +11,9 @@ import React, { useState } from 'react';
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
   const { options, answer, setNewAnswer } = useNotes();
-  const [aciertos, setAciertos] = useState(0);
-  //red buttons:
-  const [enable, setEnable] = useState<boolean>(true);
-  const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
+  const [streak, setStreak] = useState(0);
 
   function playAnswer(answer: Answer): void {
-    //instrument?.stop(); //Replace this
     instrument?.play(answer.value, 0, { duration: 2 });
     console.log(`Now playing: ${answer.name}`);
   }
@@ -26,16 +22,15 @@ export default function Notes(): JSX.Element {
     playAnswer(answer);
   }
 
-  function handleOption(selectedOption: string): void {
+  function handleOption(selectedOption: string): boolean {
     if (selectedOption.toUpperCase() === answer.name.toUpperCase()) {
-      //instrument?.stop(); //Replace this
-      setEnable(true); //red buttons
       const newAnswer = setNewAnswer();
-      setAciertos((aciertos) => aciertos + 1);
+      setStreak((s) => s + 1);
       playAnswer(newAnswer);
+      return true;
     } else {
-      setAciertos(0);
-      setEnable(!enable); //red buttons
+      setStreak(0);
+      return false;
     }
   }
 
@@ -44,12 +39,8 @@ export default function Notes(): JSX.Element {
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
         <Title>Notes</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Note?'} />
-        <Options
-          options={options}
-          optionClassName={optionClassName}
-          handleOptionClick={handleOption}
-          aciertos={aciertos}
-        />
+        <Options options={options} handleOptionClick={handleOption} streak={streak} />
+        <Streak streak={streak} />
         <Piano />
       </ExerciseLayout>
     </>
