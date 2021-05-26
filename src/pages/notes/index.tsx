@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
   const { options, answer, setNewAnswer } = useNotes();
-
+  const [aciertos, setAciertos] = useState(0);
   //red buttons:
   const [enable, setEnable] = useState<boolean>(true);
   const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
@@ -31,8 +31,10 @@ export default function Notes(): JSX.Element {
       //instrument?.stop(); //Replace this
       setEnable(true); //red buttons
       const newAnswer = setNewAnswer();
+      setAciertos((aciertos) => aciertos + 1);
       playAnswer(newAnswer);
     } else {
+      setAciertos(0);
       setEnable(!enable); //red buttons
     }
   }
@@ -42,7 +44,12 @@ export default function Notes(): JSX.Element {
       <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
         <Title>Notes</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Note?'} />
-        <Options options={options} optionClassName={optionClassName} handleOptionClick={handleOption} />
+        <Options
+          options={options}
+          optionClassName={optionClassName}
+          handleOptionClick={handleOption}
+          aciertos={aciertos}
+        />
         <Piano />
       </ExerciseLayout>
     </>

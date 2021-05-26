@@ -4,9 +4,10 @@ interface Props {
   options: string[];
   optionClassName: string;
   handleOptionClick: (string) => void;
+  aciertos: number;
 }
 
-export const Options = ({ options, optionClassName, handleOptionClick }: Props): JSX.Element => {
+export const Options = ({ options, optionClassName, handleOptionClick, aciertos }: Props): JSX.Element => {
   return (
     <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
@@ -18,6 +19,7 @@ export const Options = ({ options, optionClassName, handleOptionClick }: Props):
             handleOptionClick={handleOptionClick}
           />
         ))}
+        <div>Racha: {aciertos} </div>
       </div>
     </div>
   );
