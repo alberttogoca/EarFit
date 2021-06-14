@@ -1,4 +1,4 @@
-import { InstrumentButton } from 'components/Exercise';
+import { InstrumentButton, Tooltip } from 'components/Exercise';
 import { NotePlayer } from 'context/soundfont-wrapper';
 
 interface IProps {
@@ -24,7 +24,9 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
 
       {page == 'Notes' && (
         <div className="p-3">
-          <p className="lead">Scale</p>
+          <p className="lead">
+            Scale <Tooltip>Select the scale from which the notes are taken</Tooltip>
+          </p>
           <div className="dropdown">
             <a
               className="btn btn-secondary dropdown-toggle"
@@ -107,7 +109,9 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
       {/*ACTIVE NOTES*/}
       {options && (
         <div className="p-3">
-          <p className="lead">Active Options</p>
+          <p className="lead">
+            Active Options <Tooltip>Select the options on which you would like to be tested</Tooltip>
+          </p>
 
           <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
             <div>
@@ -130,7 +134,9 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
 
       {/*ACTIVE INSTRUMENT*/}
       <div className="p-3">
-        <p className="lead">Instrument</p>
+        <p className="lead">
+          Instrument <Tooltip>Select the instrument that plays</Tooltip>
+        </p>
         <InstrumentButton title="Guitar" emoji="🎸" instrumentName="acoustic_guitar_nylon" />
         <InstrumentButton title="Grand Piano" emoji="🎹" instrumentName="acoustic_grand_piano" />
         <InstrumentButton title="Trumpet" emoji="🎺" instrumentName="trumpet" />
