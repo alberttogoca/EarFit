@@ -45,7 +45,7 @@ export default function Intervals(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu />} col3={<Configuration options={options} />}>
+      <ExerciseLayout col1={<Menu />} col3={<Configuration page={'Intervals'} options={options} />}>
         <Title>Intervals</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Interval?'} />
         <Options options={options} handleOptionClick={handleOption} streak={streak} />

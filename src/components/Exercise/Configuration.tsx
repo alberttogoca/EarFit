@@ -1,6 +1,5 @@
 import { InstrumentButton } from 'components/Exercise';
 import { NotePlayer } from 'context/soundfont-wrapper';
-import { useInstrumentContext } from 'context/SoundfontContext';
 
 interface IProps {
   page?: string;
@@ -9,8 +8,6 @@ interface IProps {
 }
 
 export const Configuration = ({ page, options }: IProps): JSX.Element => {
-  const { setNewInstrument } = useInstrumentContext();
-
   function toggleOption(selectedOption: string): void {
     if (options.includes(selectedOption)) {
       console.log(`${selectedOption} removed`);
@@ -25,61 +22,113 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
         <h1>Options</h1>
       </div>
 
-      <div className="p-3">
-        <p className="lead">Scale</p>
-        <div className="dropdown">
-          <a
-            className="btn btn-secondary dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Major
-          </a>
+      {page == 'Notes' && (
+        <div className="p-3">
+          <p className="lead">Scale</p>
+          <div className="dropdown">
+            <a
+              className="btn btn-secondary dropdown-toggle"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Major
+            </a>
 
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li>
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="p-3">
-        <p className="lead">Active Options</p>
-
-        <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-          <div>
-            {options.map((option) => (
-              <button
-                key={option}
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => {
-                  toggleOption(option);
-                }}
-              >
-                {option}
-              </button>
-            ))}
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li>
+                <a className="dropdown-item" href="#">
+                  Action
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Another action
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
+      )}
 
+      {page == 'Scales' && (
+        <div className="p-3">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              console.log('ascending');
+            }}
+          >
+            ASCENDING
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              console.log('descending');
+            }}
+          >
+            DESCENDING
+          </button>
+        </div>
+      )}
+
+      {page == 'Intervals' && (
+        <div className="p-3">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              console.log('ascending');
+            }}
+          >
+            ASCENDING
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              console.log('descending');
+            }}
+          >
+            DESCENDING
+          </button>
+        </div>
+      )}
+
+      {/*ACTIVE NOTES*/}
+      {options && (
+        <div className="p-3">
+          <p className="lead">Active Options</p>
+
+          <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <div>
+              {options.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    toggleOption(option);
+                  }}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/*ACTIVE INSTRUMENT*/}
       <div className="p-3">
         <p className="lead">Instrument</p>
         <InstrumentButton title="Guitar" emoji="🎸" instrumentName="acoustic_guitar_nylon" />
