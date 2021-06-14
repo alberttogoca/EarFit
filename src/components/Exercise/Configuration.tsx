@@ -1,11 +1,23 @@
+import { InstrumentButton } from 'components/Exercise';
+import { NotePlayer } from 'context/soundfont-wrapper';
 import { useInstrumentContext } from 'context/SoundfontContext';
 
 interface IProps {
+  page?: string;
   options?: string[];
+  instrument?: NotePlayer;
 }
 
-export const Configuration = ({ options }: IProps): JSX.Element => {
+export const Configuration = ({ page, options }: IProps): JSX.Element => {
   const { setNewInstrument } = useInstrumentContext();
+
+  function toggleOption(selectedOption: string): void {
+    if (options.includes(selectedOption)) {
+      console.log(`${selectedOption} removed`);
+    } else {
+      console.log(`${selectedOption} added`);
+    }
+  }
 
   return (
     <>
@@ -53,7 +65,14 @@ export const Configuration = ({ options }: IProps): JSX.Element => {
         <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
           <div>
             {options.map((option) => (
-              <button key={option} type="button" className="btn btn-secondary" onClick={() => {}}>
+              <button
+                key={option}
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => {
+                  toggleOption(option);
+                }}
+              >
                 {option}
               </button>
             ))}
@@ -63,31 +82,9 @@ export const Configuration = ({ options }: IProps): JSX.Element => {
 
       <div className="p-3">
         <p className="lead">Instrument</p>
-        <button
-          type="button"
-          className="btn btn-check btn-sm "
-          aria-pressed="true"
-          onClick={() => setNewInstrument('acoustic_guitar_nylon')}
-        >
-          Guitar
-        </button>
-        <button
-          type="button"
-          className="btn btn-check btn-sm  "
-          aria-pressed="true"
-          onClick={() => setNewInstrument('acoustic_grand_piano')}
-        >
-          Grand Piano
-        </button>
-
-        <button
-          type="button"
-          className="btn btn-check btn-sm   "
-          aria-pressed="true"
-          onClick={() => setNewInstrument('trumpet')}
-        >
-          Trumpet
-        </button>
+        <InstrumentButton title="Guitar" emoji="🎸" instrumentName="acoustic_guitar_nylon" />
+        <InstrumentButton title="Grand Piano" emoji="🎹" instrumentName="acoustic_grand_piano" />
+        <InstrumentButton title="Trumpet" emoji="🎺" instrumentName="trumpet" />
       </div>
     </>
   );
