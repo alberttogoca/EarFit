@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tonaljs/tonal": "^4.6.0",
+    "bootstrap": "^5.0.0-beta3",
     "bootswatch": "^5.0.1",
     "music-instrument-js": "^0.1.1",
     "next": "10.0.9",
