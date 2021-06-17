@@ -1,5 +1,6 @@
 import { InstrumentButton, Tooltip } from 'components/Exercise';
 import { NotePlayer } from 'context/soundfont-wrapper';
+import { Dropdown } from 'react-bootstrap';
 
 interface IProps {
   page?: string;
@@ -27,36 +28,17 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
           <p className="lead">
             Scale <Tooltip>Select the scale from which the notes are taken</Tooltip>
           </p>
-          <div className="dropdown">
-            <a
-              className="btn btn-secondary dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Major
-            </a>
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              Scale
+            </Dropdown.Toggle>
 
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       )}
 
