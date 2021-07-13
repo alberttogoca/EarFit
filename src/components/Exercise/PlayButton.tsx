@@ -1,5 +1,6 @@
 import { NotePlayer } from 'context/soundfont-wrapper';
 import { ReactNode } from 'react';
+import { Button, Container } from 'react-bootstrap';
 
 interface Props {
   title: string;
@@ -12,14 +13,14 @@ export const PlayButton = ({ instrument, handlePlay, title }: Props): JSX.Elemen
   return (
     <>
       {/*PLAY SOUND*/}
-      <div className="d-flex justify-content-center p-3 ">
+      <Container className="d-flex justify-content-center p-3 ">
         {instrument && (
-          <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
+          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlay}>
             {title}
-          </button>
+          </Button>
         )}
         {!instrument && <div>Loading instrument...</div>}
-      </div>
+      </Container>
     </>
   );
 };
