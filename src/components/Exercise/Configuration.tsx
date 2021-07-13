@@ -1,6 +1,6 @@
-import { SelectInstrumentButtonGroup, Tooltip } from 'components/Exercise';
+import { SelectInstrumentButtonGroup } from 'components/Exercise';
 import { NotePlayer } from 'context/soundfont-wrapper';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 interface IProps {
   page?: string;
@@ -26,7 +26,13 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
       {page == 'Notes' && (
         <div className="p-3">
           <p className="lead">
-            Scale <Tooltip>Select the scale from which the notes are taken</Tooltip>
+            Scale
+            <OverlayTrigger
+              delay={{ show: 250, hide: 400 }}
+              overlay={<Tooltip id="1">Select the scale from which the notes are taken</Tooltip>}
+            >
+              <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
+            </OverlayTrigger>
           </p>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -92,7 +98,13 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
       {options && (
         <div className="p-3">
           <p className="lead">
-            Active Options <Tooltip>Select the options on which you would like to be tested</Tooltip>
+            Active Options
+            <OverlayTrigger
+              delay={{ show: 250, hide: 400 }}
+              overlay={<Tooltip id="2">Select the options on which you would like to be tested</Tooltip>}
+            >
+              <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
+            </OverlayTrigger>
           </p>
 
           <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
@@ -117,7 +129,13 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
       {/*ACTIVE INSTRUMENT*/}
       <div className="p-3">
         <p className="lead">
-          Instrument <Tooltip>Select the instrument that plays</Tooltip>
+          Instrument
+          <OverlayTrigger
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="3">Select the instrument that plays</Tooltip>}
+          >
+            <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
+          </OverlayTrigger>
         </p>
         <SelectInstrumentButtonGroup />
       </div>
