@@ -1,4 +1,4 @@
-import { InstrumentButton, Tooltip } from 'components/Exercise';
+import { SelectInstrumentButtonGroup, Tooltip } from 'components/Exercise';
 import { NotePlayer } from 'context/soundfont-wrapper';
 import { Dropdown } from 'react-bootstrap';
 
@@ -119,9 +119,7 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
         <p className="lead">
           Instrument <Tooltip>Select the instrument that plays</Tooltip>
         </p>
-        <InstrumentButton title="Guitar" emoji="🎸" instrumentName="acoustic_guitar_nylon" />
-        <InstrumentButton title="Grand Piano" emoji="🎹" instrumentName="acoustic_grand_piano" />
-        <InstrumentButton title="Trumpet" emoji="🎺" instrumentName="trumpet" />
+        <SelectInstrumentButtonGroup />
       </div>
     </>
   );
