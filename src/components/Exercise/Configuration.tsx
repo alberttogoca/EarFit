@@ -1,6 +1,8 @@
 import { SelectInstrumentButtonGroup } from 'components/Exercise';
+import { ActiveOptionsButtonGroup } from 'components/Exercise/ActiveOptionsButtonGroup';
 import { NotePlayer } from 'context/soundfont-wrapper';
-import { Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Dropdown, OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
 
 interface IProps {
   page?: string;
@@ -9,13 +11,7 @@ interface IProps {
 }
 
 export const Configuration = ({ page, options }: IProps): JSX.Element => {
-  function toggleOption(selectedOption: string): void {
-    if (options.includes(selectedOption)) {
-      console.log(`${selectedOption} removed`);
-    } else {
-      console.log(`${selectedOption} added`);
-    }
-  }
+  const [checked, setChecked] = useState<boolean>(true);
 
   return (
     <>
@@ -40,57 +36,46 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">Major</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Dorian</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Phrygian</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Lydian</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Mixolydian</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Aeolian</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Locrian</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
       )}
 
-      {page == 'Scales' && (
+      {(page == 'Scales' || page == 'Intervals') && (
         <div className="p-3">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              console.log('ascending');
+          <ToggleButton
+            type="checkbox"
+            variant={'light'} //light or link
+            size="sm"
+            value={0}
+            checked={checked}
+            onChange={() => {
+              setChecked(!checked);
             }}
           >
+            {' '}
             ASCENDING
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              console.log('descending');
+          </ToggleButton>
+          <ToggleButton
+            type="checkbox"
+            variant={'light'} //light or link
+            size="sm"
+            value={0}
+            checked={!checked}
+            onChange={() => {
+              setChecked(!checked);
             }}
           >
+            {' '}
             DESCENDING
-          </button>
-        </div>
-      )}
-
-      {page == 'Intervals' && (
-        <div className="p-3">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              console.log('ascending');
-            }}
-          >
-            ASCENDING
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              console.log('descending');
-            }}
-          >
-            DESCENDING
-          </button>
+          </ToggleButton>
         </div>
       )}
 
@@ -109,18 +94,7 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
 
           <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
             <div>
-              {options.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    toggleOption(option);
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
+              <ActiveOptionsButtonGroup options={options} />
             </div>
           </div>
         </div>
