@@ -15,8 +15,8 @@ export const SelectInstrumentButtonGroup = (): JSX.Element => {
   const { setNewInstrument } = useInstrumentContext();
 
   const instruments: InstrumentItem[] = [
-    { title: 'Guitar', emoji: '🎸', instrumentName: 'acoustic_guitar_nylon', value: '1' },
-    { title: 'Grand Piano', emoji: '🎹', instrumentName: 'acoustic_grand_piano', value: '2' },
+    { title: 'Grand Piano', emoji: '🎹', instrumentName: 'acoustic_grand_piano', value: '1' },
+    { title: 'Guitar', emoji: '🎸', instrumentName: 'acoustic_guitar_nylon', value: '2' },
     { title: 'Trumpet', emoji: '🎺', instrumentName: 'trumpet', value: '3' },
   ];
 
