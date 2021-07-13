@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 interface Props {
   option: string;
-  optionClassName?: string;
   handleOptionClick: (string) => boolean;
   streak: number;
 }
 
 export const OptionItem = ({ option, handleOptionClick, streak }: Props): JSX.Element => {
   const [enable, setEnable] = useState<boolean>(true);
-  const optionClassName = enable ? 'btn btn-secondary' : 'btn btn-danger';
+  const variant = enable ? 'secondary' : 'danger';
 
   useEffect(() => {
     if (streak > 0) {
@@ -19,15 +19,14 @@ export const OptionItem = ({ option, handleOptionClick, streak }: Props): JSX.El
 
   return (
     <>
-      <button
-        type="button"
-        className={optionClassName}
+      <Button
+        variant={variant}
         onClick={() => {
           setEnable(handleOptionClick(option));
         }}
       >
         {option}
-      </button>
+      </Button>
     </>
   );
 };
