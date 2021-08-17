@@ -1,12 +1,14 @@
 import { SelectInstrumentButtonGroup } from 'components/Exercise';
-import { ActiveOptionsButtonGroup } from 'components/Exercise/ActiveOptionsButtonGroup';
 import { NotePlayer } from 'context/soundfont-wrapper';
 import React, { useState } from 'react';
-import { Dropdown, OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
+import Selectable from 'utils/Selectable';
+
+import { ActiveOptionsButtonItem } from './ActiveOptionsButtonItem';
 
 interface IProps {
   page?: string;
-  options?: string[];
+  options?: Selectable[];
   instrument?: NotePlayer;
 }
 
@@ -18,35 +20,6 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
       <div className="d-flex justify-content-center p-3">
         <h1>Options</h1>
       </div>
-
-      {page == 'Notes' && (
-        <div className="p-3">
-          <p className="lead">
-            Scale
-            <OverlayTrigger
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip id="1">Select the scale from which the notes are taken</Tooltip>}
-            >
-              <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
-            </OverlayTrigger>
-          </p>
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              Scale
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Major</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Dorian</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Phrygian</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Lydian</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Mixolydian</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Aeolian</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Locrian</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-      )}
 
       {(page == 'Scales' || page == 'Intervals') && (
         <div className="p-3">
@@ -94,7 +67,15 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
 
           <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
             <div>
-              <ActiveOptionsButtonGroup options={options} />
+              {options.map((option, idx) => (
+                <ActiveOptionsButtonItem
+                  key={idx}
+                  option={option}
+                  onIsSelectedChange={() => {
+                    console.log('Active Options not implemented yet');
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>

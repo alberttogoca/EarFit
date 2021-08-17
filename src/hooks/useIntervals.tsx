@@ -1,6 +1,7 @@
 import { Interval, Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
+import Selectable from 'utils/Selectable';
 
 interface IntervalNotes {
   note1: string;
@@ -14,14 +15,14 @@ export interface Answer {
 
 type HookReturnType = {
   notes: string[];
-  options: string[];
+  options: Selectable[];
   answer: Answer;
   setNewAnswer: () => Answer;
 };
 
 const useIntervals = (): HookReturnType => {
   const [notes, setNotes] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
+  const [options, setOptions] = useState<Selectable[]>([]);
   const [answer, setAnswer] = useState<Answer>(undefined);
 
   const setNewAnswer = (): Answer => {
@@ -51,7 +52,11 @@ const useIntervals = (): HookReturnType => {
     );
     allPosbileIntervals.forEach((intervalList) => intervalList.forEach((item) => intervalsSet.add(item)));
     const intervals = Array.from(intervalsSet).sort();
-    setOptions(intervals);
+    setOptions(
+      intervals.map((s) => {
+        return { displayName: s, isSelected: true };
+      })
+    );
 
     const n1 = getRandomItem(noteList);
     const n2 = getRandomItem(noteList); // TO DO: ¿que esta nota sea siempre mayor?

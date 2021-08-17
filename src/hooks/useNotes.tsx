@@ -1,49 +1,73 @@
 import { Note, Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
 import { getRandomItem } from 'utils/arrayUtils';
+import Selectable from 'utils/Selectable';
 
-export interface Answer {
-  name: string;
+export interface Note extends Selectable {
   value: string;
+  letter: string;
 }
 
 type HookReturnType = {
-  notes: string[];
-  options: string[];
-  answer: Answer;
-  setNewAnswer: () => Answer;
+  notes: Note[];
+  answer: Note;
+  setNewAnswer: () => Note;
+  updateIsSelectedNote: (displayName: string, newIsSelectedValue: boolean) => void;
 };
 
 const useNotes = (): HookReturnType => {
-  const [notes, setNotes] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<Answer>();
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [answer, setAnswer] = useState<Note>();
 
-  const setNewAnswer = (): Answer => {
-    const value = getRandomItem(notes);
-    const name = Note.get(value).letter;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
-    return newAnswer;
-  };
-
-  useEffect(() => {
+  const createNotes = (): Note[] => {
     const tonic = 'C';
     const octave = '3';
     const pattern = 'major';
     const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
     const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
     const noteList = scaleList[0].notes; //major
-    const noteNames = noteList.map((n) => Note.get(n).letter);
-    setNotes(noteList);
-    setOptions(noteNames);
-    const value = getRandomItem(noteList);
-    const name = Note.get(value).letter;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
+    return noteList.map<Note>((n) => {
+      return {
+        value: n,
+        displayName: Note.get(n).letter,
+        letter: Note.get(n).letter,
+        isSelected: true,
+      };
+    });
+  };
+
+  useEffect(() => {
+    const notes = createNotes();
+    setNotes(notes);
   }, []);
 
-  return { notes, options, answer, setNewAnswer };
+  useEffect(() => {
+    if (!answer || notes.some((n) => n.displayName === answer.displayName && !n.isSelected)) {
+      setNewAnswer();
+    }
+  }, [notes]);
+
+  const setNewAnswer = (): Note => {
+    const noteAnswer = getRandomItem(notes.filter((n) => n.isSelected));
+    setAnswer(noteAnswer);
+    return noteAnswer;
+  };
+
+  const updateIsSelectedNote = (displayName: string, newIsSelectedValue: boolean): void => {
+    setNotes((oldNotes) => {
+      return oldNotes.map((note) => {
+        if (note.displayName === displayName && note.isSelected !== newIsSelectedValue) {
+          return {
+            ...note,
+            isSelected: newIsSelectedValue,
+          };
+        }
+        return note;
+      });
+    });
+  };
+
+  return { notes, answer, setNewAnswer, updateIsSelectedNote };
 };
 
 export default useNotes;

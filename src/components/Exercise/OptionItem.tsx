@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Selectable from 'utils/Selectable';
 
 interface Props {
-  option: string;
+  option: Selectable;
   handleOptionClick: (string) => boolean;
   streak: number;
 }
@@ -25,7 +26,7 @@ export const OptionItem = ({ option, handleOptionClick, streak }: Props): JSX.El
           setEnable(handleOptionClick(option));
         }}
       >
-        {option}
+        {option.displayName}
       </Button>
     </>
   );

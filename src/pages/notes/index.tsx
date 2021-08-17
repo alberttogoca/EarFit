@@ -1,29 +1,27 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
+import { Options, PlayButton, Streak, Title } from 'components/Exercise';
 import ExerciseLayout from 'components/Layout/ExerciseLayout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
-import useNotes from 'hooks/useNotes';
-import { Answer } from 'hooks/useNotes';
+import useNotes, { Note } from 'hooks/useNotes';
 import React, { useState } from 'react';
+import Selectable from 'utils/Selectable';
+
+import { NotesConfiguration } from './NotesConfiguration';
 
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
-  const { options, answer, setNewAnswer } = useNotes();
+  const { notes, answer, setNewAnswer, updateIsSelectedNote } = useNotes();
   const [streak, setStreak] = useState(0);
 
-  function playAnswer(answer: Answer): void {
+  function playAnswer(answer: Note): void {
     instrument?.play(answer.value, 0, { duration: 2 });
-    console.log(`Now playing: ${answer.name}`);
+    console.log(`Now playing: ${answer.value}`);
   }
 
-  function handlePlay(): void {
-    playAnswer(answer);
-  }
-
-  function handleOption(selectedOption: string): boolean {
-    if (selectedOption.toUpperCase() === answer.name.toUpperCase()) {
+  function handleOption(selectedOption: Note): boolean {
+    if (selectedOption.value.toUpperCase() === answer.value.toUpperCase()) {
       const newAnswer = setNewAnswer();
       setStreak((s) => s + 1);
       playAnswer(newAnswer);
@@ -33,13 +31,19 @@ export default function Notes(): JSX.Element {
       return false;
     }
   }
+  function handleOptionIsSelectedChange(option: Selectable, newValue: boolean): void {
+    updateIsSelectedNote(option.displayName, newValue);
+  }
 
   return (
     <>
-      <ExerciseLayout col1={<Menu />} col3={<Configuration page={'Notes'} options={options} />}>
+      <ExerciseLayout
+        col1={<Menu />}
+        col3={<NotesConfiguration options={notes} onOptionIsSelectedChange={handleOptionIsSelectedChange} />}
+      >
         <Title>Notes</Title>
-        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Note?'} />
-        <Options options={options} handleOptionClick={handleOption} streak={streak} />
+        <PlayButton instrument={instrument} handlePlay={() => playAnswer(answer)} title={'Note?'} />
+        <Options options={notes.filter((n) => n.isSelected)} handleOptionClick={handleOption} streak={streak} />
         <Streak streak={streak} />
         <Piano />
       </ExerciseLayout>
