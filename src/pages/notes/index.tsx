@@ -8,7 +8,7 @@ import useNotes, { Note } from 'hooks/useNotes';
 import React, { useState } from 'react';
 import Selectable from 'utils/Selectable';
 
-import { NotesConfiguration } from './NotesConfiguration';
+import { NotesConfiguration } from '../../components/Exercise/NotesConfiguration';
 
 export default function Notes(): JSX.Element {
   const { instrument } = useInstrumentContext();
