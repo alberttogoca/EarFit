@@ -6,6 +6,7 @@ import { useInstrumentContext } from 'context/SoundfontContext';
 import useIntervals from 'hooks/useIntervals';
 import { Answer } from 'hooks/useIntervals';
 import React, { useState } from 'react';
+import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
   const { instrument } = useInstrumentContext();
@@ -28,10 +29,10 @@ export default function Intervals(): JSX.Element {
     playAnswer(answer);
   }
 
-  function handleOption(option: string): boolean {
+  function handleOption(option: Selectable): boolean {
     //console.log('Selected option: ' + option);
-    console.log(option === answer.name);
-    if (option === answer.name) {
+    console.log(option.displayName === answer.name);
+    if (option.displayName === answer.name) {
       const newAnswer = setNewAnswer();
       playAnswer(newAnswer);
       setStreak((s) => s + 1);

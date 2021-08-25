@@ -5,7 +5,7 @@ import { OptionItem } from './OptionItem';
 
 interface Props {
   options: Selectable[];
-  handleOptionClick: (string) => boolean;
+  handleOptionClick: (option: Selectable) => boolean;
   streak: number;
 }
 

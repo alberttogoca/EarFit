@@ -4,7 +4,7 @@ import Selectable from 'utils/Selectable';
 
 interface Props {
   option: Selectable;
-  handleOptionClick: (string) => boolean;
+  handleOptionClick: (option: Selectable) => boolean;
   streak: number;
 }
 

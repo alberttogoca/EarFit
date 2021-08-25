@@ -7,6 +7,7 @@ import { useInstrumentContext } from 'context/SoundfontContext';
 import useScales from 'hooks/useScales';
 import { Answer } from 'hooks/useScales';
 import React, { useState } from 'react';
+import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
   const { instrument } = useInstrumentContext();
@@ -26,8 +27,8 @@ export default function Scales(): JSX.Element {
     playAnswer(answer);
   }
 
-  function handleOption(option: string): boolean {
-    if (option.toUpperCase() === answer.name.toUpperCase()) {
+  function handleOption(option: Selectable): boolean {
+    if (option.displayName.toUpperCase() === answer.name.toUpperCase()) {
       const newAnswer = setNewAnswer();
       playAnswer(newAnswer);
       setStreak((s) => s + 1);
