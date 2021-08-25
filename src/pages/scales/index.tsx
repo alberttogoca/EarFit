@@ -1,8 +1,7 @@
 //import { Scale as ScaleType } from '@tonaljs/scale';
 //import { Scale } from '@tonaljs/tonal';
 import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
-import ExerciseLayout from 'components/Layout/ExerciseLayout';
-import { Menu } from 'components/Menu';
+import Layout from 'components/Layout';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import useScales from 'hooks/useScales';
@@ -41,13 +40,13 @@ export default function Scales(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu />} col3={<Configuration page={'Scales'} options={options} />}>
+      <Layout rightColumn={<Configuration page={'Scales'} options={options} />}>
         <Title>Scales</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
         <Options options={options} handleOptionClick={handleOption} streak={streak} />
         <Streak streak={streak} />
         <Piano />
-      </ExerciseLayout>
+      </Layout>
     </>
   );
 }

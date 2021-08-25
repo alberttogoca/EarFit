@@ -1,7 +1,6 @@
 //import { Interval, Scale } from '@tonaljs/tonal';
 import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
-import ExerciseLayout from 'components/Layout/ExerciseLayout';
-import { Menu } from 'components/Menu';
+import Layout from 'components/Layout';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
 import useIntervals from 'hooks/useIntervals';
@@ -45,13 +44,13 @@ export default function Intervals(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout col1={<Menu />} col3={<Configuration page={'Intervals'} options={options} />}>
+      <Layout rightColumn={<Configuration page={'Intervals'} options={options} />}>
         <Title>Intervals</Title>
         <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Interval?'} />
         <Options options={options} handleOptionClick={handleOption} streak={streak} />
         <Streak streak={streak} />
         <Piano />
-      </ExerciseLayout>
+      </Layout>
     </>
   );
 }

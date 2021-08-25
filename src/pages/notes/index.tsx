@@ -1,6 +1,6 @@
 //import { Note, Scale } from '@tonaljs/tonal';
 import { Options, PlayButton, Streak, Title } from 'components/Exercise';
-import ExerciseLayout from 'components/Layout/ExerciseLayout';
+import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/SoundfontContext';
@@ -37,16 +37,15 @@ export default function Notes(): JSX.Element {
 
   return (
     <>
-      <ExerciseLayout
-        col1={<Menu />}
-        col3={<NotesConfiguration options={notes} onOptionIsSelectedChange={handleOptionIsSelectedChange} />}
+      <Layout
+        rightColumn={<NotesConfiguration options={notes} onOptionIsSelectedChange={handleOptionIsSelectedChange} />}
       >
         <Title>Notes</Title>
         <PlayButton instrument={instrument} handlePlay={() => playAnswer(answer)} title={'Note?'} />
         <Options options={notes.filter((n) => n.isSelected)} handleOptionClick={handleOption} streak={streak} />
         <Streak streak={streak} />
         <Piano />
-      </ExerciseLayout>
+      </Layout>
     </>
   );
 }
