@@ -21,6 +21,7 @@ type NotePlayer = {
   stop: (noteName?: string) => void;
   // eslint-disable-next-line
   schedule: (when?: number, events?: any[]) => Player;
+  instrumentName: InstrumentName;
 };
 
 const instruments = new Map<InstrumentName, NotePlayer>();
@@ -65,8 +66,8 @@ const getInstrument = async (instrumentName: InstrumentName, options = {}): Prom
     return audioNodes;
   };
 
-  instruments.set(instrumentName, { play, stop, schedule });
-  return { play, stop, schedule } as NotePlayer;
+  instruments.set(instrumentName, { play, stop, schedule, instrumentName });
+  return { play, stop, schedule, instrumentName } as NotePlayer;
 };
 
 async function startNote(instrumentName: InstrumentName, noteName: string, noteOptions = {}): Promise<void> {

@@ -1,4 +1,4 @@
-import { SelectInstrumentButtonGroup } from 'components/Exercise';
+import { InstrumentSelector } from 'components/Configuration/InstrumentSelector';
 import { NotePlayer } from 'context/soundfont-wrapper';
 import React, { useState } from 'react';
 import { OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
@@ -92,7 +92,8 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
             <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
           </OverlayTrigger>
         </p>
-        <SelectInstrumentButtonGroup />
+
+        <InstrumentSelector />
       </div>
     </>
   );
