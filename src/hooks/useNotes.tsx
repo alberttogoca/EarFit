@@ -22,7 +22,17 @@ const useNotes = (): HookReturnType => {
   const [selectedScale, setSelectedScale] = useState<Scale>(undefined);
 
   useEffect(() => {
-    const newNotes = getNotes().map<SelectableNote>((note) => {
+    const newScales = getScales();
+    setScales(newScales);
+    setSelectedScale(newScales[0]);
+  }, []);
+
+  useEffect(() => {
+    if (selectedScale === undefined) {
+      return;
+    }
+
+    const newNotes = getNotes(selectedScale).map<SelectableNote>((note) => {
       return {
         ...note,
         isSelected: true,
@@ -31,17 +41,13 @@ const useNotes = (): HookReturnType => {
     });
 
     setNotes(newNotes);
-
-    const newScales = getScales();
-    setScales(newScales);
-    setSelectedScale(newScales[0]);
-  }, []);
+  }, [selectedScale]);
 
   useEffect(() => {
-    if (!answer || !notes.find((n) => n.letter === answer.letter).isSelected) {
+    if (!answer || !notes.find((n) => n.letter === answer.letter)?.isSelected) {
       setNewAnswer();
     }
-  }, [notes]);
+  }, [notes, selectedScale]);
 
   const setNewAnswer = (): SelectableNote => {
     const selectedNotes = notes.filter((n) => n.isSelected);

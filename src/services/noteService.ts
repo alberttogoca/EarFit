@@ -1,4 +1,4 @@
-import { Note, Scale } from '@tonaljs/tonal';
+import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
 
 export interface Note {
   value: string;
@@ -11,17 +11,17 @@ export interface Scale {
 
 let scales: Scale[] = undefined;
 
-export const getNotes = (): Note[] => {
+export const getNotes = (scale: Scale): Note[] => {
   const tonic = 'C';
   const octave = '3';
-  const pattern = 'major';
-  const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-  const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
+  const pattern = scale.name.toLowerCase();
+  const modes = TonalScale.modeNames(tonic + octave + ' ' + pattern);
+  const scaleList = modes.map(([r, n]) => TonalScale.get([r, n]));
   const noteList = scaleList[0].notes; //major
   return noteList.map<Note>((n) => {
     return {
       value: n,
-      letter: Note.get(n).letter,
+      letter: TonalNote.get(n).pc,
     };
   });
 };
