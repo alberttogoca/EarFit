@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
   option: Selectable;
-  onIsSelectedChange: (option: Selectable, newValue: boolean) => void;
+  onIsSelectedChange: (option: Selectable) => void;
 }
 
 export const ActiveOptionsButtonItem = ({ option, onIsSelectedChange }: Props): JSX.Element => {
-  const [checked, setChecked] = useState(option.isSelected);
-
-  useEffect(() => {
-    onIsSelectedChange(option, checked);
-  }, [checked]);
-
   return (
     <>
       <ToggleButton
@@ -23,7 +16,7 @@ export const ActiveOptionsButtonItem = ({ option, onIsSelectedChange }: Props): 
         variant={'light'} //light or link
         size="sm"
         checked={option.isSelected}
-        onChange={() => setChecked(!checked)}
+        onChange={() => onIsSelectedChange({ ...option, isSelected: !option.isSelected })}
       >
         {' '}
         {option.displayName}

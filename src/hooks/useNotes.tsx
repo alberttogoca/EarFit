@@ -1,73 +1,76 @@
-import { Note, Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
+import { getNotes, getScales, Note, Scale } from 'services/noteService';
 import { getRandomItem } from 'utils/arrayUtils';
 import Selectable from 'utils/Selectable';
 
-export interface Note extends Selectable {
-  value: string;
-  letter: string;
-}
+export interface SelectableNote extends Selectable, Note {}
 
 type HookReturnType = {
-  notes: Note[];
+  notes: SelectableNote[];
+  scales: Scale[];
+  selectedScale: Scale;
   answer: Note;
-  setNewAnswer: () => Note;
-  updateIsSelectedNote: (displayName: string, newIsSelectedValue: boolean) => void;
+  setNewAnswer: () => SelectableNote;
+  updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
+  setNewSelectedScale: (name: string) => void;
 };
 
 const useNotes = (): HookReturnType => {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<SelectableNote[]>([]);
+  const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Note>();
-
-  const createNotes = (): Note[] => {
-    const tonic = 'C';
-    const octave = '3';
-    const pattern = 'major';
-    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
-    const noteList = scaleList[0].notes; //major
-    return noteList.map<Note>((n) => {
-      return {
-        value: n,
-        displayName: Note.get(n).letter,
-        letter: Note.get(n).letter,
-        isSelected: true,
-      };
-    });
-  };
+  const [selectedScale, setSelectedScale] = useState<Scale>(undefined);
 
   useEffect(() => {
-    const notes = createNotes();
-    setNotes(notes);
+    const newNotes = getNotes().map<SelectableNote>((note) => {
+      return {
+        ...note,
+        isSelected: true,
+        displayName: note.letter,
+      };
+    });
+
+    setNotes(newNotes);
+
+    const newScales = getScales();
+    setScales(newScales);
+    setSelectedScale(newScales[0]);
   }, []);
 
   useEffect(() => {
-    if (!answer || notes.some((n) => n.displayName === answer.displayName && !n.isSelected)) {
+    if (!answer || !notes.find((n) => n.letter === answer.letter).isSelected) {
       setNewAnswer();
     }
   }, [notes]);
 
-  const setNewAnswer = (): Note => {
-    const noteAnswer = getRandomItem(notes.filter((n) => n.isSelected));
+  const setNewAnswer = (): SelectableNote => {
+    const selectedNotes = notes.filter((n) => n.isSelected);
+    const noteAnswer = getRandomItem(selectedNotes);
     setAnswer(noteAnswer);
     return noteAnswer;
   };
 
-  const updateIsSelectedNote = (displayName: string, newIsSelectedValue: boolean): void => {
-    setNotes((oldNotes) => {
-      return oldNotes.map((note) => {
-        if (note.displayName === displayName && note.isSelected !== newIsSelectedValue) {
-          return {
-            ...note,
-            isSelected: newIsSelectedValue,
-          };
-        }
-        return note;
-      });
-    });
+  const setNewSelectedScale = (name: string): void => {
+    const newScale = scales.find((s) => s.name === name);
+    if (newScale) {
+      setSelectedScale(newScale);
+    }
   };
 
-  return { notes, answer, setNewAnswer, updateIsSelectedNote };
+  const updateIsSelectedNote = (displayName: string, newValue: boolean): void => {
+    const hasManySelectedNotes = notes.filter((n) => n.isSelected).length > 1;
+    if (newValue === true || hasManySelectedNotes) {
+      const newNotes = notes.map((note) => {
+        return {
+          ...note,
+          isSelected: note.displayName === displayName ? newValue : note.isSelected,
+        };
+      });
+      setNotes(newNotes);
+    }
+  };
+
+  return { notes, answer, setNewAnswer, updateIsSelectedNote, scales, selectedScale, setNewSelectedScale };
 };
 
 export default useNotes;

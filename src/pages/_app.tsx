@@ -1,13 +1,13 @@
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import 'styles/global.css';
 
-import { SoundfontContext } from 'context/SoundfontContext';
+import { EarfitContext } from 'context/EarfitContext';
 import { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <SoundfontContext>
+    <EarfitContext>
       <Component {...pageProps} />
-    </SoundfontContext>
+    </EarfitContext>
   );
 }

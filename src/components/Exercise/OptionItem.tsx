@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const OptionItem = ({ option, handleOptionClick, streak }: Props): JSX.Element => {
-  const [enable, setEnable] = useState<boolean>(true);
+  const [enable, setEnable] = useState(true);
   const variant = enable ? 'secondary' : 'danger';
 
   useEffect(() => {

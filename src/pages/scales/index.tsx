@@ -3,23 +3,23 @@
 import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
 import { Piano } from 'components/Piano';
-import { useInstrumentContext } from 'context/SoundfontContext';
+import { useInstrumentContext } from 'context/EarfitContext';
 import useScales from 'hooks/useScales';
 import { Answer } from 'hooks/useScales';
 import React, { useState } from 'react';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
-  const { instrument } = useInstrumentContext();
+  const { selectedInstrument } = useInstrumentContext();
   const { options, answer, setNewAnswer } = useScales();
   const [streak, setStreak] = useState(0);
 
   function playAnswer(answer: Answer): void {
-    //instrument?.stop(); //Replace this
+    //selectedInstrument?.notePlayer?.stop(); //Replace this
     const scaleToPlay = answer.value.notes.map((note, i) => {
       return { note: note, time: i * 0.3, duration: 0.5 };
     });
-    instrument?.schedule(0, scaleToPlay);
+    selectedInstrument?.notePlayer?.schedule(0, scaleToPlay);
     console.log(`Now playing: ${answer.name}`);
   }
 
@@ -43,7 +43,7 @@ export default function Scales(): JSX.Element {
     <>
       <Layout rightColumn={<Configuration page={'Scales'} options={options} />}>
         <Title>Scales</Title>
-        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Scale?'} />
+        <PlayButton handlePlay={handlePlay} title={'Scale?'} />
         <Options options={options} handleOptionClick={handleOption} streak={streak} />
         <Streak streak={streak} />
         <Piano />

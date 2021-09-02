@@ -1,10 +1,10 @@
 import { ConfigSection } from 'components/Configuration/ConfigSection';
-import useInstruments from 'hooks/useInstruments';
+import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export const InstrumentSelector = (): JSX.Element => {
-  const { instruments, setNewInstrument } = useInstruments();
-  const isLoading = instruments && instruments.every((i) => i.isSelected === false);
+  const { instruments, selectedInstrument, setNewSelectedInstrument } = useInstrumentContext();
+  const isLoading = instruments === undefined && selectedInstrument === undefined;
 
   return (
     <ConfigSection message="Instrument" tooltipMessage="Select the instrument that plays">
@@ -19,8 +19,8 @@ export const InstrumentSelector = (): JSX.Element => {
               type="checkbox"
               variant={'light'} //light or link
               size="sm"
-              checked={instrument.isSelected}
-              onChange={() => setNewInstrument(instrument.instrumentName)}
+              checked={instrument.instrumentName == selectedInstrument?.instrumentName}
+              onChange={() => setNewSelectedInstrument(instrument.instrumentName)}
             >
               {' '}
               {instrument.emoji} {instrument.displayName}
