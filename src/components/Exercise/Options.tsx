@@ -1,20 +1,27 @@
 import { ButtonGroup } from 'react-bootstrap';
-import Selectable from 'utils/Selectable';
+import { Button } from 'react-bootstrap';
 
-import { OptionItem } from './OptionItem';
+type VariantColor = 'success' | 'secondary' | 'danger';
 
-interface Props {
-  options: Selectable[];
-  handleOptionClick: (option: Selectable) => boolean;
-  streak: number;
+export interface IOption {
+  displayName: string;
+  color: VariantColor;
+  value: string;
 }
 
-export const Options = ({ options, handleOptionClick, streak }: Props): JSX.Element => {
+interface Props {
+  options: IOption[];
+  handleOptionClick: (option: IOption) => boolean;
+}
+
+export const Options = ({ options, handleOptionClick }: Props): JSX.Element => {
   return (
     <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
         {options.map((option) => (
-          <OptionItem key={option.displayName} option={option} handleOptionClick={handleOptionClick} streak={streak} />
+          <Button key={option.displayName} variant={option.color} onClick={() => handleOptionClick(option)}>
+            {option.displayName}
+          </Button>
         ))}
       </div>
     </ButtonGroup>
