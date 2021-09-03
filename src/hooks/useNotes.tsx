@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getNotes, getScales, Note, Scale } from 'services/noteService';
+import { getNotes, Note, Scale } from 'services/noteService';
 import { getRandomItem } from 'utils/arrayUtils';
 import Selectable from 'utils/Selectable';
 
@@ -7,25 +7,15 @@ export interface SelectableNote extends Selectable, Note {}
 
 type HookReturnType = {
   notes: SelectableNote[];
-  scales: Scale[];
-  selectedScale: Scale;
   answer: Note;
   setNewAnswer: () => SelectableNote;
   updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
-  setNewSelectedScale: (name: string) => void;
 };
 
-const useNotes = (): HookReturnType => {
+const useNotes = (selectedScale: Scale): HookReturnType => {
   const [notes, setNotes] = useState<SelectableNote[]>([]);
-  const [scales, setScales] = useState<Scale[]>([]);
   const [answer, setAnswer] = useState<Note>();
-  const [selectedScale, setSelectedScale] = useState<Scale>(undefined);
 
-  useEffect(() => {
-    const newScales = getScales();
-    setScales(newScales);
-    setSelectedScale(newScales[0]);
-  }, []);
 
   useEffect(() => {
     if (selectedScale === undefined) {
@@ -47,20 +37,13 @@ const useNotes = (): HookReturnType => {
     if (!answer || !notes.find((n) => n.letter === answer.letter)?.isSelected) {
       setNewAnswer();
     }
-  }, [notes, selectedScale]);
+  }, [notes]);
 
   const setNewAnswer = (): SelectableNote => {
     const selectedNotes = notes.filter((n) => n.isSelected);
     const noteAnswer = getRandomItem(selectedNotes);
     setAnswer(noteAnswer);
     return noteAnswer;
-  };
-
-  const setNewSelectedScale = (name: string): void => {
-    const newScale = scales.find((s) => s.name === name);
-    if (newScale) {
-      setSelectedScale(newScale);
-    }
   };
 
   const updateIsSelectedNote = (displayName: string, newValue: boolean): void => {
@@ -76,7 +59,7 @@ const useNotes = (): HookReturnType => {
     }
   };
 
-  return { notes, answer, setNewAnswer, updateIsSelectedNote, scales, selectedScale, setNewSelectedScale };
+  return { notes, answer, setNewAnswer, updateIsSelectedNote };
 };
 
 export default useNotes;

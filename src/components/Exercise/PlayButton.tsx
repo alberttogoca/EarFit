@@ -1,19 +1,29 @@
 import { useInstrumentContext } from 'context/EarfitContext';
 import { Button, Container } from 'react-bootstrap';
+import { Note } from 'services/noteService';
 
 interface Props {
   title: string;
-  handlePlay: () => void;
+  noteToPlay?: Note;
+  handlePlay?: () => void;
 }
 
-export const PlayButton = ({ handlePlay, title }: Props): JSX.Element => {
-  const { selectedInstrument } = useInstrumentContext();
+export const PlayButton = ({ handlePlay, title, noteToPlay }: Props): JSX.Element => {
+  const { selectedInstrument, playNote } = useInstrumentContext();
+
+  const handlePlay2 = (): void => {
+    if (noteToPlay) {
+      playNote(noteToPlay);
+    }
+    if (handlePlay) handlePlay();
+  };
+
   return (
     <>
       {/*PLAY SOUND*/}
       <Container className="d-flex justify-content-center p-3 ">
         {selectedInstrument && (
-          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlay}>
+          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlay2}>
             {title}
           </Button>
         )}
