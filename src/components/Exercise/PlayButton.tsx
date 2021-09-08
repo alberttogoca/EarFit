@@ -1,19 +1,24 @@
 import { useInstrumentContext } from 'context/EarfitContext';
 import { Button, Container } from 'react-bootstrap';
 import { Note } from 'services/noteService';
+import { Scale } from 'services/scaleService';
 
 interface Props {
   title: string;
   noteToPlay?: Note;
+  scaleToPlay?: Scale;
   handlePlay?: () => void;
 }
 
-export const PlayButton = ({ handlePlay, title, noteToPlay }: Props): JSX.Element => {
-  const { selectedInstrument, playNote } = useInstrumentContext();
+export const PlayButton = ({ handlePlay, title, noteToPlay, scaleToPlay }: Props): JSX.Element => {
+  const { selectedInstrument, playNote, playScale } = useInstrumentContext();
 
   const handlePlay2 = (): void => {
     if (noteToPlay) {
       playNote(noteToPlay);
+    }
+    if (scaleToPlay) {
+      playScale(scaleToPlay);
     }
     if (handlePlay) handlePlay();
   };
