@@ -19,7 +19,7 @@ export const ScalesConfiguration = ({ scales, onScaleIsSelectedChange }: IProps)
 
       {/*Direction Selector*/}
       <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
-        <div className="p-3">
+        <>
           <ToggleButton
             type="checkbox"
             variant={'light'} //light or link
@@ -46,7 +46,7 @@ export const ScalesConfiguration = ({ scales, onScaleIsSelectedChange }: IProps)
             {' '}
             DESCENDING
           </ToggleButton>
-        </div>
+        </>
       </ConfigSection>
 
       <OptionsSelector selecables={scales} onIsSelectedChange={onScaleIsSelectedChange} />

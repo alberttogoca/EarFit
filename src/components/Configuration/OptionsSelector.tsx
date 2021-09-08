@@ -11,20 +11,22 @@ export const OptionsSelector = ({ selecables, onIsSelectedChange }: Props): JSX.
   return (
     <>
       <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
-        {selecables.map((option) => (
-          <ToggleButton
-            key={option.displayName}
-            value={option.displayName}
-            type="checkbox"
-            variant={'light'} //light or link
-            size="sm"
-            checked={option.isSelected}
-            onChange={() => onIsSelectedChange({ ...option, isSelected: !option.isSelected })}
-          >
-            {' '}
-            {option.displayName}
-          </ToggleButton>
-        ))}
+        <>
+          {selecables.map((option) => (
+            <ToggleButton
+              key={option.displayName}
+              value={option.displayName}
+              type="checkbox"
+              variant={'light'} //light or link
+              size="sm"
+              checked={option.isSelected}
+              onChange={() => onIsSelectedChange({ ...option, isSelected: !option.isSelected })}
+            >
+              {' '}
+              {option.displayName}
+            </ToggleButton>
+          ))}
+        </>
       </ConfigSection>
     </>
   );
