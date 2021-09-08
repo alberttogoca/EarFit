@@ -1,4 +1,5 @@
 //import { Note, Scale } from '@tonaljs/tonal';
+import { NotesConfiguration } from 'components/Configuration';
 import { Options, PlayButton, Streak, Title } from 'components/Exercise';
 import { IOption } from 'components/Exercise/Options';
 import Layout from 'components/Layout';
@@ -10,8 +11,6 @@ import useOptions from 'hooks/useOptions';
 import useStreak from 'hooks/useStreak';
 import { Scale } from 'services/noteService';
 import Selectable from 'utils/Selectable';
-
-import { NotesConfiguration } from '../../components/Exercise/NotesConfiguration';
 
 export default function Notes(): JSX.Element {
   const { playNote } = useInstrumentContext();

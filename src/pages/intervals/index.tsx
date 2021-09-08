@@ -1,5 +1,6 @@
 //import { Interval, Scale } from '@tonaljs/tonal';
-import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
+import { ConfigurationPlaceholder } from 'components/Configuration';
+import { Options, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
 import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/EarfitContext';
@@ -45,7 +46,7 @@ export default function Intervals(): JSX.Element {
 
   return (
     <>
-      <Layout rightColumn={<Configuration page={'Intervals'} options={options} />}>
+      <Layout rightColumn={<ConfigurationPlaceholder page={'Intervals'} options={options} />}>
         <Title>Intervals</Title>
         <PlayButton handlePlay={handlePlay} title={'Interval?'} />
         <Options options={options} handleOptionClick={handleOption} streak={streak} />

@@ -1,6 +1,6 @@
 import { ConfigSection } from 'components/Configuration/ConfigSection';
 import { InstrumentSelector } from 'components/Configuration/InstrumentSelector';
-import { ActiveOptionsButtonItem } from 'components/Exercise/ActiveOptionsButtonItem';
+import { OptionsSelector } from 'components/Configuration/OptionsSelector';
 import React from 'react';
 import { Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { Scale } from 'services/noteService';
@@ -28,7 +28,7 @@ export const NotesConfiguration = ({
         <h1>Options</h1>
       </Row>
 
-      {/*Scale*/}
+      {/*Scale Selector*/}
       <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
         <DropdownButton id="dropdown-basic-button" title={title} variant="secondary">
           {scales.map((scale, idx) => (
@@ -39,13 +39,7 @@ export const NotesConfiguration = ({
         </DropdownButton>
       </ConfigSection>
 
-      <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
-        <>
-          {notes.map((option, idx) => (
-            <ActiveOptionsButtonItem key={idx} option={option} onIsSelectedChange={onNoteIsSelectedChange} />
-          ))}
-        </>
-      </ConfigSection>
+      <OptionsSelector selecables={notes} onIsSelectedChange={onNoteIsSelectedChange} />
       <InstrumentSelector />
     </Container>
   );

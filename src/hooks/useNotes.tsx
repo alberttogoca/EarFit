@@ -16,7 +16,6 @@ const useNotes = (selectedScale: Scale): HookReturnType => {
   const [notes, setNotes] = useState<SelectableNote[]>([]);
   const [answer, setAnswer] = useState<Note>();
 
-
   useEffect(() => {
     if (selectedScale === undefined) {
       return;

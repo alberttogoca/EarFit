@@ -4,15 +4,13 @@ import React, { useState } from 'react';
 import { OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
-import { ActiveOptionsButtonItem } from './ActiveOptionsButtonItem';
-
 interface IProps {
   page?: string;
   options?: Selectable[];
   instrument?: NotePlayer;
 }
 
-export const Configuration = ({ page, options }: IProps): JSX.Element => {
+export const ConfigurationPlaceholder = ({ page }: IProps): JSX.Element => {
   const [checked, setChecked] = useState<boolean>(true);
 
   return (
@@ -49,35 +47,6 @@ export const Configuration = ({ page, options }: IProps): JSX.Element => {
             {' '}
             DESCENDING
           </ToggleButton>
-        </div>
-      )}
-
-      {/*ACTIVE NOTES*/}
-      {options && (
-        <div className="p-3">
-          <p className="lead">
-            Active Options
-            <OverlayTrigger
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip id="2">Select the options on which you would like to be tested</Tooltip>}
-            >
-              <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
-            </OverlayTrigger>
-          </p>
-
-          <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-            <div>
-              {options.map((option, idx) => (
-                <ActiveOptionsButtonItem
-                  key={idx}
-                  option={option}
-                  onIsSelectedChange={() => {
-                    console.log('Active Options not implemented yet');
-                  }}
-                />
-              ))}
-            </div>
-          </div>
         </div>
       )}
 

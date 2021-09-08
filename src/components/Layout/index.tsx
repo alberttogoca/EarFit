@@ -15,6 +15,8 @@ interface IProps {
 export default function Layout({ children, rightColumn }: IProps): JSX.Element {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
+  const isAbout = pathname === '/about';
+
   return (
     <>
       <Head>
@@ -28,9 +30,9 @@ export default function Layout({ children, rightColumn }: IProps): JSX.Element {
       <Header />
       <Container fluid className="bg-light shadow-lg">
         <Row className="p-3">
-          <Col className="col-sm border d-none d-lg-block">{isHome ? null : <Menu />}</Col>
+          <Col className="col-sm border d-none d-lg-block">{isHome || isAbout ? null : <Menu />}</Col>
           <Col className="col-lg-6 border p-3 shadow-lg">{children}</Col>
-          <Col className={`col-sm border ${isHome ? 'd-none d-lg-block' : ''}`}>{rightColumn}</Col>
+          <Col className={`col-sm border ${isHome || isAbout ? 'd-none d-lg-block' : ''}`}>{rightColumn}</Col>
         </Row>
       </Container>
       <Footer />

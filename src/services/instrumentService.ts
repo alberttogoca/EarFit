@@ -24,7 +24,12 @@ export const getInstruments = async (): Promise<Instrument[]> => {
         instrumentName: 'acoustic_guitar_nylon',
         notePlayer: await getNotePlayer('acoustic_guitar_nylon'),
       },
-      { displayName: 'Trumpet', emoji: '🎺', instrumentName: 'trumpet', notePlayer: await getNotePlayer('trumpet') },
+      {
+        displayName: 'Trumpet',
+        emoji: '🎺',
+        instrumentName: 'trumpet',
+        notePlayer: await getNotePlayer('trumpet'),
+      },
     ];
   }
   return earfitInstrument;

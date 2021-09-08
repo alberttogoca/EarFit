@@ -1,5 +1,4 @@
-import { ButtonGroup } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 type VariantColor = 'success' | 'secondary' | 'danger';
 
