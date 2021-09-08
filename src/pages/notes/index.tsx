@@ -1,14 +1,10 @@
 //import { Note, Scale } from '@tonaljs/tonal';
 import { NotesConfiguration } from 'components/Configuration';
-import { Options, PlayButton, Streak, Title } from 'components/Exercise';
+import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import { IOption } from 'components/Exercise/Options';
 import Layout from 'components/Layout';
-import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/EarfitContext';
-import useNotes from 'hooks/useNotes';
-import useNoteScales from 'hooks/useNoteScales';
-import useOptions from 'hooks/useOptions';
-import useStreak from 'hooks/useStreak';
+import { useNotes, useNoteScales, useOptions, useStreak } from 'hooks';
 import { Scale } from 'services/noteService';
 import Selectable from 'utils/Selectable';
 

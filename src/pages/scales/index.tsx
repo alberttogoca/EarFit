@@ -1,13 +1,11 @@
 //import { Scale as ScaleType } from '@tonaljs/scale';
 //import { Scale } from '@tonaljs/tonal';
 import { ConfigurationPlaceholder } from 'components/Configuration';
-import { Options, PlayButton, Streak, Title } from 'components/Exercise';
+import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/EarfitContext';
-import useScales from 'hooks/useScales';
-import { Answer } from 'hooks/useScales';
-import React, { useState } from 'react';
+import useScales, { Answer } from 'hooks/useScales';
+import { useState } from 'react';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {

@@ -1,8 +1,6 @@
 import { ConfigurationPlaceholder } from 'components/Configuration';
-import { Title } from 'components/Exercise';
+import { Piano as PianoComponent, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { Piano as PianoComponent } from 'components/Piano';
-import React from 'react';
 
 export default function Piano(): JSX.Element {
   return (

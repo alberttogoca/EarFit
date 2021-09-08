@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Configuration/ConfigSection';
+import { ConfigSection } from 'components/Configuration';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 

@@ -1,6 +1,5 @@
-import { ConfigurationPlaceholder } from 'components/Configuration/ConfigurationPlaceholder';
-
 import { ConfigSection } from './ConfigSection';
+import { ConfigurationPlaceholder } from './ConfigurationPlaceholder';
 import { InstrumentSelector } from './InstrumentSelector';
 import { NotesConfiguration } from './NotesConfiguration';
 import { OptionsSelector } from './OptionsSelector';

@@ -1,6 +1,6 @@
-import { InstrumentSelector } from 'components/Configuration/InstrumentSelector';
+import { InstrumentSelector } from 'components/Configuration';
 import { NotePlayer } from 'context/soundfont-wrapper';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 

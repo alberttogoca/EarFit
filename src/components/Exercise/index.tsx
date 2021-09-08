@@ -1,9 +1,10 @@
-import { Options } from 'components/Exercise/Options';
-import { PlayButton } from 'components/Exercise/PlayButton';
-import { Streak } from 'components/Exercise/Streak';
-import { Title } from 'components/Exercise/Title';
+import { Options } from './Options';
+import { Piano } from './Piano';
+import { PlayButton } from './PlayButton';
+import { Streak } from './Streak';
+import { Title } from './Title';
 
-export { Options, PlayButton, Streak, Title };
+export { Options, Piano, PlayButton, Streak, Title };
 
 export const Exercise = (): JSX.Element => {
   return <></>;

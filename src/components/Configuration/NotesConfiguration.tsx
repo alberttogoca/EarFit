@@ -1,7 +1,4 @@
-import { ConfigSection } from 'components/Configuration/ConfigSection';
-import { InstrumentSelector } from 'components/Configuration/InstrumentSelector';
-import { OptionsSelector } from 'components/Configuration/OptionsSelector';
-import React from 'react';
+import { ConfigSection, InstrumentSelector, OptionsSelector } from 'components/Configuration';
 import { Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { Scale } from 'services/noteService';
 import Selectable from 'utils/Selectable';

@@ -1,12 +1,10 @@
 //import { Interval, Scale } from '@tonaljs/tonal';
 import { ConfigurationPlaceholder } from 'components/Configuration';
-import { Options, PlayButton, Streak, Title } from 'components/Exercise';
+import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { Piano } from 'components/Piano';
 import { useInstrumentContext } from 'context/EarfitContext';
-import useIntervals from 'hooks/useIntervals';
-import { Answer } from 'hooks/useIntervals';
-import React, { useState } from 'react';
+import useIntervals, { Answer } from 'hooks/useIntervals';
+import { useState } from 'react';
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
