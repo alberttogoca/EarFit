@@ -9,7 +9,7 @@ import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
   const { playScale } = useInstrumentContext();
-  const { scales, answer, setNewAnswer, updateIsSelectedScale } = useScales();
+  const { scales, answer, setNewAnswer, updateIsSelectedScale, changeAnswerDirection } = useScales();
   const { options, updateOption, clearOptions } = useOptions(scales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -36,8 +36,20 @@ export default function Scales(): JSX.Element {
     updateIsSelectedScale(option.displayName, option.isSelected);
   }
 
+  function handleDirectionChange(): void {
+    changeAnswerDirection();
+  }
+
   return (
-    <Layout rightColumn={<ScalesConfiguration scales={scales} onScaleIsSelectedChange={handleScaleIsSelectedChange} />}>
+    <Layout
+      rightColumn={
+        <ScalesConfiguration
+          scales={scales}
+          onScaleIsSelectedChange={handleScaleIsSelectedChange}
+          onDirectionChange={handleDirectionChange}
+        />
+      }
+    >
       <Title>Scales</Title>
       <PlayButton scaleToPlay={answer} title={'Scale?'} />
       <Options options={options} handleOptionClick={handleOption} />

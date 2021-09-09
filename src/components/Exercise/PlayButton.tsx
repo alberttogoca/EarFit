@@ -13,7 +13,7 @@ interface Props {
 export const PlayButton = ({ handlePlay, title, noteToPlay, scaleToPlay }: Props): JSX.Element => {
   const { selectedInstrument, playNote, playScale } = useInstrumentContext();
 
-  const handlePlay2 = (): void => {
+  const handlePlayButton = (): void => {
     if (noteToPlay) {
       playNote(noteToPlay);
     }
@@ -28,7 +28,7 @@ export const PlayButton = ({ handlePlay, title, noteToPlay, scaleToPlay }: Props
       {/*PLAY SOUND*/}
       <Container className="d-flex justify-content-center p-3 ">
         {selectedInstrument && (
-          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlay2}>
+          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlayButton}>
             {title}
           </Button>
         )}

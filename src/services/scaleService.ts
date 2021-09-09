@@ -6,10 +6,10 @@ export interface Scale {
   name: string;
 }
 
-export const getScales = (pattern2 = 'major'): Scale[] => {
+export const getScales = (): Scale[] => {
   const tonic = 'C';
   const octave = '3';
-  const pattern = pattern2;
+  const pattern = 'major';
   const modes = TonalScale.modeNames(tonic + octave + ' ' + pattern);
   const scaleList = modes.map(([root, mode]) => TonalScale.get([root, mode])); //Obtaining notes for each mode
   const toReturn = scaleList.map((m) => {

@@ -1,54 +1,20 @@
-import { ConfigSection, InstrumentSelector, OptionsSelector } from 'components/Configuration';
-import { useState } from 'react';
-import { Container, Row, ToggleButton } from 'react-bootstrap';
+import { DirectionSelector, InstrumentSelector, OptionsSelector } from 'components/Configuration';
+import { Container, Row } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface IProps {
   scales?: Selectable[];
-  onScaleIsSelectedChange?: (note: Selectable) => void;
+  onScaleIsSelectedChange?: (scale: Selectable) => void;
+  onDirectionChange?: () => void;
 }
 
-export const ScalesConfiguration = ({ scales, onScaleIsSelectedChange }: IProps): JSX.Element => {
-  const [checked, setChecked] = useState<boolean>(true);
-
+export const ScalesConfiguration = ({ scales, onScaleIsSelectedChange, onDirectionChange }: IProps): JSX.Element => {
   return (
     <Container>
       <Row className="justify-content-center p-3">
         <h1>Options</h1>
       </Row>
-
-      {/*Direction Selector*/}
-      <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
-        <>
-          <ToggleButton
-            type="checkbox"
-            variant={'light'} //light or link
-            size="sm"
-            value={0}
-            checked={checked}
-            onChange={() => {
-              setChecked(!checked);
-            }}
-          >
-            {' '}
-            ASCENDING
-          </ToggleButton>
-          <ToggleButton
-            type="checkbox"
-            variant={'light'} //light or link
-            size="sm"
-            value={0}
-            checked={!checked}
-            onChange={() => {
-              setChecked(!checked);
-            }}
-          >
-            {' '}
-            DESCENDING
-          </ToggleButton>
-        </>
-      </ConfigSection>
-
+      <DirectionSelector onDirectionChange={onDirectionChange} />
       <OptionsSelector selecables={scales} onIsSelectedChange={onScaleIsSelectedChange} />
       <InstrumentSelector />
     </Container>

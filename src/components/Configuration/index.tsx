@@ -1,14 +1,16 @@
 import { ConfigSection } from './ConfigSection';
-import { ConfigurationPlaceholder } from './ConfigurationPlaceholder';
+import { DirectionSelector } from './DirectionSelector';
 import { InstrumentSelector } from './InstrumentSelector';
+import { IntervalConfiguration } from './IntervalConfiguration';
 import { NotesConfiguration } from './NotesConfiguration';
 import { OptionsSelector } from './OptionsSelector';
 import { ScalesConfiguration } from './ScalesConfiguration';
 
 export {
   ConfigSection,
-  ConfigurationPlaceholder,
+  DirectionSelector,
   InstrumentSelector,
+  IntervalConfiguration,
   NotesConfiguration,
   OptionsSelector,
   ScalesConfiguration,
