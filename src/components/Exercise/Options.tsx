@@ -5,7 +5,7 @@ type VariantColor = 'success' | 'secondary' | 'danger';
 export interface IOption {
   displayName: string;
   color: VariantColor;
-  value: string;
+  value?: string;
 }
 
 interface Props {

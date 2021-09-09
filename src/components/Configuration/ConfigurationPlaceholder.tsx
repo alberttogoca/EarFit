@@ -1,7 +1,7 @@
 import { InstrumentSelector } from 'components/Configuration';
 import { NotePlayer } from 'context/soundfont-wrapper';
 import { useState } from 'react';
-import { OverlayTrigger, ToggleButton, Tooltip } from 'react-bootstrap';
+import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface IProps {
@@ -52,16 +52,6 @@ export const ConfigurationPlaceholder = ({ page }: IProps): JSX.Element => {
 
       {/*ACTIVE INSTRUMENT*/}
       <div className="p-3">
-        <p className="lead">
-          Instrument
-          <OverlayTrigger
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="3">Select the instrument that plays</Tooltip>}
-          >
-            <img src="/images/tooltipIcon.png" alt="tooltip" width="15" height="15"></img>
-          </OverlayTrigger>
-        </p>
-
         <InstrumentSelector />
       </div>
     </>
