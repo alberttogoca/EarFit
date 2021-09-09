@@ -4,6 +4,7 @@ import { InstrumentSelector } from './InstrumentSelector';
 import { IntervalConfiguration } from './IntervalConfiguration';
 import { NotesConfiguration } from './NotesConfiguration';
 import { OptionsSelector } from './OptionsSelector';
+import { PianoConfiguration } from './PianoConfiguration';
 import { ScalesConfiguration } from './ScalesConfiguration';
 
 export {
@@ -13,6 +14,7 @@ export {
   IntervalConfiguration,
   NotesConfiguration,
   OptionsSelector,
+  PianoConfiguration,
   ScalesConfiguration,
 };
 
