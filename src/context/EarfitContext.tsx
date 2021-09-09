@@ -41,7 +41,7 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
   };
 
   const playScale = (scale: Scale): void => {
-    console.log(`Now playing: ${scale.name}`);
+    console.log(`Now playing: ${scale.name} : ${scale.value}`);
     const scaleToPlay = scale.value.map((note, i) => {
       return { note: note, time: i * 0.3, duration: 0.5 };
     });

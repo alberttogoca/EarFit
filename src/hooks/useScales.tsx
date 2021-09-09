@@ -10,7 +10,7 @@ type HookReturnType = {
   answer: Scale;
   setNewAnswer: () => SelectableScale;
   updateIsSelectedScale: (displayName: string, newValue: boolean) => void;
-  changeAnswerDirection: () => Scale;
+  changeScalesDirection: () => void;
 };
 
 const useScales = (): HookReturnType => {
@@ -55,13 +55,17 @@ const useScales = (): HookReturnType => {
     }
   };
 
-  const changeAnswerDirection = (): Scale => {
-    const scaleAnswer = { ...answer, value: answer.value.reverse() };
-    setAnswer(scaleAnswer);
-    return scaleAnswer;
+  const changeScalesDirection = (): void => {
+    const newScales = scales.map((scale) => {
+      return {
+        ...scale,
+        value: scale.value.reverse(),
+      };
+    });
+    setScales(newScales);
   };
 
-  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeAnswerDirection };
+  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection };
 };
 
 export default useScales;
