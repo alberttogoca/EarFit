@@ -1,6 +1,7 @@
 import { InstrumentName } from 'context/soundfont-wrapper';
 import React, { useEffect, useState } from 'react';
 import { getInstrument, getInstruments, Instrument } from 'services/instrumentService';
+import { Interval } from 'services/intervalService';
 import { Note } from 'services/noteService';
 import { Scale } from 'services/scaleService';
 
@@ -10,6 +11,7 @@ interface ProvidedValue {
   setNewSelectedInstrument: (name: InstrumentName) => Promise<void>;
   playNote: (note: Note, when?: number, duration?: number) => void;
   playScale: (scale: Scale, when?: number, duration?: number) => void;
+  playInterval: (interval: Interval, when?: number, duration?: number) => void;
 }
 
 interface Props {
@@ -47,7 +49,23 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
     });
     selectedInstrument?.notePlayer?.schedule(0, scaleToPlay);
   };
-  const contextValues = { instruments, selectedInstrument, setNewSelectedInstrument, playNote, playScale };
+
+  const playInterval = (interval: Interval): void => {
+    console.log(`Now playing: ${interval.name} : ${interval.value}`);
+    const intervalToPlay = interval.value.map((note, i) => {
+      return { note: note, time: i * 0.8, duration: 0.7 };
+    });
+    selectedInstrument?.notePlayer?.schedule(0, intervalToPlay);
+  };
+
+  const contextValues = {
+    instruments,
+    selectedInstrument,
+    setNewSelectedInstrument,
+    playNote,
+    playScale,
+    playInterval,
+  };
 
   return <Context.Provider value={contextValues}>{children}</Context.Provider>;
 };
@@ -58,6 +76,7 @@ const Context = React.createContext<ProvidedValue>({
   setNewSelectedInstrument: () => undefined,
   playNote: () => undefined,
   playScale: () => undefined,
+  playInterval: () => undefined,
 });
 
 export const useInstrumentContext = (): ProvidedValue => React.useContext(Context);

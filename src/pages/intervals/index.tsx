@@ -1,56 +1,60 @@
-//import { Interval, Scale } from '@tonaljs/tonal';
-import { IntervalConfiguration } from 'components/Configuration';
+//import { Note, Scale } from '@tonaljs/tonal';
+import { IntervalsConfiguration } from 'components/Configuration';
 import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { IOption } from 'components/Exercise/Options';
 import Layout from 'components/Layout';
 import { useInstrumentContext } from 'context/EarfitContext';
-import useIntervals, { Answer } from 'hooks/useIntervals';
-import { useState } from 'react';
+import { useIntervals, useOptions, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
-  const { selectedInstrument } = useInstrumentContext();
-  const { options, answer, setNewAnswer } = useIntervals();
-  const [streak, setStreak] = useState(0);
+  const { playInterval } = useInstrumentContext();
+  const { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection } = useIntervals();
+  const { options, updateOption, clearOptions } = useOptions(intervals);
+  const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function playAnswer(answer: Answer): void {
-    //selectedInstrument?.notePlayer?.stop(); //Replace this
-    const intervalToPlay = [
-      { note: answer.value.note1, time: 0, duration: 2 },
-      { note: answer.value.note2, time: 0.5, duration: 2 },
-    ];
+  function handleOption(selectedOption: IOption): boolean {
+    if (selectedOption.displayName.toUpperCase() === answer.name.toUpperCase()) {
+      setNewAnswer();
+      updateOption(selectedOption, true);
+      IncrementStreak();
+      playInterval(answer);
 
-    selectedInstrument?.notePlayer?.schedule(0, intervalToPlay);
+      setTimeout(() => {
+        clearOptions();
+      }, 1000);
 
-    console.log(`Answer: ${answer.name}`);
-  }
-
-  function handlePlay(): void {
-    playAnswer(answer);
-  }
-
-  function handleOption(option: Selectable): boolean {
-    //console.log('Selected option: ' + option);
-    console.log(option.displayName === answer.name);
-    if (option.displayName === answer.name) {
-      const newAnswer = setNewAnswer();
-      playAnswer(newAnswer);
-      setStreak((s) => s + 1);
       return true;
     } else {
-      setStreak(0);
+      updateOption(selectedOption, false);
+      clearStreak();
       return false;
     }
   }
 
+  function handleScaleIsSelectedChange(option: Selectable): void {
+    updateIsSelectedInterval(option.displayName, option.isSelected);
+  }
+
+  function handleDirectionChange(): void {
+    changeIntervalsDirection();
+  }
+
   return (
-    <>
-      <Layout rightColumn={<IntervalConfiguration />}>
-        <Title>Intervals</Title>
-        <PlayButton handlePlay={handlePlay} title={'Interval?'} />
-        <Options options={options} handleOptionClick={handleOption} />
-        <Streak streak={streak} />
-        <Piano />
-      </Layout>
-    </>
+    <Layout
+      rightColumn={
+        <IntervalsConfiguration
+          intervals={intervals}
+          onIntervalIsSelectedChange={handleScaleIsSelectedChange}
+          onDirectionChange={handleDirectionChange}
+        />
+      }
+    >
+      <Title>Intervals</Title>
+      <PlayButton intervalToPlay={answer} title={'Interval?'} />
+      <Options options={options} handleOptionClick={handleOption} />
+      <Streak streak={streak} />
+      <Piano />
+    </Layout>
   );
 }

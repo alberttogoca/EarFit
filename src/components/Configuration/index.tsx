@@ -1,7 +1,7 @@
 import { ConfigSection } from './ConfigSection';
 import { DirectionSelector } from './DirectionSelector';
 import { InstrumentSelector } from './InstrumentSelector';
-import { IntervalConfiguration } from './IntervalConfiguration';
+import { IntervalsConfiguration } from './IntervalsConfiguration';
 import { NotesConfiguration } from './NotesConfiguration';
 import { OptionsSelector } from './OptionsSelector';
 import { PianoConfiguration } from './PianoConfiguration';
@@ -11,7 +11,7 @@ export {
   ConfigSection,
   DirectionSelector,
   InstrumentSelector,
-  IntervalConfiguration,
+  IntervalsConfiguration,
   NotesConfiguration,
   OptionsSelector,
   PianoConfiguration,

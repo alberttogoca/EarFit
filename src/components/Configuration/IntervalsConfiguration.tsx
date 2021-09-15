@@ -5,15 +5,20 @@ import Selectable from 'utils/Selectable';
 interface IProps {
   intervals?: Selectable[];
   onIntervalIsSelectedChange?: (interval: Selectable) => void;
+  onDirectionChange?: () => void;
 }
 
-export const IntervalConfiguration = ({ intervals, onIntervalIsSelectedChange }: IProps): JSX.Element => {
+export const IntervalsConfiguration = ({
+  intervals,
+  onIntervalIsSelectedChange,
+  onDirectionChange,
+}: IProps): JSX.Element => {
   return (
     <Container>
       <Row className="justify-content-center p-3">
         <h1>Options</h1>
       </Row>
-      <DirectionSelector />
+      <DirectionSelector onDirectionChange={onDirectionChange} />
       <OptionsSelector selecables={intervals} onIsSelectedChange={onIntervalIsSelectedChange} />
       <InstrumentSelector />
     </Container>
