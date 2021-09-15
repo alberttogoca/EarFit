@@ -15,10 +15,9 @@ export const getNotes = (scale: Scale): Note[] => {
   const tonic = 'C';
   const octave = '3';
   const pattern = scale.name.toLowerCase();
-  const modes = TonalScale.modeNames(tonic + octave + ' ' + pattern);
-  const scaleList = modes.map(([r, n]) => TonalScale.get([r, n]));
-  const noteList = scaleList[0].notes; //major
-  return noteList.map<Note>((n) => {
+  const notes = TonalScale.get(tonic + octave + ' ' + pattern).notes;
+  //major
+  return notes.map<Note>((n) => {
     return {
       value: n,
       letter: TonalNote.get(n).pc,

@@ -12,9 +12,9 @@ export const OptionsSelector = ({ selecables, onIsSelectedChange }: Props): JSX.
     <>
       <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
         <>
-          {selecables.map((option) => (
+          {selecables.map((option, idx) => (
             <ToggleButton
-              key={option.displayName}
+              key={idx}
               value={option.displayName}
               type="checkbox"
               variant={'light'} //light or link

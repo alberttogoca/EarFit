@@ -1,5 +1,6 @@
+import { Scale as TonalScale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
-import { getIntervals, Interval } from 'services/intervalService';
+import { calcIntervalToPlay, getIntervals, Interval } from 'services/intervalService';
 import { getRandomItem } from 'utils/arrayUtils';
 import Selectable from 'utils/Selectable';
 
@@ -16,6 +17,7 @@ type HookReturnType = {
 const useIntervals = (): HookReturnType => {
   const [intervals, setIntervals] = useState<SelectableInterval[]>([]);
   const [answer, setAnswer] = useState<Interval>();
+  const notes = TonalScale.get('C3 major').notes;
 
   useEffect(() => {
     const newIntervals = getIntervals().map<SelectableInterval>((interval) => {
@@ -25,7 +27,6 @@ const useIntervals = (): HookReturnType => {
         displayName: interval.name,
       };
     });
-
     setIntervals(newIntervals);
   }, []);
 
@@ -36,10 +37,16 @@ const useIntervals = (): HookReturnType => {
   }, [intervals]);
 
   const setNewAnswer = (): SelectableInterval => {
-    const selectedIntervals = intervals.filter((s) => s.isSelected);
-    const intervalAnswer = getRandomItem(selectedIntervals);
-    setAnswer(intervalAnswer);
-    return intervalAnswer;
+    if (intervals.length > 0) {
+      const root = getRandomItem(notes);
+      const selectedIntervals = intervals.filter((s) => s.isSelected);
+      const intervalAnswer = getRandomItem(selectedIntervals);
+      const newValue = calcIntervalToPlay(root, intervalAnswer.name);
+      const newAnswer = { ...intervalAnswer, value: newValue };
+      setAnswer(newAnswer);
+      return newAnswer;
+    }
+    return null;
   };
 
   const updateIsSelectedInterval = (displayName: string, newValue: boolean): void => {
