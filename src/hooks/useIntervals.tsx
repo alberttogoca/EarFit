@@ -16,6 +16,7 @@ type HookReturnType = {
 const useIntervals = (): HookReturnType => {
   const [intervals, setIntervals] = useState<SelectableInterval[]>([]);
   const [answer, setAnswer] = useState<Interval>();
+  const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
     const newIntervals = getIntervals().map<SelectableInterval>((interval) => {
@@ -38,7 +39,7 @@ const useIntervals = (): HookReturnType => {
     if (intervals.length > 0) {
       const selectedIntervals = intervals.filter((s) => s.isSelected);
       const intervalAnswer = getRandomItem(selectedIntervals);
-      const newValue = calcIntervalToPlay(intervalAnswer.name);
+      const newValue = calcIntervalToPlay(intervalAnswer.name, reverse);
       const newAnswer = { ...intervalAnswer, value: newValue };
       setAnswer(newAnswer);
       return newAnswer;
@@ -60,13 +61,8 @@ const useIntervals = (): HookReturnType => {
   };
 
   const changeIntervalsDirection = (): void => {
-    const newIntervals = intervals.map((interval) => {
-      return {
-        ...interval,
-        value: interval.value.reverse(),
-      };
-    });
-    setIntervals(newIntervals);
+    setReverse(!reverse);
+    setAnswer({ ...answer, value: answer.value.reverse() });
   };
 
   return { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection };
