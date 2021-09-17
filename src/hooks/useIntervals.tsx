@@ -17,7 +17,10 @@ type HookReturnType = {
 const useIntervals = (): HookReturnType => {
   const [intervals, setIntervals] = useState<SelectableInterval[]>([]);
   const [answer, setAnswer] = useState<Interval>();
-  const notes = TonalScale.get('C3 major').notes;
+  const octaves = [1, 2, 3, 4, 5, 6, 7, 8];
+  const notes = octaves.flatMap((octave) => {
+    return TonalScale.get('C' + octave + ' major').notes;
+  });
 
   useEffect(() => {
     const newIntervals = getIntervals().map<SelectableInterval>((interval) => {

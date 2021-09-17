@@ -14,7 +14,7 @@ export default function Intervals(): JSX.Element {
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   function handleOption(selectedOption: IOption): boolean {
-    if (selectedOption.displayName.toUpperCase() === answer.name.toUpperCase()) {
+    if (selectedOption.displayName === answer.name) {
       setNewAnswer();
       updateOption(selectedOption, true);
       IncrementStreak();

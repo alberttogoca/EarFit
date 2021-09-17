@@ -51,7 +51,7 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
   };
 
   const playInterval = (interval: Interval): void => {
-    console.log(`Now playing: ${interval.name} : ${interval.value}`);
+    console.log(`Now playing: ${interval.name} (${interval.value})`);
     const intervalToPlay = interval.value.map((note, i) => {
       return { note: note, time: i * 0.8, duration: 0.7 };
     });

@@ -1,21 +1,41 @@
 import { transpose } from '@tonaljs/core';
-import { Interval as TonalInterval } from '@tonaljs/tonal';
+//import { Interval as TonalInterval } from '@tonaljs/tonal';
 
 export interface Interval {
   name: string;
   value: string[];
 }
 //INFO: +/-: direccion, 2: distancia notas, P/M/m/A/dd/d?: justa/mayor/menor/aumentado/disminuido/? (semitonos)
-//const almostAllIntervals = ['1P', '2m', '2M', '3m', '3M', '4P', '4A', '5P', '6m', '6M', '7m', '7M'];
+//const almostAllIntervals = ['1P', '2m', '2M', '3m', '3M', '4P', '4A', '5d','5P','5A', '6m', '6M', '7m', '7M','8P];
 
 export const getIntervals = (): Interval[] => {
-  const intervalsNames = TonalInterval.names();
-
+  /*   const intervalsNames = TonalInterval.names();
   const intervals = intervalsNames.map((interval) => {
     return { name: interval, value: [] };
   });
+  return intervals; */
 
-  return intervals;
+  const almostAllIntervalsNames = [
+    '1P',
+    '2m',
+    '2M',
+    '3m',
+    '3M',
+    '4P',
+    '4A',
+    '5d',
+    '5P',
+    '5A',
+    '6m',
+    '6M',
+    '7m',
+    '7M',
+    'P8',
+  ];
+  const almostAllIntervals = almostAllIntervalsNames.map((interval) => {
+    return { name: interval, value: [] };
+  });
+  return almostAllIntervals;
 };
 
 export const calcIntervalToPlay = (note1: string, interval: string): string[] => {
