@@ -1,4 +1,3 @@
-import { Scale as TonalScale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
 import { calcIntervalToPlay, getIntervals, Interval } from 'services/intervalService';
 import { getRandomItem } from 'utils/arrayUtils';
@@ -17,11 +16,6 @@ type HookReturnType = {
 const useIntervals = (): HookReturnType => {
   const [intervals, setIntervals] = useState<SelectableInterval[]>([]);
   const [answer, setAnswer] = useState<Interval>();
-  const octaves = [1, 2, 3, 4, 5, 6, 7];
-  const notes = octaves.flatMap((octave) => {
-    return TonalScale.get('C' + octave + ' major').notes;
-  });
-  //Max range is A0 -> C8. Actual range is C1 -> B7
 
   useEffect(() => {
     const newIntervals = getIntervals().map<SelectableInterval>((interval) => {
@@ -43,15 +37,8 @@ const useIntervals = (): HookReturnType => {
   const setNewAnswer = (): SelectableInterval => {
     if (intervals.length > 0) {
       const selectedIntervals = intervals.filter((s) => s.isSelected);
-      let root = getRandomItem(notes);
-      let intervalAnswer = getRandomItem(selectedIntervals);
-      let newValue = calcIntervalToPlay(root, intervalAnswer.name);
-      while (+newValue[0].slice(-1) === 8 || +newValue[1].slice(-1) === 8) {
-        root = getRandomItem(notes);
-        intervalAnswer = getRandomItem(selectedIntervals);
-        newValue = calcIntervalToPlay(root, intervalAnswer.name);
-      }
-
+      const intervalAnswer = getRandomItem(selectedIntervals);
+      const newValue = calcIntervalToPlay(intervalAnswer.name);
       const newAnswer = { ...intervalAnswer, value: newValue };
       setAnswer(newAnswer);
       return newAnswer;
