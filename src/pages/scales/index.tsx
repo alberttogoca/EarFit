@@ -9,7 +9,7 @@ import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
   const { playScale } = useInstrumentContext();
-  const { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection } = useScales();
+  const { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, selectAllOptions } = useScales();
   const { options, updateOption, clearOptions } = useOptions(scales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -47,6 +47,7 @@ export default function Scales(): JSX.Element {
           scales={scales}
           onScaleIsSelectedChange={handleScaleIsSelectedChange}
           onDirectionChange={handleDirectionChange}
+          selectAllOptions={selectAllOptions}
         />
       }
     >
