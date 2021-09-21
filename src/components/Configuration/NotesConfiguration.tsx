@@ -9,6 +9,7 @@ interface IProps {
   selectedScale: Scale;
   onNoteIsSelectedChange?: (note: Selectable) => void;
   onSelectedScaleChange?: (scale: Scale) => void;
+  selectAllOptions: (checked: boolean) => void;
 }
 
 export const NotesConfiguration = ({
@@ -17,6 +18,7 @@ export const NotesConfiguration = ({
   selectedScale,
   onNoteIsSelectedChange,
   onSelectedScaleChange,
+  selectAllOptions,
 }: IProps): JSX.Element => {
   const title = selectedScale !== undefined ? selectedScale.name : 'Select scale';
   return (
@@ -36,7 +38,11 @@ export const NotesConfiguration = ({
         </DropdownButton>
       </ConfigSection>
 
-      <OptionsSelector selecables={notes} onIsSelectedChange={onNoteIsSelectedChange} />
+      <OptionsSelector
+        selecables={notes}
+        onIsSelectedChange={onNoteIsSelectedChange}
+        selectAllOptions={selectAllOptions}
+      />
       <InstrumentSelector />
     </Container>
   );

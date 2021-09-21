@@ -11,7 +11,7 @@ import Selectable from 'utils/Selectable';
 export default function Notes(): JSX.Element {
   const { playNote } = useInstrumentContext();
   const { scales, selectedScale, setNewSelectedScale } = useNoteScales();
-  const { notes, answer, setNewAnswer, updateIsSelectedNote } = useNotes(selectedScale);
+  const { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions } = useNotes(selectedScale);
   const { options, updateOption, clearOptions } = useOptions(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -51,6 +51,7 @@ export default function Notes(): JSX.Element {
           selectedScale={selectedScale}
           onNoteIsSelectedChange={handleNoteIsSelectedChange}
           onSelectedScaleChange={handleSelectedScaleChange}
+          selectAllOptions={selectAllOptions}
         />
       }
     >
