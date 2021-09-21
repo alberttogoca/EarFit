@@ -22,10 +22,12 @@ const useIntervals = (): HookReturnType => {
     const newIntervals = getIntervals().map<SelectableInterval>((interval) => {
       return {
         ...interval,
-        isSelected: true,
+        isSelected: false,
         displayName: interval.name,
       };
     });
+
+    selectThreeOptions(newIntervals);
     setIntervals(newIntervals);
   }, []);
 
@@ -34,6 +36,16 @@ const useIntervals = (): HookReturnType => {
       setNewAnswer();
     }
   }, [intervals]);
+
+  const selectThreeOptions = (intervals: SelectableInterval[]): void => {
+    let item = getRandomItem(intervals);
+    for (let i = 0; i < 3; i++) {
+      while (item.isSelected === true) {
+        item = getRandomItem(intervals);
+      }
+      item.isSelected = true;
+    }
+  };
 
   const setNewAnswer = (): SelectableInterval => {
     if (intervals.length > 0) {

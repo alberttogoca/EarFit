@@ -21,10 +21,11 @@ const useScales = (): HookReturnType => {
     const newScales = getScales().map<SelectableScale>((scale) => {
       return {
         ...scale,
-        isSelected: true,
+        isSelected: false,
         displayName: scale.name,
       };
     });
+    selectThreeOptions(newScales);
 
     setScales(newScales);
   }, []);
@@ -34,6 +35,16 @@ const useScales = (): HookReturnType => {
       setNewAnswer();
     }
   }, [scales]);
+
+  const selectThreeOptions = (scales: SelectableScale[]): void => {
+    let item = getRandomItem(scales);
+    for (let i = 0; i < 3; i++) {
+      while (item.isSelected === true) {
+        item = getRandomItem(scales);
+      }
+      item.isSelected = true;
+    }
+  };
 
   const setNewAnswer = (): SelectableScale => {
     const selectedScales = scales.filter((s) => s.isSelected);
