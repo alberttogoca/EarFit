@@ -9,7 +9,14 @@ import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
   const { playInterval } = useInstrumentContext();
-  const { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection } = useIntervals();
+  const {
+    intervals,
+    answer,
+    setNewAnswer,
+    updateIsSelectedInterval,
+    changeIntervalsDirection,
+    selectAllOptions,
+  } = useIntervals();
   const { options, updateOption, clearOptions } = useOptions(intervals);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -47,6 +54,7 @@ export default function Intervals(): JSX.Element {
           intervals={intervals}
           onIntervalIsSelectedChange={handleScaleIsSelectedChange}
           onDirectionChange={handleDirectionChange}
+          selectAllOptions={selectAllOptions}
         />
       }
     >

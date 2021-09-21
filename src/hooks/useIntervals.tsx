@@ -11,6 +11,7 @@ type HookReturnType = {
   setNewAnswer: () => SelectableInterval;
   updateIsSelectedInterval: (displayName: string, newValue: boolean) => void;
   changeIntervalsDirection: () => void;
+  selectAllOptions: (checked: boolean) => void;
 };
 
 const useIntervals = (): HookReturnType => {
@@ -47,6 +48,19 @@ const useIntervals = (): HookReturnType => {
     }
   };
 
+  const selectAllOptions = (checked: boolean): void => {
+    const newIntervals = intervals.map<SelectableInterval>((interval) => {
+      return {
+        ...interval,
+        isSelected: !checked,
+      };
+    });
+    if (checked) {
+      selectThreeOptions(newIntervals);
+    }
+    setIntervals(newIntervals);
+  };
+
   const setNewAnswer = (): SelectableInterval => {
     if (intervals.length > 0) {
       const selectedIntervals = intervals.filter((s) => s.isSelected);
@@ -77,7 +91,7 @@ const useIntervals = (): HookReturnType => {
     setAnswer({ ...answer, value: answer.value.reverse() });
   };
 
-  return { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection };
+  return { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection, selectAllOptions };
 };
 
 export default useIntervals;

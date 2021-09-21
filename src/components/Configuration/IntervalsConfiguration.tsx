@@ -6,12 +6,14 @@ interface IProps {
   intervals?: Selectable[];
   onIntervalIsSelectedChange?: (interval: Selectable) => void;
   onDirectionChange?: () => void;
+  selectAllOptions?: (checked: boolean) => void;
 }
 
 export const IntervalsConfiguration = ({
   intervals,
   onIntervalIsSelectedChange,
   onDirectionChange,
+  selectAllOptions,
 }: IProps): JSX.Element => {
   return (
     <Container>
@@ -19,7 +21,11 @@ export const IntervalsConfiguration = ({
         <h1>Options</h1>
       </Row>
       <DirectionSelector onDirectionChange={onDirectionChange} />
-      <OptionsSelector selecables={intervals} onIsSelectedChange={onIntervalIsSelectedChange} />
+      <OptionsSelector
+        selecables={intervals}
+        onIsSelectedChange={onIntervalIsSelectedChange}
+        selectAllOptions={selectAllOptions}
+      />
       <InstrumentSelector />
     </Container>
   );
