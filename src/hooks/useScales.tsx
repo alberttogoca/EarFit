@@ -11,7 +11,7 @@ type HookReturnType = {
   setNewAnswer: () => SelectableScale;
   updateIsSelectedScale: (displayName: string, newValue: boolean) => void;
   changeScalesDirection: () => void;
-  selectAllOptions: (checked: boolean) => void;
+  selectAllOptions: () => void;
 };
 
 const useScales = (): HookReturnType => {
@@ -47,14 +47,15 @@ const useScales = (): HookReturnType => {
     }
   };
 
-  const selectAllOptions = (checked: boolean): void => {
+  const selectAllOptions = (): void => {
+    const allSelected = scales.every((option) => option.isSelected === true);
     const newScales = scales.map<SelectableScale>((scale) => {
       return {
         ...scale,
-        isSelected: !checked,
+        isSelected: !allSelected,
       };
     });
-    if (checked) {
+    if (allSelected) {
       selectThreeOptions(newScales);
     }
     setScales(newScales);

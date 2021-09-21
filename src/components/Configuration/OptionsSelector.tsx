@@ -1,17 +1,14 @@
 import { ConfigSection } from 'components/Configuration';
-import { useState } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
   selecables?: Selectable[];
   onIsSelectedChange: (option: Selectable) => void;
-  selectAllOptions: (checked: boolean) => void;
+  selectAllOptions: () => void;
 }
 
 export const OptionsSelector = ({ selecables, onIsSelectedChange, selectAllOptions }: Props): JSX.Element => {
-  const [checked, setChecked] = useState(false);
-
   return (
     <>
       <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
@@ -35,10 +32,9 @@ export const OptionsSelector = ({ selecables, onIsSelectedChange, selectAllOptio
             type="checkbox"
             variant={'light'} //light or link
             size="sm"
-            checked={checked}
+            checked={selecables.every((option) => option.isSelected === true)}
             onChange={() => {
-              selectAllOptions(checked);
-              setChecked(!checked);
+              selectAllOptions();
             }}
           >
             {' '}

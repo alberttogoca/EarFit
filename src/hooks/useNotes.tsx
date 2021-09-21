@@ -10,8 +10,7 @@ type HookReturnType = {
   answer: Note;
   setNewAnswer: () => SelectableNote;
   updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
-  selectAllOptions: (checked: boolean) => void;
-  selectThreeOptions: (notes: SelectableNote[]) => void;
+  selectAllOptions: () => void;
 };
 
 const useNotes = (selectedScale: Scale): HookReturnType => {
@@ -50,14 +49,15 @@ const useNotes = (selectedScale: Scale): HookReturnType => {
     }
   };
 
-  const selectAllOptions = (checked: boolean): void => {
+  const selectAllOptions = (): void => {
+    const allSelected = notes.every((option) => option.isSelected === true);
     const newNotes = notes.map<SelectableNote>((note) => {
       return {
         ...note,
-        isSelected: !checked,
+        isSelected: !allSelected,
       };
     });
-    if (checked) {
+    if (allSelected) {
       selectThreeOptions(newNotes);
     }
     setNotes(newNotes);
@@ -83,7 +83,7 @@ const useNotes = (selectedScale: Scale): HookReturnType => {
     }
   };
 
-  return { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions, selectThreeOptions };
+  return { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions };
 };
 
 export default useNotes;

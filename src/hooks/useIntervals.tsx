@@ -11,7 +11,7 @@ type HookReturnType = {
   setNewAnswer: () => SelectableInterval;
   updateIsSelectedInterval: (displayName: string, newValue: boolean) => void;
   changeIntervalsDirection: () => void;
-  selectAllOptions: (checked: boolean) => void;
+  selectAllOptions: () => void;
 };
 
 const useIntervals = (): HookReturnType => {
@@ -48,14 +48,15 @@ const useIntervals = (): HookReturnType => {
     }
   };
 
-  const selectAllOptions = (checked: boolean): void => {
+  const selectAllOptions = (): void => {
+    const allSelected = intervals.every((option) => option.isSelected === true);
     const newIntervals = intervals.map<SelectableInterval>((interval) => {
       return {
         ...interval,
-        isSelected: !checked,
+        isSelected: !allSelected,
       };
     });
-    if (checked) {
+    if (allSelected) {
       selectThreeOptions(newIntervals);
     }
     setIntervals(newIntervals);

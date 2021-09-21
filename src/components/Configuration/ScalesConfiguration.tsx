@@ -6,7 +6,7 @@ interface IProps {
   scales?: Selectable[];
   onScaleIsSelectedChange?: (scale: Selectable) => void;
   onDirectionChange?: () => void;
-  selectAllOptions?: (checked: boolean) => void;
+  selectAllOptions?: () => void;
 }
 
 export const ScalesConfiguration = ({

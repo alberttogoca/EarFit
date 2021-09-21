@@ -9,7 +9,7 @@ interface IProps {
   selectedScale: Scale;
   onNoteIsSelectedChange?: (note: Selectable) => void;
   onSelectedScaleChange?: (scale: Scale) => void;
-  selectAllOptions: (checked: boolean) => void;
+  selectAllOptions: () => void;
 }
 
 export const NotesConfiguration = ({

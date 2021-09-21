@@ -6,7 +6,7 @@ interface IProps {
   intervals?: Selectable[];
   onIntervalIsSelectedChange?: (interval: Selectable) => void;
   onDirectionChange?: () => void;
-  selectAllOptions?: (checked: boolean) => void;
+  selectAllOptions?: () => void;
 }
 
 export const IntervalsConfiguration = ({
