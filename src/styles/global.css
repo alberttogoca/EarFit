@@ -51,3 +51,8 @@ img {
 .PianoDarkTheme .ReactPiano__Key--active.ReactPiano__Key--natural {
   background: #0396ca;
 }
+
+.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}

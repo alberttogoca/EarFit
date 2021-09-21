@@ -1,25 +1,44 @@
-import { NotePlayer } from 'context/soundfont-wrapper';
-import { ReactNode } from 'react';
+import { useInstrumentContext } from 'context/EarfitContext';
+import { Button, Container } from 'react-bootstrap';
+import { Interval } from 'services/intervalService';
+import { Note } from 'services/noteService';
+import { Scale } from 'services/scaleService';
 
 interface Props {
   title: string;
-  instrument: NotePlayer;
-  handlePlay: () => void;
-  children?: ReactNode;
+  noteToPlay?: Note;
+  scaleToPlay?: Scale;
+  intervalToPlay?: Interval;
+  handlePlay?: () => void;
 }
 
-export const PlayButton = ({ instrument, handlePlay, title }: Props): JSX.Element => {
+export const PlayButton = ({ handlePlay, title, noteToPlay, scaleToPlay, intervalToPlay }: Props): JSX.Element => {
+  const { selectedInstrument, playNote, playScale, playInterval } = useInstrumentContext();
+
+  const handlePlayButton = (): void => {
+    if (noteToPlay) {
+      playNote(noteToPlay);
+    }
+    if (scaleToPlay) {
+      playScale(scaleToPlay);
+    }
+    if (intervalToPlay) {
+      playInterval(intervalToPlay);
+    }
+    if (handlePlay) handlePlay();
+  };
+
   return (
     <>
       {/*PLAY SOUND*/}
-      <div className="d-flex justify-content-center p-3 ">
-        {instrument && (
-          <button type="button" className="btn btn-primary btn-lg  p-3" aria-pressed="true" onClick={handlePlay}>
+      <Container className="d-flex justify-content-center p-3 ">
+        {selectedInstrument && (
+          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlayButton}>
             {title}
-          </button>
+          </Button>
         )}
-        {!instrument && <div>Loading instrument...</div>}
-      </div>
+        {!selectedInstrument && <div>Loading instrument...</div>}
+      </Container>
     </>
   );
 };

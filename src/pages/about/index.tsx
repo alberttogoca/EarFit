@@ -1,9 +1,9 @@
-import ExerciseLayout from 'components/Layout/ExerciseLayout';
-import { Menu } from 'components/Menu';
+import Layout from 'components/Layout';
+
 export default function About(): JSX.Element {
   return (
     <>
-      <ExerciseLayout col1={<Menu></Menu>}>
+      <Layout>
         <div className="d-flex justify-content-center p-3">
           <img src="/images/profile.png" className="avatar shadow" alt="Me"></img>
         </div>
@@ -147,7 +147,7 @@ export default function About(): JSX.Element {
             </p>
           </div>
         </div>
-      </ExerciseLayout>
+      </Layout>
     </>
   );
 }

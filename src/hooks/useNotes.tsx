@@ -1,49 +1,89 @@
-import { Note, Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
+import { getNotes, Note, Scale } from 'services/noteService';
 import { getRandomItem } from 'utils/arrayUtils';
+import Selectable from 'utils/Selectable';
 
-export interface Answer {
-  name: string;
-  value: string;
-}
+export interface SelectableNote extends Selectable, Note {}
 
 type HookReturnType = {
-  notes: string[];
-  options: string[];
-  answer: Answer;
-  setNewAnswer: () => Answer;
+  notes: SelectableNote[];
+  answer: Note;
+  setNewAnswer: () => SelectableNote;
+  updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
+  selectAllOptions: () => void;
 };
 
-const useNotes = (): HookReturnType => {
-  const [notes, setNotes] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<Answer>();
-
-  const setNewAnswer = (): Answer => {
-    const value = getRandomItem(notes);
-    const name = Note.get(value).letter;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
-    return newAnswer;
-  };
+const useNotes = (selectedScale: Scale): HookReturnType => {
+  const [notes, setNotes] = useState<SelectableNote[]>([]);
+  const [answer, setAnswer] = useState<Note>();
 
   useEffect(() => {
-    const tonic = 'C';
-    const octave = '3';
-    const pattern = 'major';
-    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-    const scaleList = modes.map(([r, n]) => Scale.get([r, n]));
-    const noteList = scaleList[0].notes; //major
-    const noteNames = noteList.map((n) => Note.get(n).letter);
-    setNotes(noteList);
-    setOptions(noteNames);
-    const value = getRandomItem(noteList);
-    const name = Note.get(value).letter;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
-  }, []);
+    if (selectedScale === undefined) {
+      return;
+    }
 
-  return { notes, options, answer, setNewAnswer };
+    const newNotes = getNotes(selectedScale).map<SelectableNote>((note) => {
+      return {
+        ...note,
+        isSelected: false,
+        displayName: note.letter,
+      };
+    });
+    selectThreeOptions(newNotes);
+    setNotes(newNotes);
+  }, [selectedScale]);
+
+  useEffect(() => {
+    if (!answer || !notes.find((n) => n.letter === answer.letter)?.isSelected) {
+      setNewAnswer();
+    }
+  }, [notes]);
+
+  const selectThreeOptions = (notes: SelectableNote[]): void => {
+    let item = getRandomItem(notes);
+    for (let i = 0; i < 3; i++) {
+      while (item.isSelected === true) {
+        item = getRandomItem(notes);
+      }
+      item.isSelected = true;
+    }
+  };
+
+  const selectAllOptions = (): void => {
+    const allSelected = notes.every((option) => option.isSelected === true);
+    const newNotes = notes.map<SelectableNote>((note) => {
+      return {
+        ...note,
+        isSelected: !allSelected,
+      };
+    });
+    if (allSelected) {
+      selectThreeOptions(newNotes);
+    }
+    setNotes(newNotes);
+  };
+
+  const setNewAnswer = (): SelectableNote => {
+    const selectedNotes = notes.filter((n) => n.isSelected);
+    const noteAnswer = getRandomItem(selectedNotes);
+    setAnswer(noteAnswer);
+    return noteAnswer;
+  };
+
+  const updateIsSelectedNote = (displayName: string, newValue: boolean): void => {
+    const hasManySelectedNotes = notes.filter((n) => n.isSelected).length > 1;
+    if (newValue === true || hasManySelectedNotes) {
+      const newNotes = notes.map((note) => {
+        return {
+          ...note,
+          isSelected: note.displayName === displayName ? newValue : note.isSelected,
+        };
+      });
+      setNotes(newNotes);
+    }
+  };
+
+  return { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions };
 };
 
 export default useNotes;

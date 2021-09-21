@@ -1,48 +1,65 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { Configuration, Options, PlayButton, Streak, Title } from 'components/Exercise';
-import ExerciseLayout from 'components/Layout/ExerciseLayout';
-import { Menu } from 'components/Menu';
-import { Piano } from 'components/Piano';
-import { useInstrumentContext } from 'context/SoundfontContext';
-import useNotes from 'hooks/useNotes';
-import { Answer } from 'hooks/useNotes';
-import React, { useState } from 'react';
+import { NotesConfiguration } from 'components/Configuration';
+import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { IOption } from 'components/Exercise/Options';
+import Layout from 'components/Layout';
+import { useInstrumentContext } from 'context/EarfitContext';
+import { useNotes, useNoteScales, useOptions, useStreak } from 'hooks';
+import { Scale } from 'services/noteService';
+import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
-  const { instrument } = useInstrumentContext();
-  const { options, answer, setNewAnswer } = useNotes();
-  const [streak, setStreak] = useState(0);
+  const { playNote } = useInstrumentContext();
+  const { scales, selectedScale, setNewSelectedScale } = useNoteScales();
+  const { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions } = useNotes(selectedScale);
+  const { options, updateOption, clearOptions } = useOptions(notes);
+  const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function playAnswer(answer: Answer): void {
-    instrument?.play(answer.value, 0, { duration: 2 });
-    console.log(`Now playing: ${answer.name}`);
-  }
+  function handleOption(selectedOption: IOption): boolean {
+    if (selectedOption.value.toUpperCase() === answer.value.toUpperCase()) {
+      setNewAnswer();
+      updateOption(selectedOption, true);
+      IncrementStreak();
+      playNote(answer);
 
-  function handlePlay(): void {
-    playAnswer(answer);
-  }
+      setTimeout(() => {
+        clearOptions();
+      }, 1000);
 
-  function handleOption(selectedOption: string): boolean {
-    if (selectedOption.toUpperCase() === answer.name.toUpperCase()) {
-      const newAnswer = setNewAnswer();
-      setStreak((s) => s + 1);
-      playAnswer(newAnswer);
       return true;
     } else {
-      setStreak(0);
+      updateOption(selectedOption, false);
+      clearStreak();
       return false;
     }
   }
 
+  function handleNoteIsSelectedChange(option: Selectable): void {
+    updateIsSelectedNote(option.displayName, option.isSelected);
+  }
+
+  function handleSelectedScaleChange(scale: Scale): void {
+    setNewSelectedScale(scale.name);
+  }
+
   return (
-    <>
-      <ExerciseLayout col1={<Menu />} col3={<Configuration page="Notes" />}>
-        <Title>Notes</Title>
-        <PlayButton instrument={instrument} handlePlay={handlePlay} title={'Note?'} />
-        <Options options={options} handleOptionClick={handleOption} streak={streak} />
-        <Streak streak={streak} />
-        <Piano />
-      </ExerciseLayout>
-    </>
+    <Layout
+      rightColumn={
+        <NotesConfiguration
+          notes={notes}
+          scales={scales}
+          selectedScale={selectedScale}
+          onNoteIsSelectedChange={handleNoteIsSelectedChange}
+          onSelectedScaleChange={handleSelectedScaleChange}
+          selectAllOptions={selectAllOptions}
+        />
+      }
+    >
+      <Title>Notes</Title>
+      <PlayButton noteToPlay={answer} title={'Note?'} />
+      <Options options={options} handleOptionClick={handleOption} />
+      <Streak streak={streak} />
+      <Piano />
+    </Layout>
   );
 }

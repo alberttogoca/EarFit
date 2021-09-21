@@ -1,49 +1,97 @@
-import { Scale as ScaleType } from '@tonaljs/scale';
-import { Scale } from '@tonaljs/tonal';
 import { useEffect, useState } from 'react';
+import { getScales, Scale } from 'services/scaleService';
 import { getRandomItem } from 'utils/arrayUtils';
+import Selectable from 'utils/Selectable';
 
-export interface Answer {
-  name: string;
-  value: ScaleType;
-}
+export interface SelectableScale extends Selectable, Scale {}
 
 type HookReturnType = {
-  scales: ScaleType[];
-  options: string[];
-  answer: Answer;
-  setNewAnswer: () => Answer;
+  scales: SelectableScale[];
+  answer: Scale;
+  setNewAnswer: () => SelectableScale;
+  updateIsSelectedScale: (displayName: string, newValue: boolean) => void;
+  changeScalesDirection: () => void;
+  selectAllOptions: () => void;
 };
 
 const useScales = (): HookReturnType => {
-  const [scales, setScales] = useState<ScaleType[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<Answer>();
-
-  const setNewAnswer = (): Answer => {
-    const value = getRandomItem(scales);
-    const name = value.type;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
-    return newAnswer;
-  };
+  const [scales, setScales] = useState<SelectableScale[]>([]);
+  const [answer, setAnswer] = useState<Scale>();
 
   useEffect(() => {
-    const tonic = 'C';
-    const octave = '3';
-    const pattern = 'major';
-    const modes = Scale.modeNames(tonic + octave + ' ' + pattern);
-    const scaleList = modes.map(([root, mode]) => Scale.get([root, mode])); //Obtaining notes for each mode
-    const scaleNames = scaleList.map((m) => m.type.toUpperCase());
-    setScales(scaleList);
-    setOptions(scaleNames);
-    const value = getRandomItem(scaleList);
-    const name = value.type;
-    const newAnswer = { name, value };
-    setAnswer(newAnswer);
+    const newScales = getScales().map<SelectableScale>((scale) => {
+      return {
+        ...scale,
+        isSelected: false,
+        displayName: scale.name,
+      };
+    });
+    selectThreeOptions(newScales);
+
+    setScales(newScales);
   }, []);
 
-  return { scales, options, answer, setNewAnswer };
+  useEffect(() => {
+    if (!answer || !scales.find((n) => n.name === answer.name)?.isSelected) {
+      setNewAnswer();
+    }
+  }, [scales]);
+
+  const selectThreeOptions = (scales: SelectableScale[]): void => {
+    let item = getRandomItem(scales);
+    for (let i = 0; i < 3; i++) {
+      while (item.isSelected === true) {
+        item = getRandomItem(scales);
+      }
+      item.isSelected = true;
+    }
+  };
+
+  const selectAllOptions = (): void => {
+    const allSelected = scales.every((option) => option.isSelected === true);
+    const newScales = scales.map<SelectableScale>((scale) => {
+      return {
+        ...scale,
+        isSelected: !allSelected,
+      };
+    });
+    if (allSelected) {
+      selectThreeOptions(newScales);
+    }
+    setScales(newScales);
+  };
+
+  const setNewAnswer = (): SelectableScale => {
+    const selectedScales = scales.filter((s) => s.isSelected);
+    const scaleAnswer = getRandomItem(selectedScales);
+    setAnswer(scaleAnswer);
+    return scaleAnswer;
+  };
+
+  const updateIsSelectedScale = (displayName: string, newValue: boolean): void => {
+    const hasManySelectedScales = scales.filter((s) => s.isSelected).length > 1;
+    if (newValue === true || hasManySelectedScales) {
+      const newScales = scales.map((scale) => {
+        return {
+          ...scale,
+          isSelected: scale.displayName === displayName ? newValue : scale.isSelected,
+        };
+      });
+      setScales(newScales);
+    }
+  };
+
+  const changeScalesDirection = (): void => {
+    const newScales = scales.map((scale) => {
+      return {
+        ...scale,
+        value: scale.value.reverse(),
+      };
+    });
+    setScales(newScales);
+  };
+
+  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, selectAllOptions };
 };
 
 export default useScales;

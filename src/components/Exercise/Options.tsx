@@ -1,19 +1,28 @@
-import { OptionItem } from './OptionItem';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
-interface Props {
-  options: string[];
-  handleOptionClick: (string) => boolean;
-  streak: number;
+type VariantColor = 'success' | 'secondary' | 'danger';
+
+export interface IOption {
+  displayName: string;
+  color: VariantColor;
+  value?: string;
 }
 
-export const Options = ({ options, handleOptionClick, streak }: Props): JSX.Element => {
+interface Props {
+  options: IOption[];
+  handleOptionClick: (option: IOption) => boolean;
+}
+
+export const Options = ({ options, handleOptionClick }: Props): JSX.Element => {
   return (
-    <div className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+    <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
-        {options.map((option) => (
-          <OptionItem key={option} option={option} handleOptionClick={handleOptionClick} streak={streak} />
+        {options.map((option, idx) => (
+          <Button key={idx} variant={option.color} onClick={() => handleOptionClick(option)}>
+            {option.displayName}
+          </Button>
         ))}
       </div>
-    </div>
+    </ButtonGroup>
   );
 };
