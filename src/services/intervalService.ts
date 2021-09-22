@@ -24,7 +24,7 @@ const allIntervalsNames = [
   '6M | 7d', //(9 semitones)
   '7m | 6A', //(10 semitones)
   '7M | 8d', //(11 semitones)
-  'P8 | 7A', //(12 semitones)
+  '8P | 7A', //(12 semitones)
 ];
 
 export const getIntervals = (): Interval[] => {
