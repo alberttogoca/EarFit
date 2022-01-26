@@ -10,7 +10,7 @@ export const DirectionSelector = ({ onDirectionChange }: Props): JSX.Element => 
   const [checked, setChecked] = useState<boolean>(true);
 
   return (
-    <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
+    <ConfigSection message="Direction" tooltipMessage="Select the direction of the notes">
       <>
         <ToggleButton
           type="checkbox"
