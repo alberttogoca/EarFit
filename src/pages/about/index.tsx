@@ -24,17 +24,43 @@ export default function About(): JSX.Element {
             </p>
             <p className="lead">
               Earfit is an app for musical listening training based on Next.js and Typescript. For example, to identify
-              notes, intervals, scales, chord types, etc.
+              notes, intervals and scales.
             </p>
 
             <p className="lead">
-              This is an unfinished version. Some things work, others don&apos;t. Let&apos;s give it a try! :)
+              These exercises will improve your musical ability by developing a more intuitive understanding of what you
+              hear.
+            </p>
+
+            <p className="lead">Let&apos;s give it a try! :)</p>
+
+            <p className="lead">
+              <h4>How to practice </h4>
+              <ul>
+                <li>Increase practice frequency, not duration. </li>
+                <li>Start simple and gradually increase difficulty. </li>
+                <li>Track your progress. </li>
+                <li>Sing scales and intervals. </li>
+                <li>Transcribe music with your instrument. </li>
+              </ul>
+            </p>
+
+            <p className="lead">
+              <h4>Help </h4>
+              If you need help with music theory you can visit{' '}
+              <a href="https://www.musictheory.net/lessons" target="popup">
+                musictheory.net
+              </a>{' '}
+              and if you wan&apos;t to learn more about these exercises you can search for{' '}
+              <a href="https://en.wikipedia.org/wiki/Ear_training" target="popup">
+                Ear Trainning.
+              </a>
             </p>
 
             <p className="lead">
               <h4>About Me </h4>
               I&apos;m Alberto, a passionate fullstack developer from Spain. Currently finishing my studies at URJC and
-              on an intership at Digital Solutions Iberia
+              on an intership at Digital Solutions Iberia in Endesa.
             </p>
 
             <p className="lead">
