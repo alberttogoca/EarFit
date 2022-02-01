@@ -1,5 +1,6 @@
 import Layout from 'components/Layout';
-import Image from 'next/Image';
+import Image from 'next/image';
+
 export default function About(): JSX.Element {
   return (
     <>
