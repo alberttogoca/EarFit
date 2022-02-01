@@ -1,11 +1,13 @@
 import Layout from 'components/Layout';
-
+import Image from 'next/Image';
 export default function About(): JSX.Element {
   return (
     <>
       <Layout>
         <div className="d-flex justify-content-center p-3">
-          <img src="/images/profile.png" className="avatar shadow" alt="Me"></img>
+          <div className="avatar shadow">
+            <Image src="/images/profile.png" width="200px" height="200px" className="avatar" alt="Me" />
+          </div>
         </div>
 
         <div className="card">
