@@ -1,3 +1,7 @@
+//https://github.com/danigb/soundfont-player/tree/93e5a9a41064d18d91ed9c35fa6e29e332ac1099
+//https://github.com/audionerd/byte-music.js/tree/master/soundfonts
+//https://github.com/gleitz/midi-js-soundfonts/tree/gh-pages/MusyngKite
+
 var INSTRUMENTS = [
     "accordion",
     "acoustic_bass",
