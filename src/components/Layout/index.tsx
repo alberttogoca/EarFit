@@ -19,12 +19,13 @@ export default function Layout({ children, rightColumn }: IProps): JSX.Element {
 
   return (
     <>
+      <html lang="en"></html>
       <Head>
         <title>EarFit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <meta
           name="description"
-          content="EARFIT: Aplicación para entrenamiento auditivo musical basada en Next.js y Typescript"
+          content="EARFIT: Musical Ear Training. These exercises will improve your musical ability by developing a more intuitive understanding of what you hear."
         ></meta>
       </Head>
       <Header />
