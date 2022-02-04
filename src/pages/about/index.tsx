@@ -14,17 +14,15 @@ export default function About(): JSX.Element {
         <div className="card">
           <div className="card-body p-3 ">
             <h1 className=" display-4 ">Alberto Gómez </h1>
-            <p className="lead">
-              <h4>
-                <img
-                  src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"
-                  alt="emoji"
-                  width="40"
-                ></img>
-                Welcome!
-              </h4>
-              This is Earfit a webApp for my final degree project in URJC.
-            </p>
+            <h4>
+              <img
+                src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"
+                alt="emoji"
+                width="40"
+              ></img>
+              Welcome!
+            </h4>
+            <p className="lead">This is Earfit a webApp for my final degree project in URJC.</p>
             <p className="lead">
               Earfit is an app for musical listening training based on Next.js and Typescript. For example, to identify
               notes, intervals and scales.
@@ -37,8 +35,8 @@ export default function About(): JSX.Element {
 
             <p className="lead">Let&apos;s give it a try! :)</p>
 
-            <p className="lead">
-              <h4>How to practice </h4>
+            <h4>How to practice </h4>
+            <div className="lead">
               <ul>
                 <li>Increase practice frequency, not duration. </li>
                 <li>Start simple and gradually increase difficulty. </li>
@@ -46,10 +44,10 @@ export default function About(): JSX.Element {
                 <li>Sing scales and intervals. </li>
                 <li>Transcribe music with your instrument. </li>
               </ul>
-            </p>
+            </div>
 
+            <h4>Help </h4>
             <p className="lead">
-              <h4>Help </h4>
               If you need help with music theory you can visit{' '}
               <a href="https://www.musictheory.net/lessons" target="popup">
                 musictheory.net
@@ -60,14 +58,14 @@ export default function About(): JSX.Element {
               </a>
             </p>
 
+            <h4>About Me </h4>
             <p className="lead">
-              <h4>About Me </h4>
               I&apos;m Alberto, a passionate fullstack developer from Spain. Currently finishing my studies at URJC and
               on an intership at Digital Solutions Iberia in Endesa.
             </p>
 
+            <h4>Where to find me</h4>
             <p className="lead">
-              <h4>Where to find me</h4>
               {/* GitHub */}
               <a href="https://github.com/alberttogoca" target="popup">
                 <svg

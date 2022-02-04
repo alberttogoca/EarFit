@@ -19,7 +19,6 @@ export default function Layout({ children, rightColumn }: IProps): JSX.Element {
 
   return (
     <>
-      <html lang="en"></html>
       <Head>
         <title>EarFit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
