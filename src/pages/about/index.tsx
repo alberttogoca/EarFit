@@ -1,6 +1,6 @@
+import { GithubSVG, LinkedInSVG, TwitterSVG } from 'components/ImagesSVG';
 import Layout from 'components/Layout';
 import Image from 'next/image';
-import { GithubSVG, LinkedInSVG, TwitterSVG } from 'pages/about/ImagesSVG';
 import { Card, Col, Image as Img, Row } from 'react-bootstrap';
 
 export default function About(): JSX.Element {
