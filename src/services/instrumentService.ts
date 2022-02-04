@@ -22,13 +22,13 @@ export const getInstruments = async (): Promise<Instrument[]> => {
         displayName: 'Guitar',
         emoji: '🎸',
         instrumentName: 'acoustic_guitar_nylon',
-        notePlayer: await getNotePlayer('acoustic_guitar_nylon'),
+        notePlayer: await getNotePlayer('acoustic_guitar_nylon', true),
       },
       {
         displayName: 'Trumpet',
         emoji: '🎺',
         instrumentName: 'trumpet',
-        notePlayer: await getNotePlayer('trumpet'),
+        notePlayer: await getNotePlayer('trumpet', true),
       },
     ];
   }
@@ -40,7 +40,7 @@ export const getInstrument = async (name: InstrumentName): Promise<Instrument> =
 };
 
 const getNotePlayer = async (name: InstrumentName, isLocal = false): Promise<NotePlayer> => {
-  //TODO: Check if exist file and no use isLocal
+  //TODO: Check if exist file and not use isLocal
   const options = { gain: 10, nameToUrl: undefined };
   if (isLocal) {
     options.nameToUrl = (name: string) => 'instruments/' + name + '-mp3.js';

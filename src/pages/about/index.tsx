@@ -22,7 +22,11 @@ export default function About(): JSX.Element {
             <section>
               <Row className="pt-9">
                 <Col xs="auto" className="pr-2">
-                  <Img src="/images/hi_emoticon.gif" alt="emoji" width="33" />
+                  <Img
+                    src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"
+                    alt="emoji"
+                    width="33"
+                  />
                 </Col>
                 <Col className="p-0 pt-1 ">
                   <h4>Welcome!</h4>
