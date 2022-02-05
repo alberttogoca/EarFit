@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { getInstrument, getInstruments, Instrument, InstrumentName } from 'services/instrumentService';
+import { getInstruments, Instrument, InstrumentName } from 'services/instrumentService';
 import { Interval } from 'services/intervalService';
 import { Note } from 'services/noteService';
 import { Scale } from 'services/scaleService';
 
+const defaultInstrument = 'acoustic_grand_piano';
+
 interface ProvidedValue {
   instruments: Instrument[];
   selectedInstrument: Instrument;
-  setNewSelectedInstrument: (name: InstrumentName) => Promise<void>;
+  setNewSelectedInstrument: (name: InstrumentName) => void;
   playNote: (note: Note, when?: number, duration?: number) => void;
   playScale: (scale: Scale, when?: number, duration?: number) => void;
   playInterval: (interval: Interval, when?: number, duration?: number) => void;
@@ -24,15 +26,15 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
   useEffect(() => {
     const setInitialInstruments = async (): Promise<void> => {
       const newInstruments = await getInstruments();
-      const instrument = await getInstrument('acoustic_grand_piano');
+      const instrument = newInstruments.find((i) => i.instrumentName === defaultInstrument);
       setInstruments(newInstruments);
       setSelectedInstrument(instrument);
     };
     setInitialInstruments();
   }, []);
 
-  const setNewSelectedInstrument = async (name: InstrumentName): Promise<void> => {
-    const instrument = await getInstrument(name);
+  const setNewSelectedInstrument = (name: InstrumentName): void => {
+    const instrument = instruments.find((i) => i.instrumentName === name);
     setSelectedInstrument(instrument);
   };
 

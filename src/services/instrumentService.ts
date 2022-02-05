@@ -1,4 +1,4 @@
-import { getInstrument as GetSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
+import { getSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
 
 export interface Instrument {
   displayName: string;
@@ -37,16 +37,12 @@ export const getInstruments = async (): Promise<Instrument[]> => {
   return earfitInstrument;
 };
 
-export const getInstrument = async (name: InstrumentName): Promise<Instrument> => {
-  return (await getInstruments()).find((i) => i.instrumentName === name);
-};
-
 const getNotePlayer = async (name: InstrumentName, isLocal = false): Promise<NotePlayer> => {
   //TODO: Check if exist file and not use isLocal
   const options = { gain: 10, nameToUrl: undefined };
   if (isLocal) {
     options.nameToUrl = (name: string) => 'instruments/' + name + '-mp3.js';
   }
-  const newInstrument = await GetSoundfontInstrument(name, options);
+  const newInstrument = await getSoundfontInstrument(name, options);
   return newInstrument;
 };
