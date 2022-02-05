@@ -1,6 +1,5 @@
 import { Menu } from 'components/Menu';
 import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
 import { ReactNode } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 

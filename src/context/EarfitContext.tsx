@@ -1,6 +1,5 @@
-import { InstrumentName } from 'context/soundfont-wrapper';
 import React, { useEffect, useState } from 'react';
-import { getInstrument, getInstruments, Instrument } from 'services/instrumentService';
+import { getInstrument, getInstruments, Instrument, InstrumentName } from 'services/instrumentService';
 import { Interval } from 'services/intervalService';
 import { Note } from 'services/noteService';
 import { Scale } from 'services/scaleService';

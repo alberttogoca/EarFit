@@ -1,4 +1,4 @@
-import { getInstrument as GetSoundfontInstrument, InstrumentName, NotePlayer } from 'context/soundfont-wrapper';
+import { getInstrument as GetSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
 
 export interface Instrument {
   displayName: string;
@@ -6,6 +6,8 @@ export interface Instrument {
   instrumentName: InstrumentName;
   notePlayer: NotePlayer;
 }
+
+export type { InstrumentName };
 
 let earfitInstrument: Instrument[] = undefined;
 
