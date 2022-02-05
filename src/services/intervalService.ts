@@ -53,8 +53,6 @@ export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean):
 };
 
 //INFO
-//const uniqueIntervalsFromNames = Array.from(new Set(names.flatMap((n1) => names.flatMap((n2) => TonalInterval.distance(n1, n2)))).values()).sort();
-//const uniqueIntervalsFromNamesArraySort = ['1P', '1A', '2m', '2M', '2A', '3d', '3m', '3M', '3A', '4d', '4P', '4A', '5d', '5P', '5A', '6d', '6m', '6M', '6A', '7d', '7m', '7M', '8d']
 //const allNaturalIntervalsNames = ['1P','2m','2M','3m','3M','4P','4A','5P','6m','6M','7m','7M','P8'];
 //const allIntervalsNames = ['1P', '1A', '2d', '2m', '2M', '2A', '3d', '3m', '3M', '3A', '4d', '4P', '4A', '5d', '5P', '5A', '6d', '6m', '6M', '6A', '7d', '7m', '7M', '7A', '8d', '8P', '8A']
 
@@ -62,24 +60,8 @@ export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean):
 //PROBLEMA: Intervalos que suenan igual pero se escriben distinto: 
 Enarmonía
 Una enarmonía se produce entre dos notas que tienen el mismo sonido y escritura diferente. 
-Puesto que no existe distancia entre dos notas enarmónicas, no se considera un intervalo.
   console.log(TonalInterval.distance('C3', 'C#3'));
   console.log(TonalInterval.distance('C3', 'Db3'));
   console.log(TonalInterval.distance('C#3', 'Db3'));
-  console.log(TonalInterval.distance('Db3', 'C#3')); */
-
-/* const allIntervalsNames = [
-  '1P | 2d (0 semitone)', //2d
-  '2m | 1A (1 semitone)', //1A
-  '2M | 3d (2 semitones)', //3d
-  '3m | 2A (3 semitones)', //2A
-  '3M | 4d (4 semitones)', //4d
-  '4P | 3A (5 semitones)', //3A
-  '4A | 5d (6 semitones)', //5d
-  '5P | 6d (7 semitones)', //6d
-  '6m | 5A (8 semitones)', //5A
-  '6M | 7d (9 semitones)', //7d
-  '7m | 6A (10 semitones)', //6A
-  '7M | 8d (11 semitones)', //8d
-  'P8 | 7A (12 semitones)', //7A
-]; */
+  console.log(TonalInterval.distance('Db3', 'C#3')); 
+*/
