@@ -1,17 +1,22 @@
-import { GithubSVG, LinkedInSVG, TwitterSVG } from 'components/ImagesSVG';
 import Layout from 'components/Layout';
 import Image from 'next/image';
-import { Card, Col, Image as Img, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+
+import GithubIcon from '/public/assets/github.svg';
+import HiGif from '/public/assets/Hi.gif';
+import LinkedInIcon from '/public/assets/linkedin.svg';
+import TwitterIcon from '/public/assets/twitter.svg';
+import ProfilePic from '/public/images/profile.png';
 
 export default function About(): JSX.Element {
   return (
     <>
       <Layout>
-        <div className="d-flex justify-content-center p-3">
+        <Container className="d-flex justify-content-center p-3">
           <div className="avatar shadow">
-            <Image src="/images/profile.png" width="200px" height="200px" className="avatar" alt="Me" />
+            <Image src={ProfilePic} width="200px" height="200px" className="avatar" alt="Me" />
           </div>
-        </div>
+        </Container>
 
         <Card>
           <Card.Body>
@@ -22,27 +27,24 @@ export default function About(): JSX.Element {
             <section>
               <Row className="pt-9">
                 <Col xs="auto" className="pr-2">
-                  <Img
-                    src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"
-                    alt="emoji"
-                    width="33"
-                  />
+                  <Image src={HiGif} alt="emoji" width="33" height="33" />
                 </Col>
                 <Col className="p-0 pt-1 ">
                   <h4>Welcome!</h4>
                 </Col>
               </Row>
-
-              <p className="lead">This is Earfit a webApp for my final degree project in URJC.</p>
-              <p className="lead">
-                Earfit is an app for musical listening training based on Next.js and Typescript. For example, to
-                identify notes, intervals and scales.
-              </p>
-              <p className="lead">
-                These exercises will improve your musical ability by developing a more intuitive understanding of what
-                you hear.
-              </p>
-              <p className="lead">Let&apos;s give it a try! :)</p>
+              <div className="lead">
+                <p>This is Earfit a webApp for my final degree project in URJC.</p>
+                <p>
+                  Earfit is an app for musical listening training based on Next.js and Typescript. For example, to
+                  identify notes, intervals and scales.
+                </p>
+                <p>
+                  These exercises will improve your musical ability by developing a more intuitive understanding of what
+                  you hear.
+                </p>
+                <p>Let&apos;s give it a try! :)</p>
+              </div>
             </section>
 
             <section>
@@ -80,15 +82,15 @@ export default function About(): JSX.Element {
 
             <section>
               <h4>{`↗️`} Where to find me</h4>
-              <p className="lead">
+              <p className="lead pt-2 mb-2">
                 <a href="https://github.com/alberttogoca" target="popup">
-                  <GithubSVG />
+                  <Image src={GithubIcon} alt="Github" />
                 </a>
                 <a href="https://twitter.com/alberttogoca" target="popup">
-                  <TwitterSVG />
+                  <Image src={TwitterIcon} alt="Twitter" />
                 </a>
                 <a href="https://linkedin.com/in/alberttogoca" target="popup">
-                  <LinkedInSVG />
+                  <Image src={LinkedInIcon} alt="LinkedIn" />
                 </a>
               </p>
             </section>

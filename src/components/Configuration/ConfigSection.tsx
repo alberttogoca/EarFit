@@ -1,4 +1,7 @@
-import { Container, Image, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import Image from 'next/image';
+import { Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+
+import TooltipIcon from '/public/assets/tooltipIcon.png';
 
 interface IConfigSectionProps {
   message: string;
@@ -13,7 +16,7 @@ export const ConfigSection = ({ message, tooltipMessage, children }: IConfigSect
         <header className="lead mr-1">{message}</header>
         {tooltipMessage && (
           <OverlayTrigger delay={{ show: 250, hide: 400 }} overlay={<Tooltip id="1">{tooltipMessage}</Tooltip>}>
-            <Image src="/images/tooltipIcon.png" width="15" height="15" alt="tooltip" />
+            <Image src={TooltipIcon} width="15" height="15" alt="tooltip" />
           </OverlayTrigger>
         )}
       </Row>
