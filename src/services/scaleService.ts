@@ -1,22 +1,20 @@
 //import { Scale as ScaleType } from '@tonaljs/scale';
 import { Scale as TonalScale } from '@tonaljs/tonal';
+import Selectable from 'utils/Selectable';
 
-export interface Scale {
-  value: string[];
-  name: string;
-}
-
-export const getScales = (): Scale[] => {
+export const getScales = (): Selectable[] => {
   const tonic = 'C';
   const octave = '3';
   const pattern = 'major';
   const modes = TonalScale.modeNames(tonic + octave + ' ' + pattern);
   const scaleList = modes.map(([root, mode]) => TonalScale.get([root, mode])); //Obtaining notes for each mode
-  const toReturn = scaleList.map((m) => {
+  const myScales = scaleList.map((m) => {
     return {
-      value: m.notes,
-      name: m.type.toUpperCase(),
+      id: m.type.toUpperCase(),
+      values: m.notes,
+      isSelected: false,
+      displayName: m.type.toUpperCase(),
     };
   });
-  return toReturn;
+  return myScales;
 };

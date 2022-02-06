@@ -37,9 +37,9 @@ export const NotesConfiguration = ({
       </ConfigSection>
 
       <OptionsSelector
-        selecables={notes}
+        selectables={notes}
         onIsSelectedChange={onNoteIsSelectedChange}
-        selectAllOptions={selectAllOptions}
+        toggleAllOptions={selectAllOptions}
       />
       <InstrumentSelector />
     </Container>

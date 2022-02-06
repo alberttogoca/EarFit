@@ -1,7 +1,38 @@
-import { Instrument, Instruments as InstrumentData } from 'data/instruments';
 import { getSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
 
+export interface Instrument {
+  displayName: string;
+  emoji: string;
+  instrumentName: InstrumentName;
+  notePlayer: NotePlayer;
+  isLocal: boolean;
+}
+
 export type { InstrumentName };
+
+export const InstrumentData: Instrument[] = [
+  {
+    displayName: 'Grand Piano',
+    emoji: '🎹',
+    instrumentName: 'acoustic_grand_piano',
+    notePlayer: undefined,
+    isLocal: true,
+  },
+  {
+    displayName: 'Guitar',
+    emoji: '🎸',
+    instrumentName: 'acoustic_guitar_nylon',
+    notePlayer: undefined,
+    isLocal: true,
+  },
+  {
+    displayName: 'Trumpet',
+    emoji: '🎺',
+    instrumentName: 'trumpet',
+    notePlayer: undefined,
+    isLocal: true,
+  },
+];
 
 let instruments: Instrument[] = undefined;
 

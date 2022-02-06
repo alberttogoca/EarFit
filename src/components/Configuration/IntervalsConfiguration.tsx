@@ -20,9 +20,9 @@ export const IntervalsConfiguration = ({
       <OptionsTitle>Options</OptionsTitle>
       <DirectionSelector onDirectionChange={onDirectionChange} />
       <OptionsSelector
-        selecables={intervals}
+        selectables={intervals}
         onIsSelectedChange={onIntervalIsSelectedChange}
-        selectAllOptions={selectAllOptions}
+        toggleAllOptions={selectAllOptions}
       />
       <InstrumentSelector />
     </Container>

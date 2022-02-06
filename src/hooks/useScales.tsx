@@ -1,97 +1,60 @@
 import { useEffect, useState } from 'react';
-import { getScales, Scale } from 'services/scaleService';
-import { getRandomItem } from 'utils/arrayUtils';
-import Selectable from 'utils/Selectable';
-
-export interface SelectableScale extends Selectable, Scale {}
+import { getScales } from 'services/scaleService';
+import Selectable, {
+  getRandomItemThatIsSelected,
+  reverseValues,
+  selectThreeOptions,
+  toggleAllOptions,
+  updateIsSelected,
+} from 'utils/Selectable';
 
 type HookReturnType = {
-  scales: SelectableScale[];
-  answer: Scale;
-  setNewAnswer: () => SelectableScale;
-  updateIsSelectedScale: (displayName: string, newValue: boolean) => void;
+  scales: Selectable[];
+  answer: Selectable;
+  setNewAnswer: () => Selectable;
+  updateIsSelectedScale: (displayName: string, newIsSelected: boolean) => void;
   changeScalesDirection: () => void;
-  selectAllOptions: () => void;
+  toggleAllScales: () => void;
 };
 
 const useScales = (): HookReturnType => {
-  const [scales, setScales] = useState<SelectableScale[]>([]);
-  const [answer, setAnswer] = useState<Scale>();
+  const [scales, setScales] = useState<Selectable[]>([]);
+  const [answer, setAnswer] = useState<Selectable>();
 
   useEffect(() => {
-    const newScales = getScales().map<SelectableScale>((scale) => {
-      return {
-        ...scale,
-        isSelected: false,
-        displayName: scale.name,
-      };
-    });
-    selectThreeOptions(newScales);
-
-    setScales(newScales);
+    const selectableScales = getScales();
+    const newScalesSelection = selectThreeOptions(selectableScales);
+    setScales(newScalesSelection);
   }, []);
 
   useEffect(() => {
-    if (!answer || !scales.find((n) => n.name === answer.name)?.isSelected) {
+    if (!answer || !scales.find((n) => n.id === answer.id)?.isSelected) {
       setNewAnswer();
     }
   }, [scales]);
 
-  const selectThreeOptions = (scales: SelectableScale[]): void => {
-    let item = getRandomItem(scales);
-    for (let i = 0; i < 3; i++) {
-      while (item.isSelected === true) {
-        item = getRandomItem(scales);
-      }
-      item.isSelected = true;
-    }
+  const toggleAllScales = (): void => {
+    const newScalesSelection = toggleAllOptions(scales);
+    setScales(newScalesSelection);
   };
 
-  const selectAllOptions = (): void => {
-    const allSelected = scales.every((option) => option.isSelected === true);
-    const newScales = scales.map<SelectableScale>((scale) => {
-      return {
-        ...scale,
-        isSelected: !allSelected,
-      };
-    });
-    if (allSelected) {
-      selectThreeOptions(newScales);
-    }
-    setScales(newScales);
-  };
-
-  const setNewAnswer = (): SelectableScale => {
-    const selectedScales = scales.filter((s) => s.isSelected);
-    const scaleAnswer = getRandomItem(selectedScales);
+  const setNewAnswer = (): Selectable => {
+    const scaleAnswer = getRandomItemThatIsSelected(scales);
     setAnswer(scaleAnswer);
     return scaleAnswer;
   };
 
-  const updateIsSelectedScale = (displayName: string, newValue: boolean): void => {
-    const hasManySelectedScales = scales.filter((s) => s.isSelected).length > 1;
-    if (newValue === true || hasManySelectedScales) {
-      const newScales = scales.map((scale) => {
-        return {
-          ...scale,
-          isSelected: scale.displayName === displayName ? newValue : scale.isSelected,
-        };
-      });
-      setScales(newScales);
-    }
-  };
-
-  const changeScalesDirection = (): void => {
-    const newScales = scales.map((scale) => {
-      return {
-        ...scale,
-        value: scale.value.reverse(),
-      };
-    });
+  const updateIsSelectedScale = (displayName: string, newIsSelected: boolean): void => {
+    const newScales = updateIsSelected(scales, displayName, newIsSelected);
     setScales(newScales);
   };
 
-  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, selectAllOptions };
+  const changeScalesDirection = (): void => {
+    const newScales = reverseValues(scales);
+    setScales(newScales);
+  };
+
+  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, toggleAllScales };
 };
 
 export default useScales;

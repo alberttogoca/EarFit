@@ -3,17 +3,17 @@ import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  selecables?: Selectable[];
+  selectables?: Selectable[];
   onIsSelectedChange: (option: Selectable) => void;
-  selectAllOptions: () => void;
+  toggleAllOptions: () => void;
 }
 
-export const OptionsSelector = ({ selecables, onIsSelectedChange, selectAllOptions }: Props): JSX.Element => {
+export const OptionsSelector = ({ selectables, onIsSelectedChange, toggleAllOptions }: Props): JSX.Element => {
   return (
     <>
       <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
         <>
-          {selecables.map((option, idx) => (
+          {selectables.map((option, idx) => (
             <ToggleButton
               key={idx}
               value={option.displayName}
@@ -32,9 +32,9 @@ export const OptionsSelector = ({ selecables, onIsSelectedChange, selectAllOptio
             type="checkbox"
             variant={'light'} //light or link
             size="sm"
-            checked={selecables.every((option) => option.isSelected === true)}
+            checked={selectables.every((option) => option.isSelected === true)}
             onChange={() => {
-              selectAllOptions();
+              toggleAllOptions();
             }}
           >
             {' '}

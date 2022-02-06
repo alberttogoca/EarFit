@@ -6,23 +6,23 @@ interface IProps {
   scales?: Selectable[];
   onScaleIsSelectedChange?: (scale: Selectable) => void;
   onDirectionChange?: () => void;
-  selectAllOptions?: () => void;
+  toggleAllScales?: () => void;
 }
 
 export const ScalesConfiguration = ({
   scales,
   onScaleIsSelectedChange,
   onDirectionChange,
-  selectAllOptions,
+  toggleAllScales,
 }: IProps): JSX.Element => {
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>
       <DirectionSelector onDirectionChange={onDirectionChange} />
       <OptionsSelector
-        selecables={scales}
+        selectables={scales}
         onIsSelectedChange={onScaleIsSelectedChange}
-        selectAllOptions={selectAllOptions}
+        toggleAllOptions={toggleAllScales}
       />
       <InstrumentSelector />
     </Container>
