@@ -1,48 +1,27 @@
+import { Instrument, Instruments as InstrumentData } from 'data/instruments';
 import { getSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
-
-export interface Instrument {
-  displayName: string;
-  emoji: string;
-  instrumentName: InstrumentName;
-  notePlayer: NotePlayer;
-}
 
 export type { InstrumentName };
 
-let earfitInstrument: Instrument[] = undefined;
+let instruments: Instrument[] = undefined;
 
 export const getInstruments = async (): Promise<Instrument[]> => {
-  if (earfitInstrument === undefined) {
-    earfitInstrument = [
-      {
-        displayName: 'Grand Piano',
-        emoji: '🎹',
-        instrumentName: 'acoustic_grand_piano',
-        notePlayer: await getNotePlayer('acoustic_grand_piano', true),
-      },
-      {
-        displayName: 'Guitar',
-        emoji: '🎸',
-        instrumentName: 'acoustic_guitar_nylon',
-        notePlayer: await getNotePlayer('acoustic_guitar_nylon', true),
-      },
-      {
-        displayName: 'Trumpet',
-        emoji: '🎺',
-        instrumentName: 'trumpet',
-        notePlayer: await getNotePlayer('trumpet', true),
-      },
-    ];
+  if (instruments === undefined) {
+    instruments = await Promise.all(
+      InstrumentData.map(async (i) => {
+        return { ...i, notePlayer: await getNotePlayer(i) };
+      })
+    );
   }
-  return earfitInstrument;
+  return instruments;
 };
 
-const getNotePlayer = async (name: InstrumentName, isLocal = false): Promise<NotePlayer> => {
+const getNotePlayer = async (instrument: Instrument): Promise<NotePlayer> => {
   //TODO: Check if exist file and not use isLocal
   const options = { gain: 10, nameToUrl: undefined };
-  if (isLocal) {
+  if (instrument.isLocal) {
     options.nameToUrl = (name: string) => 'instruments/' + name + '-mp3.js';
   }
-  const newInstrument = await getSoundfontInstrument(name, options);
+  const newInstrument = await getSoundfontInstrument(instrument.instrumentName, options);
   return newInstrument;
 };
