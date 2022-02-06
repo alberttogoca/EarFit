@@ -1,5 +1,5 @@
-import { DirectionSelector, InstrumentSelector, OptionsSelector } from 'components/Configuration';
-import { Container, Row } from 'react-bootstrap';
+import { DirectionSelector, InstrumentSelector, OptionsSelector, OptionsTitle } from 'components/Configuration';
+import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface IProps {
@@ -17,9 +17,7 @@ export const ScalesConfiguration = ({
 }: IProps): JSX.Element => {
   return (
     <Container>
-      <Row className="justify-content-center p-3">
-        <h1>Options</h1>
-      </Row>
+      <OptionsTitle>Options</OptionsTitle>
       <DirectionSelector onDirectionChange={onDirectionChange} />
       <OptionsSelector
         selecables={scales}

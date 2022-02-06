@@ -1,5 +1,5 @@
-import { ConfigSection, InstrumentSelector, OptionsSelector } from 'components/Configuration';
-import { Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { ConfigSection, InstrumentSelector, OptionsSelector, OptionsTitle } from 'components/Configuration';
+import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
 import { Scale } from 'services/noteService';
 import Selectable from 'utils/Selectable';
 
@@ -23,9 +23,7 @@ export const NotesConfiguration = ({
   const title = selectedScale !== undefined ? selectedScale.name : 'Select scale';
   return (
     <Container>
-      <Row className="justify-content-center p-3">
-        <h1>Options</h1>
-      </Row>
+      <OptionsTitle>Options</OptionsTitle>
 
       {/*Scale Selector*/}
       <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
