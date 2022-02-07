@@ -1,26 +1,25 @@
 import { ConfigSection, InstrumentSelector, OptionsSelector, OptionsTitle } from 'components/Configuration';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
-import { Scale } from 'services/noteService';
 import Selectable from 'utils/Selectable';
 
 interface IProps {
   notes?: Selectable[];
-  scales: Scale[];
-  selectedScale: Scale;
+  scalesNames: string[];
+  selectedScale: string;
   onNoteIsSelectedChange?: (note: Selectable) => void;
-  onSelectedScaleChange?: (scale: Scale) => void;
+  onSelectedScaleChange?: (scale: string) => void;
   selectAllOptions: () => void;
 }
 
 export const NotesConfiguration = ({
   notes,
-  scales,
+  scalesNames,
   selectedScale,
   onNoteIsSelectedChange,
   onSelectedScaleChange,
   selectAllOptions,
 }: IProps): JSX.Element => {
-  const title = selectedScale !== undefined ? selectedScale.name : 'Select scale';
+  const title = selectedScale !== undefined ? selectedScale : 'Select scale';
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>
@@ -28,9 +27,9 @@ export const NotesConfiguration = ({
       {/*Scale Selector*/}
       <ConfigSection message="Scale" tooltipMessage="Select the scale from which the notes are taken">
         <DropdownButton id="dropdown-basic-button" title={title} variant="secondary">
-          {scales.map((scale, idx) => (
+          {scalesNames.map((scale, idx) => (
             <Dropdown.Item onSelect={() => onSelectedScaleChange(scale)} key={idx} href="#/action-1">
-              {scale.name}
+              {scale}
             </Dropdown.Item>
           ))}
         </DropdownButton>

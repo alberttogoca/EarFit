@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getNotes, Scale } from 'services/noteService';
+import { getNotes, scalesNames } from 'services/noteService';
 import Selectable, {
   getRandomItemThatIsSelected,
   selectThreeOptions,
@@ -10,14 +10,19 @@ import Selectable, {
 type HookReturnType = {
   notes: Selectable[];
   answer: Selectable;
+  scalesNames: string[];
+  selectedScale: string;
+
   setNewAnswer: () => Selectable;
   updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
   toggleAllNotes: () => void;
+  setNewSelectedScale: (name: string) => void;
 };
 
-const useNotes = (selectedScale: Scale): HookReturnType => {
+const useNotes = (): HookReturnType => {
   const [notes, setNotes] = useState<Selectable[]>([]);
   const [answer, setAnswer] = useState<Selectable>();
+  const [selectedScale, setSelectedScale] = useState<string>(scalesNames[0]);
 
   useEffect(() => {
     if (selectedScale === undefined) {
@@ -33,6 +38,13 @@ const useNotes = (selectedScale: Scale): HookReturnType => {
       setNewAnswer();
     }
   }, [notes]);
+
+  const setNewSelectedScale = (name: string): void => {
+    const newScale = scalesNames.find((s) => s === name);
+    if (newScale) {
+      setSelectedScale(newScale);
+    }
+  };
 
   const toggleAllNotes = (): void => {
     const newNotesSelection = toggleAllOptions(notes);
@@ -50,7 +62,16 @@ const useNotes = (selectedScale: Scale): HookReturnType => {
     setNotes(newNotes);
   };
 
-  return { notes, answer, setNewAnswer, updateIsSelectedNote, toggleAllNotes };
+  return {
+    notes,
+    answer,
+    scalesNames,
+    selectedScale,
+    setNewAnswer,
+    updateIsSelectedNote,
+    toggleAllNotes,
+    setNewSelectedScale,
+  };
 };
 
 export default useNotes;

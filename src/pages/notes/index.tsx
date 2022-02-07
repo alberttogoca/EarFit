@@ -4,14 +4,21 @@ import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exer
 import { AnswerButton } from 'components/Exercise/AnswerButtons';
 import Layout from 'components/Layout';
 import { useInstrumentContext } from 'context/EarfitContext';
-import { useNotes, useNoteScales, useOptions, useStreak } from 'hooks';
-import { Scale } from 'services/noteService';
+import { useNotes, useOptions, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
   const { playNote } = useInstrumentContext();
-  const { scales, selectedScale, setNewSelectedScale } = useNoteScales();
-  const { notes, answer, setNewAnswer, updateIsSelectedNote, toggleAllNotes } = useNotes(selectedScale);
+  const {
+    notes,
+    answer,
+    scalesNames,
+    selectedScale,
+    setNewAnswer,
+    updateIsSelectedNote,
+    toggleAllNotes,
+    setNewSelectedScale,
+  } = useNotes();
   const { options, updateOption, clearOptions } = useOptions(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -38,8 +45,8 @@ export default function Notes(): JSX.Element {
     updateIsSelectedNote(option.displayName, option.isSelected);
   }
 
-  function handleSelectedScaleChange(scale: Scale): void {
-    setNewSelectedScale(scale.name);
+  function handleSelectedScaleChange(scale: string): void {
+    setNewSelectedScale(scale);
   }
 
   return (
@@ -47,7 +54,7 @@ export default function Notes(): JSX.Element {
       rightColumn={
         <NotesConfiguration
           notes={notes}
-          scales={scales}
+          scalesNames={scalesNames}
           selectedScale={selectedScale}
           onNoteIsSelectedChange={handleNoteIsSelectedChange}
           onSelectedScaleChange={handleSelectedScaleChange}
