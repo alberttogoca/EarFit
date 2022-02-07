@@ -6,12 +6,12 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
-interface IProps {
+interface Props {
   children: ReactNode;
   rightColumn?: ReactNode;
 }
 
-export default function Layout({ children, rightColumn }: IProps): JSX.Element {
+export default function Layout({ children, rightColumn }: Props): JSX.Element {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
   const isAbout = pathname === '/about';

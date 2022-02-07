@@ -8,7 +8,7 @@ import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
-  const { playNote } = useInstrumentContext();
+  const { play } = useInstrumentContext();
   const {
     notes,
     answer,
@@ -27,7 +27,7 @@ export default function Notes(): JSX.Element {
       setNewAnswer();
       updateAnswerButton(selectedOption, true);
       IncrementStreak();
-      playNote(answer);
+      play(answer);
 
       setTimeout(() => {
         clearAnswerButton();

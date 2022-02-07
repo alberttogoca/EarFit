@@ -1,11 +1,11 @@
-import MenuItemsInfo from 'utils/MenuItems';
+import menuItemsInfo from 'utils/MenuItemsInfo';
 
 import { ItemMenu } from './ItemMenu';
 
 export const Menu = (): JSX.Element => {
   return (
     <>
-      {MenuItemsInfo.map((item) => {
+      {menuItemsInfo.map((item) => {
         return <ItemMenu key={item.label} item={item} />;
       })}
     </>

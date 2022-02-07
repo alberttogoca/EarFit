@@ -8,7 +8,7 @@ import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
-  const { playScale } = useInstrumentContext();
+  const { play } = useInstrumentContext();
   const { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, toggleAllScales } = useScales();
   const { answerButtons, updateAnswerButton, clearAnswerButton } = useAnswerButtons(scales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
@@ -18,7 +18,7 @@ export default function Scales(): JSX.Element {
       setNewAnswer();
       updateAnswerButton(selectedOption, true);
       IncrementStreak();
-      playScale(answer);
+      play(answer);
 
       setTimeout(() => {
         clearAnswerButton();

@@ -8,7 +8,7 @@ import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
-  const { playInterval } = useInstrumentContext();
+  const { play } = useInstrumentContext();
   const {
     intervals,
     answer,
@@ -25,7 +25,7 @@ export default function Intervals(): JSX.Element {
       setNewAnswer();
       updateAnswerButton(selectedOption, true);
       IncrementStreak();
-      playInterval(answer);
+      play(answer);
 
       setTimeout(() => {
         clearAnswerButton();

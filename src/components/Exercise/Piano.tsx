@@ -4,12 +4,12 @@ import { useInstrumentContext } from 'context/EarfitContext';
 import { KeyboardShortcuts, MidiNumbers, Piano as ReactPiano } from 'react-piano';
 import useMeasure from 'react-use-measure';
 
-interface IProps {
+interface Props {
   firstNote?: string;
   lastNote?: string;
 }
 
-export const Piano = ({ firstNote, lastNote }: IProps): JSX.Element => {
+export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
   const { selectedInstrument } = useInstrumentContext();
   const [containerRef, containerSize] = useMeasure();
   const hasNotes = firstNote && lastNote;

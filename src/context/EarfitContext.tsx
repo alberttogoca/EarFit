@@ -8,9 +8,7 @@ interface ProvidedValue {
   instruments: Instrument[];
   selectedInstrument: Instrument;
   setNewSelectedInstrument: (name: InstrumentName) => void;
-  playNote: (note: Selectable, when?: number, duration?: number) => void;
-  playScale: (scale: Selectable, when?: number, duration?: number) => void;
-  playInterval: (interval: Interval, when?: number, duration?: number) => void;
+  play: (interval: Selectable, time?: number, when?: number, duration?: number) => void;
 }
 
 interface Props {
@@ -36,37 +34,19 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
     setSelectedInstrument(instrument);
   };
 
-  const playNote = (note: Selectable, when = 0, duration = 2): void => {
-    console.log(`Now playing: ${note.values}`);
-    const notesToPlay = note.values.map((n, i) => {
-      return { note: n, time: i * 0.3, duration: duration };
+  const play = (selectable: Selectable, time = 0.8, when = 0, duration = 0.7): void => {
+    console.log(`Now playing: ${selectable.id} (${selectable.values})`);
+    const notesToPlay = selectable.values.map((note, i) => {
+      return { note: note, time: i * time, duration: duration };
     });
     selectedInstrument?.notePlayer?.schedule(when, notesToPlay);
-  };
-
-  const playScale = (scale: Selectable): void => {
-    console.log(`Now playing: ${scale.id} : ${scale.values}`);
-    const scaleToPlay = scale.values.map((note, i) => {
-      return { note: note, time: i * 0.3, duration: 0.5 };
-    });
-    selectedInstrument?.notePlayer?.schedule(0, scaleToPlay);
-  };
-
-  const playInterval = (interval: Selectable): void => {
-    console.log(`Now playing: ${interval.id} (${interval.values})`);
-    const intervalToPlay = interval.values.map((note, i) => {
-      return { note: note, time: i * 0.8, duration: 0.7 };
-    });
-    selectedInstrument?.notePlayer?.schedule(0, intervalToPlay);
   };
 
   const contextValues = {
     instruments,
     selectedInstrument,
     setNewSelectedInstrument,
-    playNote,
-    playScale,
-    playInterval,
+    play,
   };
 
   return <Context.Provider value={contextValues}>{children}</Context.Provider>;
@@ -76,9 +56,7 @@ const Context = React.createContext<ProvidedValue>({
   instruments: undefined,
   selectedInstrument: undefined,
   setNewSelectedInstrument: () => undefined,
-  playNote: () => undefined,
-  playScale: () => undefined,
-  playInterval: () => undefined,
+  play: () => undefined,
 });
 
 export const useInstrumentContext = (): ProvidedValue => React.useContext(Context);

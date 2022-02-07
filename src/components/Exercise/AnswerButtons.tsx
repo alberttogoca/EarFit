@@ -1,5 +1,5 @@
-import { AnswerButton } from 'hooks/useAnswerButtons';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import AnswerButton from 'utils/AnswerButton';
 
 interface Props {
   answerButtons: AnswerButton[];
