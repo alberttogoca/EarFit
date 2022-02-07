@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getInstruments, Instrument, InstrumentName } from 'services/instrumentService';
-import { Interval } from 'services/intervalService';
 import Selectable from 'utils/Selectable';
 
 const defaultInstrument = 'acoustic_grand_piano';
@@ -53,9 +52,9 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
     selectedInstrument?.notePlayer?.schedule(0, scaleToPlay);
   };
 
-  const playInterval = (interval: Interval): void => {
-    console.log(`Now playing: ${interval.name} (${interval.value})`);
-    const intervalToPlay = interval.value.map((note, i) => {
+  const playInterval = (interval: Selectable): void => {
+    console.log(`Now playing: ${interval.id} (${interval.values})`);
+    const intervalToPlay = interval.values.map((note, i) => {
       return { note: note, time: i * 0.8, duration: 0.7 };
     });
     selectedInstrument?.notePlayer?.schedule(0, intervalToPlay);

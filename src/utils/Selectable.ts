@@ -18,7 +18,6 @@ export function selectAllItems<T extends Selectable>(items: T[], value: boolean)
 
 export function selectThreeOptions<T extends Selectable>(items: T[]): T[] {
   const newItems = selectAllItems(items, false);
-  console.log(newItems);
 
   for (let i = 0; i < 3; i++) {
     const item = getRandomItem(newItems.filter((x) => !x.isSelected));
@@ -32,13 +31,13 @@ export function toggleAllOptions<T extends Selectable>(items: T[]): T[] {
   return allSelected ? selectThreeOptions(items) : selectAllItems(items, true);
 }
 
-export function updateIsSelected<T extends Selectable>(items: T[], displayName: string, newIsSelected: boolean): T[] {
+export function updateIsSelected<T extends Selectable>(items: T[], id: string, newIsSelected: boolean): T[] {
   const hasManySelectedScales = items.filter((s) => s.isSelected).length > 1;
   if (newIsSelected === true || hasManySelectedScales) {
     const newItems = items.map((item) => {
       return {
         ...item,
-        isSelected: item.displayName === displayName ? newIsSelected : item.isSelected,
+        isSelected: item.id === id ? newIsSelected : item.isSelected,
       };
     });
     return newItems;
@@ -51,6 +50,11 @@ export function getRandomItemThatIsSelected<T extends Selectable>(items: T[]): T
   return randomItemIsSelected;
 }
 
+//TODO: Dejar solo uno (useIntervals)
+export function reverseItemValues<T extends Selectable>(item: T): T {
+  return { ...item, values: item.values.reverse() };
+}
+//TODO: Dejar solo uno (useScales)
 export function reverseValues<T extends Selectable>(items: T[]): T[] {
   const newItems = items.map((item) => {
     return {
