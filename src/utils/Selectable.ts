@@ -7,7 +7,7 @@ export default interface Selectable {
   values: string[];
   isSelected: boolean;
   displayName: string;
-  color: VariantColor;
+  color?: VariantColor;
 }
 
 export function selectAllItems<T extends Selectable>(items: T[], value: boolean): T[] {
@@ -29,7 +29,6 @@ export function selectThreeOptions<T extends Selectable>(items: T[]): T[] {
 
 export function toggleAllOptions<T extends Selectable>(items: T[]): T[] {
   const allSelected = items.every((option) => option.isSelected === true);
-
   return allSelected ? selectThreeOptions(items) : selectAllItems(items, true);
 }
 

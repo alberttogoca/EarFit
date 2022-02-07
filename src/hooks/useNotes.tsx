@@ -1,89 +1,56 @@
 import { useEffect, useState } from 'react';
-import { getNotes, Note, Scale } from 'services/noteService';
-import { getRandomItem } from 'utils/arrayUtils';
-import Selectable from 'utils/Selectable';
-
-export interface SelectableNote extends Selectable, Note {}
+import { getNotes, Scale } from 'services/noteService';
+import Selectable, {
+  getRandomItemThatIsSelected,
+  selectThreeOptions,
+  toggleAllOptions,
+  updateIsSelected,
+} from 'utils/Selectable';
 
 type HookReturnType = {
-  notes: SelectableNote[];
-  answer: Note;
-  setNewAnswer: () => SelectableNote;
+  notes: Selectable[];
+  answer: Selectable;
+  setNewAnswer: () => Selectable;
   updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
-  selectAllOptions: () => void;
+  toggleAllNotes: () => void;
 };
 
 const useNotes = (selectedScale: Scale): HookReturnType => {
-  const [notes, setNotes] = useState<SelectableNote[]>([]);
-  const [answer, setAnswer] = useState<Note>();
+  const [notes, setNotes] = useState<Selectable[]>([]);
+  const [answer, setAnswer] = useState<Selectable>();
 
   useEffect(() => {
     if (selectedScale === undefined) {
       return;
     }
-
-    const newNotes = getNotes(selectedScale).map<SelectableNote>((note) => {
-      return {
-        ...note,
-        isSelected: false,
-        displayName: note.letter,
-      };
-    });
-    selectThreeOptions(newNotes);
-    setNotes(newNotes);
+    const selectableNotes = getNotes(selectedScale);
+    const newNotesSelection = selectThreeOptions(selectableNotes);
+    setNotes(newNotesSelection);
   }, [selectedScale]);
 
   useEffect(() => {
-    if (!answer || !notes.find((n) => n.letter === answer.letter)?.isSelected) {
+    if (!answer || !notes.find((n) => n.id === answer.id)?.isSelected) {
       setNewAnswer();
     }
   }, [notes]);
 
-  const selectThreeOptions = (notes: SelectableNote[]): void => {
-    let item = getRandomItem(notes);
-    for (let i = 0; i < 3; i++) {
-      while (item.isSelected === true) {
-        item = getRandomItem(notes);
-      }
-      item.isSelected = true;
-    }
+  const toggleAllNotes = (): void => {
+    const newNotesSelection = toggleAllOptions(notes);
+    setNotes(newNotesSelection);
   };
 
-  const selectAllOptions = (): void => {
-    const allSelected = notes.every((option) => option.isSelected === true);
-    const newNotes = notes.map<SelectableNote>((note) => {
-      return {
-        ...note,
-        isSelected: !allSelected,
-      };
-    });
-    if (allSelected) {
-      selectThreeOptions(newNotes);
-    }
+  const setNewAnswer = (): Selectable => {
+    const notesAnswer = getRandomItemThatIsSelected(notes);
+    setAnswer(notesAnswer);
+    return notesAnswer;
+  };
+
+  const updateIsSelectedNote = (displayName: string, newIsSelected: boolean): void => {
+    const newNotes = updateIsSelected(notes, displayName, newIsSelected);
     setNotes(newNotes);
   };
 
-  const setNewAnswer = (): SelectableNote => {
-    const selectedNotes = notes.filter((n) => n.isSelected);
-    const noteAnswer = getRandomItem(selectedNotes);
-    setAnswer(noteAnswer);
-    return noteAnswer;
-  };
-
-  const updateIsSelectedNote = (displayName: string, newValue: boolean): void => {
-    const hasManySelectedNotes = notes.filter((n) => n.isSelected).length > 1;
-    if (newValue === true || hasManySelectedNotes) {
-      const newNotes = notes.map((note) => {
-        return {
-          ...note,
-          isSelected: note.displayName === displayName ? newValue : note.isSelected,
-        };
-      });
-      setNotes(newNotes);
-    }
-  };
-
-  return { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions };
+  return { notes, answer, setNewAnswer, updateIsSelectedNote, toggleAllNotes };
 };
 
 export default useNotes;

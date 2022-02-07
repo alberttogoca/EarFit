@@ -1,7 +1,7 @@
 //import { Note, Scale } from '@tonaljs/tonal';
 import { NotesConfiguration } from 'components/Configuration';
-import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
-import { IOption } from 'components/Exercise/Options';
+import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { AnswerButton } from 'components/Exercise/AnswerButtons';
 import Layout from 'components/Layout';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { useNotes, useNoteScales, useOptions, useStreak } from 'hooks';
@@ -11,12 +11,12 @@ import Selectable from 'utils/Selectable';
 export default function Notes(): JSX.Element {
   const { playNote } = useInstrumentContext();
   const { scales, selectedScale, setNewSelectedScale } = useNoteScales();
-  const { notes, answer, setNewAnswer, updateIsSelectedNote, selectAllOptions } = useNotes(selectedScale);
+  const { notes, answer, setNewAnswer, updateIsSelectedNote, toggleAllNotes } = useNotes(selectedScale);
   const { options, updateOption, clearOptions } = useOptions(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleOption(selectedOption: IOption): boolean {
-    if (selectedOption.value.toUpperCase() === answer.value.toUpperCase()) {
+  function handleOption(selectedOption: AnswerButton): boolean {
+    if (selectedOption.displayName.toUpperCase() === answer.displayName.toUpperCase()) {
       setNewAnswer();
       updateOption(selectedOption, true);
       IncrementStreak();
@@ -51,13 +51,13 @@ export default function Notes(): JSX.Element {
           selectedScale={selectedScale}
           onNoteIsSelectedChange={handleNoteIsSelectedChange}
           onSelectedScaleChange={handleSelectedScaleChange}
-          selectAllOptions={selectAllOptions}
+          selectAllOptions={toggleAllNotes}
         />
       }
     >
       <Title>Notes</Title>
       <PlayButton noteToPlay={answer} title={'Note?'} />
-      <Options options={options} handleOptionClick={handleOption} />
+      <AnswerButtons options={options} handleOptionClick={handleOption} />
       <Streak streak={streak} />
       <Piano />
     </Layout>

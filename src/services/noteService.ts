@@ -1,9 +1,5 @@
 import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
-
-export interface Note {
-  value: string;
-  letter: string;
-}
+import Selectable from 'utils/Selectable';
 
 export interface Scale {
   name: string;
@@ -11,16 +7,18 @@ export interface Scale {
 
 let scales: Scale[] = undefined;
 
-export const getNotes = (scale: Scale): Note[] => {
+export const getNotes = (scale: Scale): Selectable[] => {
   const tonic = 'C';
   const octave = '3';
   const pattern = scale.name.toLowerCase();
   const notes = TonalScale.get(tonic + octave + ' ' + pattern).notes;
   //major
-  return notes.map<Note>((n) => {
+  return notes.map((n) => {
     return {
-      value: n,
-      letter: TonalNote.get(n).pc,
+      id: TonalNote.get(n).pc,
+      values: [n],
+      isSelected: false,
+      displayName: TonalNote.get(n).pc,
     };
   });
 };
