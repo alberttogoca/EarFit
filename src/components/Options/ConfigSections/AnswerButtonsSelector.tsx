@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Configuration';
+import { ConfigSection } from 'components/Options/ConfigSections';
 import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
@@ -8,10 +8,10 @@ interface Props {
   toggleAllOptions: () => void;
 }
 
-export const OptionsSelector = ({ selectables, onIsSelectedChange, toggleAllOptions }: Props): JSX.Element => {
+export const AnswerButtonsSelector = ({ selectables, onIsSelectedChange, toggleAllOptions }: Props): JSX.Element => {
   return (
     <>
-      <ConfigSection message="Active Options" tooltipMessage="Select the options on which you would like to be tested">
+      <ConfigSection title="Active Options" tooltipMessage="Select the options on which you would like to be tested">
         <>
           {selectables.map((option, idx) => (
             <ToggleButton

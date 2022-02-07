@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Configuration';
+import { ConfigSection } from 'components/Options/ConfigSections';
 import { useState } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 
@@ -10,7 +10,7 @@ export const DirectionSelector = ({ onDirectionChange }: Props): JSX.Element => 
   const [checked, setChecked] = useState<boolean>(true);
 
   return (
-    <ConfigSection message="Direction" tooltipMessage="Select the direction of the notes">
+    <ConfigSection title="Direction" tooltipMessage="Select the direction of the notes">
       <>
         <ToggleButton
           type="checkbox"

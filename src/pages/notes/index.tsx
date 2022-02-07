@@ -1,7 +1,7 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { NotesConfiguration } from 'components/Configuration';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { NotesOptions } from 'components/Options';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { useAnswerButtons, useNotes, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -52,7 +52,7 @@ export default function Notes(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <NotesConfiguration
+        <NotesOptions
           notes={notes}
           scalesNames={scalesNames}
           selectedScale={selectedScale}

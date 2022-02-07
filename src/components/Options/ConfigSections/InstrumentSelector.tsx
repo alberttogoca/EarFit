@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Configuration';
+import { ConfigSection } from 'components/Options/ConfigSections';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
@@ -7,7 +7,7 @@ export const InstrumentSelector = (): JSX.Element => {
   const isLoading = instruments === undefined && selectedInstrument === undefined;
 
   return (
-    <ConfigSection message="Instrument" tooltipMessage="Select the instrument that plays">
+    <ConfigSection title="Instrument" tooltipMessage="Select the instrument that plays">
       {isLoading ? (
         <p>Loading instruments...</p>
       ) : (

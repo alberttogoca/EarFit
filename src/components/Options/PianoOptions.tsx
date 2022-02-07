@@ -1,7 +1,7 @@
-import { InstrumentSelector, OptionsTitle } from 'components/Configuration';
+import { InstrumentSelector, OptionsTitle } from 'components/Options/ConfigSections';
 import { Container } from 'react-bootstrap';
 
-export const PianoConfiguration = (): JSX.Element => {
+export const PianoOptions = (): JSX.Element => {
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>

@@ -1,7 +1,7 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { IntervalsConfiguration } from 'components/Configuration';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { IntervalsOptions } from 'components/Options';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { useAnswerButtons, useIntervals, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -50,7 +50,7 @@ export default function Intervals(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <IntervalsConfiguration
+        <IntervalsOptions
           intervals={intervals}
           onIntervalIsSelectedChange={handleScaleIsSelectedChange}
           onDirectionChange={handleDirectionChange}

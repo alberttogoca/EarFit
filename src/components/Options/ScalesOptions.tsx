@@ -1,25 +1,30 @@
-import { DirectionSelector, InstrumentSelector, OptionsSelector, OptionsTitle } from 'components/Configuration';
+import {
+  AnswerButtonsSelector,
+  DirectionSelector,
+  InstrumentSelector,
+  OptionsTitle,
+} from 'components/Options/ConfigSections';
 import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
-interface IProps {
+interface Props {
   scales?: Selectable[];
   onScaleIsSelectedChange?: (scale: Selectable) => void;
   onDirectionChange?: () => void;
   toggleAllScales?: () => void;
 }
 
-export const ScalesConfiguration = ({
+export const ScalesOptions = ({
   scales,
   onScaleIsSelectedChange,
   onDirectionChange,
   toggleAllScales,
-}: IProps): JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>
       <DirectionSelector onDirectionChange={onDirectionChange} />
-      <OptionsSelector
+      <AnswerButtonsSelector
         selectables={scales}
         onIsSelectedChange={onScaleIsSelectedChange}
         toggleAllOptions={toggleAllScales}

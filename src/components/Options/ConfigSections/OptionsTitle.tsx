@@ -8,7 +8,6 @@ interface Props {
 export const OptionsTitle = ({ children }: Props): JSX.Element => {
   return (
     <>
-      {/*TITLE*/}
       <Row className="justify-content-center p-3">
         <h1>{children}</h1>
       </Row>

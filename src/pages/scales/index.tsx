@@ -1,7 +1,7 @@
 //import { Note, Scale } from '@tonaljs/tonal';
-import { ScalesConfiguration } from 'components/Configuration';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { ScalesOptions } from 'components/Options';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { useAnswerButtons, useScales, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -43,7 +43,7 @@ export default function Scales(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <ScalesConfiguration
+        <ScalesOptions
           scales={scales}
           onScaleIsSelectedChange={handleScaleIsSelectedChange}
           onDirectionChange={handleDirectionChange}
