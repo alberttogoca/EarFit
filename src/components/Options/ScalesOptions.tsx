@@ -8,26 +8,26 @@ import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  scales?: Selectable[];
-  onScaleIsSelectedChange?: (scale: Selectable) => void;
-  onDirectionChange?: () => void;
-  toggleAllScales?: () => void;
+  scales: Selectable[];
+  handleToggleButtonChange: (scale: Selectable) => void;
+  handleDirectionChange: () => void;
+  handleToggleAllChange: () => void;
 }
 
 export const ScalesOptions = ({
   scales,
-  onScaleIsSelectedChange,
-  onDirectionChange,
-  toggleAllScales,
+  handleToggleButtonChange,
+  handleDirectionChange,
+  handleToggleAllChange,
 }: Props): JSX.Element => {
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>
-      <DirectionSelector onDirectionChange={onDirectionChange} />
+      <DirectionSelector handleDirectionChange={handleDirectionChange} />
       <AnswerButtonsSelector
         selectables={scales}
-        onIsSelectedChange={onScaleIsSelectedChange}
-        toggleAllOptions={toggleAllScales}
+        handleToggleButtonChange={handleToggleButtonChange}
+        handleToggleAllChange={handleToggleAllChange}
       />
       <InstrumentSelector />
     </Container>

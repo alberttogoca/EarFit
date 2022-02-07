@@ -3,8 +3,8 @@ import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export const InstrumentSelector = (): JSX.Element => {
-  const { instruments, selectedInstrument, setNewSelectedInstrument } = useInstrumentContext();
-  const isLoading = instruments === undefined && selectedInstrument === undefined;
+  const { instruments, instrument, selectInstrument } = useInstrumentContext();
+  const isLoading = instruments === undefined && instrument === undefined;
 
   return (
     <ConfigSection title="Instrument" tooltipMessage="Select the instrument that plays">
@@ -12,18 +12,18 @@ export const InstrumentSelector = (): JSX.Element => {
         <p>Loading instruments...</p>
       ) : (
         <ButtonGroup>
-          {instruments.map((instrument, idx) => (
+          {instruments.map((i, idx) => (
             <ToggleButton
               key={idx}
-              value={instrument.displayName}
+              value={i.displayName}
               type="checkbox"
               variant={'light'} //light or link
               size="sm"
-              checked={instrument.instrumentName == selectedInstrument?.instrumentName}
-              onChange={() => setNewSelectedInstrument(instrument.instrumentName)}
+              checked={i.instrumentName == instrument?.instrumentName}
+              onChange={() => selectInstrument(i.instrumentName)}
             >
               {' '}
-              {instrument.emoji} {instrument.displayName}
+              {i.emoji} {i.displayName}
             </ToggleButton>
           ))}
         </ButtonGroup>

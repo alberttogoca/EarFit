@@ -1,52 +1,42 @@
-//import { Note, Scale } from '@tonaljs/tonal';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
 import { NotesOptions } from 'components/Options';
-import { useInstrumentContext } from 'context/EarfitContext';
-import { useAnswerButtons, useNotes, useStreak } from 'hooks';
+import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
-  const { play } = useInstrumentContext();
   const {
     notes,
     answer,
     scalesNames,
     selectedScale,
     setNewAnswer,
-    updateIsSelectedNote,
-    toggleAllNotes,
+    updateIsSelected,
+    selectAllOrThree,
     setNewSelectedScale,
   } = useNotes();
-  const { answerButtons, updateAnswerButton, clearAnswerButton } = useAnswerButtons(notes);
+  const { instrument, playNote } = usePlayButton();
+  const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleOption(selectedOption: AnswerButton): boolean {
-    if (selectedOption.displayName.toUpperCase() === answer.displayName.toUpperCase()) {
+  function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
+    if (selectedOption.id === answer.id) {
       setNewAnswer();
-      updateAnswerButton(selectedOption, true);
+      updateAnswerButtonColor(selectedOption, true);
       IncrementStreak();
-      play(answer);
+      playNote(answer);
 
       setTimeout(() => {
-        clearAnswerButton();
+        clearAnswerButtonColor();
       }, 1000);
 
       return true;
     } else {
-      updateAnswerButton(selectedOption, false);
+      updateAnswerButtonColor(selectedOption, false);
       clearStreak();
       return false;
     }
-  }
-
-  function handleNoteIsSelectedChange(option: Selectable): void {
-    updateIsSelectedNote(option.displayName, option.isSelected);
-  }
-
-  function handleSelectedScaleChange(scale: string): void {
-    setNewSelectedScale(scale);
   }
 
   return (
@@ -56,15 +46,15 @@ export default function Notes(): JSX.Element {
           notes={notes}
           scalesNames={scalesNames}
           selectedScale={selectedScale}
-          onNoteIsSelectedChange={handleNoteIsSelectedChange}
-          onSelectedScaleChange={handleSelectedScaleChange}
-          selectAllOptions={toggleAllNotes}
+          handleToggleAllChange={selectAllOrThree}
+          handleToggleButtonChange={(note: Selectable) => updateIsSelected(note.id, note.isSelected)}
+          handleDropdownScaleSelect={(selectedScale: string) => setNewSelectedScale(selectedScale)}
         />
       }
     >
       <Title>Notes</Title>
-      <PlayButton noteToPlay={answer} title={'Note?'} />
-      <AnswerButtons answerButtons={answerButtons} handleOptionClick={handleOption} />
+      <PlayButton title={'Note?'} instrument={instrument} handlePlayButtonClick={() => playNote(answer)} />
+      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
       <Streak streak={streak} />
       <Piano />
     </Layout>

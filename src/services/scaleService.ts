@@ -13,7 +13,6 @@ export const getScales = (): Selectable[] => {
       id: m.type.toUpperCase(),
       values: m.notes,
       isSelected: false,
-      displayName: m.type.toUpperCase(),
     };
   });
   return myScales;

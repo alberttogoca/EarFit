@@ -4,16 +4,15 @@ export default interface Selectable {
   id: string;
   values: string[];
   isSelected: boolean;
-  displayName: string;
 }
 
-export function selectAllItems<T extends Selectable>(items: T[], value: boolean): T[] {
+function selectAllItems<T extends Selectable>(items: T[], value: boolean): T[] {
   return items.map((i) => {
     return { ...i, isSelected: value };
   });
 }
 
-export function selectThreeOptions<T extends Selectable>(items: T[]): T[] {
+export function selectThreeRandomItems<T extends Selectable>(items: T[]): T[] {
   const newItems = selectAllItems(items, false);
 
   for (let i = 0; i < 3; i++) {
@@ -23,12 +22,12 @@ export function selectThreeOptions<T extends Selectable>(items: T[]): T[] {
   return newItems;
 }
 
-export function toggleAllOptions<T extends Selectable>(items: T[]): T[] {
+export function selectAllOrThreeItems<T extends Selectable>(items: T[]): T[] {
   const allSelected = items.every((option) => option.isSelected === true);
-  return allSelected ? selectThreeOptions(items) : selectAllItems(items, true);
+  return allSelected ? selectThreeRandomItems(items) : selectAllItems(items, true);
 }
 
-export function updateIsSelected<T extends Selectable>(items: T[], id: string, newIsSelected: boolean): T[] {
+export function updateIsSelectedItem<T extends Selectable>(items: T[], id: string, newIsSelected: boolean): T[] {
   const hasManySelectedScales = items.filter((s) => s.isSelected).length > 1;
   if (newIsSelected === true || hasManySelectedScales) {
     const newItems = items.map((item) => {
@@ -52,7 +51,7 @@ export function reverseItemValues<T extends Selectable>(item: T): T {
   return { ...item, values: item.values.reverse() };
 }
 //TODO: Dejar solo uno (useScales)
-export function reverseValues<T extends Selectable>(items: T[]): T[] {
+export function reverseAllItemValues<T extends Selectable>(items: T[]): T[] {
   const newItems = items.map((item) => {
     return {
       ...item,

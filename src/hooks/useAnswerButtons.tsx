@@ -4,16 +4,16 @@ import Selectable from 'utils/Selectable';
 
 type HookReturnType = {
   answerButtons: AnswerButton[];
-  updateAnswerButton(optionToUpdate: AnswerButton, isAnswer: boolean): void;
-  clearAnswerButton(): void;
+  updateAnswerButtonColor(answerButton: AnswerButton, isAnswer: boolean): void;
+  clearAnswerButtonColor(): void;
 };
 
 export function useAnswerButtons(selectables: Selectable[]): HookReturnType {
-  const [answerButtons, setOptions] = useState<AnswerButton[]>([]);
+  const [answerButtons, setAnswerButtons] = useState<AnswerButton[]>([]);
 
   useEffect(() => {
     const newAnswerButtons = selectablesToAnswerButtons(selectables);
-    setOptions(newAnswerButtons);
+    setAnswerButtons(newAnswerButtons);
   }, [selectables]);
 
   function selectablesToAnswerButtons(selectables: Selectable[]): AnswerButton[] {
@@ -22,38 +22,38 @@ export function useAnswerButtons(selectables: Selectable[]): HookReturnType {
       .map<AnswerButton>((item) => {
         return {
           id: item.id,
-          displayName: item.displayName,
+          displayName: item.id,
           color: 'secondary',
         };
       });
   }
 
-  function updateAnswerButton(optionToUpdate: AnswerButton, isAnswer: boolean): void {
-    const newOptions = answerButtons.map<AnswerButton>((option) => {
-      if (optionToUpdate.displayName === option.displayName) {
+  function updateAnswerButtonColor(answerButton: AnswerButton, isAnswer: boolean): void {
+    const newAnswerButtons = answerButtons.map<AnswerButton>((actualButton) => {
+      if (answerButton.id === actualButton.id) {
         return {
-          ...option,
+          ...actualButton,
           color: isAnswer ? 'success' : 'danger',
         };
       }
-      return { ...option };
+      return { ...actualButton };
     });
 
-    setOptions(newOptions);
+    setAnswerButtons(newAnswerButtons);
   }
 
-  function clearAnswerButton(): void {
-    setOptions((options) => {
-      return options.map<AnswerButton>((option) => {
+  function clearAnswerButtonColor(): void {
+    setAnswerButtons((answerButtons) => {
+      return answerButtons.map<AnswerButton>((actualButton) => {
         return {
-          ...option,
+          ...actualButton,
           color: 'secondary',
         };
       });
     });
   }
 
-  return { answerButtons, updateAnswerButton, clearAnswerButton };
+  return { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor };
 }
 
 export default useAnswerButtons;

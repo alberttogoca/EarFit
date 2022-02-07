@@ -1,5 +1,5 @@
+import { Logo } from 'components/Layout/Header/Logo';
 import { MenuButton } from 'components/Layout/Header/MenuButton';
-import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
 
 export const Header = (): JSX.Element => {
@@ -11,11 +11,7 @@ export const Header = (): JSX.Element => {
         </Col>
         <Col>
           <div className="d-flex justify-content-center">
-            <h1>
-              <Link href="/">
-                <a className="link-unstyled">EARFIT</a>
-              </Link>
-            </h1>
+            <Logo />
           </div>
         </Col>
         <Col className="d-lg-none d-block"></Col>

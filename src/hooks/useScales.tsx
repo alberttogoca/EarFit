@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import { getScales } from 'services/scaleService';
 import Selectable, {
   getRandomItemThatIsSelected,
-  reverseValues,
-  selectThreeOptions,
-  toggleAllOptions,
-  updateIsSelected,
+  reverseAllItemValues,
+  selectAllOrThreeItems,
+  selectThreeRandomItems,
+  updateIsSelectedItem,
 } from 'utils/Selectable';
 
 type HookReturnType = {
   scales: Selectable[];
   answer: Selectable;
   setNewAnswer: () => Selectable;
-  updateIsSelectedScale: (displayName: string, newIsSelected: boolean) => void;
-  changeScalesDirection: () => void;
-  toggleAllScales: () => void;
+  changeDirection: () => void;
+  updateIsSelected: (id: string, newValue: boolean) => void;
+  selectAllOrThree: () => void;
 };
 
 const useScales = (): HookReturnType => {
@@ -23,7 +23,7 @@ const useScales = (): HookReturnType => {
 
   useEffect(() => {
     const selectableScales = getScales();
-    const newScalesSelection = selectThreeOptions(selectableScales);
+    const newScalesSelection = selectThreeRandomItems(selectableScales);
     setScales(newScalesSelection);
   }, []);
 
@@ -33,28 +33,28 @@ const useScales = (): HookReturnType => {
     }
   }, [scales]);
 
-  const toggleAllScales = (): void => {
-    const newScalesSelection = toggleAllOptions(scales);
-    setScales(newScalesSelection);
-  };
-
   const setNewAnswer = (): Selectable => {
     const scaleAnswer = getRandomItemThatIsSelected(scales);
     setAnswer(scaleAnswer);
     return scaleAnswer;
   };
 
-  const updateIsSelectedScale = (displayName: string, newIsSelected: boolean): void => {
-    const newScales = updateIsSelected(scales, displayName, newIsSelected);
+  const changeDirection = (): void => {
+    const newScales = reverseAllItemValues(scales);
     setScales(newScales);
   };
 
-  const changeScalesDirection = (): void => {
-    const newScales = reverseValues(scales);
+  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
+    const newScales = updateIsSelectedItem(scales, id, newIsSelected);
     setScales(newScales);
   };
 
-  return { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, toggleAllScales };
+  const selectAllOrThree = (): void => {
+    const newScalesSelection = selectAllOrThreeItems(scales);
+    setScales(newScalesSelection);
+  };
+
+  return { scales, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
 };
 
 export default useScales;

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { getNotes, scalesNames } from 'services/noteService';
 import Selectable, {
   getRandomItemThatIsSelected,
-  selectThreeOptions,
-  toggleAllOptions,
-  updateIsSelected,
+  selectAllOrThreeItems,
+  selectThreeRandomItems,
+  updateIsSelectedItem,
 } from 'utils/Selectable';
 
 type HookReturnType = {
@@ -12,11 +12,10 @@ type HookReturnType = {
   answer: Selectable;
   scalesNames: string[];
   selectedScale: string;
-
   setNewAnswer: () => Selectable;
-  updateIsSelectedNote: (displayName: string, newValue: boolean) => void;
-  toggleAllNotes: () => void;
-  setNewSelectedScale: (name: string) => void;
+  setNewSelectedScale: (id: string) => void;
+  updateIsSelected: (id: string, newValue: boolean) => void;
+  selectAllOrThree: () => void;
 };
 
 const useNotes = (): HookReturnType => {
@@ -29,7 +28,7 @@ const useNotes = (): HookReturnType => {
       return;
     }
     const selectableNotes = getNotes(selectedScale);
-    const newNotesSelection = selectThreeOptions(selectableNotes);
+    const newNotesSelection = selectThreeRandomItems(selectableNotes);
     setNotes(newNotesSelection);
   }, [selectedScale]);
 
@@ -39,27 +38,27 @@ const useNotes = (): HookReturnType => {
     }
   }, [notes]);
 
-  const setNewSelectedScale = (name: string): void => {
-    const newScale = scalesNames.find((s) => s === name);
-    if (newScale) {
-      setSelectedScale(newScale);
+  const setNewAnswer = (): Selectable => {
+    const newAnswer = getRandomItemThatIsSelected(notes);
+    setAnswer(newAnswer);
+    return newAnswer;
+  };
+
+  const setNewSelectedScale = (id: string): void => {
+    const newSelectedScale = scalesNames.find((s) => s === id);
+    if (newSelectedScale) {
+      setSelectedScale(newSelectedScale);
     }
   };
 
-  const toggleAllNotes = (): void => {
-    const newNotesSelection = toggleAllOptions(notes);
-    setNotes(newNotesSelection);
-  };
-
-  const setNewAnswer = (): Selectable => {
-    const notesAnswer = getRandomItemThatIsSelected(notes);
-    setAnswer(notesAnswer);
-    return notesAnswer;
-  };
-
-  const updateIsSelectedNote = (displayName: string, newIsSelected: boolean): void => {
-    const newNotes = updateIsSelected(notes, displayName, newIsSelected);
+  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
+    const newNotes = updateIsSelectedItem(notes, id, newIsSelected);
     setNotes(newNotes);
+  };
+
+  const selectAllOrThree = (): void => {
+    const newNotesSelection = selectAllOrThreeItems(notes);
+    setNotes(newNotesSelection);
   };
 
   return {
@@ -68,9 +67,9 @@ const useNotes = (): HookReturnType => {
     scalesNames,
     selectedScale,
     setNewAnswer,
-    updateIsSelectedNote,
-    toggleAllNotes,
     setNewSelectedScale,
+    updateIsSelected,
+    selectAllOrThree,
   };
 };
 

@@ -3,28 +3,32 @@ import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  selectables?: Selectable[];
-  onIsSelectedChange: (option: Selectable) => void;
-  toggleAllOptions: () => void;
+  selectables: Selectable[];
+  handleToggleButtonChange: (option: Selectable) => void;
+  handleToggleAllChange: () => void;
 }
 
-export const AnswerButtonsSelector = ({ selectables, onIsSelectedChange, toggleAllOptions }: Props): JSX.Element => {
+export const AnswerButtonsSelector = ({
+  selectables,
+  handleToggleButtonChange,
+  handleToggleAllChange,
+}: Props): JSX.Element => {
   return (
     <>
       <ConfigSection title="Active Options" tooltipMessage="Select the options on which you would like to be tested">
         <>
-          {selectables.map((option, idx) => (
+          {selectables.map((selectable, idx) => (
             <ToggleButton
               key={idx}
-              value={option.displayName}
+              value={selectable.id}
               type="checkbox"
               variant={'light'} //light or link
               size="sm"
-              checked={option.isSelected}
-              onChange={() => onIsSelectedChange({ ...option, isSelected: !option.isSelected })}
+              checked={selectable.isSelected}
+              onChange={() => handleToggleButtonChange({ ...selectable, isSelected: !selectable.isSelected })}
             >
               {' '}
-              {option.displayName}
+              {selectable.id}
             </ToggleButton>
           ))}
           <ToggleButton
@@ -32,9 +36,9 @@ export const AnswerButtonsSelector = ({ selectables, onIsSelectedChange, toggleA
             type="checkbox"
             variant={'light'} //light or link
             size="sm"
-            checked={selectables.every((option) => option.isSelected === true)}
+            checked={selectables.every((selectable) => selectable.isSelected === true)}
             onChange={() => {
-              toggleAllOptions();
+              handleToggleAllChange();
             }}
           >
             {' '}

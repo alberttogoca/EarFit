@@ -8,21 +8,21 @@ import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  notes?: Selectable[];
+  notes: Selectable[];
   scalesNames: string[];
   selectedScale: string;
-  onNoteIsSelectedChange?: (note: Selectable) => void;
-  onSelectedScaleChange?: (scale: string) => void;
-  selectAllOptions: () => void;
+  handleDropdownScaleSelect: (scaleName: string) => void;
+  handleToggleButtonChange: (note: Selectable) => void;
+  handleToggleAllChange: () => void;
 }
 
 export const NotesOptions = ({
   notes,
   scalesNames,
   selectedScale,
-  onNoteIsSelectedChange,
-  onSelectedScaleChange,
-  selectAllOptions,
+  handleDropdownScaleSelect,
+  handleToggleButtonChange,
+  handleToggleAllChange,
 }: Props): JSX.Element => {
   return (
     <Container>
@@ -30,12 +30,12 @@ export const NotesOptions = ({
       <ScaleSelector
         scalesNames={scalesNames}
         selectedScale={selectedScale}
-        onSelectedScaleChange={onSelectedScaleChange}
+        handleDropdownScaleSelect={handleDropdownScaleSelect}
       />
       <AnswerButtonsSelector
         selectables={notes}
-        onIsSelectedChange={onNoteIsSelectedChange}
-        toggleAllOptions={selectAllOptions}
+        handleToggleButtonChange={handleToggleButtonChange}
+        handleToggleAllChange={handleToggleAllChange}
       />
       <InstrumentSelector />
     </Container>

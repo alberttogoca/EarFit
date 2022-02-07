@@ -6,7 +6,6 @@ import Selectable from 'utils/Selectable';
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const allNotes = octaves.flatMap((octave) => names.flatMap((name) => name + octave)).concat(['A0', 'A#0', 'B0', 'C8']);
-
 const allIntervalsNames = [
   '1P | 2d', //(0 semitones)
   '2m | 1A', //(1 semitones)
@@ -25,7 +24,7 @@ const allIntervalsNames = [
 
 export const getIntervals = (): Selectable[] => {
   const allIntervals = allIntervalsNames.map((interval) => {
-    return { id: interval, values: calcIntervalToPlay(interval), isSelected: false, displayName: interval };
+    return { id: interval, values: calcIntervalToPlay(interval), isSelected: false };
   });
   return allIntervals;
 };

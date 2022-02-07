@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 
 interface Props {
-  onDirectionChange?: () => void;
+  handleDirectionChange: () => void;
 }
 
-export const DirectionSelector = ({ onDirectionChange }: Props): JSX.Element => {
+export const DirectionSelector = ({ handleDirectionChange }: Props): JSX.Element => {
   const [checked, setChecked] = useState<boolean>(true);
 
   return (
@@ -19,7 +19,7 @@ export const DirectionSelector = ({ onDirectionChange }: Props): JSX.Element => 
           value={0}
           checked={checked}
           onChange={() => {
-            onDirectionChange();
+            handleDirectionChange();
             setChecked(!checked);
           }}
         >
@@ -33,7 +33,7 @@ export const DirectionSelector = ({ onDirectionChange }: Props): JSX.Element => 
           value={0}
           checked={!checked}
           onChange={() => {
-            onDirectionChange();
+            handleDirectionChange();
             setChecked(!checked);
           }}
         >

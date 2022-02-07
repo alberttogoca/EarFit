@@ -14,7 +14,6 @@ export const getNotes = (scaleName: string): Selectable[] => {
       id: TonalNote.get(n).pc,
       values: [n],
       isSelected: false,
-      displayName: TonalNote.get(n).pc,
     };
   });
 };

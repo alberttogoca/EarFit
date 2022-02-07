@@ -8,26 +8,26 @@ import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  intervals?: Selectable[];
-  onIntervalIsSelectedChange?: (interval: Selectable) => void;
-  onDirectionChange?: () => void;
-  selectAllOptions?: () => void;
+  intervals: Selectable[];
+  handleToggleButtonChange: (interval: Selectable) => void;
+  handleDirectionChange: () => void;
+  handleToggleAllChange: () => void;
 }
 
 export const IntervalsOptions = ({
   intervals,
-  onIntervalIsSelectedChange,
-  onDirectionChange,
-  selectAllOptions,
+  handleToggleButtonChange,
+  handleDirectionChange,
+  handleToggleAllChange,
 }: Props): JSX.Element => {
   return (
     <Container>
       <OptionsTitle>Options</OptionsTitle>
-      <DirectionSelector onDirectionChange={onDirectionChange} />
+      <DirectionSelector handleDirectionChange={handleDirectionChange} />
       <AnswerButtonsSelector
         selectables={intervals}
-        onIsSelectedChange={onIntervalIsSelectedChange}
-        toggleAllOptions={selectAllOptions}
+        handleToggleButtonChange={handleToggleButtonChange}
+        handleToggleAllChange={handleToggleAllChange}
       />
       <InstrumentSelector />
     </Container>

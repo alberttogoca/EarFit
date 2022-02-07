@@ -1,43 +1,33 @@
-//import { Note, Scale } from '@tonaljs/tonal';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
 import Layout from 'components/Layout';
 import { ScalesOptions } from 'components/Options';
-import { useInstrumentContext } from 'context/EarfitContext';
-import { useAnswerButtons, useScales, useStreak } from 'hooks';
+import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
-  const { play } = useInstrumentContext();
-  const { scales, answer, setNewAnswer, updateIsSelectedScale, changeScalesDirection, toggleAllScales } = useScales();
-  const { answerButtons, updateAnswerButton, clearAnswerButton } = useAnswerButtons(scales);
+  const { scales, answer, setNewAnswer, updateIsSelected, changeDirection, selectAllOrThree } = useScales();
+  const { instrument, playScale } = usePlayButton();
+  const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(scales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleOption(selectedOption: AnswerButton): boolean {
-    if (selectedOption.displayName.toUpperCase() === answer.displayName.toUpperCase()) {
+  function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
+    if (selectedOption.id === answer.id) {
       setNewAnswer();
-      updateAnswerButton(selectedOption, true);
+      updateAnswerButtonColor(selectedOption, true);
       IncrementStreak();
-      play(answer);
+      playScale(answer);
 
       setTimeout(() => {
-        clearAnswerButton();
+        clearAnswerButtonColor();
       }, 1000);
 
       return true;
     } else {
-      updateAnswerButton(selectedOption, false);
+      updateAnswerButtonColor(selectedOption, false);
       clearStreak();
       return false;
     }
-  }
-
-  function handleScaleIsSelectedChange(option: Selectable): void {
-    updateIsSelectedScale(option.displayName, option.isSelected);
-  }
-
-  function handleDirectionChange(): void {
-    changeScalesDirection();
   }
 
   return (
@@ -45,15 +35,15 @@ export default function Scales(): JSX.Element {
       rightColumn={
         <ScalesOptions
           scales={scales}
-          onScaleIsSelectedChange={handleScaleIsSelectedChange}
-          onDirectionChange={handleDirectionChange}
-          toggleAllScales={toggleAllScales}
+          handleDirectionChange={() => changeDirection()}
+          handleToggleButtonChange={(scale: Selectable) => updateIsSelected(scale.id, scale.isSelected)}
+          handleToggleAllChange={selectAllOrThree}
         />
       }
     >
       <Title>Scales</Title>
-      <PlayButton scaleToPlay={answer} title={'Scale?'} />
-      <AnswerButtons answerButtons={answerButtons} handleOptionClick={handleOption} />
+      <PlayButton title={'Scale?'} instrument={instrument} handlePlayButtonClick={() => playScale(answer)} />
+      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
       <Streak streak={streak} />
       <Piano />
     </Layout>

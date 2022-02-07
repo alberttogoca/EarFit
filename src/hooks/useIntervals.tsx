@@ -3,18 +3,18 @@ import { calcIntervalToPlay, getIntervals } from 'services/intervalService';
 import Selectable, {
   getRandomItemThatIsSelected,
   reverseItemValues,
-  selectThreeOptions,
-  toggleAllOptions,
-  updateIsSelected,
+  selectAllOrThreeItems,
+  selectThreeRandomItems,
+  updateIsSelectedItem,
 } from 'utils/Selectable';
 
 type HookReturnType = {
   intervals: Selectable[];
   answer: Selectable;
   setNewAnswer: () => Selectable;
-  updateIsSelectedInterval: (id: string, newValue: boolean) => void;
-  changeIntervalsDirection: () => void;
-  toggleAllIntervals: () => void;
+  changeDirection: () => void;
+  updateIsSelected: (id: string, newValue: boolean) => void;
+  selectAllOrThree: () => void;
 };
 
 const useIntervals = (): HookReturnType => {
@@ -24,7 +24,7 @@ const useIntervals = (): HookReturnType => {
 
   useEffect(() => {
     const selectableIntervals = getIntervals();
-    const newIntervalsSelection = selectThreeOptions(selectableIntervals);
+    const newIntervalsSelection = selectThreeRandomItems(selectableIntervals);
     setIntervals(newIntervalsSelection);
   }, []);
 
@@ -33,11 +33,6 @@ const useIntervals = (): HookReturnType => {
       setNewAnswer();
     }
   }, [intervals]);
-
-  const toggleAllIntervals = (): void => {
-    const newIntervalsSelection = toggleAllOptions(intervals);
-    setIntervals(newIntervalsSelection);
-  };
 
   const setNewAnswer = (): Selectable => {
     if (intervals.length > 0) {
@@ -49,17 +44,22 @@ const useIntervals = (): HookReturnType => {
     return null;
   };
 
-  const updateIsSelectedInterval = (id: string, newIsSelected: boolean): void => {
-    const newIntervals = updateIsSelected(intervals, id, newIsSelected);
-    setIntervals(newIntervals);
-  };
-
-  const changeIntervalsDirection = (): void => {
+  const changeDirection = (): void => {
     setReverse(!reverse);
     setAnswer(reverseItemValues(answer));
   };
 
-  return { intervals, answer, setNewAnswer, updateIsSelectedInterval, changeIntervalsDirection, toggleAllIntervals };
+  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
+    const newIntervals = updateIsSelectedItem(intervals, id, newIsSelected);
+    setIntervals(newIntervals);
+  };
+
+  const selectAllOrThree = (): void => {
+    const newIntervalsSelection = selectAllOrThreeItems(intervals);
+    setIntervals(newIntervalsSelection);
+  };
+
+  return { intervals, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
 };
 
 export default useIntervals;

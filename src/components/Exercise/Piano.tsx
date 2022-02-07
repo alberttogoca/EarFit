@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
-  const { selectedInstrument } = useInstrumentContext();
+  const { instrument } = useInstrumentContext();
   const [containerRef, containerSize] = useMeasure();
   const hasNotes = firstNote && lastNote;
   const startNote = hasNotes ? firstNote : 'c3';
@@ -32,10 +32,10 @@ export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
       <ReactPiano
         noteRange={noteRange}
         width={containerSize.width}
-        playNote={(note: string) => selectedInstrument?.notePlayer?.play(note)}
-        stopNote={(note: string) => selectedInstrument?.notePlayer?.stop(note)}
+        playNote={(note: string) => instrument?.notePlayer?.play(note)}
+        stopNote={(note: string) => instrument?.notePlayer?.stop(note)}
         keyboardShortcuts={keyboardShortcuts}
-        disabled={!selectedInstrument}
+        disabled={!instrument}
       ></ReactPiano>
     </div>
   );
