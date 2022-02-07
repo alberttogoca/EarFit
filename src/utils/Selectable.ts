@@ -1,13 +1,10 @@
 import { getRandomItem } from './arrayUtils';
 
-type VariantColor = 'success' | 'secondary' | 'danger';
-
 export default interface Selectable {
   id: string;
   values: string[];
   isSelected: boolean;
   displayName: string;
-  color?: VariantColor;
 }
 
 export function selectAllItems<T extends Selectable>(items: T[], value: boolean): T[] {

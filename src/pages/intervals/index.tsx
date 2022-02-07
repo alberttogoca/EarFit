@@ -1,10 +1,10 @@
 //import { Note, Scale } from '@tonaljs/tonal';
 import { IntervalsConfiguration } from 'components/Configuration';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
-import { AnswerButton } from 'components/Exercise/AnswerButtons';
 import Layout from 'components/Layout';
 import { useInstrumentContext } from 'context/EarfitContext';
-import { useIntervals, useOptions, useStreak } from 'hooks';
+import { useAnswerButtons, useIntervals, useStreak } from 'hooks';
+import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
@@ -17,23 +17,23 @@ export default function Intervals(): JSX.Element {
     changeIntervalsDirection,
     toggleAllIntervals,
   } = useIntervals();
-  const { options, updateOption, clearOptions } = useOptions(intervals);
+  const { answerButtons, updateAnswerButton, clearAnswerButton } = useAnswerButtons(intervals);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   function handleOption(selectedOption: AnswerButton): boolean {
     if (selectedOption.displayName === answer.displayName) {
       setNewAnswer();
-      updateOption(selectedOption, true);
+      updateAnswerButton(selectedOption, true);
       IncrementStreak();
       playInterval(answer);
 
       setTimeout(() => {
-        clearOptions();
+        clearAnswerButton();
       }, 1000);
 
       return true;
     } else {
-      updateOption(selectedOption, false);
+      updateAnswerButton(selectedOption, false);
       clearStreak();
       return false;
     }
@@ -60,7 +60,7 @@ export default function Intervals(): JSX.Element {
     >
       <Title>Intervals</Title>
       <PlayButton intervalToPlay={answer} title={'Interval?'} />
-      <AnswerButtons options={options} handleOptionClick={handleOption} />
+      <AnswerButtons answerButtons={answerButtons} handleOptionClick={handleOption} />
       <Streak streak={streak} />
       <Piano />
     </Layout>

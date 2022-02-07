@@ -1,10 +1,10 @@
 //import { Note, Scale } from '@tonaljs/tonal';
 import { NotesConfiguration } from 'components/Configuration';
 import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
-import { AnswerButton } from 'components/Exercise/AnswerButtons';
 import Layout from 'components/Layout';
 import { useInstrumentContext } from 'context/EarfitContext';
-import { useNotes, useOptions, useStreak } from 'hooks';
+import { useAnswerButtons, useNotes, useStreak } from 'hooks';
+import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
@@ -19,23 +19,23 @@ export default function Notes(): JSX.Element {
     toggleAllNotes,
     setNewSelectedScale,
   } = useNotes();
-  const { options, updateOption, clearOptions } = useOptions(notes);
+  const { answerButtons, updateAnswerButton, clearAnswerButton } = useAnswerButtons(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   function handleOption(selectedOption: AnswerButton): boolean {
     if (selectedOption.displayName.toUpperCase() === answer.displayName.toUpperCase()) {
       setNewAnswer();
-      updateOption(selectedOption, true);
+      updateAnswerButton(selectedOption, true);
       IncrementStreak();
       playNote(answer);
 
       setTimeout(() => {
-        clearOptions();
+        clearAnswerButton();
       }, 1000);
 
       return true;
     } else {
-      updateOption(selectedOption, false);
+      updateAnswerButton(selectedOption, false);
       clearStreak();
       return false;
     }
@@ -64,7 +64,7 @@ export default function Notes(): JSX.Element {
     >
       <Title>Notes</Title>
       <PlayButton noteToPlay={answer} title={'Note?'} />
-      <AnswerButtons options={options} handleOptionClick={handleOption} />
+      <AnswerButtons answerButtons={answerButtons} handleOptionClick={handleOption} />
       <Streak streak={streak} />
       <Piano />
     </Layout>
