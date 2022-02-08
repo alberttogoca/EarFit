@@ -7,7 +7,7 @@ interface Props {
   item: MenuItemsInfo;
 }
 
-export const ItemMenu = ({ item }: Props): JSX.Element => {
+export const MenuItem = ({ item }: Props): JSX.Element => {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
   return (

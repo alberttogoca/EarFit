@@ -19,6 +19,7 @@ export default function Notes(): JSX.Element {
   const { instrument, playNote } = usePlayButton();
   const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(notes);
   const { streak, clearStreak, IncrementStreak } = useStreak();
+  //  const { answerButtonSelector } = useAnswerButtonSelector(notes);
 
   function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
     if (selectedOption.id === answer.id) {
@@ -43,7 +44,7 @@ export default function Notes(): JSX.Element {
     <Layout
       rightColumn={
         <NotesOptions
-          notes={notes}
+          notes={notes} //answerButtonSelector
           scalesNames={scalesNames}
           selectedScale={selectedScale}
           handleToggleAllChange={selectAllOrThree}

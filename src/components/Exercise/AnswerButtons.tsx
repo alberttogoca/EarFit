@@ -1,4 +1,5 @@
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButton';
+import { ButtonGroup } from 'react-bootstrap';
 import AnswerButton from 'utils/AnswerButton';
 
 interface Props {
@@ -10,10 +11,12 @@ export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props)
   return (
     <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
-        {answerButtons.map((answerButton, idx) => (
-          <Button key={idx} variant={answerButton.color} onClick={() => handleAnswerButtonClick(answerButton)}>
-            {answerButton.id}
-          </Button>
+        {answerButtons.map((answerButton) => (
+          <AnswerButtonComponent
+            key={answerButton.id}
+            answerButton={answerButton}
+            handleAnswerButtonClick={handleAnswerButtonClick}
+          />
         ))}
       </div>
     </ButtonGroup>
