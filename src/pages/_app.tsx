@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         <link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png" />
         <link rel="apple-touch-icon" sizes="194x194" href="/ico/apple-icon-precomposed.png" />
         <link rel="apple-touch-icon" sizes="194x194" href="/ico/apple-icon.png" />
-        <meta name="theme-color" content="#6f1db6" />
+        <meta name="theme-color" content="#f9f8fc" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
