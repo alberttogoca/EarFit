@@ -1,3 +1,4 @@
+import { useScaleDropdown } from 'hooks';
 import { useEffect, useState } from 'react';
 import { getNotes, scalesNames } from 'services/noteService';
 import Selectable, {
@@ -21,7 +22,7 @@ type HookReturnType = {
 const useNotes = (): HookReturnType => {
   const [notes, setNotes] = useState<Selectable[]>([]);
   const [answer, setAnswer] = useState<Selectable>();
-  const [selectedScale, setSelectedScale] = useState<string>(scalesNames[0]);
+  const { selectedScale, setNewSelectedScale } = useScaleDropdown();
 
   useEffect(() => {
     if (selectedScale === undefined) {
@@ -42,13 +43,6 @@ const useNotes = (): HookReturnType => {
     const newAnswer = getRandomItemThatIsSelected(notes);
     setAnswer(newAnswer);
     return newAnswer;
-  };
-
-  const setNewSelectedScale = (id: string): void => {
-    const newSelectedScale = scalesNames.find((s) => s === id);
-    if (newSelectedScale) {
-      setSelectedScale(newSelectedScale);
-    }
   };
 
   const updateIsSelected = (id: string, newIsSelected: boolean): void => {
