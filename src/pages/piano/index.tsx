@@ -1,11 +1,12 @@
-import { Piano as PianoComponent, Title } from 'components/Exercise';
+import { Piano as PianoComponent } from 'components/Exercise/Piano';
+import { Title } from 'components/Exercise/Title';
 import Layout from 'components/Layout';
-import { PianoOptions } from 'components/Options';
+import { Options } from 'components/Options';
 
 export default function Piano(): JSX.Element {
   return (
     <>
-      <Layout rightColumn={<PianoOptions />}>
+      <Layout rightColumn={<Options />}>
         <Title>Piano</Title>
         <PianoComponent firstNote="c3" lastNote="b4" />
       </Layout>

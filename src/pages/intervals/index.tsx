@@ -1,6 +1,6 @@
-import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { IntervalsOptions } from 'components/Options';
+import { Options } from 'components/Options';
 import { useAnswerButtons, useIntervals, usePlayButton, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
@@ -33,19 +33,23 @@ export default function Intervals(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <IntervalsOptions
-          intervals={intervals}
+        <Options
+          selectables={intervals}
           handleDirectionChange={() => changeDirection()}
           handleToggleButtonChange={(interval: Selectable) => updateIsSelected(interval.id, interval.isSelected)}
           handleToggleAllChange={selectAllOrThree}
         />
       }
     >
-      <Title>Intervals</Title>
-      <PlayButton title={'Interval?'} instrument={instrument} handlePlayButtonClick={() => playInterval(answer)} />
-      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
-      <Streak streak={streak} />
-      <Piano />
+      <Exercise
+        exerciseTitle="Intervals"
+        playTitle="Interval?"
+        instrument={instrument}
+        handlePlayButtonClick={() => playInterval(answer)}
+        answerButtons={answerButtons}
+        handleAnswerButtonClick={handleAnswerButtonClick}
+        streak={streak}
+      />
     </Layout>
   );
 }

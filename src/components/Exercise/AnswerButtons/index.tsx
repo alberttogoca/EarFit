@@ -1,4 +1,4 @@
-import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButton';
+import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButtons/AnswerButton';
 import { ButtonGroup } from 'react-bootstrap';
 import AnswerButton from 'utils/AnswerButton';
 

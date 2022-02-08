@@ -9,7 +9,7 @@ interface Props {
 export const AnswerButton = ({ answerButton, handleAnswerButtonClick }: Props): JSX.Element => {
   return (
     <Button variant={answerButton.color} onClick={() => handleAnswerButtonClick(answerButton)}>
-      {answerButton.id}
+      {answerButton.displayName}
     </Button>
   );
 };

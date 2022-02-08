@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Options/ConfigSections';
+import { ConfigSection } from 'components/Options/ConfigSection';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 interface Props {

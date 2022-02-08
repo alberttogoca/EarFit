@@ -1,4 +1,4 @@
-import { ConfigSection } from 'components/Options/ConfigSections';
+import { ConfigSection } from 'components/Options/ConfigSection';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 

@@ -1,6 +1,6 @@
-import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { NotesOptions } from 'components/Options';
+import { Options } from 'components/Options';
 import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
@@ -43,8 +43,8 @@ export default function Notes(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <NotesOptions
-          notes={notes} //answerButtonSelector
+        <Options
+          selectables={notes} //answerButtonSelector
           scalesNames={scalesNames}
           selectedScale={selectedScale}
           handleToggleAllChange={selectAllOrThree}
@@ -53,11 +53,15 @@ export default function Notes(): JSX.Element {
         />
       }
     >
-      <Title>Notes</Title>
-      <PlayButton title={'Note?'} instrument={instrument} handlePlayButtonClick={() => playNote(answer)} />
-      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
-      <Streak streak={streak} />
-      <Piano />
+      <Exercise
+        exerciseTitle="Notes"
+        playTitle="Note?"
+        instrument={instrument}
+        handlePlayButtonClick={() => playNote(answer)}
+        answerButtons={answerButtons}
+        handleAnswerButtonClick={handleAnswerButtonClick}
+        streak={streak}
+      />
     </Layout>
   );
 }

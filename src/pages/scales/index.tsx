@@ -1,6 +1,6 @@
-import { AnswerButtons, Piano, PlayButton, Streak, Title } from 'components/Exercise';
+import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
-import { ScalesOptions } from 'components/Options';
+import { Options } from 'components/Options';
 import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
@@ -33,19 +33,23 @@ export default function Scales(): JSX.Element {
   return (
     <Layout
       rightColumn={
-        <ScalesOptions
-          scales={scales}
+        <Options
+          selectables={scales}
           handleDirectionChange={() => changeDirection()}
           handleToggleButtonChange={(scale: Selectable) => updateIsSelected(scale.id, scale.isSelected)}
           handleToggleAllChange={selectAllOrThree}
         />
       }
     >
-      <Title>Scales</Title>
-      <PlayButton title={'Scale?'} instrument={instrument} handlePlayButtonClick={() => playScale(answer)} />
-      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
-      <Streak streak={streak} />
-      <Piano />
+      <Exercise
+        exerciseTitle="Scales"
+        playTitle="Scale?"
+        instrument={instrument}
+        handlePlayButtonClick={() => playScale(answer)}
+        answerButtons={answerButtons}
+        handleAnswerButtonClick={handleAnswerButtonClick}
+        streak={streak}
+      />
     </Layout>
   );
 }

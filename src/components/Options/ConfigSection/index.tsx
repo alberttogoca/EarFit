@@ -1,8 +1,3 @@
-import { AnswerButtonsSelector } from 'components/Options/ConfigSections/AnswerButtonsSelector';
-import { DirectionSelector } from 'components/Options/ConfigSections/DirectionSelector';
-import { InstrumentSelector } from 'components/Options/ConfigSections/InstrumentSelector';
-import { OptionsTitle } from 'components/Options/ConfigSections/OptionsTitle';
-import { ScaleSelector } from 'components/Options/ConfigSections/ScaleSelector';
 import Image from 'next/image';
 import { Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 
@@ -29,5 +24,3 @@ export const ConfigSection = ({ title, tooltipMessage, children }: Props): JSX.E
     </Container>
   );
 };
-
-export { AnswerButtonsSelector, DirectionSelector, InstrumentSelector, OptionsTitle, ScaleSelector };

@@ -1,6 +1,6 @@
 import menuItemsInfo from 'utils/MenuItemsInfo';
 
-import { MenuItem } from './ItemMenu';
+import { MenuItem } from './MenuItem';
 
 export const Menu = (): JSX.Element => {
   return (
