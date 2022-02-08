@@ -1,5 +1,6 @@
 import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, useIntervals, usePlayButton, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -32,7 +33,8 @@ export default function Intervals(): JSX.Element {
 
   return (
     <Layout
-      rightColumn={
+      leftCol={<Menu />}
+      rightCol={
         <Options
           selectables={intervals}
           handleDirectionChange={() => changeDirection()}
@@ -42,8 +44,8 @@ export default function Intervals(): JSX.Element {
       }
     >
       <Exercise
-        exerciseTitle="Intervals"
-        playTitle="Interval?"
+        title="Intervals"
+        playButtonLabel="Interval?"
         instrument={instrument}
         handlePlayButtonClick={() => playInterval(answer)}
         answerButtons={answerButtons}

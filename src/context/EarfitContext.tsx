@@ -8,7 +8,7 @@ interface ProvidedValue {
   instruments: Instrument[];
   instrument: Instrument;
   selectInstrument: (name: InstrumentName) => void;
-  play: (interval: Selectable, time?: number, when?: number, duration?: number) => void;
+  play: (selectable: Selectable, time?: number, when?: number, duration?: number) => void;
 }
 
 interface Props {

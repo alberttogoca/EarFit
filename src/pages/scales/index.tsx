@@ -1,5 +1,6 @@
 import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -32,7 +33,8 @@ export default function Scales(): JSX.Element {
 
   return (
     <Layout
-      rightColumn={
+      leftCol={<Menu />}
+      rightCol={
         <Options
           selectables={scales}
           handleDirectionChange={() => changeDirection()}
@@ -42,8 +44,8 @@ export default function Scales(): JSX.Element {
       }
     >
       <Exercise
-        exerciseTitle="Scales"
-        playTitle="Scale?"
+        title="Scales"
+        playButtonLabel="Scale?"
         instrument={instrument}
         handlePlayButtonClick={() => playScale(answer)}
         answerButtons={answerButtons}

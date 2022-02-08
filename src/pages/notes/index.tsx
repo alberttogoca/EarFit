@@ -1,5 +1,6 @@
 import { Exercise } from 'components/Exercise';
 import Layout from 'components/Layout';
+import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
 import AnswerButton from 'utils/AnswerButton';
@@ -42,7 +43,8 @@ export default function Notes(): JSX.Element {
 
   return (
     <Layout
-      rightColumn={
+      leftCol={<Menu />}
+      rightCol={
         <Options
           selectables={notes} //answerButtonSelector
           scalesNames={scalesNames}
@@ -54,8 +56,8 @@ export default function Notes(): JSX.Element {
       }
     >
       <Exercise
-        exerciseTitle="Notes"
-        playTitle="Note?"
+        title="Notes"
+        playButtonLabel="Note?"
         instrument={instrument}
         handlePlayButtonClick={() => playNote(answer)}
         answerButtons={answerButtons}

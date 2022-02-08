@@ -9,31 +9,45 @@ import { Streak } from './Streak';
 import { Title } from './Title';
 
 interface Props {
-  exerciseTitle: string;
-  playTitle: string;
-  instrument: Instrument;
-  handlePlayButtonClick: () => void;
-  answerButtons: AnswerButton[];
-  handleAnswerButtonClick: (answerButton: AnswerButton) => boolean;
-  streak: number;
+  title?: string;
+  playButtonLabel?: string;
+  instrument?: Instrument;
+  handlePlayButtonClick?: () => void;
+  answerButtons?: AnswerButton[];
+  handleAnswerButtonClick?: (answerButton: AnswerButton) => boolean;
+  streak?: number;
+  firstNote?: string;
+  lastNote?: string;
 }
 
 export const Exercise = ({
-  exerciseTitle,
-  playTitle,
+  title,
+  playButtonLabel,
   instrument,
   handlePlayButtonClick,
   answerButtons,
   handleAnswerButtonClick,
   streak,
+  firstNote,
+  lastNote,
 }: Props): JSX.Element => {
   return (
-    <Container>
-      <Title>{exerciseTitle}</Title>
-      <PlayButton title={playTitle} instrument={instrument} handlePlayButtonClick={handlePlayButtonClick} />
-      <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
-      <Streak streak={streak} />
-      <Piano />
-    </Container>
+    <>
+      {title !== 'Piano' && (
+        <Container>
+          <Title>{title}</Title>
+          <PlayButton label={playButtonLabel} instrument={instrument} handlePlayButtonClick={handlePlayButtonClick} />
+          <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
+          <Streak streak={streak} />
+          <Piano />
+        </Container>
+      )}
+      {lastNote && firstNote && (
+        <Container>
+          <Title>{title}</Title>
+          <Piano firstNote={firstNote} lastNote={lastNote} />
+        </Container>
+      )}
+    </>
   );
 };
