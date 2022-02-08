@@ -3,7 +3,6 @@ import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
-import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Notes(): JSX.Element {
@@ -22,7 +21,7 @@ export default function Notes(): JSX.Element {
   const { streak, clearStreak, IncrementStreak } = useStreak();
   //  const { answerButtonSelector } = useAnswerButtonSelector(notes);
 
-  function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
+  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
     if (selectedOption.id === answer.id) {
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
@@ -60,7 +59,7 @@ export default function Notes(): JSX.Element {
         playButtonLabel="Note?"
         instrument={instrument}
         handlePlayButtonClick={() => playNote(answer)}
-        answerButtons={answerButtons}
+        selectables={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

@@ -8,11 +8,13 @@ export const getScales = (): Selectable[] => {
   const pattern = 'major';
   const modes = TonalScale.modeNames(tonic + octave + ' ' + pattern);
   const scaleList = modes.map(([root, mode]) => TonalScale.get([root, mode])); //Obtaining notes for each mode
-  const myScales = scaleList.map((m) => {
+  const myScales: Selectable[] = scaleList.map((m) => {
     return {
       id: m.type.toUpperCase(),
       values: m.notes,
       isSelected: false,
+      displayName: m.type.toUpperCase(),
+      color: 'secondary',
     };
   });
   return myScales;

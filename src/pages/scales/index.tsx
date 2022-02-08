@@ -3,7 +3,6 @@ import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
-import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
@@ -12,7 +11,7 @@ export default function Scales(): JSX.Element {
   const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(scales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
+  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
     if (selectedOption.id === answer.id) {
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
@@ -48,7 +47,7 @@ export default function Scales(): JSX.Element {
         playButtonLabel="Scale?"
         instrument={instrument}
         handlePlayButtonClick={() => playScale(answer)}
-        answerButtons={answerButtons}
+        selectables={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

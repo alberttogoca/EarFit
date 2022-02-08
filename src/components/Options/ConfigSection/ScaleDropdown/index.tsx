@@ -12,7 +12,7 @@ export const ScaleDropdown = ({ scalesNames, selectedScale, handleDropdownScaleS
     <>
       <DropdownButton id="dropdown-basic-button" title={scaleName} variant="secondary">
         {scalesNames.map((scale) => (
-          <Dropdown.Item onSelect={() => handleDropdownScaleSelect(scale)} key={scale} href="#/action-1">
+          <Dropdown.Item onSelect={() => handleDropdownScaleSelect(scale)} key={scale}>
             {scale}
           </Dropdown.Item>
         ))}

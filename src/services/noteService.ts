@@ -9,11 +9,14 @@ export const getNotes = (scaleName: string): Selectable[] => {
   const pattern = scaleName.toLowerCase();
   const notes = TonalScale.get(tonic + octave + ' ' + pattern).notes;
   //major
-  return notes.map((n) => {
+  const myNotes: Selectable[] = notes.map((n) => {
     return {
       id: TonalNote.get(n).pc,
       values: [n],
       isSelected: false,
+      displayName: TonalNote.get(n).pc,
+      color: 'secondary',
     };
   });
+  return myNotes;
 };

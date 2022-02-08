@@ -23,10 +23,16 @@ const allIntervalsNames = [
 ];
 
 export const getIntervals = (): Selectable[] => {
-  const allIntervals = allIntervalsNames.map((interval) => {
-    return { id: interval, values: calcIntervalToPlay(interval), isSelected: false };
+  const myIntervals: Selectable[] = allIntervalsNames.map((interval) => {
+    return {
+      id: interval,
+      values: calcIntervalToPlay(interval),
+      isSelected: false,
+      displayName: interval,
+      color: 'secondary',
+    };
   });
-  return allIntervals;
+  return myIntervals;
 };
 
 export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean): string[] => {

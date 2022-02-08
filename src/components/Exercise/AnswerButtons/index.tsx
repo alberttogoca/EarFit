@@ -1,20 +1,20 @@
 import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButtons/AnswerButton';
 import { ButtonGroup } from 'react-bootstrap';
-import AnswerButton from 'utils/AnswerButton';
+import Selectable from 'utils/Selectable';
 
 interface Props {
-  answerButtons: AnswerButton[];
-  handleAnswerButtonClick: (answerButton: AnswerButton) => boolean;
+  selectables: Selectable[];
+  handleAnswerButtonClick: (selectable: Selectable) => boolean;
 }
 
-export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props): JSX.Element => {
+export const AnswerButtons = ({ selectables, handleAnswerButtonClick }: Props): JSX.Element => {
   return (
     <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
-        {answerButtons.map((answerButton) => (
+        {selectables.map((selectable) => (
           <AnswerButtonComponent
-            key={answerButton.id}
-            answerButton={answerButton}
+            key={selectable.id}
+            selectable={selectable}
             handleAnswerButtonClick={handleAnswerButtonClick}
           />
         ))}

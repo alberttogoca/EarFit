@@ -3,7 +3,6 @@ import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswerButtons, useIntervals, usePlayButton, useStreak } from 'hooks';
-import AnswerButton from 'utils/AnswerButton';
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
@@ -12,7 +11,7 @@ export default function Intervals(): JSX.Element {
   const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(intervals);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleAnswerButtonClick(selectedOption: AnswerButton): boolean {
+  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
     if (selectedOption.id === answer.id) {
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
@@ -48,7 +47,7 @@ export default function Intervals(): JSX.Element {
         playButtonLabel="Interval?"
         instrument={instrument}
         handlePlayButtonClick={() => playInterval(answer)}
-        answerButtons={answerButtons}
+        selectables={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

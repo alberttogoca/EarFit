@@ -1,15 +1,15 @@
 import { Button } from 'react-bootstrap';
-import AnswerButton from 'utils/AnswerButton';
+import Selectable from 'utils/Selectable';
 
 interface Props {
-  answerButton: AnswerButton;
-  handleAnswerButtonClick: (answerButton: AnswerButton) => boolean;
+  selectable: Selectable;
+  handleAnswerButtonClick: (selectable: Selectable) => boolean;
 }
 
-export const AnswerButton = ({ answerButton, handleAnswerButtonClick }: Props): JSX.Element => {
+export const AnswerButton = ({ selectable, handleAnswerButtonClick }: Props): JSX.Element => {
   return (
-    <Button variant={answerButton.color} onClick={() => handleAnswerButtonClick(answerButton)}>
-      {answerButton.displayName}
+    <Button variant={selectable.color} onClick={() => handleAnswerButtonClick(selectable)}>
+      {selectable.displayName}
     </Button>
   );
 };
