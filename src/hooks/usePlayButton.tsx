@@ -15,6 +15,7 @@ export const PlayButton = (): HookReturnType => {
   function playNote(selectable: Selectable): void {
     play(selectable, 0.3, 0, 2);
   }
+
   function playScale(selectable: Selectable): void {
     play(selectable, 0.3, 0, 0.5);
   }

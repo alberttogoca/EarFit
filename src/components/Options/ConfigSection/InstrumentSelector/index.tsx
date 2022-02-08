@@ -11,9 +11,9 @@ export const InstrumentSelector = (): JSX.Element => {
         <p>Loading instruments...</p>
       ) : (
         <ButtonGroup>
-          {instruments.map((i, idx) => (
+          {instruments.map((i) => (
             <ToggleButton
-              key={idx}
+              key={i.instrumentName}
               value={i.displayName}
               type="checkbox"
               variant={'light'} //light or link

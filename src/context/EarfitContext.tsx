@@ -30,7 +30,7 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
   }, []);
 
   const selectInstrument = (name: InstrumentName): void => {
-    const instrument = instruments.find((i) => i.instrumentName === name);
+    const instrument = instruments?.find((i) => i.instrumentName === name);
     setInstrument(instrument);
   };
 
