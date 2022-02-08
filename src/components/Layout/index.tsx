@@ -1,13 +1,14 @@
 import { useRouter } from 'next/dist/client/router';
+import { ReactNode } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import { Footer } from './Footer';
 import { Header } from './Header';
 
 interface Props {
-  children: JSX.Element;
-  leftCol?: JSX.Element;
-  rightCol?: JSX.Element;
+  children: ReactNode;
+  leftCol?: ReactNode;
+  rightCol?: ReactNode;
 }
 
 export default function Layout({ children, rightCol, leftCol }: Props): JSX.Element {
