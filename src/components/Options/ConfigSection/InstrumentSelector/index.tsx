@@ -1,4 +1,3 @@
-import { ConfigSection } from 'components/Options/ConfigSection';
 import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
@@ -7,7 +6,7 @@ export const InstrumentSelector = (): JSX.Element => {
   const isLoading = instruments === undefined && instrument === undefined;
 
   return (
-    <ConfigSection title="Instrument" tooltipMessage="Select the instrument that plays">
+    <>
       {isLoading ? (
         <p>Loading instruments...</p>
       ) : (
@@ -28,6 +27,6 @@ export const InstrumentSelector = (): JSX.Element => {
           ))}
         </ButtonGroup>
       )}
-    </ConfigSection>
+    </>
   );
 };

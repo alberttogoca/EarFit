@@ -1,8 +1,11 @@
-import { AnswerToggleSelector } from 'components/Options/AnswerToggleSelector';
-import { DirectionSelector } from 'components/Options/DirectionSelector';
-import { InstrumentSelector } from 'components/Options/InstrumentSelector';
-import { OptionsTitle } from 'components/Options/OptionsTitle';
-import { ScaleSelector } from 'components/Options/ScaleSelector';
+import {
+  AnswerToggles,
+  ConfigSection,
+  DirectionSelector,
+  InstrumentSelector,
+  ScaleDropdown,
+} from 'components/Options/ConfigSection';
+import { Title } from 'components/Options/Title';
 import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
@@ -27,23 +30,45 @@ export const Options = ({
 }: Props): JSX.Element => {
   return (
     <Container>
-      <OptionsTitle>Options</OptionsTitle>
+      <Title>Options</Title>
       {scalesNames && (
-        <ScaleSelector
-          scalesNames={scalesNames}
-          selectedScale={selectedScale}
-          handleDropdownScaleSelect={handleDropdownScaleSelect}
+        <ConfigSection
+          title="Scale"
+          tooltipMessage="Select the scale from which the notes are taken"
+          config={
+            <ScaleDropdown
+              scalesNames={scalesNames}
+              selectedScale={selectedScale}
+              handleDropdownScaleSelect={handleDropdownScaleSelect}
+            />
+          }
         />
       )}
-      {handleDirectionChange && <DirectionSelector handleDirectionChange={handleDirectionChange} />}
+      {handleDirectionChange && (
+        <ConfigSection
+          title="Direction"
+          tooltipMessage="Select the direction of the notes"
+          config={<DirectionSelector handleDirectionChange={handleDirectionChange} />}
+        />
+      )}
       {selectables && (
-        <AnswerToggleSelector
-          selectables={selectables}
-          handleToggleButtonChange={handleToggleButtonChange}
-          handleToggleAllChange={handleToggleAllChange}
+        <ConfigSection
+          title="Active Options"
+          tooltipMessage="Select the options on which you would like to be tested"
+          config={
+            <AnswerToggles
+              selectables={selectables}
+              handleToggleButtonChange={handleToggleButtonChange}
+              handleToggleAllChange={handleToggleAllChange}
+            />
+          }
         />
       )}
-      <InstrumentSelector />
+      <ConfigSection
+        title="Instrument"
+        tooltipMessage="Select the instrument that plays"
+        config={<InstrumentSelector />}
+      />
     </Container>
   );
 };

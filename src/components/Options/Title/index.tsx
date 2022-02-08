@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const OptionsTitle = ({ children }: Props): JSX.Element => {
+export const Title = ({ children }: Props): JSX.Element => {
   return (
     <>
       <Row className="justify-content-center p-3">
