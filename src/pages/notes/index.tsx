@@ -1,7 +1,7 @@
 import { Exercise } from 'components/Exercise';
+import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import PageLayout from 'components/PageLayout';
 import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
