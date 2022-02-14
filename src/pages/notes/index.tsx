@@ -1,7 +1,7 @@
 import { Exercise } from 'components/Exercise';
-import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
+import PageLayout from 'components/PageLayout';
 import { useAnswerButtons, useNotes, usePlayButton, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
@@ -41,7 +41,7 @@ export default function Notes(): JSX.Element {
   }
 
   return (
-    <Layout
+    <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
@@ -63,6 +63,6 @@ export default function Notes(): JSX.Element {
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />
-    </Layout>
+    </PageLayout>
   );
 }

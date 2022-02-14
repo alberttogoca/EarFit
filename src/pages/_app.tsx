@@ -1,6 +1,7 @@
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import 'styles/global.css';
 
+import Layout from 'components/Layout';
 import { EarfitContext } from 'context/EarfitContext';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -27,7 +28,9 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="keywords" content="Musical Ear Trainning, Music, TFG, Notes, Intervals, Scales" />
       </Head>
       <EarfitContext>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </EarfitContext>
     </>
   );

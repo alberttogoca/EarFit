@@ -1,4 +1,4 @@
-import Layout from 'components/Layout';
+import PageLayout from 'components/PageLayout';
 import Image from 'next/image';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
@@ -11,7 +11,7 @@ import ProfilePic from '/public/images/profile.png';
 export default function About(): JSX.Element {
   return (
     <>
-      <Layout>
+      <PageLayout>
         <>
           <Container className="d-flex justify-content-center p-3">
             <div className="avatar shadow">
@@ -98,7 +98,7 @@ export default function About(): JSX.Element {
             </Card.Body>
           </Card>
         </>
-      </Layout>
+      </PageLayout>
     </>
   );
 }

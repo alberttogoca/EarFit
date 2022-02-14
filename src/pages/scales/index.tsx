@@ -1,7 +1,7 @@
 import { Exercise } from 'components/Exercise';
-import Layout from 'components/Layout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
+import PageLayout from 'components/PageLayout';
 import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
@@ -31,7 +31,7 @@ export default function Scales(): JSX.Element {
   }
 
   return (
-    <Layout
+    <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
@@ -51,6 +51,6 @@ export default function Scales(): JSX.Element {
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />
-    </Layout>
+    </PageLayout>
   );
 }

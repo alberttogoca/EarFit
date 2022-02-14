@@ -34,19 +34,19 @@ export const Exercise = ({
   return (
     <>
       {title !== 'Piano' && (
-        <Container>
+        <>
           <Title>{title}</Title>
           <PlayButton label={playButtonLabel} instrument={instrument} handlePlayButtonClick={handlePlayButtonClick} />
           <AnswerButtons selectables={selectables} handleAnswerButtonClick={handleAnswerButtonClick} />
           <Streak streak={streak} />
           <Piano />
-        </Container>
+        </>
       )}
       {lastNote && firstNote && (
-        <Container>
+        <>
           <Title>{title}</Title>
           <Piano firstNote={firstNote} lastNote={lastNote} />
-        </Container>
+        </>
       )}
     </>
   );
