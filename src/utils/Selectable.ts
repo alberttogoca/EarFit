@@ -32,8 +32,8 @@ export function selectAllOrThreeItems<T extends Selectable>(items: T[]): T[] {
 }
 
 export function updateIsSelectedItem<T extends Selectable>(items: T[], id: string, newIsSelected: boolean): T[] {
-  const hasManySelectedScales = items.filter((s) => s.isSelected).length > 1;
-  if (newIsSelected === true || hasManySelectedScales) {
+  const hasManySelectedItems = items.filter((s) => s.isSelected).length > 1;
+  if (newIsSelected === true || hasManySelectedItems) {
     const newItems = items.map((item) => {
       return {
         ...item,
@@ -42,6 +42,7 @@ export function updateIsSelectedItem<T extends Selectable>(items: T[], id: strin
     });
     return newItems;
   }
+  return items;
 }
 
 export function getRandomItemThatIsSelected<T extends Selectable>(items: T[]): T {
