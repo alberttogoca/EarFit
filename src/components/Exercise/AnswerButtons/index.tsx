@@ -3,15 +3,15 @@ import { ButtonGroup } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  selectables: Selectable[];
+  answerButtons: Selectable[];
   handleAnswerButtonClick: (selectable: Selectable) => boolean;
 }
 
-export const AnswerButtons = ({ selectables, handleAnswerButtonClick }: Props): JSX.Element => {
+export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props): JSX.Element => {
   return (
     <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
-        {selectables.map((selectable) => (
+        {answerButtons.map((selectable) => (
           <AnswerButtonComponent
             key={selectable.id}
             selectable={selectable}

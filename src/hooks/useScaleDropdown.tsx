@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { scalesNames } from 'services/noteService';
 
 type HookReturnType = {
   scalesNames: string[];
   selectedScale: string;
   setNewSelectedScale: (name: string) => void;
 };
+
+const scalesNames = ['Major', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
 
 const useScaleDropdown = (): HookReturnType => {
   const [selectedScale, setSelectedScale] = useState<string>(undefined);

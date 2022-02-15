@@ -1,6 +1,7 @@
+import { useScaleDropdown } from 'hooks';
 import { useEffect, useState } from 'react';
 import { calcIntervalToPlay, getIntervals } from 'services/intervalService';
-import { getNotes, scalesNames } from 'services/noteService';
+import { getNotes } from 'services/noteService';
 import { getScales } from 'services/scaleService';
 import Selectable, {
   getRandomItemThatIsSelected,
@@ -28,8 +29,8 @@ type HookReturnType = {
 const useExercise = (exerciseVariant: ExerciseVariant): HookReturnType => {
   const [selectables, setSelectables] = useState<Selectable[]>([]);
   const [answer, setAnswer] = useState<Selectable>();
-  //deberia ir en su propio hook:
-  const [selectedScale, setSelectedScale] = useState<string>(scalesNames[0]);
+  const { scalesNames, selectedScale, setNewSelectedScale } = useScaleDropdown();
+
   const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
@@ -70,13 +71,6 @@ const useExercise = (exerciseVariant: ExerciseVariant): HookReturnType => {
         newAnswer = getRandomItemThatIsSelected(selectables);
         setAnswer(newAnswer);
         return newAnswer;
-    }
-  };
-
-  const setNewSelectedScale = (id: string): void => {
-    const newSelectedScale = scalesNames.find((s) => s === id);
-    if (newSelectedScale) {
-      setSelectedScale(newSelectedScale);
     }
   };
 

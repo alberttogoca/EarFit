@@ -1,5 +1,3 @@
-import { Container } from 'react-bootstrap';
-import { Instrument } from 'services/instrumentService';
 import Selectable from 'utils/Selectable';
 
 import { AnswerButtons } from './AnswerButtons';
@@ -11,9 +9,8 @@ import { Title } from './Title';
 interface Props {
   title?: string;
   playButtonLabel?: string;
-  instrument?: Instrument;
   handlePlayButtonClick?: () => void;
-  selectables?: Selectable[];
+  answerButtons?: Selectable[];
   handleAnswerButtonClick?: (answerButton: Selectable) => boolean;
   streak?: number;
   firstNote?: string;
@@ -23,9 +20,8 @@ interface Props {
 export const Exercise = ({
   title,
   playButtonLabel,
-  instrument,
   handlePlayButtonClick,
-  selectables,
+  answerButtons,
   handleAnswerButtonClick,
   streak,
   firstNote,
@@ -33,18 +29,17 @@ export const Exercise = ({
 }: Props): JSX.Element => {
   return (
     <>
+      <Title>{title}</Title>
       {title !== 'Piano' && (
         <>
-          <Title>{title}</Title>
-          <PlayButton label={playButtonLabel} instrument={instrument} handlePlayButtonClick={handlePlayButtonClick} />
-          <AnswerButtons selectables={selectables} handleAnswerButtonClick={handleAnswerButtonClick} />
+          <PlayButton label={playButtonLabel} handlePlayButtonClick={handlePlayButtonClick} />
+          <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
           <Streak streak={streak} />
           <Piano />
         </>
       )}
       {lastNote && firstNote && (
         <>
-          <Title>{title}</Title>
           <Piano firstNote={firstNote} lastNote={lastNote} />
         </>
       )}

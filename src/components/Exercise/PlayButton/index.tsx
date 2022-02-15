@@ -1,13 +1,14 @@
+import { useInstrumentContext } from 'context/EarfitContext';
 import { Button, Container } from 'react-bootstrap';
-import { Instrument } from 'services/instrumentService';
 
 interface Props {
   label: string;
-  instrument: Instrument;
   handlePlayButtonClick: () => void;
 }
 
-export const PlayButton = ({ label, instrument, handlePlayButtonClick }: Props): JSX.Element => {
+export const PlayButton = ({ label, handlePlayButtonClick }: Props): JSX.Element => {
+  const { instrument } = useInstrumentContext();
+
   return (
     <>
       <Container className="d-flex justify-content-center p-3 ">

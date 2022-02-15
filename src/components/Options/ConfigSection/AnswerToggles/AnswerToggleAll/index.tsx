@@ -2,18 +2,18 @@ import { ToggleButton } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  selectables?: Selectable[];
+  answerToggles?: Selectable[];
   handleToggleAllChange?: () => void;
 }
 
-export const AnswerToggleAll = ({ selectables, handleToggleAllChange }: Props): JSX.Element => {
+export const AnswerToggleAll = ({ answerToggles, handleToggleAllChange }: Props): JSX.Element => {
   return (
     <ToggleButton
       value="Check All"
       type="checkbox"
       variant={'light'} //light or link
       size="sm"
-      checked={selectables.every((selectable) => selectable.isSelected === true)}
+      checked={answerToggles.every((selectable) => selectable.isSelected === true)}
       onChange={() => {
         handleToggleAllChange();
       }}

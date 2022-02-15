@@ -1,8 +1,6 @@
 import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
 import Selectable from 'utils/Selectable';
 
-export const scalesNames = ['Major', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
-
 export const getNotes = (scaleName: string): Selectable[] => {
   const tonic = 'C';
   const octave = '3';

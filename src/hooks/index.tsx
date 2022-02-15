@@ -1,4 +1,5 @@
 import useAnswerButtons from './useAnswerButtons';
+import useAnswerToggles from './useAnswerToggles';
 import useExercise from './useExercise';
 import useIntervals from './useIntervals';
 import useNotes from './useNotes';
@@ -10,6 +11,7 @@ import useStreak from './useStreak';
 
 export {
   useAnswerButtons,
+  useAnswerToggles,
   useExercise,
   useIntervals,
   useNotes,

@@ -10,7 +10,7 @@ import { Container } from 'react-bootstrap';
 import Selectable from 'utils/Selectable';
 
 interface Props {
-  selectables?: Selectable[];
+  answerToggles?: Selectable[];
   scalesNames?: string[];
   selectedScale?: string;
   handleDropdownScaleSelect?: (scaleName: string) => void;
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const Options = ({
-  selectables,
+  answerToggles,
   scalesNames,
   selectedScale,
   handleDropdownScaleSelect,
@@ -51,13 +51,13 @@ export const Options = ({
           config={<DirectionSelector handleDirectionChange={handleDirectionChange} />}
         />
       )}
-      {selectables && (
+      {answerToggles && (
         <ConfigSection
           title="Active Options"
           tooltipMessage="Select the options on which you would like to be tested"
           config={
             <AnswerToggles
-              selectables={selectables}
+              answerToggles={answerToggles}
               handleToggleButtonChange={handleToggleButtonChange}
               handleToggleAllChange={handleToggleAllChange}
             />
