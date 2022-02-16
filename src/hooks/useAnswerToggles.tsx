@@ -1,24 +1,31 @@
 import { useEffect, useState } from 'react';
-import Selectable, { selectThreeRandomItems, selectThreeRandomItems2 } from 'utils/Selectable';
+import Selectable, {
+  Answer,
+  getItemsWithThreeSelected,
+  SelectableAnswer,
+  selectThreeRandomItems,
+} from 'utils/Selectable';
 
 type HookReturnType = {
-  items: Selectable[];
+  items: SelectableAnswer[];
   updateIsSelected: (selectable: Selectable) => void;
   selectAllOrThree: () => void;
 };
 
-export function useAnswerToggles(selectables: Selectable[]): HookReturnType {
-  const [items, setItems] = useState<Selectable[]>([]);
+export function useAnswerToggles(answers: Answer[]): HookReturnType {
+  const [items, setItems] = useState<SelectableAnswer[]>([]);
 
   useEffect(() => {
-    if (!selectables || selectables.length === 0) {
+    if (!answers || answers.length === 0) {
       return;
     }
+    const selectedAnswers = answers.map<SelectableAnswer>((s) => {
+      return { ...s, isSelected: false };
+    });
 
-    //convertir los selectables en selectables
-    const newItems = selectThreeRandomItems(selectables);
+    const newItems = getItemsWithThreeSelected(selectedAnswers);
     setItems(newItems);
-  }, [selectables]);
+  }, [answers]);
 
   const selectAllOrThree = (): void => {
     const allSelected = items.every((option) => option.isSelected === true);
@@ -31,7 +38,7 @@ export function useAnswerToggles(selectables: Selectable[]): HookReturnType {
 
   const selectAllItems = (): void => {
     setItems((items) => {
-      return items.map<Selectable>((item) => {
+      return items.map<SelectableAnswer>((item) => {
         return {
           ...item,
           isSelected: true,
@@ -41,9 +48,9 @@ export function useAnswerToggles(selectables: Selectable[]): HookReturnType {
   };
 
   const selectThreeItems = (): void => {
-    const ids = selectThreeRandomItems2(items).map((i) => i.id);
+    const ids = selectThreeRandomItems(items).map((i) => i.id);
     setItems((items) => {
-      return items.map<Selectable>((item) => {
+      return items.map<SelectableAnswer>((item) => {
         return {
           ...item,
           isSelected: ids.some((id) => id == item.id),
@@ -59,7 +66,7 @@ export function useAnswerToggles(selectables: Selectable[]): HookReturnType {
 
     if (newValue === true || hasManySelectedNotes) {
       setItems((items) => {
-        return items.map<Selectable>((item) => {
+        return items.map<SelectableAnswer>((item) => {
           return {
             ...item,
             isSelected: item.id === id ? newValue : item.isSelected,

@@ -2,6 +2,24 @@ import { getRandomItem } from './arrayUtils';
 
 type VariantColor = 'success' | 'secondary' | 'danger';
 
+export interface Answer {
+  id: string;
+  values: string[];
+  displayName: string;
+}
+
+export interface IsSelectable {
+  isSelected: boolean;
+}
+
+export interface HasColor {
+  color: VariantColor;
+}
+
+export type SelectableAnswer = Answer & IsSelectable;
+
+export type SelectableAnswerColor = SelectableAnswer & HasColor;
+
 export default interface Selectable {
   id: string;
   values: string[];
@@ -24,13 +42,13 @@ export function updateIsSelectedItem<T extends Selectable>(items: T[], id: strin
   return items;
 }
 
-function updateIsSelectedAllItems<T extends Selectable>(items: T[], value: boolean): T[] {
+function updateIsSelectedAllItems<T extends IsSelectable>(items: T[], value: boolean): T[] {
   return items.map((i) => {
     return { ...i, isSelected: value };
   });
 }
 
-export function selectThreeRandomItems<T extends Selectable>(items: T[]): T[] {
+export function getItemsWithThreeSelected<T extends IsSelectable>(items: T[]): T[] {
   const newItems = updateIsSelectedAllItems(items, false);
 
   for (let i = 0; i < 3; i++) {
@@ -40,9 +58,19 @@ export function selectThreeRandomItems<T extends Selectable>(items: T[]): T[] {
   return newItems;
 }
 
+export function selectThreeRandomItems<T extends IsSelectable>(items: T[]): T[] {
+  const newItems = updateIsSelectedAllItems(items, false);
+
+  for (let i = 0; i < 3; i++) {
+    const item = getRandomItem(newItems.filter((x) => !x.isSelected));
+    item.isSelected = true;
+  }
+  return newItems.filter((t) => t.isSelected == true);
+}
+
 export function selectAllOrThreeItems<T extends Selectable>(items: T[]): T[] {
   const allSelected = items.every((option) => option.isSelected === true);
-  return allSelected ? selectThreeRandomItems(items) : updateIsSelectedAllItems(items, true);
+  return allSelected ? getItemsWithThreeSelected(items) : updateIsSelectedAllItems(items, true);
 }
 
 export function getRandomItemThatIsSelected<T extends Selectable>(items: T[]): T {
@@ -87,14 +115,4 @@ export function reverseAllItemValues<T extends Selectable>(items: T[]): T[] {
     };
   });
   return newItems;
-}
-
-export function selectThreeRandomItems2<T extends Selectable>(items: T[]): T[] {
-  const newItems = updateIsSelectedAllItems(items, false);
-
-  for (let i = 0; i < 3; i++) {
-    const item = getRandomItem(newItems.filter((x) => !x.isSelected));
-    item.isSelected = true;
-  }
-  return newItems.filter((t) => t.isSelected == true);
 }

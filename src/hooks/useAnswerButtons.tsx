@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
-import Selectable from 'utils/Selectable';
+import Selectable, { SelectableAnswer, SelectableAnswerColor } from 'utils/Selectable';
 
 import usePlayButton from './usePlayButton';
 import useStreak from './useStreak';
 
 type HookReturnType = {
-  answerButtons: Selectable[];
-  handleAnswerButtonClick: (selectedOption: Selectable) => void;
+  answerButtons: SelectableAnswerColor[];
+  handleAnswerButtonClick: (selectedOption: SelectableAnswerColor) => void;
   streak: number;
 };
 
 export function useAnswerButtons(
-  selectables: Selectable[],
+  selectables: SelectableAnswer[],
   answer: Selectable,
   setNewAnswer: () => void
 ): HookReturnType {
   const { playNote } = usePlayButton();
-  const [answerButtons, setAnswerButtons] = useState<Selectable[]>([]);
+  const [answerButtons, setAnswerButtons] = useState<SelectableAnswerColor[]>([]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function useAnswerButtons(
 
     const newOptions = selectables
       .filter((n) => n.isSelected)
-      .map<Selectable>((item) => {
+      .map<SelectableAnswerColor>((item) => {
         return {
           ...item,
           color: 'secondary',
@@ -36,7 +36,7 @@ export function useAnswerButtons(
     setAnswerButtons(newOptions);
   }, [selectables]);
 
-  function handleAnswerButtonClick(selectedOption: Selectable): void {
+  function handleAnswerButtonClick(selectedOption: SelectableAnswerColor): void {
     const isAnswer = selectedOption.id.toUpperCase() === answer.id.toUpperCase();
     if (isAnswer) {
       setNewAnswer();
@@ -53,10 +53,10 @@ export function useAnswerButtons(
     }
   }
 
-  function updateAnswerButtonColor(answerButton: Selectable, isAnswer: boolean): void {
+  function updateAnswerButtonColor(answerButton: SelectableAnswerColor, isAnswer: boolean): void {
     const newColor = isAnswer ? 'success' : 'danger';
     setAnswerButtons((answerButtons) => {
-      return answerButtons.map<Selectable>((option) => {
+      return answerButtons.map<SelectableAnswerColor>((option) => {
         return {
           ...option,
           color: answerButton.id === option.id ? newColor : option.color,
@@ -67,7 +67,7 @@ export function useAnswerButtons(
 
   function clearAllAnswerButtonsColor(): void {
     setAnswerButtons((answerButtons) => {
-      return answerButtons.map<Selectable>((option) => {
+      return answerButtons.map<SelectableAnswerColor>((option) => {
         return {
           ...option,
           color: 'secondary',

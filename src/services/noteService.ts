@@ -1,13 +1,13 @@
 import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
-import Selectable, { selectThreeRandomItems } from 'utils/Selectable';
+import { Answer } from 'utils/Selectable';
 
-export const getNotes = (scaleName: string): Selectable[] => {
+export const getNotes = (scaleName: string): Answer[] => {
   const tonic = 'C';
   const octave = '3';
   const pattern = scaleName.toLowerCase();
   const notes = TonalScale.get(tonic + octave + ' ' + pattern).notes;
   //major
-  const myNotes: Selectable[] = notes.map((n) => {
+  const myNotes: Answer[] = notes.map((n) => {
     return {
       id: TonalNote.get(n).pc,
       values: [n],
@@ -16,5 +16,5 @@ export const getNotes = (scaleName: string): Selectable[] => {
       color: 'secondary',
     };
   });
-  return selectThreeRandomItems(myNotes);
+  return myNotes;
 };
