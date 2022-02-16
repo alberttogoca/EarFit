@@ -1,3 +1,4 @@
+import useAnswer from './useAnswer';
 import useAnswerButtons from './useAnswerButtons';
 import useAnswerToggles from './useAnswerToggles';
 import useExercise from './useExercise';
@@ -10,6 +11,7 @@ import useScales from './useScales';
 import useStreak from './useStreak';
 
 export {
+  useAnswer,
   useAnswerButtons,
   useAnswerToggles,
   useExercise,

@@ -2,22 +2,26 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswerButtons, useAnswerToggles, useNotes, usePlayButton, useScaleDropdown } from 'hooks';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, usePlayButton /*, useScaleDropdown*/ } from 'hooks';
+import useNotesScales from 'hooks/useNotesScales';
+import { GetStaticProps } from 'next';
+import { getNotesScales } from 'services/scaleService';
 
-export default function Notes(): JSX.Element {
-  const { scalesNames, selectedScale, setNewSelectedScale } = useScaleDropdown();
-  const { notes, setNewNotes, answer, setNewAnswer } = useNotes(selectedScale); //Esto a contexto?
+export default function Notes({ scales }: Props): JSX.Element {
+  const { selectedScale, setNewSelectedScale } = useNotesScales(scales);
+  const { notes } = useNotes(selectedScale);
   const { playNote } = usePlayButton();
-  const { updateIsSelected, selectAllOrThree } = useAnswerToggles(notes, setNewNotes);
-  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(notes, answer, setNewAnswer, playNote);
+  const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
+  const { answer, setNewAnswer } = useAnswer(items);
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(items, answer, setNewAnswer);
 
   return (
     <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
-          answerToggles={notes}
-          scalesNames={scalesNames}
+          answerToggles={items}
+          scalesNames={scales}
           selectedScale={selectedScale}
           handleDropdownScaleSelect={setNewSelectedScale}
           handleToggleAllChange={selectAllOrThree}
@@ -36,3 +40,16 @@ export default function Notes(): JSX.Element {
     </PageLayout>
   );
 }
+
+interface Props {
+  scales: string[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = () => {
+  const scales = getNotesScales();
+  return {
+    props: {
+      scales,
+    },
+  };
+};

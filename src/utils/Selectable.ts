@@ -88,3 +88,13 @@ export function reverseAllItemValues<T extends Selectable>(items: T[]): T[] {
   });
   return newItems;
 }
+
+export function selectThreeRandomItems2<T extends Selectable>(items: T[]): T[] {
+  const newItems = updateIsSelectedAllItems(items, false);
+
+  for (let i = 0; i < 3; i++) {
+    const item = getRandomItem(newItems.filter((x) => !x.isSelected));
+    item.isSelected = true;
+  }
+  return newItems.filter((t) => t.isSelected == true);
+}

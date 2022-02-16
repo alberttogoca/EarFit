@@ -1,39 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getNotes } from 'services/noteService';
-import Selectable, { getRandomItemThatIsSelected } from 'utils/Selectable';
+import Selectable from 'utils/Selectable';
 
 type HookReturnType = {
-  notes: Selectable[];
-  setNewNotes: (selectable: Selectable[]) => void;
-  answer: Selectable;
-  setNewAnswer: () => void;
+  notes: Selectable[]; //no tiene que ser selectable, tiene que ser un objeto minimo!!
 };
 
 const useNotes = (selectedScale: string): HookReturnType => {
   const [notes, setNotes] = useState<Selectable[]>([]);
-  const [answer, setAnswer] = useState<Selectable>();
 
   useEffect(() => {
     const newNotes = getNotes(selectedScale);
     setNotes(newNotes);
   }, [selectedScale]);
 
-  useEffect(() => {
-    if (!answer || !notes.find((n) => n.id === answer.id)?.isSelected) {
-      const newAnswer = getRandomItemThatIsSelected(notes);
-      setAnswer(newAnswer);
-    }
-  }, [answer, notes]);
-
-  function setNewNotes(newNotes: Selectable[]): void {
-    setNotes(newNotes);
-  }
-
-  const setNewAnswer = (): void => {
-    const newAnswer = getRandomItemThatIsSelected(notes);
-    setAnswer(newAnswer);
-  };
-  return { notes, setNewNotes, answer, setNewAnswer };
+  return { notes };
 };
 
 export default useNotes;

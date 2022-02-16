@@ -19,3 +19,7 @@ export const getScales = (): Selectable[] => {
   });
   return selectThreeRandomItems(myScales);
 };
+
+export const getNotesScales = (): string[] => {
+  return ['Major', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
+};

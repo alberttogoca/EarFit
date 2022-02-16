@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react';
 import Selectable from 'utils/Selectable';
 
+import usePlayButton from './usePlayButton';
 import useStreak from './useStreak';
 
 type HookReturnType = {
   answerButtons: Selectable[];
-  handleAnswerButtonClick: (selectedOption: Selectable) => boolean;
+  handleAnswerButtonClick: (selectedOption: Selectable) => void;
   streak: number;
-  updateAnswerButtonColor: (answerButton: Selectable, isAnswer: boolean) => void;
-  clearAllAnswerButtonsColor: () => void;
 };
 
 export function useAnswerButtons(
   selectables: Selectable[],
   answer: Selectable,
-  setNewAnswer: () => void,
-  playNote: (answer: Selectable) => void
+  setNewAnswer: () => void
 ): HookReturnType {
+  const { playNote } = usePlayButton();
   const [answerButtons, setAnswerButtons] = useState<Selectable[]>([]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   useEffect(() => {
+    if (!selectables || selectables.length === 0) {
+      return;
+    }
+
     const newOptions = selectables
       .filter((n) => n.isSelected)
       .map<Selectable>((item) => {
@@ -33,8 +36,9 @@ export function useAnswerButtons(
     setAnswerButtons(newOptions);
   }, [selectables]);
 
-  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
-    if (selectedOption.id.toUpperCase() === answer.id.toUpperCase()) {
+  function handleAnswerButtonClick(selectedOption: Selectable): void {
+    const isAnswer = selectedOption.id.toUpperCase() === answer.id.toUpperCase();
+    if (isAnswer) {
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
       IncrementStreak();
@@ -43,27 +47,22 @@ export function useAnswerButtons(
       setTimeout(() => {
         clearAllAnswerButtonsColor();
       }, 1000);
-
-      return true;
     } else {
       updateAnswerButtonColor(selectedOption, false);
       clearStreak();
-      return false;
     }
   }
 
   function updateAnswerButtonColor(answerButton: Selectable, isAnswer: boolean): void {
-    const newOptions = answerButtons.map<Selectable>((option) => {
-      if (answerButton.displayName === option.displayName) {
+    const newColor = isAnswer ? 'success' : 'danger';
+    setAnswerButtons((answerButtons) => {
+      return answerButtons.map<Selectable>((option) => {
         return {
           ...option,
-          color: isAnswer ? 'success' : 'danger',
+          color: answerButton.id === option.id ? newColor : option.color,
         };
-      }
-      return { ...option };
+      });
     });
-
-    setAnswerButtons(newOptions);
   }
 
   function clearAllAnswerButtonsColor(): void {
@@ -77,7 +76,7 @@ export function useAnswerButtons(
     });
   }
 
-  return { answerButtons, handleAnswerButtonClick, streak, updateAnswerButtonColor, clearAllAnswerButtonsColor };
+  return { answerButtons, handleAnswerButtonClick, streak };
 }
 
 export default useAnswerButtons;
