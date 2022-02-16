@@ -17,13 +17,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/api/hello.js"  ],
+    "**/*.tsx",
+    "pages/api/hello.js"
+  ],
   "exclude": [
     "node_modules"
   ]
