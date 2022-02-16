@@ -1,54 +1,83 @@
-import { useEffect } from 'react';
-import Selectable, { setAllColorSecondary, setItemColorSuccesOrDanger } from 'utils/Selectable';
+import { useEffect, useState } from 'react';
+import Selectable from 'utils/Selectable';
 
 import useStreak from './useStreak';
 
 type HookReturnType = {
-  handleAnswerButtonClick: (selectedOption: Selectable) => void;
+  answerButtons: Selectable[];
+  handleAnswerButtonClick: (selectedOption: Selectable) => boolean;
   streak: number;
-  updateAnswerButtonColor;
-  clearAllAnswerButtonsColor;
+  updateAnswerButtonColor: (answerButton: Selectable, isAnswer: boolean) => void;
+  clearAllAnswerButtonsColor: () => void;
 };
 
-const useAnswerButtons = (
+export function useAnswerButtons(
   selectables: Selectable[],
-  setNewSelectables: (selectables: Selectable[]) => void,
-  answer?: Selectable,
-  setNewAnswer?: () => void,
-  play?: (selectable: Selectable) => void
-): HookReturnType => {
-  useEffect(() => {
-    //clearAllAnswerButtonsColor();
-  }, [selectables]);
+  answer: Selectable,
+  setNewAnswer: () => void,
+  playNote: (answer: Selectable) => void
+): HookReturnType {
+  const [answerButtons, setAnswerButtons] = useState<Selectable[]>([]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleAnswerButtonClick(answerButton: Selectable): void {
-    const isAnswer = answerButton.id === answer.id;
-    if (isAnswer) {
+  useEffect(() => {
+    const newOptions = selectables
+      .filter((n) => n.isSelected)
+      .map<Selectable>((item) => {
+        return {
+          ...item,
+          color: 'secondary',
+        };
+      });
+
+    setAnswerButtons(newOptions);
+  }, [selectables]);
+
+  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
+    if (selectedOption.id.toUpperCase() === answer.id.toUpperCase()) {
       setNewAnswer();
-      updateAnswerButtonColor(answerButton, isAnswer);
+      updateAnswerButtonColor(selectedOption, true);
       IncrementStreak();
-      play(answer);
+      playNote(answer);
+
       setTimeout(() => {
         clearAllAnswerButtonsColor();
       }, 1000);
+
+      return true;
     } else {
-      updateAnswerButtonColor(answerButton, isAnswer);
+      updateAnswerButtonColor(selectedOption, false);
       clearStreak();
+      return false;
     }
   }
 
   function updateAnswerButtonColor(answerButton: Selectable, isAnswer: boolean): void {
-    const newAnswerButtons = setItemColorSuccesOrDanger(selectables, answerButton.id, isAnswer);
-    setNewSelectables(newAnswerButtons);
+    const newOptions = answerButtons.map<Selectable>((option) => {
+      if (answerButton.displayName === option.displayName) {
+        return {
+          ...option,
+          color: isAnswer ? 'success' : 'danger',
+        };
+      }
+      return { ...option };
+    });
+
+    setAnswerButtons(newOptions);
   }
 
   function clearAllAnswerButtonsColor(): void {
-    const newAnswerButtons = setAllColorSecondary(selectables);
-    setNewSelectables(newAnswerButtons);
+    setAnswerButtons((answerButtons) => {
+      return answerButtons.map<Selectable>((option) => {
+        return {
+          ...option,
+          color: 'secondary',
+        };
+      });
+    });
   }
 
-  return { handleAnswerButtonClick, streak, updateAnswerButtonColor, clearAllAnswerButtonsColor };
-};
+  return { answerButtons, handleAnswerButtonClick, streak, updateAnswerButtonColor, clearAllAnswerButtonsColor };
+}
 
 export default useAnswerButtons;

@@ -4,14 +4,14 @@ import Selectable, { getRandomItemThatIsSelected } from 'utils/Selectable';
 
 type HookReturnType = {
   notes: Selectable[];
-  setNewNotes: (newNotes: Selectable[]) => void;
+  setNewNotes: (selectable: Selectable[]) => void;
   answer: Selectable;
   setNewAnswer: () => void;
 };
 
 const useNotes = (selectedScale: string): HookReturnType => {
   const [notes, setNotes] = useState<Selectable[]>([]);
-  const [answer, setAnswer] = useState<Selectable>(undefined);
+  const [answer, setAnswer] = useState<Selectable>();
 
   useEffect(() => {
     const newNotes = getNotes(selectedScale);
@@ -19,7 +19,7 @@ const useNotes = (selectedScale: string): HookReturnType => {
   }, [selectedScale]);
 
   useEffect(() => {
-    if (!answer || !notes.find((s) => s.id === answer.id)?.isSelected) {
+    if (!answer || !notes.find((n) => n.id === answer.id)?.isSelected) {
       const newAnswer = getRandomItemThatIsSelected(notes);
       setAnswer(newAnswer);
     }
@@ -29,17 +29,11 @@ const useNotes = (selectedScale: string): HookReturnType => {
     setNotes(newNotes);
   }
 
-  function setNewAnswer(): void {
+  const setNewAnswer = (): void => {
     const newAnswer = getRandomItemThatIsSelected(notes);
     setAnswer(newAnswer);
-  }
-
-  return {
-    notes,
-    setNewNotes,
-    answer,
-    setNewAnswer,
   };
+  return { notes, setNewNotes, answer, setNewAnswer };
 };
 
 export default useNotes;

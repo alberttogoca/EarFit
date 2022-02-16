@@ -9,10 +9,7 @@ export default function Notes(): JSX.Element {
   const { notes, setNewNotes, answer, setNewAnswer } = useNotes(selectedScale); //Esto a contexto?
   const { playNote } = usePlayButton();
   const { updateIsSelected, selectAllOrThree } = useAnswerToggles(notes, setNewNotes);
-  const { handleAnswerButtonClick, streak } = useAnswerButtons(notes, setNewNotes, answer, setNewAnswer, playNote);
-
-  console.log(notes);
-  console.log(answer);
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(notes, answer, setNewAnswer, playNote);
 
   return (
     <PageLayout
@@ -32,7 +29,7 @@ export default function Notes(): JSX.Element {
         title="Notes"
         playButtonLabel="Note?"
         handlePlayButtonClick={() => playNote(answer)}
-        answerButtons={notes}
+        answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />
