@@ -2,8 +2,7 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, usePlayButton /*, useScaleDropdown*/ } from 'hooks';
-import useNotesScales from 'hooks/useNotesScales';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, useNotesScales, usePlayButton } from 'hooks';
 import { GetStaticProps } from 'next';
 import { getNotesScales } from 'services/scaleService';
 

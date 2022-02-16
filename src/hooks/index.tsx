@@ -1,9 +1,9 @@
 import useAnswer from './useAnswer';
 import useAnswerButtons from './useAnswerButtons';
 import useAnswerToggles from './useAnswerToggles';
-import useExercise from './useExercise';
 import useIntervals from './useIntervals';
 import useNotes from './useNotes';
+import useNotesScales from './useNotesScales';
 import usePiano from './usePiano';
 import usePlayButton from './usePlayButton';
 import useScaleDropdown from './useScaleDropdown';
@@ -14,9 +14,9 @@ export {
   useAnswer,
   useAnswerButtons,
   useAnswerToggles,
-  useExercise,
   useIntervals,
   useNotes,
+  useNotesScales,
   usePiano,
   usePlayButton,
   useScaleDropdown,

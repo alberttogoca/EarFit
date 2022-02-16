@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getNotes } from 'services/noteService';
-import Selectable from 'utils/Selectable';
+import { Answer } from 'utils/Selectable';
 
 type HookReturnType = {
-  notes: Selectable[]; //no tiene que ser selectable, tiene que ser un objeto minimo!!
+  notes: Answer[]; //no tiene que ser selectable, tiene que ser un objeto minimo!!
 };
 
 const useNotes = (selectedScale: string): HookReturnType => {
-  const [notes, setNotes] = useState<Selectable[]>([]);
+  const [notes, setNotes] = useState<Answer[]>([]);
 
   useEffect(() => {
     const newNotes = getNotes(selectedScale);
