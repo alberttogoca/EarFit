@@ -6,7 +6,6 @@ import useNotes from './useNotes';
 import useNotesScales from './useNotesScales';
 import usePiano from './usePiano';
 import usePlayButton from './usePlayButton';
-import useScaleDropdown from './useScaleDropdown';
 import useScales from './useScales';
 import useStreak from './useStreak';
 
@@ -19,7 +18,6 @@ export {
   useNotesScales,
   usePiano,
   usePlayButton,
-  useScaleDropdown,
   useScales,
   useStreak,
 };

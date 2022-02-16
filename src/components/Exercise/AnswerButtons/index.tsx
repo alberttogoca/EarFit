@@ -1,10 +1,10 @@
 import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButtons/AnswerButton';
 import { ButtonGroup } from 'react-bootstrap';
-import Selectable from 'utils/Selectable';
+import { SelectableAnswerColor } from 'utils/Selectable';
 
 interface Props {
-  answerButtons: Selectable[];
-  handleAnswerButtonClick: (selectable: Selectable) => void;
+  answerButtons: SelectableAnswerColor[];
+  handleAnswerButtonClick: (selectable: SelectableAnswerColor) => void;
 }
 
 export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props): JSX.Element => {

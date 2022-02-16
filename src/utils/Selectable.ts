@@ -73,7 +73,7 @@ export function selectAllOrThreeItems<T extends Selectable>(items: T[]): T[] {
   return allSelected ? getItemsWithThreeSelected(items) : updateIsSelectedAllItems(items, true);
 }
 
-export function getRandomItemThatIsSelected<T extends Selectable>(items: T[]): T {
+export function getRandomItemThatIsSelected<T extends IsSelectable>(items: T[]): T {
   const selectedItems = items.filter((s) => s.isSelected);
   const randomItemIsSelected = getRandomItem(selectedItems);
   return randomItemIsSelected;

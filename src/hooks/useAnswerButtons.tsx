@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Selectable, { SelectableAnswer, SelectableAnswerColor } from 'utils/Selectable';
+import { Answer, SelectableAnswer, SelectableAnswerColor } from 'utils/Selectable';
 
 import usePlayButton from './usePlayButton';
 import useStreak from './useStreak';
@@ -12,7 +12,7 @@ type HookReturnType = {
 
 export function useAnswerButtons(
   selectables: SelectableAnswer[],
-  answer: Selectable,
+  answer: Answer,
   setNewAnswer: () => void
 ): HookReturnType {
   const { playNote } = usePlayButton();

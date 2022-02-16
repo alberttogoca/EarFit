@@ -7,15 +7,15 @@ import {
 } from 'components/Options/ConfigSection';
 import { Title } from 'components/Options/Title';
 import { Container } from 'react-bootstrap';
-import Selectable from 'utils/Selectable';
+import { SelectableAnswer } from 'utils/Selectable';
 
 interface Props {
-  answerToggles?: Selectable[];
+  answerToggles?: SelectableAnswer[];
   scalesNames?: string[];
   selectedScale?: string;
   handleDropdownScaleSelect?: (scaleName: string) => void;
   handleDirectionChange?: () => void;
-  handleToggleButtonChange?: (note: Selectable) => void;
+  handleToggleButtonChange?: (note: SelectableAnswer) => void;
   handleToggleAllChange?: () => void;
 }
 

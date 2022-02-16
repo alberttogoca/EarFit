@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
-import Selectable, {
-  Answer,
-  getItemsWithThreeSelected,
-  SelectableAnswer,
-  selectThreeRandomItems,
-} from 'utils/Selectable';
+import { Answer, getItemsWithThreeSelected, SelectableAnswer, selectThreeRandomItems } from 'utils/Selectable';
 
 type HookReturnType = {
   items: SelectableAnswer[];
-  updateIsSelected: (selectable: Selectable) => void;
+  updateIsSelected: (selectable: SelectableAnswer) => void;
   selectAllOrThree: () => void;
 };
 
@@ -59,7 +54,7 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
     });
   };
 
-  const updateIsSelected = (selectable: Selectable): void => {
+  const updateIsSelected = (selectable: SelectableAnswer): void => {
     const { id } = selectable;
     const newValue = !selectable.isSelected;
     const hasManySelectedNotes = items.filter((n) => n.isSelected).length > 1;

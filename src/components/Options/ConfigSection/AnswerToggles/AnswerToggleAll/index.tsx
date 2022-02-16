@@ -1,8 +1,8 @@
 import { ToggleButton } from 'react-bootstrap';
-import Selectable from 'utils/Selectable';
+import { SelectableAnswer } from 'utils/Selectable';
 
 interface Props {
-  answerToggles?: Selectable[];
+  answerToggles?: SelectableAnswer[];
   handleToggleAllChange?: () => void;
 }
 

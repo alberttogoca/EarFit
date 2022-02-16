@@ -1,9 +1,9 @@
 import { Button } from 'react-bootstrap';
-import Selectable from 'utils/Selectable';
+import { SelectableAnswerColor } from 'utils/Selectable';
 
 interface Props {
-  selectable: Selectable;
-  handleAnswerButtonClick: (selectable: Selectable) => void;
+  selectable: SelectableAnswerColor;
+  handleAnswerButtonClick: (selectable: SelectableAnswerColor) => void;
 }
 
 export const AnswerButton = ({ selectable, handleAnswerButtonClick }: Props): JSX.Element => {

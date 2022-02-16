@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import Selectable, { getRandomItemThatIsSelected } from 'utils/Selectable';
+import { Answer, getRandomItemThatIsSelected, SelectableAnswer } from 'utils/Selectable';
 
 type HookReturnType = {
-  answer: Selectable;
+  answer: Answer;
   setNewAnswer: () => void;
-  isCorrectAnswer: (item: Selectable) => boolean;
+  isCorrectAnswer: (item: Answer) => boolean;
 };
 
-const useAnswer = (selectables: Selectable[]): HookReturnType => {
-  const [answer, setAnswer] = useState<Selectable>();
+const useAnswer = (selectables: SelectableAnswer[]): HookReturnType => {
+  const [answer, setAnswer] = useState<Answer>();
 
   useEffect(() => {
     const selectedItems = selectables.filter((s) => s.isSelected);
@@ -25,7 +25,7 @@ const useAnswer = (selectables: Selectable[]): HookReturnType => {
     setAnswer(newAnswer);
   };
 
-  const isCorrectAnswer = (item: Selectable): boolean => {
+  const isCorrectAnswer = (item: Answer): boolean => {
     const isAnswer = item.id.toUpperCase() === answer.id.toUpperCase();
     return isAnswer;
   };
