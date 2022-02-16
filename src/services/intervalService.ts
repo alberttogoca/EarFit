@@ -1,7 +1,7 @@
 import { transpose } from '@tonaljs/core';
 import { Note as TonalNote } from '@tonaljs/tonal';
 import { getRandomItem } from 'utils/arrayUtils';
-import Selectable from 'utils/Selectable';
+import Selectable, { selectThreeRandomItems } from 'utils/Selectable';
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -32,7 +32,7 @@ export const getIntervals = (): Selectable[] => {
       color: 'secondary',
     };
   });
-  return myIntervals;
+  return selectThreeRandomItems(myIntervals);
 };
 
 export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean): string[] => {

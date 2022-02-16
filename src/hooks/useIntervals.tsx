@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
 import { calcIntervalToPlay, getIntervals } from 'services/intervalService';
-import Selectable, {
-  getRandomItemThatIsSelected,
-  reverseItemValues,
-  selectAllOrThreeItems,
-  selectThreeRandomItems,
-  updateIsSelectedItem,
-} from 'utils/Selectable';
+import Selectable, { getRandomItemThatIsSelected, reverseItemValues } from 'utils/Selectable';
 
 type HookReturnType = {
   intervals: Selectable[];
+  setNewIntervals: (selectable: Selectable[]) => void;
   answer: Selectable;
-  setNewAnswer: () => Selectable;
+  setNewAnswer: () => void;
   changeDirection: () => void;
-  updateIsSelected: (selectable: Selectable) => void;
-  selectAllOrThree: () => void;
-  setNewIntervals;
 };
 
 const useIntervals = (): HookReturnType => {
@@ -24,16 +16,16 @@ const useIntervals = (): HookReturnType => {
   const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
-    const selectableIntervals = getIntervals();
-    const newIntervalsSelection = selectThreeRandomItems(selectableIntervals);
-    setIntervals(newIntervalsSelection);
+    const newIntervals = getIntervals();
+    setIntervals(newIntervals);
   }, []);
 
   useEffect(() => {
     if (!answer || !intervals.find((n) => n.id === answer.id)?.isSelected) {
-      setNewAnswer();
+      const newAnswer = getRandomItemThatIsSelected(intervals);
+      setAnswer(newAnswer);
     }
-  }, [intervals]);
+  }, [answer, intervals]);
 
   function setNewIntervals(newIntervals: Selectable[]): void {
     setIntervals(newIntervals);
@@ -54,17 +46,7 @@ const useIntervals = (): HookReturnType => {
     setAnswer(reverseItemValues(answer));
   };
 
-  const updateIsSelected = (selectable: Selectable): void => {
-    const newIntervals = updateIsSelectedItem(intervals, selectable.id, !selectable.isSelected);
-    setIntervals(newIntervals);
-  };
-
-  const selectAllOrThree = (): void => {
-    const newIntervalsSelection = selectAllOrThreeItems(intervals);
-    setIntervals(newIntervalsSelection);
-  };
-
-  return { intervals, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree, setNewIntervals };
+  return { intervals, answer, setNewAnswer, changeDirection, setNewIntervals };
 };
 
 export default useIntervals;
