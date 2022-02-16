@@ -1,6 +1,6 @@
 //import { Scale as ScaleType } from '@tonaljs/scale';
 import { Scale as TonalScale } from '@tonaljs/tonal';
-import Selectable from 'utils/Selectable';
+import Selectable, { selectThreeRandomItems } from 'utils/Selectable';
 
 export const getScales = (): Selectable[] => {
   const tonic = 'C';
@@ -17,5 +17,5 @@ export const getScales = (): Selectable[] => {
       color: 'secondary',
     };
   });
-  return myScales;
+  return selectThreeRandomItems(myScales);
 };

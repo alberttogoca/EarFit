@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getScales } from 'services/scaleService';
-import Selectable, {
-  getRandomItemThatIsSelected,
-  reverseAllItemValues,
-  selectAllOrThreeItems,
-  selectThreeRandomItems,
-  updateIsSelectedItem,
-} from 'utils/Selectable';
+import Selectable, { getRandomItemThatIsSelected, reverseAllItemValues } from 'utils/Selectable';
 
 type HookReturnType = {
   scales: Selectable[];
-  setNewScales: (newScales: Selectable[]) => void;
+  setNewScales: (selectable: Selectable[]) => void;
   answer: Selectable;
-  setNewAnswer: () => Selectable;
+  setNewAnswer: () => void;
   changeDirection: () => void;
-  updateIsSelected: (selectable: Selectable) => void;
-  selectAllOrThree: () => void;
 };
 
 const useScales = (): HookReturnType => {
@@ -23,16 +15,17 @@ const useScales = (): HookReturnType => {
   const [answer, setAnswer] = useState<Selectable>();
 
   useEffect(() => {
-    const selectableScales = getScales();
-    const newScalesSelection = selectThreeRandomItems(selectableScales);
-    setScales(newScalesSelection);
+    const newScales = getScales();
+    setScales(newScales);
   }, []);
 
   useEffect(() => {
     if (!answer || !scales.find((n) => n.id === answer.id)?.isSelected) {
-      setNewAnswer();
+      const newAnswer = getRandomItemThatIsSelected(scales);
+      setAnswer(newAnswer);
     }
-  }, [scales]);
+  }, [answer, scales]);
+
   function setNewScales(newNotes: Selectable[]): void {
     setScales(newNotes);
   }
@@ -48,17 +41,7 @@ const useScales = (): HookReturnType => {
     setScales(newScales);
   };
 
-  const updateIsSelected = (selectable: Selectable): void => {
-    const newScales = updateIsSelectedItem(scales, selectable.id, !selectable.isSelected);
-    setScales(newScales);
-  };
-
-  const selectAllOrThree = (): void => {
-    const newScalesSelection = selectAllOrThreeItems(scales);
-    setScales(newScalesSelection);
-  };
-
-  return { scales, setNewScales, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
+  return { scales, setNewScales, answer, setNewAnswer, changeDirection };
 };
 
 export default useScales;

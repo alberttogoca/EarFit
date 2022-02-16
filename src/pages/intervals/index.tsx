@@ -28,8 +28,8 @@ export default function Intervals(): JSX.Element {
       }
     >
       <Exercise
-        title="Notes"
-        playButtonLabel="Note?"
+        title="Intervals"
+        playButtonLabel="Interval?"
         handlePlayButtonClick={() => playInterval(answer)}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}

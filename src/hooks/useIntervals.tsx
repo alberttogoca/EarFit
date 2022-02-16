@@ -22,23 +22,22 @@ const useIntervals = (): HookReturnType => {
 
   useEffect(() => {
     if (!answer || !intervals.find((n) => n.id === answer.id)?.isSelected) {
-      const newAnswer = getRandomItemThatIsSelected(intervals);
+      const intervalAnswer = getRandomItemThatIsSelected(intervals);
+      const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
       setAnswer(newAnswer);
     }
-  }, [answer, intervals]);
+  }, [answer, intervals, reverse]);
 
   function setNewIntervals(newIntervals: Selectable[]): void {
     setIntervals(newIntervals);
   }
 
-  const setNewAnswer = (): Selectable => {
+  const setNewAnswer = (): void => {
     if (intervals.length > 0) {
       const intervalAnswer = getRandomItemThatIsSelected(intervals);
       const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
       setAnswer(newAnswer);
-      return newAnswer;
     }
-    return null;
   };
 
   const changeDirection = (): void => {

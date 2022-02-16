@@ -2,41 +2,13 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
-import Selectable from 'utils/Selectable';
+import { useAnswerButtons, useAnswerToggles, usePlayButton, useScales } from 'hooks';
 
 export default function Scales(): JSX.Element {
-  const {
-    scales,
-    setNewScales,
-    answer,
-    setNewAnswer,
-    updateIsSelected,
-    changeDirection,
-    selectAllOrThree,
-  } = useScales();
+  const { scales, setNewScales, answer, setNewAnswer, changeDirection } = useScales(); //Esto a contexto?
   const { playScale } = usePlayButton();
-  const { clearAllAnswerButtonsColor, updateAnswerButtonColor } = useAnswerButtons(scales, setNewScales);
-  const { streak, clearStreak, IncrementStreak } = useStreak();
-
-  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
-    if (selectedOption.id === answer.id) {
-      setNewAnswer();
-      updateAnswerButtonColor(selectedOption, true);
-      IncrementStreak();
-      playScale(answer);
-
-      setTimeout(() => {
-        clearAllAnswerButtonsColor();
-      }, 1000);
-
-      return true;
-    } else {
-      updateAnswerButtonColor(selectedOption, false);
-      clearStreak();
-      return false;
-    }
-  }
+  const { updateIsSelected, selectAllOrThree } = useAnswerToggles(scales, setNewScales);
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(scales, answer, setNewAnswer, playScale);
 
   return (
     <PageLayout
@@ -45,8 +17,8 @@ export default function Scales(): JSX.Element {
         <Options
           answerToggles={scales}
           handleDirectionChange={changeDirection}
-          handleToggleButtonChange={updateIsSelected}
           handleToggleAllChange={selectAllOrThree}
+          handleToggleButtonChange={updateIsSelected}
         />
       }
     >
@@ -54,7 +26,7 @@ export default function Scales(): JSX.Element {
         title="Scales"
         playButtonLabel="Scale?"
         handlePlayButtonClick={() => playScale(answer)}
-        answerButtons={scales}
+        answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />
