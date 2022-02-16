@@ -3,7 +3,7 @@ import Selectable from 'utils/Selectable';
 
 interface Props {
   selectable: Selectable;
-  handleAnswerButtonClick: (selectable: Selectable) => boolean;
+  handleAnswerButtonClick: (selectable: Selectable) => void;
 }
 
 export const AnswerButton = ({ selectable, handleAnswerButtonClick }: Props): JSX.Element => {

@@ -1,5 +1,5 @@
 import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
-import Selectable from 'utils/Selectable';
+import Selectable, { selectThreeRandomItems } from 'utils/Selectable';
 
 export const getNotes = (scaleName: string): Selectable[] => {
   const tonic = 'C';
@@ -16,5 +16,5 @@ export const getNotes = (scaleName: string): Selectable[] => {
       color: 'secondary',
     };
   });
-  return myNotes;
+  return selectThreeRandomItems(myNotes);
 };

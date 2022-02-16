@@ -4,20 +4,22 @@ import Selectable from 'utils/Selectable';
 
 interface Props {
   answerButtons: Selectable[];
-  handleAnswerButtonClick: (selectable: Selectable) => boolean;
+  handleAnswerButtonClick: (selectable: Selectable) => void;
 }
 
 export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props): JSX.Element => {
   return (
     <ButtonGroup className="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
       <div>
-        {answerButtons.map((selectable) => (
-          <AnswerButtonComponent
-            key={selectable.id}
-            selectable={selectable}
-            handleAnswerButtonClick={handleAnswerButtonClick}
-          />
-        ))}
+        {answerButtons
+          .filter((s) => s.isSelected)
+          .map((selectable) => (
+            <AnswerButtonComponent
+              key={selectable.id}
+              selectable={selectable}
+              handleAnswerButtonClick={handleAnswerButtonClick}
+            />
+          ))}
       </div>
     </ButtonGroup>
   );

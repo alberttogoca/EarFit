@@ -10,10 +10,11 @@ import Selectable, {
 
 type HookReturnType = {
   scales: Selectable[];
+  setNewScales: (newScales: Selectable[]) => void;
   answer: Selectable;
   setNewAnswer: () => Selectable;
   changeDirection: () => void;
-  updateIsSelected: (id: string, newValue: boolean) => void;
+  updateIsSelected: (selectable: Selectable) => void;
   selectAllOrThree: () => void;
 };
 
@@ -32,6 +33,9 @@ const useScales = (): HookReturnType => {
       setNewAnswer();
     }
   }, [scales]);
+  function setNewScales(newNotes: Selectable[]): void {
+    setScales(newNotes);
+  }
 
   const setNewAnswer = (): Selectable => {
     const scaleAnswer = getRandomItemThatIsSelected(scales);
@@ -44,8 +48,8 @@ const useScales = (): HookReturnType => {
     setScales(newScales);
   };
 
-  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
-    const newScales = updateIsSelectedItem(scales, id, newIsSelected);
+  const updateIsSelected = (selectable: Selectable): void => {
+    const newScales = updateIsSelectedItem(scales, selectable.id, !selectable.isSelected);
     setScales(newScales);
   };
 
@@ -54,7 +58,7 @@ const useScales = (): HookReturnType => {
     setScales(newScalesSelection);
   };
 
-  return { scales, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
+  return { scales, setNewScales, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
 };
 
 export default useScales;

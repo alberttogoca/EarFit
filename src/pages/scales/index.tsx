@@ -6,9 +6,17 @@ import { useAnswerButtons, usePlayButton, useScales, useStreak } from 'hooks';
 import Selectable from 'utils/Selectable';
 
 export default function Scales(): JSX.Element {
-  const { scales, answer, setNewAnswer, updateIsSelected, changeDirection, selectAllOrThree } = useScales();
-  const { instrument, playScale } = usePlayButton();
-  const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(scales);
+  const {
+    scales,
+    setNewScales,
+    answer,
+    setNewAnswer,
+    updateIsSelected,
+    changeDirection,
+    selectAllOrThree,
+  } = useScales();
+  const { playScale } = usePlayButton();
+  const { clearAllAnswerButtonsColor, updateAnswerButtonColor } = useAnswerButtons(scales, setNewScales);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   function handleAnswerButtonClick(selectedOption: Selectable): boolean {
@@ -19,7 +27,7 @@ export default function Scales(): JSX.Element {
       playScale(answer);
 
       setTimeout(() => {
-        clearAnswerButtonColor();
+        clearAllAnswerButtonsColor();
       }, 1000);
 
       return true;
@@ -35,9 +43,9 @@ export default function Scales(): JSX.Element {
       leftCol={<Menu />}
       rightCol={
         <Options
-          selectables={scales}
-          handleDirectionChange={() => changeDirection()}
-          handleToggleButtonChange={(scale: Selectable) => updateIsSelected(scale.id, scale.isSelected)}
+          answerToggles={scales}
+          handleDirectionChange={changeDirection}
+          handleToggleButtonChange={updateIsSelected}
           handleToggleAllChange={selectAllOrThree}
         />
       }
@@ -45,9 +53,8 @@ export default function Scales(): JSX.Element {
       <Exercise
         title="Scales"
         playButtonLabel="Scale?"
-        instrument={instrument}
         handlePlayButtonClick={() => playScale(answer)}
-        selectables={answerButtons}
+        answerButtons={scales}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

@@ -5,11 +5,9 @@ type HookReturnType = {
   playNote: (selectable: Selectable) => void;
   playScale: (selectable: Selectable) => void;
   playInterval: (selectable: Selectable) => void;
-  label: string;
 };
 
-export const usePlayButton = (title: string): HookReturnType => {
-  const label = title;
+export const usePlayButton = (): HookReturnType => {
   const { instrument } = useInstrumentContext();
 
   const play = (selectable: Selectable, time = 0.8, when = 0, duration = 0.7): void => {
@@ -31,7 +29,7 @@ export const usePlayButton = (title: string): HookReturnType => {
   function playInterval(selectable: Selectable): void {
     play(selectable, 0.8, 0, 0.7);
   }
-  return { playNote, playScale, playInterval, label };
+  return { playNote, playScale, playInterval };
 };
 
 export default usePlayButton;

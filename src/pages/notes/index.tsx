@@ -2,45 +2,37 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useNotes } from 'hooks';
-import Selectable from 'utils/Selectable';
+import { useAnswerButtons, useAnswerToggles, useNotes, usePlayButton, useScaleDropdown } from 'hooks';
 
 export default function Notes(): JSX.Element {
-  const {
-    title,
-    answerToggles,
-    answerButtons,
-    answer, //sacar al playButton
-    scalesNames,
-    selectedScale,
-    updateIsSelected,
-    selectAllOrThree,
-    setNewSelectedScale,
-    handleAnswerButtonClick,
-    streak,
-    label,
-    playNote,
-  } = useNotes();
+  const { scalesNames, selectedScale, setNewSelectedScale } = useScaleDropdown();
+  const { notes, setNewNotes, answer, setNewAnswer } = useNotes(selectedScale); //Esto a contexto?
+  const { playNote } = usePlayButton();
+  const { updateIsSelected, selectAllOrThree } = useAnswerToggles(notes, setNewNotes);
+  const { handleAnswerButtonClick, streak } = useAnswerButtons(notes, setNewNotes, answer, setNewAnswer, playNote);
+
+  console.log(notes);
+  console.log(answer);
 
   return (
     <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
-          answerToggles={answerToggles}
+          answerToggles={notes}
           scalesNames={scalesNames}
           selectedScale={selectedScale}
+          handleDropdownScaleSelect={setNewSelectedScale}
           handleToggleAllChange={selectAllOrThree}
-          handleToggleButtonChange={(note: Selectable) => updateIsSelected(note.id, note.isSelected)}
-          handleDropdownScaleSelect={(selectedScale: string) => setNewSelectedScale(selectedScale)}
+          handleToggleButtonChange={updateIsSelected}
         />
       }
     >
       <Exercise
-        title={title}
-        playButtonLabel={label}
+        title="Notes"
+        playButtonLabel="Note?"
         handlePlayButtonClick={() => playNote(answer)}
-        answerButtons={answerButtons}
+        answerButtons={notes}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

@@ -11,7 +11,7 @@ interface Props {
   playButtonLabel?: string;
   handlePlayButtonClick?: () => void;
   answerButtons?: Selectable[];
-  handleAnswerButtonClick?: (answerButton: Selectable) => boolean;
+  handleAnswerButtonClick?: (answerButton: Selectable) => void;
   streak?: number;
   firstNote?: string;
   lastNote?: string;

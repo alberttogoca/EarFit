@@ -13,8 +13,9 @@ type HookReturnType = {
   answer: Selectable;
   setNewAnswer: () => Selectable;
   changeDirection: () => void;
-  updateIsSelected: (id: string, newValue: boolean) => void;
+  updateIsSelected: (selectable: Selectable) => void;
   selectAllOrThree: () => void;
+  setNewIntervals;
 };
 
 const useIntervals = (): HookReturnType => {
@@ -34,6 +35,10 @@ const useIntervals = (): HookReturnType => {
     }
   }, [intervals]);
 
+  function setNewIntervals(newIntervals: Selectable[]): void {
+    setIntervals(newIntervals);
+  }
+
   const setNewAnswer = (): Selectable => {
     if (intervals.length > 0) {
       const intervalAnswer = getRandomItemThatIsSelected(intervals);
@@ -49,8 +54,8 @@ const useIntervals = (): HookReturnType => {
     setAnswer(reverseItemValues(answer));
   };
 
-  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
-    const newIntervals = updateIsSelectedItem(intervals, id, newIsSelected);
+  const updateIsSelected = (selectable: Selectable): void => {
+    const newIntervals = updateIsSelectedItem(intervals, selectable.id, !selectable.isSelected);
     setIntervals(newIntervals);
   };
 
@@ -59,7 +64,7 @@ const useIntervals = (): HookReturnType => {
     setIntervals(newIntervalsSelection);
   };
 
-  return { intervals, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree };
+  return { intervals, answer, setNewAnswer, changeDirection, updateIsSelected, selectAllOrThree, setNewIntervals };
 };
 
 export default useIntervals;

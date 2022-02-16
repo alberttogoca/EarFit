@@ -1,91 +1,54 @@
-import { useStreak } from 'hooks';
-import { useEffect, useState } from 'react';
-import Selectable, { getRandomItemThatIsSelected } from 'utils/Selectable';
+import { useEffect } from 'react';
+import Selectable, { setAllColorSecondary, setItemColorSuccesOrDanger } from 'utils/Selectable';
+
+import useStreak from './useStreak';
 
 type HookReturnType = {
-  answerButtons: Selectable[];
-  answer: Selectable;
-  handleAnswerButtonClick: (selectedOption: Selectable) => boolean;
+  handleAnswerButtonClick: (selectedOption: Selectable) => void;
   streak: number;
+  updateAnswerButtonColor;
+  clearAllAnswerButtonsColor;
 };
 
-export function useAnswerButtons(
+const useAnswerButtons = (
   selectables: Selectable[],
-  playNote: (selectable: Selectable) => void
-): HookReturnType {
-  const [answerButtons, setAnswerButtons] = useState<Selectable[]>([]);
-  const [answer, setAnswer] = useState<Selectable>(undefined);
+  setNewSelectables: (selectables: Selectable[]) => void,
+  answer?: Selectable,
+  setNewAnswer?: () => void,
+  play?: (selectable: Selectable) => void
+): HookReturnType => {
+  useEffect(() => {
+    //clearAllAnswerButtonsColor();
+  }, [selectables]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  useEffect(() => {
-    if (selectables.length < 1) {
-      return;
-    }
-
-    const newAnswerButtons = selectables.filter((n) => n.isSelected);
-    setAnswerButtons(newAnswerButtons);
-  }, [selectables]);
-
-  useEffect(() => {
-    if (!answer || !selectables.find((n) => n.id === answer.id)?.isSelected) {
+  function handleAnswerButtonClick(answerButton: Selectable): void {
+    const isAnswer = answerButton.id === answer.id;
+    if (isAnswer) {
       setNewAnswer();
-    }
-  }, [selectables]);
-
-  const setNewAnswer = (): Selectable => {
-    const newAnswer = getRandomItemThatIsSelected(selectables);
-    setAnswer(newAnswer);
-    return newAnswer;
-  };
-
-  const handleAnswerButtonClick = (selectedOption: Selectable): boolean => {
-    console.log('answer: ' + answer.id);
-    console.log('selected: ' + selectedOption.id);
-
-    if (selectedOption.id === answer.id) {
-      setNewAnswer();
-      updateAnswerButtonColor(selectedOption, true);
+      updateAnswerButtonColor(answerButton, isAnswer);
       IncrementStreak();
-      playNote(answer);
-
+      play(answer);
       setTimeout(() => {
-        clearAnswerButtonColor();
+        clearAllAnswerButtonsColor();
       }, 1000);
-
-      return true;
     } else {
-      updateAnswerButtonColor(selectedOption, false);
+      updateAnswerButtonColor(answerButton, isAnswer);
       clearStreak();
-      return false;
     }
-  };
+  }
 
-  const updateAnswerButtonColor = (answerButton: Selectable, isAnswer: boolean): void => {
-    const newAnswerButtons = answerButtons.map<Selectable>((actualButton) => {
-      if (answerButton.id === actualButton.id) {
-        return {
-          ...actualButton,
-          color: isAnswer ? 'success' : 'danger',
-        };
-      }
-      return { ...actualButton };
-    });
+  function updateAnswerButtonColor(answerButton: Selectable, isAnswer: boolean): void {
+    const newAnswerButtons = setItemColorSuccesOrDanger(selectables, answerButton.id, isAnswer);
+    setNewSelectables(newAnswerButtons);
+  }
 
-    setAnswerButtons(newAnswerButtons);
-  };
+  function clearAllAnswerButtonsColor(): void {
+    const newAnswerButtons = setAllColorSecondary(selectables);
+    setNewSelectables(newAnswerButtons);
+  }
 
-  const clearAnswerButtonColor = (): void => {
-    setAnswerButtons((answerButtons) => {
-      return answerButtons.map<Selectable>((actualButton) => {
-        return {
-          ...actualButton,
-          color: 'secondary',
-        };
-      });
-    });
-  };
-
-  return { answerButtons, answer, handleAnswerButtonClick, streak };
-}
+  return { handleAnswerButtonClick, streak, updateAnswerButtonColor, clearAllAnswerButtonsColor };
+};
 
 export default useAnswerButtons;

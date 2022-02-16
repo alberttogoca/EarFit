@@ -6,12 +6,20 @@ import { useAnswerButtons, useIntervals, usePlayButton, useStreak } from 'hooks'
 import Selectable from 'utils/Selectable';
 
 export default function Intervals(): JSX.Element {
-  const { intervals, answer, setNewAnswer, updateIsSelected, changeDirection, selectAllOrThree } = useIntervals();
-  const { instrument, playInterval } = usePlayButton();
-  const { answerButtons, updateAnswerButtonColor, clearAnswerButtonColor } = useAnswerButtons(intervals);
+  const {
+    intervals,
+    answer,
+    setNewIntervals,
+    setNewAnswer,
+    updateIsSelected,
+    changeDirection,
+    selectAllOrThree,
+  } = useIntervals();
+  const { playInterval } = usePlayButton();
+  const { clearAllAnswerButtonsColor, updateAnswerButtonColor } = useAnswerButtons(intervals, setNewIntervals);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
-  function handleAnswerButtonClick(selectedOption: Selectable): boolean {
+  function handleAnswerButtonClick(selectedOption: Selectable): void {
     if (selectedOption.id === answer.id) {
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
@@ -19,25 +27,24 @@ export default function Intervals(): JSX.Element {
       playInterval(answer);
 
       setTimeout(() => {
-        clearAnswerButtonColor();
+        clearAllAnswerButtonsColor();
       }, 1000);
-
-      return true;
     } else {
       updateAnswerButtonColor(selectedOption, false);
       clearStreak();
-      return false;
     }
   }
+  console.log(intervals);
+  console.log(answer);
 
   return (
     <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
-          selectables={intervals}
-          handleDirectionChange={() => changeDirection()}
-          handleToggleButtonChange={(interval: Selectable) => updateIsSelected(interval.id, interval.isSelected)}
+          answerToggles={intervals}
+          handleDirectionChange={changeDirection}
+          handleToggleButtonChange={updateIsSelected}
           handleToggleAllChange={selectAllOrThree}
         />
       }
@@ -45,9 +52,8 @@ export default function Intervals(): JSX.Element {
       <Exercise
         title="Intervals"
         playButtonLabel="Interval?"
-        instrument={instrument}
         handlePlayButtonClick={() => playInterval(answer)}
-        selectables={answerButtons}
+        answerButtons={intervals}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
       />

@@ -16,7 +16,7 @@ export const AnswerToggle = ({ selectable, handleToggleButtonChange }: Props): J
       variant={'light'} //light or link
       size="sm"
       checked={selectable.isSelected}
-      onChange={() => handleToggleButtonChange({ ...selectable, isSelected: !selectable.isSelected })}
+      onChange={() => handleToggleButtonChange(selectable)}
     >
       {' '}
       {selectable.id}

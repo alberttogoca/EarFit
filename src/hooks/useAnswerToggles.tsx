@@ -1,34 +1,25 @@
-import { useEffect, useState } from 'react';
-import Selectable, { selectAllOrThreeItems, selectThreeRandomItems, updateIsSelectedItem } from 'utils/Selectable';
+import Selectable, { selectAllOrThreeItems, updateIsSelectedItem } from 'utils/Selectable';
 
 type HookReturnType = {
-  answerToggles: Selectable[];
-  updateIsSelected: (id: string, newIsSelected: boolean) => void;
+  updateIsSelected: (selectable: Selectable) => void;
   selectAllOrThree: () => void;
 };
 
-export function useAnswerToggles(selectables: Selectable[]): HookReturnType {
-  const [answerToggles, setAnswerToggles] = useState<Selectable[]>([]);
-
-  useEffect(() => {
-    if (selectables.length < 1) {
-      return;
-    }
-    const newAnswerToggles = selectThreeRandomItems(selectables);
-    setAnswerToggles(newAnswerToggles);
-  }, [selectables]);
-
-  const updateIsSelected = (id: string, newIsSelected: boolean): void => {
-    const newAnswerToggles = updateIsSelectedItem(answerToggles, id, newIsSelected);
-    setAnswerToggles(newAnswerToggles);
+export function useAnswerToggles(
+  selectables: Selectable[],
+  setNewSelectables: (selectables: Selectable[]) => void
+): HookReturnType {
+  const updateIsSelected = (selectable: Selectable): void => {
+    const newAnswerToggles = updateIsSelectedItem(selectables, selectable.id, !selectable.isSelected);
+    setNewSelectables(newAnswerToggles);
   };
 
   const selectAllOrThree = (): void => {
-    const newAnswerToggles = selectAllOrThreeItems(answerToggles);
-    setAnswerToggles(newAnswerToggles);
+    const newAnswerToggles = selectAllOrThreeItems(selectables);
+    setNewSelectables(newAnswerToggles);
   };
 
-  return { answerToggles, updateIsSelected, selectAllOrThree };
+  return { updateIsSelected, selectAllOrThree };
 }
 
 export default useAnswerToggles;

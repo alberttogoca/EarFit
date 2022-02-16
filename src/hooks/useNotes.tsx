@@ -1,55 +1,44 @@
-import { useScaleDropdown } from 'hooks';
-import { useAnswerButtons, useAnswerToggles, usePlayButton } from 'hooks';
 import { useEffect, useState } from 'react';
 import { getNotes } from 'services/noteService';
-import Selectable from 'utils/Selectable';
+import Selectable, { getRandomItemThatIsSelected } from 'utils/Selectable';
 
 type HookReturnType = {
-  title: string;
-  answerToggles: Selectable[];
-  answerButtons: Selectable[];
+  notes: Selectable[];
+  setNewNotes: (newNotes: Selectable[]) => void;
   answer: Selectable;
-  scalesNames: string[];
-  selectedScale: string;
-  setNewSelectedScale: (id: string) => void;
-  updateIsSelected: (id: string, newValue: boolean) => void;
-  selectAllOrThree: () => void;
-  label: string;
-  playNote: (selectable: Selectable) => void;
-  handleAnswerButtonClick: (selectedOption: Selectable) => boolean;
-  streak: number;
+  setNewAnswer: () => void;
 };
 
-const useNotes = (): HookReturnType => {
-  const title = 'Notes';
+const useNotes = (selectedScale: string): HookReturnType => {
   const [notes, setNotes] = useState<Selectable[]>([]);
-  const { scalesNames, selectedScale, setNewSelectedScale } = useScaleDropdown();
-  const { label, playNote } = usePlayButton('Note?');
-  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
-  const { answerButtons, answer, handleAnswerButtonClick, streak } = useAnswerButtons(answerToggles, playNote);
-  //isLoading
+  const [answer, setAnswer] = useState<Selectable>(undefined);
 
   useEffect(() => {
-    if (selectedScale === undefined) {
-      return;
-    }
-    setNotes(getNotes(selectedScale));
+    const newNotes = getNotes(selectedScale);
+    setNotes(newNotes);
   }, [selectedScale]);
 
+  useEffect(() => {
+    if (!answer || !notes.find((s) => s.id === answer.id)?.isSelected) {
+      const newAnswer = getRandomItemThatIsSelected(notes);
+      setAnswer(newAnswer);
+    }
+  }, [answer, notes]);
+
+  function setNewNotes(newNotes: Selectable[]): void {
+    setNotes(newNotes);
+  }
+
+  function setNewAnswer(): void {
+    const newAnswer = getRandomItemThatIsSelected(notes);
+    setAnswer(newAnswer);
+  }
+
   return {
-    title,
-    answerToggles,
-    answerButtons,
+    notes,
+    setNewNotes,
     answer,
-    scalesNames,
-    selectedScale,
-    setNewSelectedScale,
-    updateIsSelected,
-    selectAllOrThree,
-    label,
-    playNote,
-    handleAnswerButtonClick,
-    streak,
+    setNewAnswer,
   };
 };
 
