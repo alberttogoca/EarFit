@@ -103,11 +103,11 @@ export function setItemColorSuccesOrDanger<T extends Selectable>(items: T[], id:
 }
 
 //TODO: Dejar solo uno (useIntervals)
-export function reverseItemValues<T extends Selectable>(item: T): T {
+export function reverseItemValues<T extends Answer>(item: T): T {
   return { ...item, values: item.values.reverse() };
 }
 //TODO: Dejar solo uno (useScales)
-export function reverseAllItemValues<T extends Selectable>(items: T[]): T[] {
+export function reverseAllItemValues<T extends Answer>(items: T[]): T[] {
   const newItems = items.map((item) => {
     return {
       ...item,

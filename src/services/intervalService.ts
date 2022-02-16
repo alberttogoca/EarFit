@@ -1,7 +1,7 @@
 import { transpose } from '@tonaljs/core';
 import { Note as TonalNote } from '@tonaljs/tonal';
 import { getRandomItem } from 'utils/arrayUtils';
-import Selectable, { selectThreeRandomItems } from 'utils/Selectable';
+import { SelectableAnswer, selectThreeRandomItems } from 'utils/Selectable';
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -22,8 +22,8 @@ const allIntervalsNames = [
   '8P | 7A', //(12 semitones)
 ];
 
-export const getIntervals = (): Selectable[] => {
-  const myIntervals: Selectable[] = allIntervalsNames.map((interval) => {
+export const getIntervals = (): SelectableAnswer[] => {
+  const myIntervals: SelectableAnswer[] = allIntervalsNames.map((interval) => {
     return {
       id: interval,
       values: calcIntervalToPlay(interval),

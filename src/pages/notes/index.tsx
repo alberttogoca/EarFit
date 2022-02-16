@@ -4,7 +4,7 @@ import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
 import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, useNotesScales, usePlayButton } from 'hooks';
 import { GetStaticProps } from 'next';
-import { getNotesScales } from 'services/scaleService';
+import { getScaleNames } from 'services/scaleService';
 
 export default function Notes({ scales }: Props): JSX.Element {
   const { selectedScale, setNewSelectedScale } = useNotesScales(scales);
@@ -12,7 +12,7 @@ export default function Notes({ scales }: Props): JSX.Element {
   const { playNote } = usePlayButton();
   const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
   const { answer, setNewAnswer } = useAnswer(items.filter((s) => s.isSelected));
-  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(items, answer, setNewAnswer);
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(items, answer, setNewAnswer, playNote);
 
   return (
     <PageLayout
@@ -45,7 +45,7 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps<Props> = () => {
-  const scales = getNotesScales();
+  const scales = getScaleNames();
   return {
     props: {
       scales,

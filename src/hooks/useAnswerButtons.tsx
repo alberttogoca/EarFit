@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Answer, SelectableAnswer, SelectableAnswerColor } from 'utils/Selectable';
 
-import usePlayButton from './usePlayButton';
 import useStreak from './useStreak';
 
 type HookReturnType = {
@@ -13,9 +12,9 @@ type HookReturnType = {
 export function useAnswerButtons(
   selectables: SelectableAnswer[],
   answer: Answer,
-  setNewAnswer: () => void
+  setNewAnswer: () => void,
+  play: (answer: Answer) => void
 ): HookReturnType {
-  const { playNote } = usePlayButton();
   const [answerButtons, setAnswerButtons] = useState<SelectableAnswerColor[]>([]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
@@ -42,7 +41,7 @@ export function useAnswerButtons(
       setNewAnswer();
       updateAnswerButtonColor(selectedOption, true);
       IncrementStreak();
-      playNote(answer);
+      play(answer);
 
       setTimeout(() => {
         clearAllAnswerButtonsColor();

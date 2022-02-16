@@ -5,15 +5,17 @@ import { Options } from 'components/Options';
 import { useAnswerButtons, useAnswerToggles, useIntervals, usePlayButton } from 'hooks';
 
 export default function Intervals(): JSX.Element {
-  const { intervals, setNewIntervals, answer, setNewAnswer, changeDirection } = useIntervals(); //Esto a contexto?
+  const { intervals, answer, setNewAnswer, changeDirection } = useIntervals(); //Esto a contexto?
   const { playInterval } = usePlayButton();
-  const { updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals, setNewIntervals);
+  const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
-    intervals,
+    items,
     answer,
     setNewAnswer,
     playInterval
   );
+
+  //const { answer, setNewAnswer } = useAnswer(items.filter((s) => s.isSelected));
 
   return (
     <PageLayout

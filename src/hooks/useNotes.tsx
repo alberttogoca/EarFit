@@ -3,7 +3,7 @@ import { getNotes } from 'services/noteService';
 import { Answer } from 'utils/Selectable';
 
 type HookReturnType = {
-  notes: Answer[]; //no tiene que ser selectable, tiene que ser un objeto minimo!!
+  notes: Answer[];
 };
 
 const useNotes = (selectedScale: string): HookReturnType => {

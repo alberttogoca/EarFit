@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { getScales } from 'services/scaleService';
-import Selectable, { getRandomItemThatIsSelected, reverseAllItemValues } from 'utils/Selectable';
+import { Answer, getRandomItemThatIsSelected, reverseAllItemValues, SelectableAnswer } from 'utils/Selectable';
 
 type HookReturnType = {
-  scales: Selectable[];
-  setNewScales: (selectable: Selectable[]) => void;
-  answer: Selectable;
+  scales: SelectableAnswer[];
+  setNewScales: (selectable: SelectableAnswer[]) => void;
+  answer: Answer;
   setNewAnswer: () => void;
   changeDirection: () => void;
 };
 
 const useScales = (): HookReturnType => {
-  const [scales, setScales] = useState<Selectable[]>([]);
-  const [answer, setAnswer] = useState<Selectable>();
+  const [scales, setScales] = useState<SelectableAnswer[]>([]);
+  const [answer, setAnswer] = useState<Answer>();
 
   useEffect(() => {
     const newScales = getScales();
@@ -26,11 +26,11 @@ const useScales = (): HookReturnType => {
     }
   }, [answer, scales]);
 
-  function setNewScales(newNotes: Selectable[]): void {
+  function setNewScales(newNotes: SelectableAnswer[]): void {
     setScales(newNotes);
   }
 
-  const setNewAnswer = (): Selectable => {
+  const setNewAnswer = (): Answer => {
     const scaleAnswer = getRandomItemThatIsSelected(scales);
     setAnswer(scaleAnswer);
     return scaleAnswer;

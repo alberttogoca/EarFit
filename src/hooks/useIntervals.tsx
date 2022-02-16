@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { calcIntervalToPlay, getIntervals } from 'services/intervalService';
-import Selectable, { getRandomItemThatIsSelected, reverseItemValues } from 'utils/Selectable';
+import Selectable, { Answer, getRandomItemThatIsSelected, reverseItemValues, SelectableAnswer } from 'utils/Selectable';
 
 type HookReturnType = {
-  intervals: Selectable[];
-  setNewIntervals: (selectable: Selectable[]) => void;
-  answer: Selectable;
+  intervals: SelectableAnswer[];
+  setNewIntervals: (selectable: SelectableAnswer[]) => void;
+  answer: Answer;
   setNewAnswer: () => void;
   changeDirection: () => void;
 };
 
 const useIntervals = (): HookReturnType => {
-  const [intervals, setIntervals] = useState<Selectable[]>([]);
-  const [answer, setAnswer] = useState<Selectable>();
+  const [intervals, setIntervals] = useState<SelectableAnswer[]>([]);
+  const [answer, setAnswer] = useState<Answer>();
   const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
