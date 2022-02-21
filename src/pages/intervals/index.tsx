@@ -8,7 +8,7 @@ export default function Intervals(): JSX.Element {
   const { intervals } = useIntervals();
   const { playInterval, reverse, changeDirection } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
-  const { answer, setNewAnswer } = useIntervalAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answer, setNewAnswer } = useIntervalAnswer(answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,

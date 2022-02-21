@@ -19,20 +19,17 @@ export function useAnswerButtons(
   const { streak, clearStreak, IncrementStreak } = useStreak();
 
   useEffect(() => {
-    if (!answerToggles || answerToggles.length === 0) {
+    if (!answerToggles || answerToggles.length < 1) {
       return;
     }
-
-    const newOptions = answerToggles
-      .filter((n) => n.isSelected)
-      .map<SelectableAnswerWithColor>((item) => {
-        return {
-          ...item,
-          color: 'secondary',
-        };
-      });
-
-    setAnswerButtons(newOptions);
+    const selectedAnswers = answerToggles.filter((s) => s.isSelected);
+    const newAnswerButtons = selectedAnswers.map<SelectableAnswerWithColor>((item) => {
+      return {
+        ...item,
+        color: 'secondary',
+      };
+    });
+    setAnswerButtons(newAnswerButtons);
   }, [answerToggles]);
 
   function handleAnswerButtonClick(answerButtonSelected: SelectableAnswerWithColor): void {

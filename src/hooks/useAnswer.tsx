@@ -7,21 +7,20 @@ type HookReturnType = {
   isCorrectAnswer: (item: Answer) => boolean;
 };
 
-const useAnswer = (answerTogglesSelected: SelectableAnswer[]): HookReturnType => {
+const useAnswer = (answerToggles: SelectableAnswer[]): HookReturnType => {
   const [answer, setAnswer] = useState<Answer>();
 
   useEffect(() => {
-    const selectedItems = answerTogglesSelected.filter((s) => s.isSelected);
-
-    if (!answer || !selectedItems.find((n) => n.id === answer.id)?.isSelected) {
-      const newAnswer = getRandomItemThatIsSelected(selectedItems);
+    const selectedAnswers = answerToggles.filter((s) => s.isSelected);
+    if (!answer || !selectedAnswers.find((n) => n.id === answer.id)?.isSelected) {
+      const newAnswer = getRandomItemThatIsSelected(selectedAnswers);
       setAnswer(newAnswer);
     }
-  }, [answer, answerTogglesSelected]);
+  }, [answer, answerToggles]);
 
   const setNewAnswer = (): void => {
-    const selectedItems = answerTogglesSelected.filter((s) => s.isSelected);
-    const newAnswer = getRandomItemThatIsSelected(selectedItems);
+    const selectedAnswers = answerToggles.filter((s) => s.isSelected);
+    const newAnswer = getRandomItemThatIsSelected(selectedAnswers);
     setAnswer(newAnswer);
   };
 

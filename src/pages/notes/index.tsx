@@ -11,7 +11,7 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
   const { notes } = useNotes(selectedScale);
   const { playNote } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
-  const { answer, setNewAnswer } = useAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answer, setNewAnswer } = useAnswer(answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,

@@ -14,11 +14,11 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
     if (!answers || answers.length === 0) {
       return;
     }
-    const selectedAnswers = answers.map<SelectableAnswer>((s) => {
+    const answersWithSelected = answers.map<SelectableAnswer>((s) => {
       return { ...s, isSelected: false };
     });
 
-    const newAnswerToggles = getItemsWithThreeSelected(selectedAnswers);
+    const newAnswerToggles = getItemsWithThreeSelected(answersWithSelected);
     setAnswerToggles(newAnswerToggles);
   }, [answers]);
 

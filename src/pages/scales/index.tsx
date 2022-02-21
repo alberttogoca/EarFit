@@ -8,7 +8,7 @@ export default function Scales(): JSX.Element {
   const { scales } = useScales();
   const { playScale, reverse, changeDirection } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(scales);
-  const { answer, setNewAnswer } = useAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answer, setNewAnswer } = useAnswer(answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,

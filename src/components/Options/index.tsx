@@ -14,7 +14,7 @@ interface Props {
   scalesNames?: string[];
   selectedScale?: string;
   handleScaleDropdownChange?: (scaleName: string) => void;
-  reverse: boolean;
+  reverse?: boolean;
   handleDirectionChange?: () => void;
   handleAnswerTogglesChange?: (answerToggle: SelectableAnswer) => void;
   handleAnswerToggleAllChange?: () => void;
