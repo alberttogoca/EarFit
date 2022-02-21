@@ -2,33 +2,25 @@ import { getRandomItem } from './arrayUtils';
 
 type VariantColor = 'success' | 'secondary' | 'danger';
 
-export interface Answer {
+export type Answer = {
   id: string;
   values: string[];
   displayName: string;
-}
+};
 
-export interface IsSelectable {
+export type IsSelectable = {
   isSelected: boolean;
-}
+};
 
-export interface HasColor {
+export type WithColor = {
   color: VariantColor;
-}
+};
 
 export type SelectableAnswer = Answer & IsSelectable;
 
-export type SelectableAnswerColor = SelectableAnswer & HasColor;
+export type SelectableAnswerColor = SelectableAnswer & WithColor;
 
-export default interface Selectable {
-  id: string;
-  values: string[];
-  isSelected: boolean;
-  displayName: string;
-  color: VariantColor;
-}
-
-export function updateIsSelectedItem<T extends Selectable>(items: T[], id: string, newIsSelected: boolean): T[] {
+export function updateIsSelectedItem<T extends SelectableAnswer>(items: T[], id: string, newIsSelected: boolean): T[] {
   const hasManySelectedItems = items.filter((s) => s.isSelected).length > 1;
   if (newIsSelected === true || hasManySelectedItems) {
     const newItems = items.map((item) => {
@@ -68,7 +60,7 @@ export function selectThreeRandomItems<T extends IsSelectable>(items: T[]): T[] 
   return newItems.filter((t) => t.isSelected == true);
 }
 
-export function selectAllOrThreeItems<T extends Selectable>(items: T[]): T[] {
+export function selectAllOrThreeItems<T extends IsSelectable>(items: T[]): T[] {
   const allSelected = items.every((option) => option.isSelected === true);
   return allSelected ? getItemsWithThreeSelected(items) : updateIsSelectedAllItems(items, true);
 }
@@ -79,7 +71,7 @@ export function getRandomItemThatIsSelected<T extends IsSelectable>(items: T[]):
   return randomItemIsSelected;
 }
 
-export function setAllColorSecondary<T extends Selectable>(items: T[]): T[] {
+export function setAllColorSecondary<T extends WithColor>(items: T[]): T[] {
   const itemsSecondary = items.map<T>((actualButton) => {
     return {
       ...actualButton,
@@ -89,7 +81,11 @@ export function setAllColorSecondary<T extends Selectable>(items: T[]): T[] {
   return itemsSecondary;
 }
 
-export function setItemColorSuccesOrDanger<T extends Selectable>(items: T[], id: string, isAnswer: boolean): T[] {
+export function setItemColorSuccesOrDanger<T extends SelectableAnswerColor>(
+  items: T[],
+  id: string,
+  isAnswer: boolean
+): T[] {
   const itemsWithUpdateColor = items.map<T>((item) => {
     if (id === item.id) {
       return {

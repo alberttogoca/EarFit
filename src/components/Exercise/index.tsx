@@ -1,4 +1,4 @@
-import { SelectableAnswerColor } from 'utils/Selectable';
+import { SelectableAnswerColor } from 'utils/Types';
 
 import { AnswerButtons } from './AnswerButtons';
 import { Piano } from './Piano';

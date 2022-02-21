@@ -1,7 +1,7 @@
 import { transpose } from '@tonaljs/core';
 import { Note as TonalNote } from '@tonaljs/tonal';
 import { getRandomItem } from 'utils/arrayUtils';
-import { SelectableAnswer } from 'utils/Selectable';
+import { SelectableAnswer } from 'utils/Types';
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];

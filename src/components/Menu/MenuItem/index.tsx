@@ -1,10 +1,10 @@
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { MenuItemsInfo } from 'utils/MenuItemsInfo';
+import { MenuItemInfo } from 'utils/menuItemsInfo';
 
 interface Props {
-  item: MenuItemsInfo;
+  item: MenuItemInfo;
 }
 
 export const MenuItem = ({ item }: Props): JSX.Element => {

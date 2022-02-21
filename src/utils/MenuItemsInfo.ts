@@ -1,10 +1,10 @@
-export interface MenuItemsInfo {
+export interface MenuItemInfo {
   label: string;
   path: string;
   description?: string;
 }
 
-const menuItemsInfo: MenuItemsInfo[] = [
+const menuItemsInfo: MenuItemInfo[] = [
   { label: 'Notes', path: '/notes', description: 'Aquí tocamos notas muy bonitas' },
   { label: 'Intervals', path: '/intervals', description: 'Para enredar con intervalos.' },
   { label: 'Scales', path: '/scales', description: 'Sección para tocar escalas' },

@@ -1,5 +1,5 @@
 import { useInstrumentContext } from 'context/EarfitContext';
-import { Answer } from 'utils/Selectable';
+import { Answer } from 'utils/Types';
 
 type HookReturnType = {
   playNote: (selectable: Answer) => void;

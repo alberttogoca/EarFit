@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Answer, getItemsWithThreeSelected, SelectableAnswer, selectThreeRandomItems } from 'utils/Selectable';
+import { Answer, getItemsWithThreeSelected, SelectableAnswer, selectThreeRandomItems } from 'utils/Types';
 
 type HookReturnType = {
   items: SelectableAnswer[];

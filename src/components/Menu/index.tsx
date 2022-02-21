@@ -1,4 +1,4 @@
-import menuItemsInfo from 'utils/MenuItemsInfo';
+import menuItemsInfo from 'utils/menuItemsInfo';
 
 import { MenuItem } from './MenuItem';
 

@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import { SelectableAnswerColor } from 'utils/Selectable';
+import { SelectableAnswerColor } from 'utils/Types';
 
 interface Props {
   selectable: SelectableAnswerColor;

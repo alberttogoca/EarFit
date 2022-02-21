@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getIntervals } from 'services/intervalService';
-import { SelectableAnswer } from 'utils/Selectable';
+import { SelectableAnswer } from 'utils/Types';
 
 type HookReturnType = {
   intervals: SelectableAnswer[];

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getScales } from 'services/scaleService';
-import { Answer, reverseAllItemValues } from 'utils/Selectable';
+import { Answer, reverseAllItemValues } from 'utils/Types';
 
 type HookReturnType = {
   scales: Answer[];

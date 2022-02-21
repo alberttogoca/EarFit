@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getNotes } from 'services/noteService';
-import { Answer } from 'utils/Selectable';
+import { Answer } from 'utils/Types';
 
 type HookReturnType = {
   notes: Answer[];
