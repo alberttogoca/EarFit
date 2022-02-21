@@ -6,8 +6,8 @@ import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, useNotesScales
 import { GetStaticProps } from 'next';
 import { getScaleNames } from 'services/scaleService';
 
-export default function Notes({ scales }: Props): JSX.Element {
-  const { selectedScale, setNewSelectedScale } = useNotesScales(scales);
+export default function Notes({ scaleNames }: Props): JSX.Element {
+  const { selectedScale, setNewSelectedScale } = useNotesScales(scaleNames);
   const { notes } = useNotes(selectedScale);
   const { playNote } = usePlayButton();
   const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
@@ -20,7 +20,7 @@ export default function Notes({ scales }: Props): JSX.Element {
       rightCol={
         <Options
           answerToggles={items}
-          scalesNames={scales}
+          scalesNames={scaleNames}
           selectedScale={selectedScale}
           handleDropdownScaleSelect={setNewSelectedScale}
           handleToggleAllChange={selectAllOrThree}
@@ -41,14 +41,14 @@ export default function Notes({ scales }: Props): JSX.Element {
 }
 
 interface Props {
-  scales: string[];
+  scaleNames: string[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = () => {
-  const scales = getScaleNames();
+  const scaleNames = getScaleNames();
   return {
     props: {
-      scales,
+      scaleNames,
     },
   };
 };

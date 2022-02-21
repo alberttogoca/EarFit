@@ -31,6 +31,7 @@ export const Options = ({
   return (
     <Container>
       <Title>Options</Title>
+
       {scalesNames && (
         <ConfigSection
           title="Scale"
@@ -44,6 +45,7 @@ export const Options = ({
           }
         />
       )}
+
       {handleDirectionChange && (
         <ConfigSection
           title="Direction"
@@ -51,6 +53,7 @@ export const Options = ({
           config={<DirectionSelector handleDirectionChange={handleDirectionChange} />}
         />
       )}
+
       {answerToggles && (
         <ConfigSection
           title="Active Options"
@@ -64,6 +67,7 @@ export const Options = ({
           }
         />
       )}
+
       <ConfigSection
         title="Instrument"
         tooltipMessage="Select the instrument that plays"

@@ -7,7 +7,7 @@ import { Streak } from './Streak';
 import { Title } from './Title';
 
 interface Props {
-  title?: string;
+  title: string;
   playButtonLabel?: string;
   handlePlayButtonClick?: () => void;
   answerButtons?: SelectableAnswerColor[];
@@ -30,15 +30,14 @@ export const Exercise = ({
   return (
     <>
       <Title>{title}</Title>
-      {title !== 'Piano' && (
+      {title !== 'Piano' ? (
         <>
           <PlayButton label={playButtonLabel} handlePlayButtonClick={handlePlayButtonClick} />
           <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
           <Streak streak={streak} />
           <Piano />
         </>
-      )}
-      {lastNote && firstNote && (
+      ) : (
         <>
           <Piano firstNote={firstNote} lastNote={lastNote} />
         </>
