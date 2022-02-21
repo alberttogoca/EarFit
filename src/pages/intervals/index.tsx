@@ -7,10 +7,10 @@ import { useAnswerButtons, useAnswerToggles, useIntervalAnswer, useIntervals, us
 export default function Intervals(): JSX.Element {
   const { intervals } = useIntervals();
   const { playInterval } = usePlayButton();
-  const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
-  const { answer, setNewAnswer, changeDirection } = useIntervalAnswer(items.filter((s) => s.isSelected));
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
+  const { answer, setNewAnswer, changeDirection } = useIntervalAnswer(answerToggles.filter((s) => s.isSelected));
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
-    items,
+    answerToggles,
     answer,
     setNewAnswer,
     playInterval
@@ -22,7 +22,7 @@ export default function Intervals(): JSX.Element {
       rightCol={
         <Options
           handleDirectionChange={changeDirection}
-          answerToggles={items}
+          answerToggles={answerToggles}
           handleToggleAllChange={selectAllOrThree}
           handleToggleButtonChange={updateIsSelected}
         />

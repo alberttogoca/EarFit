@@ -7,9 +7,14 @@ import { useAnswer, useAnswerButtons, useAnswerToggles, usePlayButton, useScales
 export default function Scales(): JSX.Element {
   const { scales, changeDirection } = useScales();
   const { playScale } = usePlayButton();
-  const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(scales);
-  const { answer, setNewAnswer } = useAnswer(items.filter((s) => s.isSelected));
-  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(items, answer, setNewAnswer, playScale);
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(scales);
+  const { answer, setNewAnswer } = useAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
+    answerToggles,
+    answer,
+    setNewAnswer,
+    playScale
+  );
 
   return (
     <PageLayout
@@ -17,7 +22,7 @@ export default function Scales(): JSX.Element {
       rightCol={
         <Options
           handleDirectionChange={changeDirection}
-          answerToggles={items}
+          answerToggles={answerToggles}
           handleToggleAllChange={selectAllOrThree}
           handleToggleButtonChange={updateIsSelected}
         />

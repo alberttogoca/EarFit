@@ -1,10 +1,10 @@
-import { AnswerButton as AnswerButtonComponent } from 'components/Exercise/AnswerButtons/AnswerButton';
+import { AnswerButton } from 'components/Exercise/AnswerButtons/AnswerButton';
 import { ButtonGroup } from 'react-bootstrap';
-import { SelectableAnswerColor } from 'utils/Types';
+import { SelectableAnswerWithColor } from 'utils/Types';
 
 interface Props {
-  answerButtons: SelectableAnswerColor[];
-  handleAnswerButtonClick: (selectable: SelectableAnswerColor) => void;
+  answerButtons: SelectableAnswerWithColor[];
+  handleAnswerButtonClick: (answerButton: SelectableAnswerWithColor) => void;
 }
 
 export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props): JSX.Element => {
@@ -13,10 +13,10 @@ export const AnswerButtons = ({ answerButtons, handleAnswerButtonClick }: Props)
       <div>
         {answerButtons
           .filter((s) => s.isSelected)
-          .map((selectable) => (
-            <AnswerButtonComponent
-              key={selectable.id}
-              selectable={selectable}
+          .map((answerButton) => (
+            <AnswerButton
+              key={answerButton.id}
+              answerButton={answerButton}
               handleAnswerButtonClick={handleAnswerButtonClick}
             />
           ))}

@@ -9,23 +9,23 @@ type HookReturnType = {
   changeDirection: () => void;
 };
 
-const useAnswer = (selectables: SelectableAnswer[]): HookReturnType => {
+const useAnswer = (answerTogglesSelected: SelectableAnswer[]): HookReturnType => {
   const [answer, setAnswer] = useState<Answer>();
   const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!answer || !selectables.find((n) => n.id === answer.id)?.isSelected) {
-      if (selectables.length > 0) {
-        const intervalAnswer = getRandomItemThatIsSelected(selectables);
+    if (!answer || !answerTogglesSelected.find((n) => n.id === answer.id)?.isSelected) {
+      if (answerTogglesSelected.length > 0) {
+        const intervalAnswer = getRandomItemThatIsSelected(answerTogglesSelected);
         const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
         setAnswer(newAnswer);
       }
     }
-  }, [answer, selectables, reverse]);
+  }, [answer, answerTogglesSelected, reverse]);
 
   const setNewAnswer = (): void => {
-    if (selectables.length > 0) {
-      const intervalAnswer = getRandomItemThatIsSelected(selectables);
+    if (answerTogglesSelected.length > 0) {
+      const intervalAnswer = getRandomItemThatIsSelected(answerTogglesSelected);
       const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
       setAnswer(newAnswer);
     }

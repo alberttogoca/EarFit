@@ -10,16 +10,21 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
   const { selectedScale, setNewSelectedScale } = useNotesScales(scaleNames);
   const { notes } = useNotes(selectedScale);
   const { playNote } = usePlayButton();
-  const { items, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
-  const { answer, setNewAnswer } = useAnswer(items.filter((s) => s.isSelected));
-  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(items, answer, setNewAnswer, playNote);
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
+  const { answer, setNewAnswer } = useAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
+    answerToggles,
+    answer,
+    setNewAnswer,
+    playNote
+  );
 
   return (
     <PageLayout
       leftCol={<Menu />}
       rightCol={
         <Options
-          answerToggles={items}
+          answerToggles={answerToggles}
           scalesNames={scaleNames}
           selectedScale={selectedScale}
           handleDropdownScaleSelect={setNewSelectedScale}

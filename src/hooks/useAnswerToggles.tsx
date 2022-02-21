@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Answer, getItemsWithThreeSelected, SelectableAnswer, selectThreeRandomItems } from 'utils/Types';
 
 type HookReturnType = {
-  items: SelectableAnswer[];
+  answerToggles: SelectableAnswer[];
   updateIsSelected: (selectable: SelectableAnswer) => void;
   selectAllOrThree: () => void;
 };
 
 export function useAnswerToggles(answers: Answer[]): HookReturnType {
-  const [items, setItems] = useState<SelectableAnswer[]>([]);
+  const [answerToggles, setItems] = useState<SelectableAnswer[]>([]);
 
   useEffect(() => {
     if (!answers || answers.length === 0) {
@@ -23,7 +23,7 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
   }, [answers]);
 
   const selectAllOrThree = (): void => {
-    const allSelected = items.every((option) => option.isSelected === true);
+    const allSelected = answerToggles.every((option) => option.isSelected === true);
     if (allSelected) {
       selectThreeItems();
     } else {
@@ -43,7 +43,7 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
   };
 
   const selectThreeItems = (): void => {
-    const ids = selectThreeRandomItems(items).map((i) => i.id);
+    const ids = selectThreeRandomItems(answerToggles).map((i) => i.id);
     setItems((items) => {
       return items.map<SelectableAnswer>((item) => {
         return {
@@ -57,7 +57,7 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
   const updateIsSelected = (selectable: SelectableAnswer): void => {
     const { id } = selectable;
     const newValue = !selectable.isSelected;
-    const hasManySelectedNotes = items.filter((n) => n.isSelected).length > 1;
+    const hasManySelectedNotes = answerToggles.filter((n) => n.isSelected).length > 1;
 
     if (newValue === true || hasManySelectedNotes) {
       setItems((items) => {
@@ -71,7 +71,7 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
     }
   };
 
-  return { items, updateIsSelected, selectAllOrThree };
+  return { answerToggles, updateIsSelected, selectAllOrThree };
 }
 
 export default useAnswerToggles;

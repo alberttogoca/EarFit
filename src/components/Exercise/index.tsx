@@ -1,4 +1,4 @@
-import { SelectableAnswerColor } from 'utils/Types';
+import { SelectableAnswerWithColor } from 'utils/Types';
 
 import { AnswerButtons } from './AnswerButtons';
 import { Piano } from './Piano';
@@ -10,8 +10,8 @@ interface Props {
   title: string;
   playButtonLabel?: string;
   handlePlayButtonClick?: () => void;
-  answerButtons?: SelectableAnswerColor[];
-  handleAnswerButtonClick?: (answerButton: SelectableAnswerColor) => void;
+  answerButtons?: SelectableAnswerWithColor[];
+  handleAnswerButtonClick?: (answerButton: SelectableAnswerWithColor) => void;
   streak?: number;
   firstNote?: string;
   lastNote?: string;

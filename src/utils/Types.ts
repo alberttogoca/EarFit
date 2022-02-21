@@ -18,7 +18,7 @@ export type WithColor = {
 
 export type SelectableAnswer = Answer & IsSelectable;
 
-export type SelectableAnswerColor = SelectableAnswer & WithColor;
+export type SelectableAnswerWithColor = SelectableAnswer & WithColor;
 
 export function updateIsSelectedItem<T extends SelectableAnswer>(items: T[], id: string, newIsSelected: boolean): T[] {
   const hasManySelectedItems = items.filter((s) => s.isSelected).length > 1;
@@ -81,7 +81,7 @@ export function setAllColorSecondary<T extends WithColor>(items: T[]): T[] {
   return itemsSecondary;
 }
 
-export function setItemColorSuccesOrDanger<T extends SelectableAnswerColor>(
+export function setItemColorSuccesOrDanger<T extends SelectableAnswerWithColor>(
   items: T[],
   id: string,
   isAnswer: boolean
