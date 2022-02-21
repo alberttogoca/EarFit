@@ -13,7 +13,9 @@ export const AnswerToggleAll = ({ answerToggles, handleAnswerToggleAllChange }: 
       type="checkbox"
       variant={'light'} //light or link
       size="sm"
-      checked={answerToggles.every((answerToggle) => answerToggle.isSelected === true)}
+      checked={
+        answerToggles.length < 1 ? false : answerToggles.every((answerToggle) => answerToggle.isSelected === true)
+      }
       onChange={() => {
         handleAnswerToggleAllChange();
       }}
