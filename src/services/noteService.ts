@@ -11,9 +11,7 @@ export const getNotes = (scaleName: string): Answer[] => {
     return {
       id: TonalNote.get(n).pc,
       values: [n],
-      isSelected: false,
       displayName: TonalNote.get(n).pc,
-      color: 'secondary',
     };
   });
   return myNotes;
