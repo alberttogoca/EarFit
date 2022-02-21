@@ -11,10 +11,9 @@ type HookReturnType = {
 
 export function useAnswerButtons(
   answerToggles: SelectableAnswer[],
-  answer: Answer,
+  isCorrectAnswer: (possibleAnswer: Answer) => boolean,
   setNewAnswer: () => void,
-  play: (answer: Answer, direction?: boolean) => void,
-  direction?: boolean
+  playAnswer: () => void
 ): HookReturnType {
   const [answerButtons, setAnswerButtons] = useState<SelectableAnswerWithColor[]>([]);
   const { streak, clearStreak, IncrementStreak } = useStreak();
@@ -34,12 +33,11 @@ export function useAnswerButtons(
   }, [answerToggles]);
 
   function handleAnswerButtonClick(answerButtonSelected: SelectableAnswerWithColor): void {
-    const isAnswer = answerButtonSelected.id.toUpperCase() === answer.id.toUpperCase();
-    if (isAnswer) {
+    if (isCorrectAnswer(answerButtonSelected)) {
       setNewAnswer();
       updateAnswerButtonColor(answerButtonSelected, true);
       IncrementStreak();
-      play(answer, direction);
+      playAnswer();
 
       setTimeout(() => {
         clearAllAnswerButtonsColor();

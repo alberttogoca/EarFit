@@ -5,17 +5,16 @@ import { Options } from 'components/Options';
 import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Intervals(): JSX.Element {
-  const { answers } = useExercise('intervals');
   const { direction, changeDirection } = useDirectionSelector();
-  const { playInterval } = usePlayButton();
+  const { answers } = useExercise('intervals');
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
-  const { answer, setNewAnswer } = useAnswer('intervals', answerToggles);
+  const { answer, setNewAnswer, isCorrectAnswer } = useAnswer('intervals', answerToggles);
+  const { playAnswer } = usePlayButton('intervals', answer, direction);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
-    answer,
+    isCorrectAnswer,
     setNewAnswer,
-    playInterval,
-    direction
+    playAnswer
   );
 
   return (
@@ -34,7 +33,7 @@ export default function Intervals(): JSX.Element {
       <Exercise
         title="Intervals"
         playButtonLabel="Interval?"
-        handlePlayButtonClick={() => playInterval(answer, direction)}
+        handlePlayButtonClick={playAnswer}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}

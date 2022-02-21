@@ -6,7 +6,7 @@ import { Answer, SelectableAnswer, VariantExercise } from 'utils/Types';
 type HookReturnType = {
   answer: Answer;
   setNewAnswer: () => void;
-  isCorrectAnswer: (item: Answer) => boolean;
+  isCorrectAnswer: (possibleAnswer: Answer) => boolean;
 };
 
 const useAnswer = (variant: VariantExercise, answerToggles: SelectableAnswer[]): HookReturnType => {
@@ -45,8 +45,8 @@ const useAnswer = (variant: VariantExercise, answerToggles: SelectableAnswer[]):
     }
   };
 
-  const isCorrectAnswer = (item: Answer): boolean => {
-    const isAnswer = item.id.toUpperCase() === answer.id.toUpperCase();
+  const isCorrectAnswer = (possibleAnswer: Answer): boolean => {
+    const isAnswer = possibleAnswer.id.toUpperCase() === answer.id.toUpperCase();
     return isAnswer;
   };
 

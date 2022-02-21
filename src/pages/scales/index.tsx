@@ -5,17 +5,16 @@ import { Options } from 'components/Options';
 import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Scales(): JSX.Element {
-  const { answers } = useExercise('scales');
   const { direction, changeDirection } = useDirectionSelector();
-  const { playScale } = usePlayButton();
+  const { answers } = useExercise('scales');
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
-  const { answer, setNewAnswer } = useAnswer('scales', answerToggles);
+  const { answer, setNewAnswer, isCorrectAnswer } = useAnswer('scales', answerToggles);
+  const { playAnswer } = usePlayButton('scales', answer, direction);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
-    answer,
+    isCorrectAnswer,
     setNewAnswer,
-    playScale,
-    direction
+    playAnswer
   );
 
   return (
@@ -34,7 +33,7 @@ export default function Scales(): JSX.Element {
       <Exercise
         title="Scales"
         playButtonLabel="Scale?"
-        handlePlayButtonClick={() => playScale(answer, direction)}
+        handlePlayButtonClick={playAnswer}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}

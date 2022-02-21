@@ -9,14 +9,14 @@ import { getScaleNames } from 'services/scaleService';
 export default function Notes({ scaleNames }: Props): JSX.Element {
   const { selectedScale, setNewSelectedScale } = useScaleDropdown(scaleNames);
   const { answers } = useExercise('notes', selectedScale);
-  const { playNote } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
-  const { answer, setNewAnswer } = useAnswer('notes', answerToggles);
+  const { answer, setNewAnswer, isCorrectAnswer } = useAnswer('notes', answerToggles);
+  const { playAnswer } = usePlayButton('notes', answer);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
-    answer,
+    isCorrectAnswer,
     setNewAnswer,
-    playNote
+    playAnswer
   );
 
   return (
@@ -36,7 +36,7 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
       <Exercise
         title="Notes"
         playButtonLabel="Note?"
-        handlePlayButtonClick={() => playNote(answer)}
+        handlePlayButtonClick={playAnswer}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
