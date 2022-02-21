@@ -35,7 +35,7 @@ export const Options = ({
       {scalesNames && (
         <ConfigSection
           title="Scale"
-          tooltipMessage="Select the scale from which the notes are taken"
+          tooltipMessage="Select the scale you want to test."
           config={
             <ScaleDropdown
               scalesNames={scalesNames}
@@ -49,15 +49,15 @@ export const Options = ({
       {handleDirectionChange && (
         <ConfigSection
           title="Direction"
-          tooltipMessage="Select the direction of the notes"
+          tooltipMessage="Select the direction of the notes."
           config={<DirectionSelector handleDirectionChange={handleDirectionChange} />}
         />
       )}
 
       {answerToggles && (
         <ConfigSection
-          title="Active Options"
-          tooltipMessage="Select the options on which you would like to be tested"
+          title="Answers"
+          tooltipMessage="Select the possible answers. More answer, more difficult."
           config={
             <AnswerToggles
               answerToggles={answerToggles}
@@ -70,7 +70,7 @@ export const Options = ({
 
       <ConfigSection
         title="Instrument"
-        tooltipMessage="Select the instrument that plays"
+        tooltipMessage="Select the instrument that plays."
         config={<InstrumentSelector />}
       />
     </Container>
