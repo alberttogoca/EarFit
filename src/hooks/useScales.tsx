@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getScales } from 'services/scaleService';
-import { Answer, reverseAllItemValues } from 'utils/Types';
+import { Answer } from 'utils/Types';
 
 type HookReturnType = {
   scales: Answer[];
-  changeDirection: () => void;
 };
 
 const useScales = (): HookReturnType => {
@@ -15,13 +14,7 @@ const useScales = (): HookReturnType => {
     setScales(newScales);
   }, []);
 
-  //TODO: Extract
-  const changeDirection = (): void => {
-    const newScales = reverseAllItemValues(scales);
-    setScales(newScales);
-  };
-
-  return { scales, changeDirection };
+  return { scales };
 };
 
 export default useScales;

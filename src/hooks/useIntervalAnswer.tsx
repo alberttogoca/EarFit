@@ -1,32 +1,30 @@
 import { useEffect, useState } from 'react';
 import { calcIntervalToPlay } from 'services/intervalService';
-import { Answer, getRandomItemThatIsSelected, reverseItemValues, SelectableAnswer } from 'utils/Types';
+import { Answer, getRandomItemThatIsSelected, SelectableAnswer } from 'utils/Types';
 
 type HookReturnType = {
   answer: Answer;
   setNewAnswer: () => void;
   isCorrectAnswer: (item: Answer) => boolean;
-  changeDirection: () => void;
 };
 
 const useAnswer = (answerTogglesSelected: SelectableAnswer[]): HookReturnType => {
   const [answer, setAnswer] = useState<Answer>();
-  const [reverse, setReverse] = useState<boolean>(false);
 
   useEffect(() => {
     if (!answer || !answerTogglesSelected.find((n) => n.id === answer.id)?.isSelected) {
       if (answerTogglesSelected.length > 0) {
         const intervalAnswer = getRandomItemThatIsSelected(answerTogglesSelected);
-        const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
+        const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id) };
         setAnswer(newAnswer);
       }
     }
-  }, [answer, answerTogglesSelected, reverse]);
+  }, [answer, answerTogglesSelected]);
 
   const setNewAnswer = (): void => {
     if (answerTogglesSelected.length > 0) {
       const intervalAnswer = getRandomItemThatIsSelected(answerTogglesSelected);
-      const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id, reverse) };
+      const newAnswer = { ...intervalAnswer, values: calcIntervalToPlay(intervalAnswer.id) };
       setAnswer(newAnswer);
     }
   };
@@ -36,13 +34,7 @@ const useAnswer = (answerTogglesSelected: SelectableAnswer[]): HookReturnType =>
     return isAnswer;
   };
 
-  //TODO: Extract
-  const changeDirection = (): void => {
-    setReverse(!reverse);
-    setAnswer(reverseItemValues(answer));
-  };
-
-  return { answer, setNewAnswer, isCorrectAnswer, changeDirection };
+  return { answer, setNewAnswer, isCorrectAnswer };
 };
 
 export default useAnswer;

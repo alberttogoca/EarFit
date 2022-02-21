@@ -1,24 +1,21 @@
-import { useState } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 
 interface Props {
+  reverse: boolean;
   handleDirectionChange: () => void;
 }
 
-export const DirectionSelector = ({ handleDirectionChange }: Props): JSX.Element => {
-  const [checked, setChecked] = useState<boolean>(true);
-
+export const DirectionSelector = ({ reverse, handleDirectionChange }: Props): JSX.Element => {
   return (
     <>
       <ToggleButton
         type="checkbox"
         variant={'light'} //light or link
         size="sm"
-        value={0}
-        checked={checked}
+        value={1}
+        checked={reverse}
         onChange={() => {
           handleDirectionChange();
-          setChecked(!checked);
         }}
       >
         {' '}
@@ -29,10 +26,9 @@ export const DirectionSelector = ({ handleDirectionChange }: Props): JSX.Element
         variant={'light'} //light or link
         size="sm"
         value={0}
-        checked={!checked}
+        checked={!reverse}
         onChange={() => {
           handleDirectionChange();
-          setChecked(!checked);
         }}
       >
         {' '}

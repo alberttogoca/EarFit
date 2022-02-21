@@ -1,36 +1,46 @@
 import { useInstrumentContext } from 'context/EarfitContext';
+import { useState } from 'react';
 import { Answer } from 'utils/Types';
 
 type HookReturnType = {
-  playNote: (selectable: Answer) => void;
-  playScale: (selectable: Answer) => void;
-  playInterval: (selectable: Answer) => void;
+  playNote: (answer: Answer) => void;
+  playScale: (answer: Answer) => void;
+  playInterval: (answer: Answer) => void;
+  reverse: boolean;
+  changeDirection: () => void;
 };
 
 export const usePlayButton = (): HookReturnType => {
   const { instrument } = useInstrumentContext();
+  const [reverse, setReverse] = useState<boolean>(true);
 
-  function playNote(selectable: Answer): void {
-    play(selectable, 0.3, 0, 2);
+  function playNote(answer: Answer): void {
+    play(answer, 0.3, 0, 2);
   }
 
-  function playScale(selectable: Answer): void {
-    play(selectable, 0.3, 0, 0.5);
+  function playScale(answer: Answer): void {
+    play(answer, 0.3, 0, 0.5);
   }
 
-  function playInterval(selectable: Answer): void {
-    play(selectable, 0.8, 0, 0.7);
+  function playInterval(answer: Answer): void {
+    play(answer, 0.8, 0, 0.7);
   }
 
-  const play = (selectable: Answer, time = 0.8, when = 0, duration = 0.7): void => {
-    console.log(`Now playing: ${selectable.id} (${selectable.values})`);
-    const notesToPlay = selectable.values.map((note, i) => {
+  const play = (answer: Answer, time = 0.8, when = 0, duration = 0.7): void => {
+    const valuesCopy = answer.values.slice();
+    const values = reverse ? valuesCopy : valuesCopy.reverse();
+    const notesToPlay = values.map((note, i) => {
       return { note: note, time: i * time, duration: duration };
     });
+    console.log(`Now playing: ${answer.id} (${values})`);
     instrument?.notePlayer?.schedule(when, notesToPlay);
   };
 
-  return { playNote, playScale, playInterval };
+  const changeDirection = (): void => {
+    setReverse(!reverse);
+  };
+
+  return { playNote, playScale, playInterval, reverse, changeDirection };
 };
 
 export default usePlayButton;

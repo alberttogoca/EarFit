@@ -6,9 +6,9 @@ import { useAnswerButtons, useAnswerToggles, useIntervalAnswer, useIntervals, us
 
 export default function Intervals(): JSX.Element {
   const { intervals } = useIntervals();
-  const { playInterval } = usePlayButton();
+  const { playInterval, reverse, changeDirection } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
-  const { answer, setNewAnswer, changeDirection } = useIntervalAnswer(answerToggles.filter((s) => s.isSelected));
+  const { answer, setNewAnswer } = useIntervalAnswer(answerToggles.filter((s) => s.isSelected));
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,
@@ -21,6 +21,7 @@ export default function Intervals(): JSX.Element {
       leftCol={<Menu />}
       rightCol={
         <Options
+          reverse={reverse}
           handleDirectionChange={changeDirection}
           answerToggles={answerToggles}
           handleAnswerToggleAllChange={selectAllOrThree}

@@ -5,8 +5,8 @@ import { Options } from 'components/Options';
 import { useAnswer, useAnswerButtons, useAnswerToggles, usePlayButton, useScales } from 'hooks';
 
 export default function Scales(): JSX.Element {
-  const { scales, changeDirection } = useScales();
-  const { playScale } = usePlayButton();
+  const { scales } = useScales();
+  const { playScale, reverse, changeDirection } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(scales);
   const { answer, setNewAnswer } = useAnswer(answerToggles.filter((s) => s.isSelected));
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
@@ -21,6 +21,7 @@ export default function Scales(): JSX.Element {
       leftCol={<Menu />}
       rightCol={
         <Options
+          reverse={reverse}
           handleDirectionChange={changeDirection}
           answerToggles={answerToggles}
           handleAnswerToggleAllChange={selectAllOrThree}

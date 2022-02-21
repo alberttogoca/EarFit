@@ -35,7 +35,7 @@ export const getIntervals = (): SelectableAnswer[] => {
   return myIntervals;
 };
 
-export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean): string[] => {
+export const calcIntervalToPlay = (interval: string): string[] => {
   let note1 = getRandomItem(allNotes);
   let note2 = transpose(note1, interval);
 
@@ -45,10 +45,6 @@ export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean):
   }
 
   const values = [note1, TonalNote.simplify(note2)];
-
-  if (reverseInterval) {
-    values.reverse();
-  }
 
   return values;
 };
