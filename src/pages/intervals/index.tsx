@@ -2,18 +2,20 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswer, useAnswerButtons, useAnswerToggles, useIntervals, usePlayButton } from 'hooks';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Intervals(): JSX.Element {
-  const { intervals } = useIntervals();
-  const { playInterval, reverse, changeDirection } = usePlayButton();
-  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
-  const { answer, setNewAnswer } = useAnswer(answerToggles, 'interval');
+  const { answers } = useExercise('intervals');
+  const { direction, changeDirection } = useDirectionSelector();
+  const { playInterval } = usePlayButton();
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
+  const { answer, setNewAnswer } = useAnswer('intervals', answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,
     setNewAnswer,
-    playInterval
+    playInterval,
+    direction
   );
 
   return (
@@ -21,7 +23,7 @@ export default function Intervals(): JSX.Element {
       leftCol={<Menu />}
       rightCol={
         <Options
-          reverse={reverse}
+          direction={direction}
           handleDirectionChange={changeDirection}
           answerToggles={answerToggles}
           handleAnswerToggleAllChange={selectAllOrThree}
@@ -32,7 +34,7 @@ export default function Intervals(): JSX.Element {
       <Exercise
         title="Intervals"
         playButtonLabel="Interval?"
-        handlePlayButtonClick={() => playInterval(answer)}
+        handlePlayButtonClick={() => playInterval(answer, direction)}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}

@@ -2,16 +2,16 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswer, useAnswerButtons, useAnswerToggles, useNotes, useNotesScales, usePlayButton } from 'hooks';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useExercise, usePlayButton, useScaleDropdown } from 'hooks';
 import { GetStaticProps } from 'next';
 import { getScaleNames } from 'services/scaleService';
 
 export default function Notes({ scaleNames }: Props): JSX.Element {
-  const { selectedScale, setNewSelectedScale } = useNotesScales(scaleNames);
-  const { notes } = useNotes(selectedScale);
+  const { selectedScale, setNewSelectedScale } = useScaleDropdown(scaleNames);
+  const { answers } = useExercise('notes', selectedScale);
   const { playNote } = usePlayButton();
-  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(notes);
-  const { answer, setNewAnswer } = useAnswer(answerToggles);
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
+  const { answer, setNewAnswer } = useAnswer('notes', answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,

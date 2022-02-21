@@ -14,7 +14,7 @@ interface Props {
   scalesNames?: string[];
   selectedScale?: string;
   handleScaleDropdownChange?: (scaleName: string) => void;
-  reverse?: boolean;
+  direction?: boolean;
   handleDirectionChange?: () => void;
   handleAnswerTogglesChange?: (answerToggle: SelectableAnswer) => void;
   handleAnswerToggleAllChange?: () => void;
@@ -25,7 +25,7 @@ export const Options = ({
   scalesNames,
   selectedScale,
   handleScaleDropdownChange,
-  reverse,
+  direction,
   handleDirectionChange,
   handleAnswerTogglesChange,
   handleAnswerToggleAllChange,
@@ -52,7 +52,7 @@ export const Options = ({
         <ConfigSection
           title="Direction"
           tooltipMessage="Select the direction of the notes."
-          config={<DirectionSelector reverse={reverse} handleDirectionChange={handleDirectionChange} />}
+          config={<DirectionSelector direction={direction} handleDirectionChange={handleDirectionChange} />}
         />
       )}
 

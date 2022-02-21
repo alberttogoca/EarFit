@@ -2,18 +2,20 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswer, useAnswerButtons, useAnswerToggles, usePlayButton, useScales } from 'hooks';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Scales(): JSX.Element {
-  const { scales } = useScales();
-  const { playScale, reverse, changeDirection } = usePlayButton();
-  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(scales);
-  const { answer, setNewAnswer } = useAnswer(answerToggles);
+  const { answers } = useExercise('scales');
+  const { direction, changeDirection } = useDirectionSelector();
+  const { playScale } = usePlayButton();
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
+  const { answer, setNewAnswer } = useAnswer('scales', answerToggles);
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,
     setNewAnswer,
-    playScale
+    playScale,
+    direction
   );
 
   return (
@@ -21,7 +23,7 @@ export default function Scales(): JSX.Element {
       leftCol={<Menu />}
       rightCol={
         <Options
-          reverse={reverse}
+          direction={direction}
           handleDirectionChange={changeDirection}
           answerToggles={answerToggles}
           handleAnswerToggleAllChange={selectAllOrThree}
@@ -32,7 +34,7 @@ export default function Scales(): JSX.Element {
       <Exercise
         title="Scales"
         playButtonLabel="Scale?"
-        handlePlayButtonClick={() => playScale(answer)}
+        handlePlayButtonClick={() => playScale(answer, direction)}
         answerButtons={answerButtons}
         handleAnswerButtonClick={handleAnswerButtonClick}
         streak={streak}
