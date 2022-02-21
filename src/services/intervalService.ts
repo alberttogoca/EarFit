@@ -1,7 +1,7 @@
 import { transpose } from '@tonaljs/core';
 import { Note as TonalNote } from '@tonaljs/tonal';
 import { getRandomItem } from 'utils/arrayUtils';
-import { SelectableAnswer, selectThreeRandomItems } from 'utils/Selectable';
+import { SelectableAnswer } from 'utils/Selectable';
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -32,7 +32,7 @@ export const getIntervals = (): SelectableAnswer[] => {
       color: 'secondary',
     };
   });
-  return selectThreeRandomItems(myIntervals);
+  return myIntervals;
 };
 
 export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean): string[] => {
@@ -52,17 +52,3 @@ export const calcIntervalToPlay = (interval: string, reverseInterval?: boolean):
 
   return values;
 };
-
-//INFO
-//const allNaturalIntervalsNames = ['1P','2m','2M','3m','3M','4P','4A','5P','6m','6M','7m','7M','P8'];
-//const allIntervalsNames = ['1P', '1A', '2d', '2m', '2M', '2A', '3d', '3m', '3M', '3A', '4d', '4P', '4A', '5d', '5P', '5A', '6d', '6m', '6M', '6A', '7d', '7m', '7M', '7A', '8d', '8P', '8A']
-
-/* 
-//PROBLEMA: Intervalos que suenan igual pero se escriben distinto: 
-Enarmonía
-Una enarmonía se produce entre dos notas que tienen el mismo sonido y escritura diferente. 
-  console.log(TonalInterval.distance('C3', 'C#3'));
-  console.log(TonalInterval.distance('C3', 'Db3'));
-  console.log(TonalInterval.distance('C#3', 'Db3'));
-  console.log(TonalInterval.distance('Db3', 'C#3')); 
-*/

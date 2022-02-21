@@ -1,6 +1,7 @@
 import useAnswer from './useAnswer';
 import useAnswerButtons from './useAnswerButtons';
 import useAnswerToggles from './useAnswerToggles';
+import useIntervalAnswer from './useIntervalAnswer';
 import useIntervals from './useIntervals';
 import useNotes from './useNotes';
 import useNotesScales from './useNotesScales';
@@ -13,6 +14,7 @@ export {
   useAnswer,
   useAnswerButtons,
   useAnswerToggles,
+  useIntervalAnswer,
   useIntervals,
   useNotes,
   useNotesScales,
