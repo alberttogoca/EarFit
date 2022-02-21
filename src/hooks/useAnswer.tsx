@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { calcInterval } from 'services/intervalService';
-import { Answer, getRandomItemThatIsSelected, SelectableAnswer } from 'utils/Types';
+import { getRandomItem } from 'utils/arrayUtils';
+import { Answer, SelectableAnswer, VariantExercise } from 'utils/Types';
 
 type HookReturnType = {
   answer: Answer;
@@ -8,23 +9,40 @@ type HookReturnType = {
   isCorrectAnswer: (item: Answer) => boolean;
 };
 
-type VariantAnswer = 'notes' | 'interval' | 'scales';
-
-const useAnswer = (answerToggles: SelectableAnswer[], variant?: VariantAnswer): HookReturnType => {
+const useAnswer = (variant: VariantExercise, answerToggles: SelectableAnswer[]): HookReturnType => {
   const [answer, setAnswer] = useState<Answer>(undefined);
 
   useEffect(() => {
-    if (answerToggles.length > 0 && (!answer || !answerToggles.find((n) => n.id === answer.id)?.isSelected)) {
-      const randomAnswer = getRandomItemThatIsSelected(answerToggles);
-      const newAnswer = variant === 'interval' ? calcInterval(randomAnswer) : randomAnswer;
-      setAnswer(newAnswer);
+    if (answerToggles.length < 1 || (answer && answerToggles.find((n) => n.id === answer.id)?.isSelected)) {
+      return;
+    }
+    const selectedItems = answerToggles.filter((s) => s.isSelected);
+    const randomAnswer = getRandomItem(selectedItems);
+    switch (variant) {
+      case 'notes':
+        setAnswer(randomAnswer);
+        break;
+      case 'scales':
+        setAnswer(randomAnswer);
+        break;
+      case 'intervals':
+        setAnswer(calcInterval(randomAnswer));
     }
   }, [answer, answerToggles, variant]);
 
   const setNewAnswer = (): void => {
-    const randomAnswer = getRandomItemThatIsSelected(answerToggles);
-    const newAnswer = variant === 'interval' ? calcInterval(randomAnswer) : randomAnswer;
-    setAnswer(newAnswer);
+    const selectedItems = answerToggles.filter((s) => s.isSelected);
+    const randomAnswer = getRandomItem(selectedItems);
+    switch (variant) {
+      case 'notes':
+        setAnswer(randomAnswer);
+        break;
+      case 'scales':
+        setAnswer(randomAnswer);
+        break;
+      case 'intervals':
+        setAnswer(calcInterval(randomAnswer));
+    }
   };
 
   const isCorrectAnswer = (item: Answer): boolean => {

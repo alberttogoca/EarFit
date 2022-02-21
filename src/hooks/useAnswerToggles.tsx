@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Answer, getItemsWithThreeSelected, SelectableAnswer, selectThreeRandomItems } from 'utils/Types';
+import { getRandomItem } from 'utils/arrayUtils';
+import { Answer, SelectableAnswer } from 'utils/Types';
 
 type HookReturnType = {
   answerToggles: SelectableAnswer[];
@@ -7,61 +8,64 @@ type HookReturnType = {
   selectAllOrThree: () => void;
 };
 
-export function useAnswerToggles(answers: Answer[]): HookReturnType {
+const useAnswerToggles = (answers: Answer[]): HookReturnType => {
   const [answerToggles, setAnswerToggles] = useState<SelectableAnswer[]>([]);
 
   useEffect(() => {
-    if (!answers || answers.length === 0) {
+    if (!answers || answers.length < 1) {
       return;
     }
-    const answersWithSelected = answers.map<SelectableAnswer>((s) => {
-      return { ...s, isSelected: false };
+    const newAnswerToggles = answers.map<SelectableAnswer>((item) => {
+      return { ...item, isSelected: false };
     });
 
-    const newAnswerToggles = getItemsWithThreeSelected(answersWithSelected);
+    for (let i = 0; i < 3; i++) {
+      const item = getRandomItem(newAnswerToggles.filter((x) => !x.isSelected));
+      item.isSelected = true;
+    }
+
     setAnswerToggles(newAnswerToggles);
   }, [answers]);
 
-  const selectAllOrThree = (): void => {
+  function selectAllOrThree(): void {
     const allSelected = answerToggles.every((s) => s.isSelected === true);
     if (allSelected) {
-      selectThreeItems();
+      setAnswerToggles((answerToggles) => {
+        return getThreeRandomNewAnswersSelected(answerToggles);
+      });
     } else {
-      selectAllItems();
+      setAnswerToggles((answerToggles) => {
+        return getAllNewAnswersSelected(answerToggles, true);
+      });
     }
-  };
+  }
 
-  const selectAllItems = (): void => {
-    setAnswerToggles((answerToggles) => {
-      return answerToggles.map<SelectableAnswer>((answerToggle) => {
-        return {
-          ...answerToggle,
-          isSelected: true,
-        };
-      });
+  function getThreeRandomNewAnswersSelected(items: SelectableAnswer[]): SelectableAnswer[] {
+    const newItems = getAllNewAnswersSelected(items, false);
+    for (let i = 0; i < 3; i++) {
+      const item = getRandomItem(newItems.filter((x) => !x.isSelected));
+      item.isSelected = true;
+    }
+    return newItems;
+  }
+
+  function getAllNewAnswersSelected(items: SelectableAnswer[], newValue: boolean): SelectableAnswer[] {
+    return items.map((item) => {
+      return {
+        ...item,
+        isSelected: newValue,
+      };
     });
-  };
+  }
 
-  const selectThreeItems = (): void => {
-    const ids = selectThreeRandomItems(answerToggles).map((s) => s.id);
-    setAnswerToggles((answerToggles) => {
-      return answerToggles.map<SelectableAnswer>((answerToggle) => {
-        return {
-          ...answerToggle,
-          isSelected: ids.some((id) => id == answerToggle.id),
-        };
-      });
-    });
-  };
-
-  const updateIsSelected = (answerToggleSelected: SelectableAnswer): void => {
+  function updateIsSelected(answerToggleSelected: SelectableAnswer): void {
     const { id } = answerToggleSelected;
     const newValue = !answerToggleSelected.isSelected;
     const hasManySelectedNotes = answerToggles.filter((s) => s.isSelected).length > 1;
 
     if (newValue === true || hasManySelectedNotes) {
       setAnswerToggles((answerToggles) => {
-        return answerToggles.map<SelectableAnswer>((answerToggle) => {
+        return answerToggles.map((answerToggle) => {
           return {
             ...answerToggle,
             isSelected: answerToggle.id === id ? newValue : answerToggle.isSelected,
@@ -69,9 +73,9 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
         });
       });
     }
-  };
+  }
 
   return { answerToggles, updateIsSelected, selectAllOrThree };
-}
+};
 
 export default useAnswerToggles;

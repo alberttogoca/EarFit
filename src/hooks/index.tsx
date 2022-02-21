@@ -1,24 +1,22 @@
 import useAnswer from './useAnswer';
 import useAnswerButtons from './useAnswerButtons';
 import useAnswerToggles from './useAnswerToggles';
-import useIntervals from './useIntervals';
-import useNotes from './useNotes';
-import useNotesScales from './useNotesScales';
+import useDirectionSelector from './useDirectionSelector';
+import useExercise from './useExercise';
 import usePiano from './usePiano';
 import usePlayButton from './usePlayButton';
-import useScales from './useScales';
+import useScaleDropdown from './useScaleDropdown';
 import useStreak from './useStreak';
 
 export {
   useAnswer,
   useAnswerButtons,
   useAnswerToggles,
-  useIntervals,
-  useNotes,
-  useNotesScales,
+  useDirectionSelector,
+  useExercise,
   usePiano,
   usePlayButton,
-  useScales,
+  useScaleDropdown,
   useStreak,
 };
 
