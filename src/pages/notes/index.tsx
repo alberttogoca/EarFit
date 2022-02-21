@@ -27,9 +27,9 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
           answerToggles={answerToggles}
           scalesNames={scaleNames}
           selectedScale={selectedScale}
-          handleDropdownScaleSelect={setNewSelectedScale}
-          handleToggleAllChange={selectAllOrThree}
-          handleToggleButtonChange={updateIsSelected}
+          handleScaleDropdownChange={setNewSelectedScale}
+          handleAnswerToggleAllChange={selectAllOrThree}
+          handleAnswerTogglesChange={updateIsSelected}
         />
       }
     >

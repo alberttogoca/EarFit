@@ -8,7 +8,7 @@ type HookReturnType = {
 };
 
 export function useAnswerToggles(answers: Answer[]): HookReturnType {
-  const [answerToggles, setItems] = useState<SelectableAnswer[]>([]);
+  const [answerToggles, setAnswerToggles] = useState<SelectableAnswer[]>([]);
 
   useEffect(() => {
     if (!answers || answers.length === 0) {
@@ -18,12 +18,12 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
       return { ...s, isSelected: false };
     });
 
-    const newItems = getItemsWithThreeSelected(selectedAnswers);
-    setItems(newItems);
+    const newAnswerToggles = getItemsWithThreeSelected(selectedAnswers);
+    setAnswerToggles(newAnswerToggles);
   }, [answers]);
 
   const selectAllOrThree = (): void => {
-    const allSelected = answerToggles.every((option) => option.isSelected === true);
+    const allSelected = answerToggles.every((s) => s.isSelected === true);
     if (allSelected) {
       selectThreeItems();
     } else {
@@ -32,10 +32,10 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
   };
 
   const selectAllItems = (): void => {
-    setItems((items) => {
-      return items.map<SelectableAnswer>((item) => {
+    setAnswerToggles((answerToggles) => {
+      return answerToggles.map<SelectableAnswer>((answerToggle) => {
         return {
-          ...item,
+          ...answerToggle,
           isSelected: true,
         };
       });
@@ -43,28 +43,28 @@ export function useAnswerToggles(answers: Answer[]): HookReturnType {
   };
 
   const selectThreeItems = (): void => {
-    const ids = selectThreeRandomItems(answerToggles).map((i) => i.id);
-    setItems((items) => {
-      return items.map<SelectableAnswer>((item) => {
+    const ids = selectThreeRandomItems(answerToggles).map((s) => s.id);
+    setAnswerToggles((answerToggles) => {
+      return answerToggles.map<SelectableAnswer>((answerToggle) => {
         return {
-          ...item,
-          isSelected: ids.some((id) => id == item.id),
+          ...answerToggle,
+          isSelected: ids.some((id) => id == answerToggle.id),
         };
       });
     });
   };
 
-  const updateIsSelected = (selectable: SelectableAnswer): void => {
-    const { id } = selectable;
-    const newValue = !selectable.isSelected;
-    const hasManySelectedNotes = answerToggles.filter((n) => n.isSelected).length > 1;
+  const updateIsSelected = (answerToggleSelected: SelectableAnswer): void => {
+    const { id } = answerToggleSelected;
+    const newValue = !answerToggleSelected.isSelected;
+    const hasManySelectedNotes = answerToggles.filter((s) => s.isSelected).length > 1;
 
     if (newValue === true || hasManySelectedNotes) {
-      setItems((items) => {
-        return items.map<SelectableAnswer>((item) => {
+      setAnswerToggles((answerToggles) => {
+        return answerToggles.map<SelectableAnswer>((answerToggle) => {
           return {
-            ...item,
-            isSelected: item.id === id ? newValue : item.isSelected,
+            ...answerToggle,
+            isSelected: answerToggle.id === id ? newValue : answerToggle.isSelected,
           };
         });
       });

@@ -13,20 +13,20 @@ interface Props {
   answerToggles?: SelectableAnswer[];
   scalesNames?: string[];
   selectedScale?: string;
-  handleDropdownScaleSelect?: (scaleName: string) => void;
+  handleScaleDropdownChange?: (scaleName: string) => void;
   handleDirectionChange?: () => void;
-  handleToggleButtonChange?: (note: SelectableAnswer) => void;
-  handleToggleAllChange?: () => void;
+  handleAnswerTogglesChange?: (answerToggle: SelectableAnswer) => void;
+  handleAnswerToggleAllChange?: () => void;
 }
 
 export const Options = ({
   answerToggles,
   scalesNames,
   selectedScale,
-  handleDropdownScaleSelect,
+  handleScaleDropdownChange,
   handleDirectionChange,
-  handleToggleButtonChange,
-  handleToggleAllChange,
+  handleAnswerTogglesChange,
+  handleAnswerToggleAllChange,
 }: Props): JSX.Element => {
   return (
     <Container>
@@ -40,7 +40,7 @@ export const Options = ({
             <ScaleDropdown
               scalesNames={scalesNames}
               selectedScale={selectedScale}
-              handleDropdownScaleSelect={handleDropdownScaleSelect}
+              handleScaleDropdownChange={handleScaleDropdownChange}
             />
           }
         />
@@ -61,8 +61,8 @@ export const Options = ({
           config={
             <AnswerToggles
               answerToggles={answerToggles}
-              handleToggleButtonChange={handleToggleButtonChange}
-              handleToggleAllChange={handleToggleAllChange}
+              handleAnswerTogglesChange={handleAnswerTogglesChange}
+              handleAnswerToggleAllChange={handleAnswerToggleAllChange}
             />
           }
         />

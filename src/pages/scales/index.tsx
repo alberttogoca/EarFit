@@ -23,8 +23,8 @@ export default function Scales(): JSX.Element {
         <Options
           handleDirectionChange={changeDirection}
           answerToggles={answerToggles}
-          handleToggleAllChange={selectAllOrThree}
-          handleToggleButtonChange={updateIsSelected}
+          handleAnswerToggleAllChange={selectAllOrThree}
+          handleAnswerTogglesChange={updateIsSelected}
         />
       }
     >

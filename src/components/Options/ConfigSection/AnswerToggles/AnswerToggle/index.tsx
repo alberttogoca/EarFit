@@ -2,24 +2,22 @@ import { ToggleButton } from 'react-bootstrap';
 import { SelectableAnswer } from 'utils/Types';
 
 interface Props {
-  selectable?: SelectableAnswer;
-  selectables?: SelectableAnswer[];
-  handleToggleButtonChange?: (option: SelectableAnswer) => void;
-  handleToggleAllChange?: () => void;
+  answerToggle?: SelectableAnswer;
+  handleAnswerTogglesChange?: (answerToggle: SelectableAnswer) => void;
 }
 
-export const AnswerToggle = ({ selectable, handleToggleButtonChange }: Props): JSX.Element => {
+export const AnswerToggle = ({ answerToggle, handleAnswerTogglesChange }: Props): JSX.Element => {
   return (
     <ToggleButton
-      value={selectable.id}
+      value={answerToggle.id}
       type="checkbox"
       variant={'light'} //light or link
       size="sm"
-      checked={selectable.isSelected}
-      onChange={() => handleToggleButtonChange(selectable)}
+      checked={answerToggle.isSelected}
+      onChange={() => handleAnswerTogglesChange(answerToggle)}
     >
       {' '}
-      {selectable.id}
+      {answerToggle.id}
     </ToggleButton>
   );
 };

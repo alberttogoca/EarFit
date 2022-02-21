@@ -3,19 +3,19 @@ import { SelectableAnswer } from 'utils/Types';
 
 interface Props {
   answerToggles?: SelectableAnswer[];
-  handleToggleAllChange?: () => void;
+  handleAnswerToggleAllChange?: () => void;
 }
 
-export const AnswerToggleAll = ({ answerToggles, handleToggleAllChange }: Props): JSX.Element => {
+export const AnswerToggleAll = ({ answerToggles, handleAnswerToggleAllChange }: Props): JSX.Element => {
   return (
     <ToggleButton
       value="Check All"
       type="checkbox"
       variant={'light'} //light or link
       size="sm"
-      checked={answerToggles.every((selectable) => selectable.isSelected === true)}
+      checked={answerToggles.every((answerToggle) => answerToggle.isSelected === true)}
       onChange={() => {
-        handleToggleAllChange();
+        handleAnswerToggleAllChange();
       }}
     >
       {' '}

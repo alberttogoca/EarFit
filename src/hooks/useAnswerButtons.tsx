@@ -35,11 +35,11 @@ export function useAnswerButtons(
     setAnswerButtons(newOptions);
   }, [answerToggles]);
 
-  function handleAnswerButtonClick(selectedOption: SelectableAnswerWithColor): void {
-    const isAnswer = selectedOption.id.toUpperCase() === answer.id.toUpperCase();
+  function handleAnswerButtonClick(answerButtonSelected: SelectableAnswerWithColor): void {
+    const isAnswer = answerButtonSelected.id.toUpperCase() === answer.id.toUpperCase();
     if (isAnswer) {
       setNewAnswer();
-      updateAnswerButtonColor(selectedOption, true);
+      updateAnswerButtonColor(answerButtonSelected, true);
       IncrementStreak();
       play(answer);
 
@@ -47,18 +47,18 @@ export function useAnswerButtons(
         clearAllAnswerButtonsColor();
       }, 1000);
     } else {
-      updateAnswerButtonColor(selectedOption, false);
+      updateAnswerButtonColor(answerButtonSelected, false);
       clearStreak();
     }
   }
 
-  function updateAnswerButtonColor(answerButton: SelectableAnswerWithColor, isAnswer: boolean): void {
+  function updateAnswerButtonColor(answerButtonSelected: SelectableAnswerWithColor, isAnswer: boolean): void {
     const newColor = isAnswer ? 'success' : 'danger';
     setAnswerButtons((answerButtons) => {
-      return answerButtons.map<SelectableAnswerWithColor>((option) => {
+      return answerButtons.map<SelectableAnswerWithColor>((answerButton) => {
         return {
-          ...option,
-          color: answerButton.id === option.id ? newColor : option.color,
+          ...answerButton,
+          color: answerButtonSelected.id === answerButton.id ? newColor : answerButton.color,
         };
       });
     });
@@ -66,9 +66,9 @@ export function useAnswerButtons(
 
   function clearAllAnswerButtonsColor(): void {
     setAnswerButtons((answerButtons) => {
-      return answerButtons.map<SelectableAnswerWithColor>((option) => {
+      return answerButtons.map<SelectableAnswerWithColor>((answerButton) => {
         return {
-          ...option,
+          ...answerButton,
           color: 'secondary',
         };
       });

@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 type HookReturnType = {
   selectedScale: string;
-  setNewSelectedScale: (name: string) => void;
+  setNewSelectedScale: (scaleName: string) => void;
 };
 
-const useNotesScales = (scales: string[]): HookReturnType => {
-  const [selectedScale, setSelectedScale] = useState<string>(scales[0]);
+const useNotesScales = (scalesNames: string[]): HookReturnType => {
+  const [selectedScale, setSelectedScale] = useState<string>(scalesNames[0]);
 
-  const setNewSelectedScale = (name: string): void => {
-    const newScale = scales.find((s) => s === name);
+  const setNewSelectedScale = (scaleName: string): void => {
+    const newScale = scalesNames.find((s) => s === scaleName);
     setSelectedScale(newScale);
   };
 

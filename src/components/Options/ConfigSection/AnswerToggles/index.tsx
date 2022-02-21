@@ -4,21 +4,25 @@ import { SelectableAnswer } from 'utils/Types';
 
 interface Props {
   answerToggles: SelectableAnswer[];
-  handleToggleButtonChange: (option: SelectableAnswer) => void;
-  handleToggleAllChange: () => void;
+  handleAnswerTogglesChange: (answerToggle: SelectableAnswer) => void;
+  handleAnswerToggleAllChange: () => void;
 }
 
 export const AnswerToggles = ({
   answerToggles,
-  handleToggleButtonChange,
-  handleToggleAllChange,
+  handleAnswerTogglesChange,
+  handleAnswerToggleAllChange,
 }: Props): JSX.Element => {
   return (
     <>
-      {answerToggles.map((selectable) => (
-        <AnswerToggle key={selectable.id} selectable={selectable} handleToggleButtonChange={handleToggleButtonChange} />
+      {answerToggles.map((answerToggle) => (
+        <AnswerToggle
+          key={answerToggle.id}
+          answerToggle={answerToggle}
+          handleAnswerTogglesChange={handleAnswerTogglesChange}
+        />
       ))}
-      <AnswerToggleAll answerToggles={answerToggles} handleToggleAllChange={handleToggleAllChange} />
+      <AnswerToggleAll answerToggles={answerToggles} handleAnswerToggleAllChange={handleAnswerToggleAllChange} />
     </>
   );
 };
