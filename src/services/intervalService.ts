@@ -1,7 +1,7 @@
 import { transpose } from '@tonaljs/core';
 import { Note as TonalNote } from '@tonaljs/tonal';
 import { getRandomItem } from 'utils/arrayUtils';
-import { SelectableAnswer } from 'utils/Types';
+import { Answer } from 'utils/Types';
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -22,29 +22,27 @@ const allIntervalsNames = [
   '8P | 7A', //(12 semitones)
 ];
 
-export const getIntervals = (): SelectableAnswer[] => {
-  const myIntervals: SelectableAnswer[] = allIntervalsNames.map((interval) => {
+export const getIntervals = (): Answer[] => {
+  const myIntervals: Answer[] = allIntervalsNames.map((interval) => {
     return {
       id: interval,
-      values: calcIntervalToPlay(interval),
-      isSelected: false,
+      values: [],
       displayName: interval,
-      color: 'secondary',
     };
   });
   return myIntervals;
 };
 
-export const calcIntervalToPlay = (interval: string): string[] => {
+export const calcInterval = (interval: Answer): Answer => {
   let note1 = getRandomItem(allNotes);
-  let note2 = transpose(note1, interval);
+  let note2 = transpose(note1, interval.id);
 
   while ((+note2.slice(-1) === 8 || +note2.slice(-1) === 0) && !['A0', 'A#0', 'B0', 'C8'].includes(note2)) {
     note1 = getRandomItem(allNotes);
-    note2 = transpose(note1, interval);
+    note2 = transpose(note1, interval.id);
   }
 
-  const values = [note1, TonalNote.simplify(note2)];
+  const newValues = [note1, TonalNote.simplify(note2)];
 
-  return values;
+  return { ...interval, values: newValues };
 };

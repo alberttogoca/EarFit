@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { calcInterval } from 'services/intervalService';
 import { Answer, getRandomItemThatIsSelected, SelectableAnswer } from 'utils/Types';
 
 type HookReturnType = {
@@ -7,20 +8,22 @@ type HookReturnType = {
   isCorrectAnswer: (item: Answer) => boolean;
 };
 
-const useAnswer = (answerToggles: SelectableAnswer[]): HookReturnType => {
-  const [answer, setAnswer] = useState<Answer>();
+type VariantAnswer = 'notes' | 'interval' | 'scales';
+
+const useAnswer = (answerToggles: SelectableAnswer[], variant?: VariantAnswer): HookReturnType => {
+  const [answer, setAnswer] = useState<Answer>(undefined);
 
   useEffect(() => {
-    const selectedAnswers = answerToggles.filter((s) => s.isSelected);
-    if (!answer || !selectedAnswers.find((n) => n.id === answer.id)?.isSelected) {
-      const newAnswer = getRandomItemThatIsSelected(selectedAnswers);
+    if (answerToggles.length > 0 && (!answer || !answerToggles.find((n) => n.id === answer.id)?.isSelected)) {
+      const randomAnswer = getRandomItemThatIsSelected(answerToggles);
+      const newAnswer = variant === 'interval' ? calcInterval(randomAnswer) : randomAnswer;
       setAnswer(newAnswer);
     }
-  }, [answer, answerToggles]);
+  }, [answer, answerToggles, variant]);
 
   const setNewAnswer = (): void => {
-    const selectedAnswers = answerToggles.filter((s) => s.isSelected);
-    const newAnswer = getRandomItemThatIsSelected(selectedAnswers);
+    const randomAnswer = getRandomItemThatIsSelected(answerToggles);
+    const newAnswer = variant === 'interval' ? calcInterval(randomAnswer) : randomAnswer;
     setAnswer(newAnswer);
   };
 

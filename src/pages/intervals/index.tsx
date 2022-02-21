@@ -2,13 +2,13 @@ import { Exercise } from 'components/Exercise';
 import PageLayout from 'components/Layout/PageLayout';
 import { Menu } from 'components/Menu';
 import { Options } from 'components/Options';
-import { useAnswerButtons, useAnswerToggles, useIntervalAnswer, useIntervals, usePlayButton } from 'hooks';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useIntervals, usePlayButton } from 'hooks';
 
 export default function Intervals(): JSX.Element {
   const { intervals } = useIntervals();
   const { playInterval, reverse, changeDirection } = usePlayButton();
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(intervals);
-  const { answer, setNewAnswer } = useIntervalAnswer(answerToggles);
+  const { answer, setNewAnswer } = useAnswer(answerToggles, 'interval');
   const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
     answerToggles,
     answer,
