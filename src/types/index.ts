@@ -32,8 +32,8 @@ export type SelectableAnswer = Answer & IsSelectable;
 
 export type SelectableAnswerWithColor = SelectableAnswer & WithColor;
 
-export interface MenuItemInfo {
+export type MenuItemInfo = {
   label: string;
   path: string;
   description?: string;
-}
+};
