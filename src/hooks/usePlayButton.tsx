@@ -23,12 +23,12 @@ export const usePlayButton = (variant: VariantExercise, answer: Answer, directio
   }
 
   const play = (answer: Answer, time = 0.8, when = 0, duration = 0.7, direction = true): void => {
-    const valuesCopy = answer.values.slice();
-    const values = direction ? valuesCopy : valuesCopy.reverse();
-    const notesToPlay = values.map((note, i) => {
+    const notesCopy = answer.notes.slice();
+    const notes = direction ? notesCopy : notesCopy.reverse();
+    const notesToPlay = notes.map((note, i) => {
       return { note: note, time: i * time, duration: duration };
     });
-    console.log(`Now playing: ${answer.id} (${values})`);
+    console.log(`Now playing: ${answer.id} (${notes})`);
     instrument?.notePlayer?.schedule(when, notesToPlay);
   };
 

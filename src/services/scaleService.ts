@@ -10,7 +10,7 @@ export const getScales = (): Answer[] => {
   const myScales: Answer[] = scaleList.map((m) => {
     return {
       id: m.type.toUpperCase(),
-      values: m.notes,
+      notes: m.notes,
       displayName: m.type.toUpperCase(),
     };
   });

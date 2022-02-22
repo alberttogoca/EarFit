@@ -16,7 +16,7 @@ export type VariantColor = 'success' | 'secondary' | 'danger';
 
 export type Answer = {
   id: string;
-  values: string[];
+  notes: string[];
   displayName: string;
 };
 

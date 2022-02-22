@@ -26,7 +26,7 @@ export const getIntervals = (): Answer[] => {
   const myIntervals: Answer[] = allIntervalsNames.map((interval) => {
     return {
       id: interval,
-      values: [],
+      notes: [],
       displayName: interval,
     };
   });
@@ -42,7 +42,7 @@ export const calcInterval = (interval: Answer): Answer => {
     note2 = transpose(note1, interval.id);
   }
 
-  const newValues = [note1, TonalNote.simplify(note2)];
+  const newNotes = [note1, TonalNote.simplify(note2)];
 
-  return { ...interval, values: newValues };
+  return { ...interval, notes: newNotes };
 };

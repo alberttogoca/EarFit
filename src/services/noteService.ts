@@ -9,7 +9,7 @@ export const getNotes = (scaleName: string): Answer[] => {
   const myNotes: Answer[] = notes.map((n) => {
     return {
       id: TonalNote.get(n).pc,
-      values: [n],
+      notes: [n],
       displayName: TonalNote.get(n).pc,
     };
   });
