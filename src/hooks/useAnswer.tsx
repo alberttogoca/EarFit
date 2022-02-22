@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { calcInterval } from 'services/intervalService';
+import { Answer, SelectableAnswer, VariantExercise } from 'types';
 import { getRandomItem } from 'utils/arrayUtils';
-import { Answer, SelectableAnswer, VariantExercise } from 'utils/Types';
 
 type HookReturnType = {
   answer: Answer;

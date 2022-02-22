@@ -1,5 +1,4 @@
-import PageLayout from 'components/Layout/PageLayout';
-import { Menu } from 'components/Menu';
+import { Menu, PageLayout } from 'components';
 
 export default function Home(): JSX.Element {
   return (

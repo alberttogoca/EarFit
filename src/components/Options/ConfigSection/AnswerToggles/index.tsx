@@ -1,6 +1,6 @@
 import { AnswerToggle } from 'components/Options/ConfigSection/AnswerToggles/AnswerToggle';
 import { AnswerToggleAll } from 'components/Options/ConfigSection/AnswerToggles/AnswerToggleAll';
-import { SelectableAnswer } from 'utils/Types';
+import { SelectableAnswer } from 'types';
 
 interface Props {
   answerToggles: SelectableAnswer[];

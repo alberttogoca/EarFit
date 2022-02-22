@@ -1,14 +1,5 @@
-import { getSoundfontInstrument, InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
-
-export interface Instrument {
-  displayName: string;
-  emoji: string;
-  instrumentName: InstrumentName;
-  notePlayer: NotePlayer;
-  isLocal: boolean;
-}
-
-export type { InstrumentName };
+import { getSoundfontInstrument, NotePlayer } from 'lib/soundfont-wrapper';
+import { Instrument } from 'types';
 
 export const InstrumentData: Instrument[] = [
   {
@@ -34,16 +25,12 @@ export const InstrumentData: Instrument[] = [
   },
 ];
 
-let instruments: Instrument[] = undefined;
-
 export const getInstruments = async (): Promise<Instrument[]> => {
-  if (instruments === undefined) {
-    instruments = await Promise.all(
-      InstrumentData.map(async (i) => {
-        return { ...i, notePlayer: await getNotePlayer(i) };
-      })
-    );
-  }
+  const instruments = await Promise.all(
+    InstrumentData.map(async (i) => {
+      return { ...i, notePlayer: await getNotePlayer(i) };
+    })
+  );
   return instruments;
 };
 

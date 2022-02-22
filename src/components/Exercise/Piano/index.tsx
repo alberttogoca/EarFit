@@ -21,7 +21,7 @@ export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
         playNote={playNote}
         stopNote={stopNote}
         keyboardShortcuts={keyboardShortcuts}
-        disabled={!disabled}
+        disabled={disabled}
       ></ReactPiano>
     </div>
   );

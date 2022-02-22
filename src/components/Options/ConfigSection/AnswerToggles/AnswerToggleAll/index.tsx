@@ -1,5 +1,5 @@
 import { ToggleButton } from 'react-bootstrap';
-import { SelectableAnswer } from 'utils/Types';
+import { SelectableAnswer } from 'types';
 
 interface Props {
   answerToggles?: SelectableAnswer[];

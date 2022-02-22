@@ -7,7 +7,7 @@ import {
 } from 'components/Options/ConfigSection';
 import { Title } from 'components/Options/Title';
 import { Container } from 'react-bootstrap';
-import { SelectableAnswer } from 'utils/Types';
+import { SelectableAnswer } from 'types';
 
 interface Props {
   answerToggles?: SelectableAnswer[];
@@ -20,7 +20,7 @@ interface Props {
   handleAnswerToggleAllChange?: () => void;
 }
 
-export const Options = ({
+export default function Options({
   answerToggles,
   scalesNames,
   selectedScale,
@@ -29,7 +29,7 @@ export const Options = ({
   handleDirectionChange,
   handleAnswerTogglesChange,
   handleAnswerToggleAllChange,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <Container>
       <Title>Options</Title>
@@ -77,4 +77,4 @@ export const Options = ({
       />
     </Container>
   );
-};
+}

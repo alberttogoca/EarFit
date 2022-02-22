@@ -11,7 +11,7 @@ type HookReturnType = {
 
 const usePiano = (firstNote?: string, lastNote?: string): HookReturnType => {
   const { instrument } = useInstrumentContext();
-  const disabled = instrument ? true : false;
+  const disabled = !instrument;
   const hasNotes = firstNote && lastNote;
   const startNote = hasNotes ? firstNote : 'c3';
   const endNote = hasNotes ? lastNote : 'c4';

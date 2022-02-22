@@ -1,5 +1,5 @@
 import { Note as TonalNote, Scale as TonalScale } from '@tonaljs/tonal';
-import { Answer } from 'utils/Types';
+import { Answer } from 'types';
 
 export const getNotes = (scaleName: string): Answer[] => {
   const tonic = 'C';

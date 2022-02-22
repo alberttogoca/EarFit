@@ -1,5 +1,7 @@
 import { InstrumentName, NotePlayer } from 'lib/soundfont-wrapper';
 
+export type { InstrumentName, NotePlayer };
+
 export type Instrument = {
   displayName: string;
   emoji: string;
@@ -7,8 +9,6 @@ export type Instrument = {
   notePlayer: NotePlayer;
   isLocal: boolean;
 };
-
-export type { InstrumentName };
 
 export type VariantExercise = 'notes' | 'intervals' | 'scales';
 
@@ -31,3 +31,9 @@ export type WithColor = {
 export type SelectableAnswer = Answer & IsSelectable;
 
 export type SelectableAnswerWithColor = SelectableAnswer & WithColor;
+
+export interface MenuItemInfo {
+  label: string;
+  path: string;
+  description?: string;
+}

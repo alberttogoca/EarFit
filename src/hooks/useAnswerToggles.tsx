@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Answer, SelectableAnswer } from 'types';
 import { getRandomItem } from 'utils/arrayUtils';
-import { Answer, SelectableAnswer } from 'utils/Types';
 
 type HookReturnType = {
   answerToggles: SelectableAnswer[];

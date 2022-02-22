@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getIntervals } from 'services/intervalService';
 import { getNotes } from 'services/noteService';
 import { getScales } from 'services/scaleService';
-import { Answer, VariantExercise } from 'utils/Types';
+import { Answer, VariantExercise } from 'types';
 
 type HookReturnType = {
   answers: Answer[];

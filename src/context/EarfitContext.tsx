@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getInstruments, Instrument, InstrumentData, InstrumentName } from 'services/instrumentService';
+import { getInstruments, InstrumentData } from 'services/instrumentService';
+import { Instrument, InstrumentName } from 'types';
 
 const defaultInstrument = 'acoustic_grand_piano';
 

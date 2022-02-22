@@ -1,7 +1,4 @@
-import { Exercise } from 'components/Exercise';
-import PageLayout from 'components/Layout/PageLayout';
-import { Menu } from 'components/Menu';
-import { Options } from 'components/Options';
+import { Exercise, Menu, Options, PageLayout } from 'components';
 import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Scales(): JSX.Element {

@@ -1,6 +1,6 @@
 import { AnswerButton } from 'components/Exercise/AnswerButtons/AnswerButton';
 import { ButtonGroup } from 'react-bootstrap';
-import { SelectableAnswerWithColor } from 'utils/Types';
+import { SelectableAnswerWithColor } from 'types';
 
 interface Props {
   answerButtons: SelectableAnswerWithColor[];

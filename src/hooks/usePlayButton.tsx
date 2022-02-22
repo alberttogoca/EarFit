@@ -1,5 +1,5 @@
 import { useInstrumentContext } from 'context/EarfitContext';
-import { Answer, VariantExercise } from 'utils/Types';
+import { Answer, VariantExercise } from 'types';
 
 type HookReturnType = {
   playAnswer: () => void;

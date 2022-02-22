@@ -1,8 +1,8 @@
-import menuItemsInfo from 'utils/MenuItemsInfo';
+import menuItemsInfo from 'services/menuService';
 
 import { MenuItem } from './MenuItem';
 
-export const Menu = (): JSX.Element => {
+export default function Menu(): JSX.Element {
   return (
     <>
       {menuItemsInfo.map((item) => {
@@ -10,4 +10,4 @@ export const Menu = (): JSX.Element => {
       })}
     </>
   );
-};
+}

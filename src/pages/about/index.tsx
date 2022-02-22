@@ -1,5 +1,4 @@
-import AboutCard from 'components/AboutCard';
-import PageLayout from 'components/Layout/PageLayout';
+import { AboutCard, PageLayout } from 'components';
 
 export default function About(): JSX.Element {
   return (

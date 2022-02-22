@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Answer, SelectableAnswer, SelectableAnswerWithColor } from 'utils/Types';
+import { Answer, SelectableAnswer, SelectableAnswerWithColor } from 'types';
 
 import useStreak from './useStreak';
 

@@ -1,6 +1,6 @@
 import { useInstrumentContext } from 'context/EarfitContext';
 import { Container, Spinner } from 'react-bootstrap';
-import { SelectableAnswerWithColor } from 'utils/Types';
+import { SelectableAnswerWithColor } from 'types';
 
 import { AnswerButtons } from './AnswerButtons';
 import { Piano } from './Piano';
@@ -19,7 +19,7 @@ interface Props {
   lastNote?: string;
 }
 
-export const Exercise = ({
+export default function Exercise({
   title,
   playButtonLabel,
   handlePlayButtonClick,
@@ -28,7 +28,7 @@ export const Exercise = ({
   streak,
   firstNote,
   lastNote,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const { instrument } = useInstrumentContext();
   const isLoading = !instrument;
   return (
@@ -56,4 +56,4 @@ export const Exercise = ({
       )}
     </>
   );
-};
+}
