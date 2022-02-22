@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "EARFIT: Musical Ear Training",
-    "short_name": "Earfit",
+    "name": "Earfit",
+    "short_name": "Musical Ear Training",
     "description": "These exercises will improve your musical ability by developing a more intuitive understanding of what you hear.",
     "icons": [
         {
