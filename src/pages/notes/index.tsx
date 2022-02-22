@@ -1,10 +1,8 @@
 import { Exercise, Menu, Options, PageLayout } from 'components';
 import { useAnswer, useAnswerButtons, useAnswerToggles, useExercise, usePlayButton, useScaleDropdown } from 'hooks';
-import { GetStaticProps } from 'next';
-import { getScaleNames } from 'services/scaleService';
 
-export default function Notes({ scaleNames }: Props): JSX.Element {
-  const { selectedScale, setNewSelectedScale } = useScaleDropdown(scaleNames);
+export default function Notes(): JSX.Element {
+  const { scalesNames, selectedScale, setNewSelectedScale } = useScaleDropdown();
   const { answers } = useExercise('notes', selectedScale);
   const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
   const { answer, setNewAnswer, isCorrectAnswer } = useAnswer('notes', answerToggles);
@@ -22,7 +20,7 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
       rightCol={
         <Options
           answerToggles={answerToggles}
-          scalesNames={scaleNames}
+          scalesNames={scalesNames}
           selectedScale={selectedScale}
           handleScaleDropdownChange={setNewSelectedScale}
           handleAnswerToggleAllChange={selectAllOrThree}
@@ -41,16 +39,3 @@ export default function Notes({ scaleNames }: Props): JSX.Element {
     </PageLayout>
   );
 }
-
-interface Props {
-  scaleNames: string[];
-}
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-  const scaleNames = getScaleNames();
-  return {
-    props: {
-      scaleNames,
-    },
-  };
-};
