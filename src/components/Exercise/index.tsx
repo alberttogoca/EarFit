@@ -38,7 +38,7 @@ export const Exercise = ({
         <>
           {isLoading ? (
             <Container className="d-flex justify-content-center p-5 ">
-              <Spinner animation="border" role="status" variant="secondary" />
+              <Spinner animation="border" role="status" variant="info" />
             </Container>
           ) : (
             <>
