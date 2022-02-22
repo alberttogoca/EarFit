@@ -10,7 +10,7 @@ export const ScaleDropdown = ({ scalesNames, selectedScale, handleScaleDropdownC
   const scaleName = selectedScale !== undefined ? selectedScale : 'Select scale';
   return (
     <>
-      <DropdownButton id="dropdown-basic-button" title={scaleName} variant="secondary">
+      <DropdownButton id="dropdown-basic-button" title={scaleName} variant="secondary" disabled={!scalesNames}>
         {scalesNames.map((scale) => (
           <Dropdown.Item onSelect={() => handleScaleDropdownChange(scale)} key={scale}>
             {scale}

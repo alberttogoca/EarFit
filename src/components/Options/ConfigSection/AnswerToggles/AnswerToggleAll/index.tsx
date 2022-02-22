@@ -19,6 +19,7 @@ export const AnswerToggleAll = ({ answerToggles, handleAnswerToggleAllChange }: 
       onChange={() => {
         handleAnswerToggleAllChange();
       }}
+      disabled={!answerToggles}
     >
       {' '}
       Check All

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
-  const { noteRange, keyboardShortcuts, playNote, stopNote, disabled } = usePiano({ firstNote, lastNote });
+  const { noteRange, keyboardShortcuts, playNote, stopNote, disabled } = usePiano(firstNote, lastNote);
   const [containerRef, containerSize] = useMeasure();
 
   return (

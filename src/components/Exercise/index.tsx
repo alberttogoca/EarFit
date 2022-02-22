@@ -1,3 +1,5 @@
+import { useInstrumentContext } from 'context/EarfitContext';
+import { Container, Spinner } from 'react-bootstrap';
 import { SelectableAnswerWithColor } from 'utils/Types';
 
 import { AnswerButtons } from './AnswerButtons';
@@ -27,14 +29,24 @@ export const Exercise = ({
   firstNote,
   lastNote,
 }: Props): JSX.Element => {
+  const { instrument } = useInstrumentContext();
+  const isLoading = !instrument;
   return (
     <>
       <Title>{title}</Title>
       {title !== 'Piano' ? (
         <>
-          <PlayButton label={playButtonLabel} handlePlayButtonClick={handlePlayButtonClick} />
-          <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
-          <Streak streak={streak} />
+          {isLoading ? (
+            <Container className="d-flex justify-content-center p-5 ">
+              <Spinner animation="border" role="status" variant="secondary" />
+            </Container>
+          ) : (
+            <>
+              <PlayButton label={playButtonLabel} handlePlayButtonClick={handlePlayButtonClick} />
+              <AnswerButtons answerButtons={answerButtons} handleAnswerButtonClick={handleAnswerButtonClick} />
+              <Streak streak={streak} />
+            </>
+          )}
           <Piano />
         </>
       ) : (

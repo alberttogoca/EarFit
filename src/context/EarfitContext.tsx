@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getInstruments, Instrument, InstrumentName } from 'services/instrumentService';
+import { getInstruments, Instrument, InstrumentData, InstrumentName } from 'services/instrumentService';
 
 const defaultInstrument = 'acoustic_grand_piano';
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const EarfitContext = ({ children }: Props): JSX.Element => {
-  const [instruments, setInstruments] = useState<Instrument[]>(undefined);
+  const [instruments, setInstruments] = useState<Instrument[]>(InstrumentData);
   const [instrument, setInstrument] = useState<Instrument>(undefined);
 
   useEffect(() => {

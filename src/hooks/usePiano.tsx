@@ -9,12 +9,7 @@ type HookReturnType = {
   disabled: boolean;
 };
 
-interface Props {
-  firstNote?: string;
-  lastNote?: string;
-}
-
-const usePiano = ({ firstNote, lastNote }: Props): HookReturnType => {
+const usePiano = (firstNote?: string, lastNote?: string): HookReturnType => {
   const { instrument } = useInstrumentContext();
   const disabled = instrument ? true : false;
   const hasNotes = firstNote && lastNote;

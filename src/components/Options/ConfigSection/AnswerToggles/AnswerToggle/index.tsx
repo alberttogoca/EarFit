@@ -15,6 +15,7 @@ export const AnswerToggle = ({ answerToggle, handleAnswerTogglesChange }: Props)
       size="sm"
       checked={answerToggle.isSelected}
       onChange={() => handleAnswerTogglesChange(answerToggle)}
+      disabled={!answerToggle}
     >
       {' '}
       {answerToggle.id}

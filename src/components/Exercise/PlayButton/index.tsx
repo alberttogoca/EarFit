@@ -13,13 +13,15 @@ export const PlayButton = ({ label, handlePlayButtonClick }: Props): JSX.Element
   return (
     <>
       <Container className="d-flex justify-content-center p-3 ">
-        {isLoading ? (
-          <div>Loading instrument...</div>
-        ) : (
-          <Button variant="primary p-3" size="lg" aria-pressed="true" onClick={handlePlayButtonClick}>
-            {label}
-          </Button>
-        )}
+        <Button
+          variant="primary p-3"
+          size="lg"
+          aria-pressed="true"
+          onClick={handlePlayButtonClick}
+          disabled={isLoading}
+        >
+          {label}
+        </Button>
       </Container>
     </>
   );

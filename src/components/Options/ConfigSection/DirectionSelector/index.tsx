@@ -17,6 +17,7 @@ export const DirectionSelector = ({ direction, handleDirectionChange }: Props): 
         onChange={() => {
           handleDirectionChange();
         }}
+        disabled={!direction}
       >
         {' '}
         ASCENDING
@@ -30,6 +31,7 @@ export const DirectionSelector = ({ direction, handleDirectionChange }: Props): 
         onChange={() => {
           handleDirectionChange();
         }}
+        disabled={!direction}
       >
         {' '}
         DESCENDING
