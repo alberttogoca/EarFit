@@ -1,11 +1,24 @@
-import useIntervals from './useIntervals';
-import useNotes from './useNotes';
-import useNoteScales from './useNoteScales';
-import useOptions from './useOptions';
-import useScales from './useScales';
+import useAnswer from './useAnswer';
+import useAnswerButtons from './useAnswerButtons';
+import useAnswerToggles from './useAnswerToggles';
+import useDirectionSelector from './useDirectionSelector';
+import useExercise from './useExercise';
+import usePiano from './usePiano';
+import usePlayButton from './usePlayButton';
+import useScaleDropdown from './useScaleDropdown';
 import useStreak from './useStreak';
 
-export { useIntervals, useNotes, useNoteScales, useOptions, useScales, useStreak };
+export {
+  useAnswer,
+  useAnswerButtons,
+  useAnswerToggles,
+  useDirectionSelector,
+  useExercise,
+  usePiano,
+  usePlayButton,
+  useScaleDropdown,
+  useStreak,
+};
 
 export const Hooks = (): JSX.Element => {
   return <></>;
