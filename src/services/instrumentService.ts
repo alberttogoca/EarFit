@@ -35,7 +35,7 @@ export const getInstruments = async (): Promise<Instrument[]> => {
 };
 
 const getNotePlayer = async (instrument: Instrument): Promise<NotePlayer> => {
-  const toUrl = (name: string): string => 'instruments/' + name + '-mp3.js';
+  const toUrl = (name: string): string => 'soundfonts/' + name + '-mp3.js';
   const options = { gain: 10, nameToUrl: instrument.isLocal ? toUrl : undefined };
   const newInstrument = await getSoundfontInstrument(instrument.instrumentName, options);
   return newInstrument;
