@@ -1,10 +1,9 @@
-import Layout from 'components/Layout';
-import { Menu } from 'components/Menu';
+import { Menu, PageLayout } from 'components';
 
 export default function Home(): JSX.Element {
   return (
-    <Layout>
+    <PageLayout>
       <Menu />
-    </Layout>
+    </PageLayout>
   );
 }

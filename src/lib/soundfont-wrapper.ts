@@ -1,7 +1,7 @@
 import { instrument, InstrumentName, Player } from 'soundfont-player';
 
 export type { InstrumentName, NotePlayer };
-export { getInstrument, startNote, stopNote };
+export { getSoundfontInstrument, startNote, stopNote };
 
 type NotePlayer = {
   play: (
@@ -37,7 +37,7 @@ const getAudioContext = (): AudioContext => {
   return new AudioContext();
 };
 
-const getInstrument = async (instrumentName: InstrumentName, options = {}): Promise<NotePlayer> => {
+const getSoundfontInstrument = async (instrumentName: InstrumentName, options = {}): Promise<NotePlayer> => {
   if (instruments.has(instrumentName)) {
     return instruments.get(instrumentName) as NotePlayer;
   }
@@ -71,11 +71,11 @@ const getInstrument = async (instrumentName: InstrumentName, options = {}): Prom
 };
 
 async function startNote(instrumentName: InstrumentName, noteName: string, noteOptions = {}): Promise<void> {
-  const instrument = await getInstrument(instrumentName);
+  const instrument = await getSoundfontInstrument(instrumentName);
   await instrument.play(noteName, 0, noteOptions);
 }
 
 async function stopNote(instrumentName: InstrumentName, noteName: string): Promise<void> {
-  const instrument = await getInstrument(instrumentName);
+  const instrument = await getSoundfontInstrument(instrumentName);
   instrument.stop(noteName);
 }

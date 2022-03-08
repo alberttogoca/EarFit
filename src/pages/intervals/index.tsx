@@ -1,68 +1,40 @@
-//import { Note, Scale } from '@tonaljs/tonal';
-import { IntervalsConfiguration } from 'components/Configuration';
-import { Options, Piano, PlayButton, Streak, Title } from 'components/Exercise';
-import { IOption } from 'components/Exercise/Options';
-import Layout from 'components/Layout';
-import { useInstrumentContext } from 'context/EarfitContext';
-import { useIntervals, useOptions, useStreak } from 'hooks';
-import Selectable from 'utils/Selectable';
+import { Exercise, Menu, Options, PageLayout } from 'components';
+import { useAnswer, useAnswerButtons, useAnswerToggles, useDirectionSelector, useExercise, usePlayButton } from 'hooks';
 
 export default function Intervals(): JSX.Element {
-  const { playInterval } = useInstrumentContext();
-  const {
-    intervals,
-    answer,
+  const { direction, changeDirection } = useDirectionSelector();
+  const { answers } = useExercise('intervals');
+  const { answerToggles, updateIsSelected, selectAllOrThree } = useAnswerToggles(answers);
+  const { answer, setNewAnswer, isCorrectAnswer } = useAnswer('intervals', answerToggles);
+  const { playAnswer } = usePlayButton('intervals', answer, direction);
+  const { answerButtons, handleAnswerButtonClick, streak } = useAnswerButtons(
+    answerToggles,
+    isCorrectAnswer,
     setNewAnswer,
-    updateIsSelectedInterval,
-    changeIntervalsDirection,
-    selectAllOptions,
-  } = useIntervals();
-  const { options, updateOption, clearOptions } = useOptions(intervals);
-  const { streak, clearStreak, IncrementStreak } = useStreak();
-
-  function handleOption(selectedOption: IOption): boolean {
-    if (selectedOption.displayName === answer.name) {
-      setNewAnswer();
-      updateOption(selectedOption, true);
-      IncrementStreak();
-      playInterval(answer);
-
-      setTimeout(() => {
-        clearOptions();
-      }, 1000);
-
-      return true;
-    } else {
-      updateOption(selectedOption, false);
-      clearStreak();
-      return false;
-    }
-  }
-
-  function handleScaleIsSelectedChange(option: Selectable): void {
-    updateIsSelectedInterval(option.displayName, option.isSelected);
-  }
-
-  function handleDirectionChange(): void {
-    changeIntervalsDirection();
-  }
+    playAnswer
+  );
 
   return (
-    <Layout
-      rightColumn={
-        <IntervalsConfiguration
-          intervals={intervals}
-          onIntervalIsSelectedChange={handleScaleIsSelectedChange}
-          onDirectionChange={handleDirectionChange}
-          selectAllOptions={selectAllOptions}
+    <PageLayout
+      leftCol={<Menu />}
+      rightCol={
+        <Options
+          direction={direction}
+          handleDirectionChange={changeDirection}
+          answerToggles={answerToggles}
+          handleAnswerToggleAllChange={selectAllOrThree}
+          handleAnswerTogglesChange={updateIsSelected}
         />
       }
     >
-      <Title>Intervals</Title>
-      <PlayButton intervalToPlay={answer} title={'Interval?'} />
-      <Options options={options} handleOptionClick={handleOption} />
-      <Streak streak={streak} />
-      <Piano />
-    </Layout>
+      <Exercise
+        title="Intervals"
+        playButtonLabel="Interval?"
+        handlePlayButtonClick={playAnswer}
+        answerButtons={answerButtons}
+        handleAnswerButtonClick={handleAnswerButtonClick}
+        streak={streak}
+      />
+    </PageLayout>
   );
 }
