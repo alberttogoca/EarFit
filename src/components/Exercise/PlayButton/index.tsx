@@ -5,7 +5,7 @@ interface Props {
   handlePlayButtonClick: () => void;
 }
 
-export const PlayButton = ({ label, handlePlayButtonClick }: Props): JSX.Element => {
+export default function PlayButton({ label, handlePlayButtonClick }: Props): JSX.Element {
   return (
     <>
       <Container className="d-flex justify-content-center p-3 ">
@@ -15,4 +15,4 @@ export const PlayButton = ({ label, handlePlayButtonClick }: Props): JSX.Element
       </Container>
     </>
   );
-};
+}

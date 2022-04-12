@@ -5,7 +5,7 @@ interface Props {
   handleDirectionChange: () => void;
 }
 
-export const DirectionSelector = ({ direction, handleDirectionChange }: Props): JSX.Element => {
+export default function DirectionSelector({ direction, handleDirectionChange }: Props): JSX.Element {
   return (
     <>
       <ToggleButton
@@ -36,4 +36,4 @@ export const DirectionSelector = ({ direction, handleDirectionChange }: Props): 
       </ToggleButton>
     </>
   );
-};
+}

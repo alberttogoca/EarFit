@@ -6,10 +6,10 @@ interface Props {
   handleAnswerButtonClick: (answerButton: SelectableAnswerWithColor) => void;
 }
 
-export const AnswerButton = ({ answerButton, handleAnswerButtonClick }: Props): JSX.Element => {
+export default function AnswerButton({ answerButton, handleAnswerButtonClick }: Props): JSX.Element {
   return (
     <Button variant={answerButton.color} onClick={() => handleAnswerButtonClick(answerButton)} disabled={!answerButton}>
       {answerButton.displayName}
     </Button>
   );
-};
+}

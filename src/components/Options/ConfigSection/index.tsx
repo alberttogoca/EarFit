@@ -1,7 +1,7 @@
-import { AnswerToggles } from 'components/Options/ConfigSection/AnswerToggles';
-import { DirectionSelector } from 'components/Options/ConfigSection/DirectionSelector';
-import { InstrumentSelector } from 'components/Options/ConfigSection/InstrumentSelector';
-import { ScaleDropdown } from 'components/Options/ConfigSection/ScaleDropdown';
+import AnswerToggles from 'components/Options/ConfigSection/AnswerToggles';
+import DirectionSelector from 'components/Options/ConfigSection/DirectionSelector';
+import InstrumentSelector from 'components/Options/ConfigSection/InstrumentSelector';
+import ScaleDropdown from 'components/Options/ConfigSection/ScaleDropdown';
 import Image from 'next/image';
 import { Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 

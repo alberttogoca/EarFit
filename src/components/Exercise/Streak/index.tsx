@@ -2,7 +2,7 @@ interface Props {
   streak: number;
 }
 
-export const Streak = ({ streak }: Props): JSX.Element => {
+export default function Streak({ streak }: Props): JSX.Element {
   return (
     <>
       <div className="d-flex justify-content-center m-3">
@@ -21,4 +21,4 @@ export const Streak = ({ streak }: Props): JSX.Element => {
       </div>
     </>
   );
-};
+}

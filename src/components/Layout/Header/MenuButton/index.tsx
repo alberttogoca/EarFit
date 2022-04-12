@@ -2,7 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 
-export const MenuButton = (): JSX.Element => {
+export default function MenuButton(): JSX.Element {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
   return (
@@ -18,4 +18,4 @@ export const MenuButton = (): JSX.Element => {
       )}
     </>
   );
-};
+}

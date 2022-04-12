@@ -1,5 +1,5 @@
-import { AnswerToggle } from 'components/Options/ConfigSection/AnswerToggles/AnswerToggle';
-import { AnswerToggleAll } from 'components/Options/ConfigSection/AnswerToggles/AnswerToggleAll';
+import AnswerToggle from 'components/Options/ConfigSection/AnswerToggles/AnswerToggle';
+import AnswerToggleAll from 'components/Options/ConfigSection/AnswerToggles/AnswerToggleAll';
 import { SelectableAnswer } from 'types';
 
 interface Props {
@@ -8,11 +8,11 @@ interface Props {
   handleAnswerToggleAllChange: () => void;
 }
 
-export const AnswerToggles = ({
+export default function AnswerToggles({
   answerToggles,
   handleAnswerTogglesChange,
   handleAnswerToggleAllChange,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <>
       {answerToggles.map((answerToggle) => (
@@ -25,4 +25,4 @@ export const AnswerToggles = ({
       <AnswerToggleAll answerToggles={answerToggles} handleAnswerToggleAllChange={handleAnswerToggleAllChange} />
     </>
   );
-};
+}
