@@ -1,6 +1,6 @@
 import { MenuItemInfo } from 'types';
 
-const menuItemsInfo: MenuItemInfo[] = [
+const MENU_INFO: MenuItemInfo[] = [
   { label: 'Notes', path: '/notes', description: 'Test notes.' },
   { label: 'Intervals', path: '/intervals', description: 'Test Intervals.' },
   { label: 'Scales', path: '/scales', description: 'Test Scales.' },
@@ -9,7 +9,7 @@ const menuItemsInfo: MenuItemInfo[] = [
 ];
 
 export const getMenuInfo = (): MenuItemInfo[] => {
-  return menuItemsInfo;
+  return MENU_INFO;
 };
 
-export default menuItemsInfo;
+export default MENU_INFO;
