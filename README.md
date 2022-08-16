@@ -8,7 +8,7 @@ The idea is to help musicians develop their hearing skills. For example, to iden
 
 You can visit it now in:
 
-[![Earfit](public\icons\earfit-logo.png)](https://earfit-git-dev-alberttogoca.vercel.app/)
+<a href="https://earfit-git-dev-alberttogoca.vercel.app/" target="_blank"><img alt="Earfit" src="https://github.com/alberttogoca/EarFit/blob/dev/public/icons/Earfit-logo.png" /></a>
 
 Or watch this [YouTube Demo](https://www.youtube.com/watch?v=cpJd5_bDa0w). 
 
@@ -21,6 +21,4 @@ If you are interested in how it has been made, you can check out this [Miro's Bi
 
 ## About Me
 
-[LinkedIn](https://www.linkedin.com/in/alberttogoca/)
-
-[GitHub](https://github.com/alberttogoca)
+<p><a href="https://github.com/alberttogoca" target="_blank"><img alt="Github" src="https://img.shields.io/badge/GitHub-%2312100E.svg?&style=for-the-badge&logo=Github&logoColor=white" /></a> <a href="https://twitter.com/alberttogoca" target="_blank"><img alt="Twitter" src="https://img.shields.io/badge/twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" /></a> <a href="https://www.linkedin.com/in/alberttogoca" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a></p>
