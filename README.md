@@ -1,12 +1,22 @@
 
 
-# Welcome
+# Earfit
 
-This is Earfit a webApp for my final degree project in  URJC. Earfit is an app for musical listening training based on [Next.js](https://nextjs.org/) and [Typescript](https://www.typescriptlang.org/). 
+Earfit is a progressive web app for musical ear training. 
 
-The idea is to develop an application to help musicians develop their hearing (musical ear training). For example, to identify intervals, scales, chord types, etc.
+The idea is to help musicians develop their hearing skills. For example, to identify notes, intervals and scales.
 
-You can see a preview on [Earfit](https://earfit-git-dev-alberttogoca.vercel.app/) 
+You can visit it now in:
+
+[![Earfit](public\icons\earfit-logo.png)](https://earfit-git-dev-alberttogoca.vercel.app/)
+
+Or watch this [YouTube Demo](https://www.youtube.com/watch?v=cpJd5_bDa0w). 
+
+## Learn More
+
+This application has been developed using Scrum and DevOps practices such as CI/CD for product development. In addition to Design Thinking and Lean Startup.
+
+If you are interested in how it has been made, you can check out this [Miro's Big Picture of the Project](https://miro.com/app/board/uXjVOMmPLjM=/).  
 
 
 ## About Me
@@ -14,14 +24,3 @@ You can see a preview on [Earfit](https://earfit-git-dev-alberttogoca.vercel.app
 [LinkedIn](https://www.linkedin.com/in/alberttogoca/)
 
 [GitHub](https://github.com/alberttogoca)
-
-# Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) 
-
-
