@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getInstruments, InstrumentData } from 'services/instrumentService';
 import { Instrument, InstrumentName } from 'types';
 
-const defaultInstrument = 'acoustic_grand_piano';
+const DEFAULT_INSTRUMENT = 'acoustic_grand_piano';
 
 interface ProvidedValue {
   instruments: Instrument[];
@@ -21,7 +21,7 @@ export const EarfitContext = ({ children }: Props): JSX.Element => {
   useEffect(() => {
     const setInitialInstruments = async (): Promise<void> => {
       const newInstruments = await getInstruments();
-      const instrument = newInstruments.find((i) => i.instrumentName === defaultInstrument);
+      const instrument = newInstruments.find((i) => i.instrumentName === DEFAULT_INSTRUMENT);
       setInstruments(newInstruments);
       setInstrument(instrument);
     };

@@ -1,7 +1,7 @@
 import { useInstrumentContext } from 'context/EarfitContext';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
-export const InstrumentSelector = (): JSX.Element => {
+export default function InstrumentSelector(): JSX.Element {
   const { instruments, instrument, selectInstrument } = useInstrumentContext();
   const isLoading = !instrument;
 
@@ -26,4 +26,4 @@ export const InstrumentSelector = (): JSX.Element => {
       </ButtonGroup>
     </>
   );
-};
+}

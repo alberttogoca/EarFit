@@ -2,11 +2,11 @@ import { useInstrumentContext } from 'context/EarfitContext';
 import { Container, Spinner } from 'react-bootstrap';
 import { SelectableAnswerWithColor } from 'types';
 
-import { AnswerButtons } from './AnswerButtons';
-import { Piano } from './Piano';
-import { PlayButton } from './PlayButton';
-import { Streak } from './Streak';
-import { Title } from './Title';
+import AnswerButtons from './AnswerButtons';
+import Piano from './Piano';
+import PlayButton from './PlayButton';
+import Streak from './Streak';
+import Title from './Title';
 
 interface Props {
   title: string;

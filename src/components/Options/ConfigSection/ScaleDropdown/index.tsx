@@ -6,7 +6,7 @@ interface Props {
   handleScaleDropdownChange: (scale: string) => void;
 }
 
-export const ScaleDropdown = ({ scalesNames, selectedScale, handleScaleDropdownChange }: Props): JSX.Element => {
+export default function ScaleDropdown({ scalesNames, selectedScale, handleScaleDropdownChange }: Props): JSX.Element {
   const scaleName = selectedScale !== undefined ? selectedScale : 'Select scale';
   return (
     <>
@@ -19,4 +19,4 @@ export const ScaleDropdown = ({ scalesNames, selectedScale, handleScaleDropdownC
       </DropdownButton>
     </>
   );
-};
+}

@@ -7,7 +7,7 @@ interface Props {
   item: MenuItemInfo;
 }
 
-export const MenuItem = ({ item }: Props): JSX.Element => {
+export default function MenuItem({ item }: Props): JSX.Element {
   const { pathname } = useRouter();
   const isHome = pathname === '/';
   return (
@@ -37,7 +37,7 @@ export const MenuItem = ({ item }: Props): JSX.Element => {
       </Link>
     </div>
   );
-};
+}
 
 /*
 {isHome && <h1 className="display-4">{item.label}</h1>}
