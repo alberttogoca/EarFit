@@ -6,7 +6,7 @@ interface Props {
   handleAnswerToggleAllChange?: () => void;
 }
 
-export const AnswerToggleAll = ({ answerToggles, handleAnswerToggleAllChange }: Props): JSX.Element => {
+export default function AnswerToggleAll({ answerToggles, handleAnswerToggleAllChange }: Props): JSX.Element {
   return (
     <ToggleButton
       value="Check All"
@@ -25,4 +25,4 @@ export const AnswerToggleAll = ({ answerToggles, handleAnswerToggleAllChange }: 
       Check All
     </ToggleButton>
   );
-};
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const Logo = (): JSX.Element => {
+export default function Logo(): JSX.Element {
   return (
     <h1>
       <Link href="/">
@@ -8,4 +8,4 @@ export const Logo = (): JSX.Element => {
       </Link>
     </h1>
   );
-};
+}

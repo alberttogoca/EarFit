@@ -9,7 +9,7 @@ interface Props {
   lastNote?: string;
 }
 
-export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
+export default function Piano({ firstNote, lastNote }: Props): JSX.Element {
   const { noteRange, keyboardShortcuts, playNote, stopNote, disabled } = usePiano(firstNote, lastNote);
   const [containerRef, containerSize] = useMeasure();
 
@@ -25,4 +25,4 @@ export const Piano = ({ firstNote, lastNote }: Props): JSX.Element => {
       ></ReactPiano>
     </div>
   );
-};
+}

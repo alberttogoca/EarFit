@@ -1,11 +1,11 @@
-import menuItemsInfo from 'services/menuService';
+import MENU_INFO from 'services/menuService';
 
-import { MenuItem } from './MenuItem';
+import MenuItem from './MenuItem';
 
 export default function Menu(): JSX.Element {
   return (
     <>
-      {menuItemsInfo.map((item) => {
+      {MENU_INFO.map((item) => {
         return <MenuItem key={item.label} item={item} />;
       })}
     </>

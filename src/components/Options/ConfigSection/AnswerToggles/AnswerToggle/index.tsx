@@ -6,7 +6,7 @@ interface Props {
   handleAnswerTogglesChange?: (answerToggle: SelectableAnswer) => void;
 }
 
-export const AnswerToggle = ({ answerToggle, handleAnswerTogglesChange }: Props): JSX.Element => {
+export default function AnswerToggle({ answerToggle, handleAnswerTogglesChange }: Props): JSX.Element {
   return (
     <ToggleButton
       value={answerToggle.id}
@@ -21,4 +21,4 @@ export const AnswerToggle = ({ answerToggle, handleAnswerTogglesChange }: Props)
       {answerToggle.id}
     </ToggleButton>
   );
-};
+}

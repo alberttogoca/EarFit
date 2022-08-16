@@ -4,7 +4,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const Title = ({ children }: Props): JSX.Element => {
+export default function Title({ children }: Props): JSX.Element {
   return (
     <>
       <div className="d-flex justify-content-center p-3 ">
@@ -12,4 +12,4 @@ export const Title = ({ children }: Props): JSX.Element => {
       </div>
     </>
   );
-};
+}

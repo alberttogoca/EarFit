@@ -1,8 +1,8 @@
-import { Logo } from 'components/Layout/Header/Logo';
-import { MenuButton } from 'components/Layout/Header/MenuButton';
+import Logo from 'components/Layout/Header/Logo';
+import MenuButton from 'components/Layout/Header/MenuButton';
 import { Col, Container, Row } from 'react-bootstrap';
 
-export const Header = (): JSX.Element => {
+export default function Header(): JSX.Element {
   return (
     <Container fluid>
       <Row className="justify-content-center p-3">
@@ -18,4 +18,4 @@ export const Header = (): JSX.Element => {
       </Row>
     </Container>
   );
-};
+}

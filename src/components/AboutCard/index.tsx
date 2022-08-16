@@ -28,16 +28,16 @@ export default function AboutCard(): JSX.Element {
               </Col>
             </Row>
             <div className="lead">
-              <p>This is Earfit a webApp for my final degree project in URJC.</p>
+              <p>This is Earfit a Progressive Web App for Musical Ear Training.</p>
               <p>
-                Earfit is an app for musical listening training based on Next.js and Typescript. For example, to
-                identify notes, intervals and scales.
+                The idea is to help musicians develop their hearing skills, such as identifying notes, intervals and
+                scales.
               </p>
               <p>
                 These exercises will improve your musical ability by developing a more intuitive understanding of what
                 you hear.
               </p>
-              <p>Let&apos;s give it a try! :)</p>
+              <p>Practice online or download the app for offline use. Let&apos;s have a try! :)</p>
             </div>
           </section>
 
@@ -55,11 +55,18 @@ export default function AboutCard(): JSX.Element {
           <section>
             <h4>{`🆘`} Help </h4>
             <p className="lead">
-              If you need help with music theory you can visit{' '}
+              <p>
+                ¿Need help on how to use the application? Here is a{' '}
+                <a href="https://www.youtube.com/watch?v=cpJd5_bDa0w" target="popup">
+                  Youtube Tutorial
+                </a>
+                .
+              </p>
+              On the other hand, if you need help with music theory you can visit{' '}
               <a href="https://www.musictheory.net/lessons" target="popup">
                 musictheory.net
               </a>{' '}
-              and if you wan&apos;t to learn more about these exercises you can search for{' '}
+              and if you wan&apos;t to learn more about these exercises you can look for{' '}
               <a href="https://en.wikipedia.org/wiki/Ear_training" target="popup">
                 Ear Trainning.
               </a>
