@@ -8,9 +8,10 @@ The idea is to help musicians develop their hearing skills. For example, to iden
 
 You can visit it now in:
 
-<a href="https://earfit-git-dev-alberttogoca.vercel.app/" target="_blank"><img alt="Earfit" src="https://github.com/alberttogoca/EarFit/blob/dev/public/icons/Earfit-logo.png" /></a>
+<a href="https://earfit.vercel.app/" target="_blank"><img alt="Earfit" src="https://github.com/alberttogoca/EarFit/blob/dev/public/icons/Earfit-logo.png" /></a>
 
-Or watch this [YouTube Demo](https://www.youtube.com/watch?v=cpJd5_bDa0w). 
+Or watch this <a href="https://www.youtube.com/watch?v=cpJd5_bDa0w" target="_blank">YouTube Demo</a>.
+
 
 ## Learn More
 
